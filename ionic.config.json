@@ -1,0 +1,7 @@
+{
+  "name": "pps-sp-2024",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
