@@ -1,13 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<div class="login">
+				<h2>Inicio de sesión</h2>
+				<div class="login__field">					
+					<input type="text" class="login__input" [(ngModel)]="user.email" placeholder="Correo electrónico">
+				</div>
+				<div class="login__field">				
+					<input type="password" class="login__input" [(ngModel)]="user.password" placeholder="Contraseña">
+				</div>
+				<button class="button login__submit" (click)="loginUser()">
+					<span class="button__text">Ingresar</span>					
+				</button>				
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+				<div class="button-container">
+
+					<button class="button login__fastlogin" (click)="fastLogin('invitado@invitado.com', '123456')">
+						<span class="button__text">Dueño</span>					
+					</button>			
+					<button class="button login__fastlogin" (click)="fastLogin('admin@admin.com', '111111')">
+						<span class="button__text">Supervisor</span>					
+					</button>			
+
+				</div>
+			</div>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
