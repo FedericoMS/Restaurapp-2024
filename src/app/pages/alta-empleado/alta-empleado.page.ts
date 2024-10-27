@@ -19,6 +19,8 @@ import {
 } from '@ionic/angular/standalone';
 import { Empleado } from 'src/app/clases/empleado';
 import { Router } from '@angular/router';
+import { Alert } from 'src/app/clases/alert';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-alta-empleado',
@@ -46,7 +48,8 @@ export class AltaEmpleadoPage implements OnInit {
   // ● Brindar la posibilidad de contar con un lector de código QR para el DNI, que cargará
   // la información disponible (sólo aplicable a aquellos documentos que lo posean).
   // ● Esta acción la podrá realizar el supervisor o el dueño.
-  private router = inject(Router);
+  // private router = inject(Router);
+  private fire = inject(FirestoreService);
   fb: FormBuilder = inject(FormBuilder);
   fg: FormGroup;
   list_roles = Empleado.get_roles();
@@ -71,6 +74,8 @@ export class AltaEmpleadoPage implements OnInit {
           Validators.max(99999999999),
         ],
       ],
+
+      rol: [this.list_roles[0]],
     });
   }
 
@@ -78,7 +83,20 @@ export class AltaEmpleadoPage implements OnInit {
 
   cargar() {
     if (this.fg.valid) {
-      console.log('es valido');
+      //Agrego el empleado
+      this.fire.addEmpleado(
+        new Empleado(
+          this.fg.controls['nombre'].value,
+          this.fg.controls['apellido'].value,
+          this.fg.controls['dni'].value,
+          this.fg.controls['cuil'].value,
+          '', //esta la foto_url que se agrega despues
+          this.fg.controls['rol'].value
+        )
+      );
+      Alert.success('Se cargo exitosamente el empleado', '');
+      //Reseteo el form para que empiece de cero
+      this.fg.reset();
     } else {
       //Muestro todos los errores
       Object.keys(this.fg.controls).forEach((controlName) => {

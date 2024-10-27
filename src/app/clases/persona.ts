@@ -4,6 +4,7 @@ export class Persona {
   dni: number;
   cuil: string;
   foto_url: string;
+  id: string;
 
   constructor(
     nombre: string,
@@ -12,6 +13,7 @@ export class Persona {
     cuil: string,
     foto_url: string
   ) {
+    this.id = '';
     this.nombre = nombre;
     this.apellido = apellido;
     this.dni = dni;
