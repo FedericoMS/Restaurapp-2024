@@ -25,4 +25,15 @@ export class Alert {
 
     return alert;
   }
+
+  static error(titulo: string, texto: string) {
+    const alert = Swal.fire(Alert.base);
+    Swal.update({
+      icon: 'error',
+      title: titulo,
+      text: texto,
+    });
+
+    return alert;
+  }
 }

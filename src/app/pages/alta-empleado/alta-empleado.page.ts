@@ -83,21 +83,35 @@ export class AltaEmpleadoPage implements OnInit {
 
   cargar() {
     if (this.fg.valid) {
-      //Agrego el empleado
-      this.fire.addEmpleado(
-        new Empleado(
-          this.fg.controls['nombre'].value,
-          this.fg.controls['apellido'].value,
-          this.fg.controls['dni'].value,
-          this.fg.controls['cuil'].value,
-          '', //esta la foto_url que se agrega despues
-          this.fg.controls['rol'].value
+      //Se deberia agregar un spinner para la espera
+      //Agrego el empleado a firestores
+      this.fire
+        .addEmpleado(
+          new Empleado(
+            this.fg.controls['nombre'].value,
+            this.fg.controls['apellido'].value,
+            this.fg.controls['dni'].value,
+            this.fg.controls['cuil'].value,
+            '', //esta la foto_url que se agrega despues
+            this.fg.controls['rol'].value
+          )
         )
-      );
-      Alert.success('Se cargo exitosamente el empleado', '');
-      //Reseteo el form para que empiece de cero
-      this.fg.reset();
+        .then(() => {
+          Alert.success('Se cargo exitosamente el empleado', '');
+          //Reseteo el form para que empiece de cero
+          this.fg.reset();
+        })
+        .catch(() => {
+          Alert.error(
+            'Hubo un problema al cargar el empleado',
+            'Vuelva a intentar más tarde'
+          );
+        });
     } else {
+      Alert.error(
+        'Ocurrió un error',
+        'Verifique que todos los campos estén completos sin errores!'
+      );
       //Muestro todos los errores
       Object.keys(this.fg.controls).forEach((controlName) => {
         this.fg.controls[controlName].markAsTouched();
