@@ -1,0 +1,78 @@
+ion-content {
+    --background: none; /* Elimina el color de fondo predeterminado */  
+    display: flex;
+    justify-content: center; /* Centra los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column; /* Apilar los elementos en una columna */
+    justify-content: space-between; /* Espacio entre header, imagen, y footer */
+    align-items: center; /* Alinear elementos horizontalmente */
+    height: 80%; /* Hace que el contenedor llene el alto de ion-content */
+  }
+  
+  /* Animación de deslizamiento */
+  .slide-in-bck-center {
+    -webkit-animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+  
+  @-webkit-keyframes slide-in-bck-center {
+    0% {
+      -webkit-transform: translateZ(600px);
+              transform: translateZ(600px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-bck-center {
+    0% {
+      -webkit-transform: translateZ(600px);
+              transform: translateZ(600px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+
+
+  
+  /* Especificar animación para la imagen */
+  img {
+    height: 250px;
+    animation-delay: 0.5s; /* La imagen se anima primero */
+    animation-fill-mode: both; /* Mantiene el estado final de la animación */
+    @extend .slide-in-bck-center;
+  }
+  
+  /* Animación del header y footer */
+  .header, .footer {
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 3px 10px #000000;
+    @extend .slide-in-bck-center;
+    animation-delay: 1.4s; /* Se animan después de la imagen, al mismo tiempo */
+    animation-fill-mode: both; /* Mantiene el estado final de la animación */
+  }
+  
+  /* Estilos específicos para header */
+  .header {
+    font-size: 42px;
+    margin-top: 36px;
+  }
+  
+  /* Estilos específicos para footer */
+  .footer {
+    font-size: 60px;
+    margin-bottom: 86px;
+  }
