@@ -88,6 +88,8 @@ export class AltaEmpleadoPage implements OnInit {
       this.fg.controls['nombre'].setValue(datos.nombre);
       this.fg.controls['apellido'].setValue(datos.apellido);
       this.fg.controls['dni'].setValue(datos.dni);
+    } else {
+      Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
     }
   }
 
