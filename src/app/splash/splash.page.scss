@@ -11,7 +11,8 @@ ion-content {
     flex-direction: column; /* Apilar los elementos en una columna */
     justify-content: space-between; /* Espacio entre header, imagen, y footer */
     align-items: center; /* Alinear elementos horizontalmente */
-    height: 80%; /* Hace que el contenedor llene el alto de ion-content */
+    height: 70vh; /* Hace que el contenedor llene el alto de ion-content */
+    max-height: 80vh;
   }
   
   /* Animación de deslizamiento */
@@ -67,12 +68,12 @@ ion-content {
   
   /* Estilos específicos para header */
   .header {
-    font-size: 42px;
+    font-size: 30px;
     margin-top: 36px;
   }
   
   /* Estilos específicos para footer */
   .footer {
-    font-size: 60px;
-    margin-bottom: 86px;
+    font-size: 36px;
+    margin-bottom: 76px;
   }
