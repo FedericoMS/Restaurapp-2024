@@ -21,6 +21,7 @@ import { Empleado } from 'src/app/clases/empleado';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/clases/alert';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-alta-empleado',
@@ -50,6 +51,7 @@ export class AltaEmpleadoPage implements OnInit {
   // ● Esta acción la podrá realizar el supervisor o el dueño.
   // private router = inject(Router);
   private fire = inject(FirestoreService);
+  private util = inject(UtilService);
   fb: FormBuilder = inject(FormBuilder);
   fg: FormGroup;
   list_roles = Empleado.get_roles();
@@ -80,6 +82,14 @@ export class AltaEmpleadoPage implements OnInit {
   }
 
   ngOnInit() {}
+  async cargarConQr() {
+    const datos = await this.util.get_result_scan();
+    if (datos) {
+      this.fg.controls['nombre'].setValue(datos.nombre);
+      this.fg.controls['apellido'].setValue(datos.apellido);
+      this.fg.controls['dni'].setValue(datos.dni);
+    }
+  }
 
   cargar() {
     if (this.fg.valid) {
