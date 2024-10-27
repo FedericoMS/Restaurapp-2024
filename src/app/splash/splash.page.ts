@@ -24,11 +24,8 @@ import { Router } from '@angular/router';
 })
 export class SplashPage implements OnInit {
   constructor(public router: Router) {
-    // setTimeout(() => {
-    //   this.router.navigateByUrl('login', { replaceUrl: true }); //El replaceUrl es para que NO se pueda volver a la pantalla de splash cuando volvés en el celu
-    // }, 3000);
     setTimeout(() => {
-      this.router.navigateByUrl('alta-empleado', { replaceUrl: true }); //El replaceUrl es para que NO se pueda volver a la pantalla de splash cuando volvés en el celu
+      this.router.navigateByUrl('login', { replaceUrl: true }); //El replaceUrl es para que NO se pueda volver a la pantalla de splash cuando volvés en el celu
     }, 3000);
   }
 
