@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Encuesta cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<main>
+  <ion-button (click)="sacar_foto()"> Subir imagen </ion-button>
+  <form>
+    <div>
+      <label>
+        Range
+        <input type="range" />
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Radio
+        <input type="radio" />
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Chek
+        <input type="checkbox" />
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Select
+        <select>
+          <option value="a">a</option>
+          <option value="b">b</option>
+          <option value="c">c</option>
+          <option value="d">d</option>
+        </select>
+      </label>
+    </div>
+    <div>
+      <label>
+        Comentario
+        <textarea></textarea>
+      </label>
+    </div>
+  </form>
+
+  <div>graficos</div>
+</main>

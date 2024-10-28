@@ -25,5 +25,13 @@ export const routes: Routes = [
       import('./pages/alta-empleado/alta-empleado.page').then(
         (m) => m.AltaEmpleadoPage
       ),
+  },  {
+    path: 'encuesta-clientes',
+    loadComponent: () => import('./pages/encuestas/encuesta-clientes/encuesta-clientes.page').then( m => m.EncuestaClientesPage)
   },
+  {
+    path: 'encuesta-empleados',
+    loadComponent: () => import('./pages/encuestas/encuesta-empleados/encuesta-empleados.page').then( m => m.EncuestaEmpleadosPage)
+  },
+
 ];
