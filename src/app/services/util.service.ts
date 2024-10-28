@@ -32,9 +32,9 @@ export class UtilService {
     return camera === 'granted' || camera === 'limited';
   }
 
-  async get_result_scan() {
+  async scan_dni() {
     const result = await this.scan();
-
+    console.log(result);
     if (result !== '') {
       console.log('Resultado del escaneo:', result);
       const content = result.split('@').map((part: any) => part.trim()); // Removemos espacios innecesarios

@@ -83,7 +83,7 @@ export class AltaEmpleadoPage implements OnInit {
 
   ngOnInit() {}
   async cargarConQr() {
-    const datos = await this.util.get_result_scan();
+    const datos = await this.util.scan_dni();
     if (datos) {
       this.fg.controls['nombre'].setValue(datos.nombre);
       this.fg.controls['apellido'].setValue(datos.apellido);
