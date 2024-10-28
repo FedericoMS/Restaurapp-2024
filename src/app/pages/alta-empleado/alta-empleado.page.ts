@@ -95,11 +95,11 @@ export class AltaEmpleadoPage implements OnInit {
     }
   }
 
-  cargar() {
+  async cargar() {
     if (this.fg.valid) {
       //Se deberia agregar un spinner para la espera
       //Subo la imagen al storage
-      this.upload_storage();
+      await this.upload_storage();
       //Agrego el empleado a firestores
       this.fire
         .addEmpleado(
