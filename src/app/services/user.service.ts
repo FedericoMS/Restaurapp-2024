@@ -20,6 +20,7 @@ export class UserService {
   private email : string | null | undefined= '';
   private userSubject: BehaviorSubject<any> = new BehaviorSubject(null);
   public user = this.userSubject.asObservable();
+  public uidUser : any;
 
   constructor(private auth: Auth, private authFire: AngularFireAuth, private router: Router, private afstorage: AngularFireStorage, private af : AngularFirestore) {
     this.authFire.authState.subscribe((user) => {
@@ -40,9 +41,9 @@ export class UserService {
   
   login({email , password} : any ){
     return signInWithEmailAndPassword(this.auth, email, password)
-                                      .then(() => {
+                                      .then((u) => {
                                         this.isLoggedIn = true;
-                                        console.log(true);
+                                        this.uidUser = u.user.uid;
                                       })
                                       .catch((err) =>{
                                         console.log("Hubo un error: " + err)
