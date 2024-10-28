@@ -58,11 +58,16 @@ select {
 /* Estilo para el botón de envío */
 ion-button {
   width: 100%;
-  background-color: #007acc;
   color: white;
-  padding: 10px;
   font-size: 1rem;
   border-radius: 4px;
   text-align: center;
   margin-top: 10px;
+}
+
+.cont-btns {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 10px;
 }

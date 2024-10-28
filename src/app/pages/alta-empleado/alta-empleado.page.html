@@ -5,8 +5,14 @@
 </ion-header>
 <main>
   <form [formGroup]="fg" class="form-container">
-    <!-- <ion-button (click)="cargarConQr()"> Cargar datos con QR </ion-button> -->
-    <ion-button (click)="sacar_foto()"> Sacar foto </ion-button>
+    <div class="cont-btns">
+      <ion-button (click)="cargarConQr()" color="primary">
+        Cargar datos con QR
+      </ion-button>
+      <ion-button (click)="sacar_foto()" color="tertiary">
+        Sacar foto
+      </ion-button>
+    </div>
     <br /><br />
     <div class="form-group">
       <label>
@@ -83,6 +89,8 @@
       </label>
     </div>
     <br />
-    <ion-button type="submit" (click)="cargar()"> Cargar empleado </ion-button>
+    <ion-button type="submit" (click)="cargar()" color="success">
+      Cargar empleado
+    </ion-button>
   </form>
 </main>
