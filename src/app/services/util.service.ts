@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Alert } from '../clases/alert';
 import { Persona } from '../clases/persona';
 @Injectable({
@@ -92,5 +93,18 @@ export class UtilService {
     }
 
     return null;
+  }
+
+  async takePicture() {
+    return await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera,
+    });
+  }
+
+  async sacar_foto() {
+    return (await this.takePicture()).dataUrl;
   }
 }
