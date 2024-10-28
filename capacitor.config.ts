@@ -1,9 +1,9 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'io.ionic.restaurant',
   appName: 'pps-sp-2024',
-  webDir: 'www'
+  webDir: 'www',
 };
 
 export default config;
