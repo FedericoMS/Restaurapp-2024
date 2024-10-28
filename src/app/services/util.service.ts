@@ -104,6 +104,18 @@ export class UtilService {
     });
   }
 
+  async takePicturePrompt() {
+    return await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt,
+      promptLabelHeader: 'Selecciona una opción',
+      promptLabelPicture: 'Tomar una foto',
+      promptLabelPhoto: 'Elegir de la galería',
+    });
+  }
+
   async sacar_foto() {
     return (await this.takePicture()).dataUrl;
   }

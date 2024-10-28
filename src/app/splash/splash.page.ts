@@ -28,7 +28,7 @@ export class SplashPage implements OnInit {
     //   this.router.navigateByUrl('login', { replaceUrl: true }); //El replaceUrl es para que NO se pueda volver a la pantalla de splash cuando volvés en el celu
     // }, 3000);
     setTimeout(() => {
-      this.router.navigateByUrl('alta-empleado', { replaceUrl: true }); //El replaceUrl es para que NO se pueda volver a la pantalla de splash cuando volvés en el celu
+      this.router.navigateByUrl('encuesta-clientes', { replaceUrl: true }); //El replaceUrl es para que NO se pueda volver a la pantalla de splash cuando volvés en el celu
     }, 3000);
   }
 
