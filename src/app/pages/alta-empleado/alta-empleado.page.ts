@@ -55,6 +55,8 @@ export class AltaEmpleadoPage implements OnInit {
   fb: FormBuilder = inject(FormBuilder);
   fg: FormGroup;
   list_roles = Empleado.get_roles();
+  foto_url: string = '';
+  img?: string = '';
 
   constructor() {
     this.fg = this.fb.group({
@@ -96,6 +98,8 @@ export class AltaEmpleadoPage implements OnInit {
   cargar() {
     if (this.fg.valid) {
       //Se deberia agregar un spinner para la espera
+      //Subo la imagen al storage
+      this.upload_storage();
       //Agrego el empleado a firestores
       this.fire
         .addEmpleado(
@@ -104,7 +108,7 @@ export class AltaEmpleadoPage implements OnInit {
             this.fg.controls['apellido'].value,
             this.fg.controls['dni'].value,
             this.fg.controls['cuil'].value,
-            '', //esta la foto_url que se agrega despues
+            this.foto_url,
             this.fg.controls['rol'].value
           )
         )
@@ -128,6 +132,23 @@ export class AltaEmpleadoPage implements OnInit {
       Object.keys(this.fg.controls).forEach((controlName) => {
         this.fg.controls[controlName].markAsTouched();
       });
+    }
+  }
+
+  async sacar_foto() {
+    try {
+      this.img = await this.util.sacar_foto();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async upload_storage() {
+    if (this.img) {
+      this.foto_url = await this.fire.uploadImage(
+        `imagenes_empelados/${Date.now()}`,
+        this.img
+      );
     }
   }
 }
