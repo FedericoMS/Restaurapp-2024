@@ -51,6 +51,7 @@ ion-toolbar{
     margin-bottom: 5px;
     color: rgb(143, 135, 135);
     margin-top: 10px;
+    text-align: center;
   }
   
   /* Estilo para los inputs */
@@ -118,14 +119,14 @@ ion-toolbar{
     }
 
     .content-select{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      margin-bottom: 15px;
     }
 
     select {
-        width: 50%;
+        width: 100%;
         padding: 8px;
         font-size: 1rem;
         border: 1px solid #ccc;
@@ -161,4 +162,12 @@ ion-toolbar{
 
       ion-icon{
         margin-left: 10px;
+      }
+
+
+      .icon-validate-foto{
+        font-size: 30px;
+        margin-left: 0 !important;
+        color: white;
+  
       }
