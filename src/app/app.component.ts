@@ -11,15 +11,14 @@ import { SplashScreen } from '@capacitor/splash-screen';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor(private platform : Platform, private router : Router) {
+  constructor(private platform: Platform, private router: Router) {
     this.initializeApp();
   }
 
-  initializeApp(){
-    this.platform.ready().then(() => {    
-      SplashScreen.hide();  // Hide the splash screen
-      this.router.navigateByUrl('alta-duenio-supervisor');  // Navigate to the splash route
-      
-  });
+  initializeApp() {
+    this.platform.ready().then(() => {
+      SplashScreen.hide(); // Hide the splash screen
+      this.router.navigateByUrl('alta-empleado'); // Navigate to the splash route
+    });
   }
 }
