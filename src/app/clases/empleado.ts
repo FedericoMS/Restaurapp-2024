@@ -16,6 +16,6 @@ export class Empleado extends Persona {
   }
 
   static get_roles() {
-    return ['maitre', 'mozo', 'cocinero', 'bartender'];
+    return ['maitre', 'mozo', 'cocinero', 'bartender','dueño','supervisor'];
   }
 }

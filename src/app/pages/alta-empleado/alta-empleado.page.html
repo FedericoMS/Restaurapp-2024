@@ -83,7 +83,9 @@
         Rol
         <select>
           @for (item of list_roles; track $index) {
-          <option [value]="item">{{item}}</option>
+            @if (item !== 'dueño' && item !== 'supervisor') {
+              <option [value]="item">{{item}}</option>
+            }
           }
         </select>
       </label>

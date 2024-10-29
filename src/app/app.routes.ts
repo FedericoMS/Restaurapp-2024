@@ -33,5 +33,9 @@ export const routes: Routes = [
     path: 'encuesta-empleados',
     loadComponent: () => import('./pages/encuestas/encuesta-empleados/encuesta-empleados.page').then( m => m.EncuestaEmpleadosPage)
   },
+  {
+    path: 'alta-duenio-supervisor',
+    loadComponent: () => import('./pages/alta-duenio-supervisor/alta-duenio-supervisor.page').then( m => m.AltaDuenioSupervisorPage)
+  },
 
 ];
