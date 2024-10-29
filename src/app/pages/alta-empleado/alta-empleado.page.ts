@@ -102,7 +102,7 @@ export class AltaEmpleadoPage implements OnInit {
       await this.upload_storage();
       //Agrego el empleado a firestores
       this.fire
-        .addEmpleado(
+        .addUsuario(
           new Empleado(
             this.fg.controls['nombre'].value,
             this.fg.controls['apellido'].value,
