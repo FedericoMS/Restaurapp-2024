@@ -33,18 +33,18 @@ export class LoginPage implements OnInit {
    
     if (this.user.email == '' || this.user.password == '') {
       
-      this.userService.showToast('Campos vacíos', 'red', 'top', 'error')
+      this.userService.showToast('Campos vacíos', 'red', 'center', 'error', 'white', true)
   
         }
         else {
           this.userService.login({ email: this.user.email, password: this.user.password })
           .then(() => {
-            this.userService.showToast('¡Bienvenido!', 'lightgreen', 'top', 'success', 'black')
+            this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black')
             this.router.navigateByUrl('home');
          
           })
           .catch(() => {
-          this.userService.showToast('Alguno de los datos es incorrecto', 'red', 'top', 'error')
+          this.userService.showToast('Alguno de los datos es incorrecto', 'red', 'center', 'error', 'white', true)
          
         });
 
