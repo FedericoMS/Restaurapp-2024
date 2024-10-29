@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Usuario } from '../clases/usuario';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import Vibration from '@awesome-cordova-library/vibration';
 
 
 @Injectable({
@@ -164,7 +165,8 @@ export class UserService {
       backgroundColor: string = 'lightgreen',
       position: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center' | 'top' | 'bottom',
       icon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'success', 
-      textColor: string = 'white' 
+      textColor: string = 'white',
+      vibration : boolean = false
     ) {
       const Toast = Swal.mixin({
         toast: true,
@@ -184,5 +186,9 @@ export class UserService {
         title: title,
         icon: icon
       });
+      if(vibration)
+      {
+        Vibration.vibrate(1000);
+      }
     }
 }
