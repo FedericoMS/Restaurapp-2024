@@ -18,7 +18,7 @@ import {
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 import { Empleado } from 'src/app/clases/empleado';
-import { Alert } from 'src/app/clases/alert';
+// import { Alert } from 'src/app/clases/alert';
 import { addIcons } from 'ionicons';
 import {
   cameraOutline,
@@ -94,13 +94,19 @@ export class AltaEmpleadoPage implements OnInit {
       this.fg.controls['apellido'].setValue(datos.apellido);
       this.fg.controls['dni'].setValue(datos.dni);
     } else {
-      Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
+      this.util.showToast(
+        'Ocurrió un error, Vuelva a intentar más tarde',
+        'red',
+        'top'
+      );
+      // Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
     }
   }
 
   async cargar() {
     if (this.fg.valid) {
       //Se deberia agregar un spinner para la espera
+      this.isLoading = true;
       //Subo la imagen al storage
       await this.upload_storage();
       //Agrego el empleado a firestores
@@ -116,20 +122,42 @@ export class AltaEmpleadoPage implements OnInit {
           )
         )
         .then(() => {
-          Alert.success('Se cargo exitosamente el empleado', '');
+          // Alert.success('Se cargo exitosamente el empleado', '');
+          this.util.showToast(
+            'Se cargo exitosamente el empleado',
+            'lightgreen',
+            'top'
+          );
           //Reseteo el form para que empiece de cero
           this.fg.reset();
+          this.fg.controls['rol'].setValue(this.list_roles[0]);
         })
         .catch(() => {
-          Alert.error(
+          this.util.showToast(
             'Hubo un problema al cargar el empleado',
-            'Vuelva a intentar más tarde'
+            'red',
+            'top',
+            'error'
           );
+
+          // Alert.error(
+          //   'Hubo un problema al cargar el empleado',
+          //   'Vuelva a intentar más tarde'
+          // );
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     } else {
-      Alert.error(
-        'Ocurrió un error',
-        'Verifique que todos los campos estén completos sin errores!'
+      // Alert.error(
+      //   'Ocurrió un error',
+      //   'Verifique que todos los campos estén completos sin errores!'
+      // );
+      this.util.showToast(
+        'Verifique que todos los campos estén completos sin errores!',
+        'red',
+        'top',
+        'error'
       );
       //Muestro todos los errores
       Object.keys(this.fg.controls).forEach((controlName) => {
@@ -171,6 +199,7 @@ export class AltaEmpleadoPage implements OnInit {
 
     this.fg.get('cuil')?.setValue(rawValue, { emitEvent: false });
   }
+
   allowOnlyNumbers(event: KeyboardEvent) {
     const charCode = event.charCode;
     if (charCode < 48 || charCode > 57) {

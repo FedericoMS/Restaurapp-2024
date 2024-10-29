@@ -3,6 +3,9 @@ import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Alert } from '../clases/alert';
 import { Persona } from '../clases/persona';
+import Vibration from '@awesome-cordova-library/vibration';
+import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -118,5 +121,43 @@ export class UtilService {
 
   async sacar_foto() {
     return (await this.takePicture()).dataUrl;
+  }
+
+  showToast(
+    title: string,
+    backgroundColor: string = 'lightgreen',
+    position:
+      | 'top-right'
+      | 'top-left'
+      | 'bottom-right'
+      | 'bottom-left'
+      | 'center'
+      | 'top'
+      | 'bottom',
+    icon: 'success' | 'error' | 'warning' | 'info' | 'question' = 'success',
+    textColor: string = 'white',
+    vibration: boolean = false
+  ) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: position,
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast',
+      },
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      background: backgroundColor,
+      color: textColor,
+    });
+
+    Toast.fire({
+      title: title,
+      icon: icon,
+    });
+    if (vibration) {
+      Vibration.vibrate(1000);
+    }
   }
 }
