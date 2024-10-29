@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonSegmentButton, IonLabel, IonSegment } from '@ionic/angular/standalone';
+import { Empleado } from 'src/app/clases/empleado';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
-import { Empleado } from 'src/app/clases/empleado';
-import { Alert } from 'src/app/clases/alert';
 import { addIcons } from 'ionicons';
 import { cameraOutline, checkmark, closeOutline, qrCodeOutline} from 'ionicons/icons'
 import { cuilValidator } from 'src/app/validators/cuilValidator';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import { Alert } from 'src/app/clases/alert';
+
 @Component({
-  selector: 'app-alta-duenio-supervisor',
-  templateUrl: './alta-duenio-supervisor.page.html',
-  styleUrls: ['./alta-duenio-supervisor.page.scss'],
+  selector: 'app-alta-cliente',
+  templateUrl: './alta-cliente.page.html',
+  styleUrls: ['./alta-cliente.page.scss'],
   standalone: true,
-  imports: [SpinnerComponent,IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonSegment, IonLabel, IonSegmentButton, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule,SpinnerComponent]
 })
-export class AltaDuenioSupervisorPage implements OnInit {
+export class AltaClientePage implements OnInit {
   fg!: FormGroup;
   list_roles = Empleado.get_roles();
   foto_url: string = '';
@@ -39,15 +40,7 @@ export class AltaDuenioSupervisorPage implements OnInit {
           Validators.max(99999999),
         ],
       ],
-      cuil: [
-        '',
-        [
-          Validators.required,
-          cuilValidator()
-        ],
-      ],
-
-      rol: [this.list_roles[4]],
+      rol: [this.list_roles[6]],
     });
   }
 
@@ -120,28 +113,5 @@ export class AltaDuenioSupervisorPage implements OnInit {
         this.img
       );
     }
-  }
-  allowOnlyNumbers(event: KeyboardEvent) {
-    const charCode = event.charCode;
-    if (charCode < 48 || charCode > 57) {
-      event.preventDefault();
-    }
-  }
-  
-  formatCuil() {
-    let rawValue = this.fg.get('cuil')?.value.replace(/-/g, '');
-    
-    if (!/^\d*$/.test(rawValue)) {
-      rawValue = rawValue.replace(/\D/g, '');
-    }
-  
-    if (rawValue.length > 2) {
-      rawValue = rawValue.slice(0, 2) + '-' + rawValue.slice(2);
-    }
-    if (rawValue.length > 11) {
-      rawValue = rawValue.slice(0, 11) + '-' + rawValue.slice(11);
-    }
-  
-    this.fg.get('cuil')?.setValue(rawValue, { emitEvent: false });
   }
 }
