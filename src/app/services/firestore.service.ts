@@ -25,7 +25,7 @@ export class FirestoreService {
   }
 
   //Obtener los empleados
-  getUsuario() {
+  getUsuarios() : any {
     const col = this.firestore.collection('usuarios');
     return col;
   }
@@ -42,5 +42,9 @@ export class FirestoreService {
     return this.firestore
       .doc<any>(`usuarios/${usuario.uid}`)
       .update(usuario);
+  }
+
+  getUserProfile(userId: string) {
+    return this.firestore.collection('usuarios').doc(userId).get();
   }
 }
