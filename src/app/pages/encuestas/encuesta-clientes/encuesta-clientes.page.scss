@@ -79,6 +79,17 @@ p {
   font-size: 1.2rem;
 }
 
+ion-range {
+  --bar-background: #54494b;
+  --bar-background-active: #e3d081;
+  --bar-height: 8px;
+  --bar-border-radius: 8px;
+  --knob-background: #eeffc8;
+  --knob-size: 40px;
+  --pin-background: #ecffaf;
+  --pin-color: #fff;
+}
+
 @media (max-height: 670px) {
   label,
   p {

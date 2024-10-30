@@ -11,15 +11,21 @@
       <label for="overallSatisfaction"
         >¿Qué tan satisfecho estuvo con su experiencia?</label
       >
-      <input
+      <!-- <input
         type="range"
         id="overallSatisfaction"
         name="overallSatisfaction"
         min="1"
         max="5"
-      />
+        (ionChange)="cambiarRange($event)"
+      /> -->
+      <ion-range
+        min="1"
+        max="5"
+        step="1"
+        (ionChange)="cambiarRange($event)"
+      ></ion-range>
     </div>
-    <br />
     <div class="ion-margin-bottom">
       <p>¿Cómo describiría el ambiente del restaurante?</p>
       <div class="div-radios">
@@ -29,6 +35,7 @@
             id="ambientCalm"
             name="environment"
             value="Tranquilo"
+            (click)="cambiarRadio('Tranquilo')"
             checked
           />
           <label for="ambientCalm">Tranquilo</label><br />
@@ -39,6 +46,7 @@
             id="ambientLively"
             name="environment"
             value="Animado"
+            (click)="cambiarRadio('Animado')"
           />
           <label for="ambientLively">Animado</label><br />
         </div>
@@ -48,6 +56,7 @@
             id="ambientNoisy"
             name="environment"
             value="Ruidoso"
+            (click)="cambiarRadio('Ruidoso')"
           />
           <label for="ambientNoisy">Ruidoso</label>
         </div>
@@ -63,6 +72,7 @@
             id="cleanDiningArea"
             name="cleanliness"
             value="Atención"
+            (click)="cambiarCheck(1)"
           />
           <label for="cleanDiningArea">La Atención</label><br />
         </div>
@@ -72,6 +82,7 @@
             id="cleanRestrooms"
             name="cleanliness"
             value="Baños"
+            (click)="cambiarCheck(2)"
             checked
           />
           <label for="cleanRestrooms">Los Baños</label><br />
@@ -82,6 +93,7 @@
             id="cleanTables"
             name="cleanliness"
             value="Mesas"
+            (click)="cambiarCheck(3)"
           />
           <label for="cleanTables">Las Mesas</label>
         </div>
@@ -93,10 +105,18 @@
         >¿Con qué frecuencia visita el restaurante?</label
       >
       <select id="visitFrequency" name="visitFrequency">
-        <option value="Primera_vez">Primera vez</option>
-        <option value="Semanalmente">Semanalmente</option>
-        <option value="Mensualmente">Mensualmente</option>
-        <option value="Rara_vez">Rara vez</option>
+        <option value="Primera_vez" (click)="cambiarSelect('Primera_vez')">
+          Primera vez
+        </option>
+        <option value="Semanalmente" (click)="cambiarSelect('Semanalmente')">
+          Semanalmente
+        </option>
+        <option value="Mensualmente" (click)="cambiarSelect('Mensualmente')">
+          Mensualmente
+        </option>
+        <option value="Rara_vez" (click)="cambiarSelect('Rara_vez')">
+          Rara vez
+        </option>
       </select>
     </div>
 
@@ -110,6 +130,8 @@
       />
     </div>
 
-    <ion-button type="submit" class="load"> Enviar Encuesta </ion-button>
+    <ion-button type="submit" class="load" (click)="guardar()">
+      Enviar Encuesta
+    </ion-button>
   </form>
 </main>

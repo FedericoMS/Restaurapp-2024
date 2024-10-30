@@ -41,6 +41,12 @@ export class FirestoreService {
     await documento.set({ ...encuesta });
   }
 
+  //Obtner cualquier collection
+  getCollection(path: string) {
+    const col = this.firestore.collection(path);
+    return col;
+  }
+
   async uploadImage(path: string, data_url: string) {
     return uploadString(ref(getStorage(), path), data_url, 'data_url').then(
       () => {
