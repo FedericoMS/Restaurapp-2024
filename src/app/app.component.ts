@@ -22,7 +22,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       SplashScreen.hide(); // Hide the splash screen
-      this.router.navigateByUrl('encuesta-clientes'); // Navigate to the splash route
+      this.router.navigateByUrl('encuesta-empleados'); // Navigate to the splash route
     });
   }
 }
