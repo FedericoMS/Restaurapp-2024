@@ -38,13 +38,14 @@ import { cameraOutline } from 'ionicons/icons';
 export class EncuestaEmpleadosPage implements OnInit {
   // ngOnInit() {
   //   const encuesta: Encuesta = new Encuesta({
-  //     question: '¿Cómo describiría el ambiente del restaurante?',
-  //     Tranquilo: 0,
-  //     Animado: 0,
-  //     Ruidoso: 0,
+  //     question: 'Estado de Limpieza',
+  //     Excelente: 0,
+  //     Bueno: 0,
+  //     Regular: 0,
+  //     Malo: 0,
   //   });
 
-  //   // this.fire.addEncuesta(encuesta);
+  //   this.fire.addEncuesta(encuesta, 'empleados');
   // }
 
   private util = inject(UtilService);
@@ -59,8 +60,8 @@ export class EncuestaEmpleadosPage implements OnInit {
   radio?: Encuesta;
   chek?: Encuesta;
   select?: Encuesta;
-  radioSelect = 'Tranquilo';
-  Select_ok = 'Primera_vez';
+  radioSelect = 'Si';
+  Select_ok = 'Excelente';
   check_1 = false;
   check_2 = true;
   check_3 = false;
@@ -78,7 +79,7 @@ export class EncuestaEmpleadosPage implements OnInit {
     this.util.mostrarSpinner = true;
 
     this.sub = this.fire
-      .getCollection('encuesta_clientes')
+      .getCollection('encuesta_empleados')
       .valueChanges()
       .subscribe((next) => {
         this.res_encuestas = next as Encuesta[];
@@ -152,7 +153,7 @@ export class EncuestaEmpleadosPage implements OnInit {
     this.util.mostrarSpinner = true;
     setTimeout(() => {
       if (this.chek && this.range && this.radio && this.select) {
-        if (this.check_1) this.chek['Atención']++;
+        if (this.check_1) this.chek['Cocina']++;
         if (this.check_2) this.chek['Baños']++;
         if (this.check_3) this.chek['Mesas']++;
 
@@ -161,7 +162,7 @@ export class EncuestaEmpleadosPage implements OnInit {
         this.radio[this.radioSelect]++;
 
         this.res_encuestas.forEach((value) => {
-          this.fire.addEncuesta(value);
+          this.fire.addEncuesta(value, 'empleados');
         });
       }
       this.util.mostrarSpinner = false;
