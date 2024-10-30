@@ -6,9 +6,9 @@
 <main>
 
 
-  <form [formGroup]="fg" class="form-container">
+  <form [formGroup]="fg" class="form-container" [ngClass]="{ 'anonimo': fg.get('rol')?.value === 'anonimo' }">
 
-    <ion-segment formControlName="rol">
+    <ion-segment formControlName="rol" (ionChange)="emptyInputs()">
       <ion-segment-button value="cliente">
         <ion-label>Cliente</ion-label>
       </ion-segment-button>
@@ -17,28 +17,51 @@
       </ion-segment-button>
     </ion-segment>
 
-    <div class="cont-btns">
-      <ion-button (click)="cargarConQr()" class="btn-top" >
-        Cargar con QR
-        <ion-icon name="qr-code-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="sacar_foto()" class="btn-top" >
-        Sacar foto
-        <ion-icon name="camera-outline"></ion-icon>
-      </ion-button>
-    </div>
+
+    @if ( fg.get('rol')?.value === 'cliente') {
+      <div class="form-group login__field">
+        <input type="text" class="login__input" formControlName="correo" placeholder="Correo electrónico" maxlength="10">
+      </div>
+      <div class="cont-p">
+        @if(this.fg.controls['correo'].errors !== null && this.fg.controls["correo"].touched) { 
+          @if(this.fg.controls['correo'].errors!['required']) {
+            <p>Debes ingresar un correo electrónico</p>
+          } 
+          @else if(this.fg.controls['correo'].errors!['email']) {
+            <p>Formato invalido del email</p>
+          }
+        }
+      </div>
+  
+      <div class="form-group login__field">
+        <input type="text" class="login__input" formControlName="contrasenia" placeholder="Contraseña" maxlength="10">
+      </div>
+      <div class="cont-p">
+        @if(this.fg.controls['contrasenia'].errors !== null && this.fg.controls["contrasenia"].touched) { 
+          @if(this.fg.controls['contrasenia'].errors!['required']) {
+            <p>Debes ingresar una contraseña</p>
+          } 
+        }
+      </div>
+    }
 
 
-    <div class="form-group login__field">
-      <input type="text" class="login__input" formControlName="nombre" placeholder="Nombre">
+
+
+
+    <div>
+      <div class="form-group login__field">
+        <input type="text" class="login__input" formControlName="nombre" placeholder="Nombre" [ngClass]="{ 'nombre-anonimo': fg.get('rol')?.value === 'anonimo' }">
+      </div>
+      <div class="cont-p">
+        @if(this.fg.controls['nombre'].errors !== null && this.fg.controls["nombre"].touched) { 
+          @if(this.fg.controls['nombre'].errors!['required']) {
+            <p [ngClass]="{ 'error-anonimo': fg.get('rol')?.value === 'anonimo' }">Debes ingresar un nombre</p>
+          } 
+        }
+      </div>
     </div>
-    <div class="cont-p">
-      @if(this.fg.controls['nombre'].errors !== null && this.fg.controls["nombre"].touched) { 
-        @if(this.fg.controls['nombre'].errors!['required']) {
-          <p>Debes ingresar un nombre</p>
-        } 
-      }
-    </div>
+
 
     @if ( fg.get('rol')?.value === 'cliente') {
       <div class="form-group login__field">
@@ -68,6 +91,21 @@
        }
       </div>
     }
+
+
+    <div class="cont-btns" [ngClass]="{ 'cont-btn-anonimo': fg.get('rol')?.value === 'anonimo' }">
+      @if ( fg.get('rol')?.value === 'cliente') {
+        <ion-button (click)="cargarConQr()" class="btn-top" >
+          Cargar con QR
+          <ion-icon name="qr-code-outline"></ion-icon>
+        </ion-button>
+      }
+      <ion-button (click)="sacar_foto()" class="btn-top" [ngClass]="{ 'btn-foto-anonimo': fg.get('rol')?.value === 'anonimo' }">
+        Sacar foto
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+    </div>
+
 
 
     <div class="form-group content-select">

@@ -41,6 +41,8 @@ export class AltaClientePage implements OnInit {
         ],
       ],
       rol: [this.list_roles[6]],
+      contrasenia: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -76,13 +78,13 @@ export class AltaClientePage implements OnInit {
           )
         )
         .then(() => {
-          Alert.success('Se cargo exitosamente el empleado', '');
+          Alert.success('Se cargo exitosamente el cliente', '');
           this.fg.reset();
           this.isLoading = false;
         })
         .catch(() => {
           Alert.error(
-            'Hubo un problema al cargar el empleado',
+            'Hubo un problema al cargar el cliente',
             'Vuelva a intentar más tarde'
           );
           this.isLoading = false;
@@ -109,9 +111,29 @@ export class AltaClientePage implements OnInit {
   async upload_storage() {
     if (this.img) {
       this.foto_url = await this.firestore.uploadImage(
-        `imagenes_dueños_supervisores/${Date.now()}`,
+        `imagenes_clientes/${Date.now()}`,
         this.img
       );
     }
   }
+  emptyInputs() {
+    this.fg.reset({
+      rol: this.fg.get('rol')?.value,
+      nombre: '',
+      apellido: '',
+      correo: '',
+      contrasenia: '',
+      dni: '',
+    });
+    
+    Object.keys(this.fg.controls).forEach((key) => {
+      const control = this.fg.get(key);
+      control?.markAsPristine();
+      control?.markAsUntouched();
+      control?.updateValueAndValidity();
+    });
+  
+    this.img = '';
+  }
+
 }
