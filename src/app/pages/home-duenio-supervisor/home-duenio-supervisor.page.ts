@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton } from '@ionic/angular/standalone';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-duenio-supervisor',
   templateUrl: './home-duenio-supervisor.page.html',
   styleUrls: ['./home-duenio-supervisor.page.scss'],
   standalone: true,
-  imports: [IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class HomeDuenioSupervisorPage implements OnInit {
 
@@ -55,6 +56,28 @@ export class HomeDuenioSupervisorPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  approveUser(user : any) {
+    let modUser : any = user;
+    Swal.fire({
+      title: "¿Estás seguro de que quieres aprobar a este cliente?",
+      showCancelButton: true,
+      confirmButtonText: "Aprobar",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modUser.estaAprobado = true;     
+        console.log(modUser);   
+        this.firestoreService.updateUser(modUser)
+        Swal.fire({
+          title: "¡Cliente aprobado!",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
   }
 
 }

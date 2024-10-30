@@ -4,11 +4,11 @@
      <!-- *************************** LISTADO DE USUARIOS *************************** -->
     <div *ngIf="userList">
         <h2 class="mb-3" style="text-align: center; margin-top: 4rem; text-shadow: 1px 1px #000">
-            LISTA DE USUARIOS PENDIENTES DE APROBACIÓN
+            LISTA DE CLIENTES PENDIENTES DE APROBACIÓN
         </h2>
 
         <div *ngFor="let item of userList;">
-            <ion-card style="border: 4px double rgb(65, 151, 167); border-radius: 30px" class="tarjeta-usuario" *ngIf="!item.estaAprobado">
+            <ion-card style="border: 4px double rgb(65, 151, 167); border-radius: 30px" class="tarjeta-usuario" *ngIf="!item.estaAprobado && item.rol == 'cliente'">
                 <div class="usuario-container" >
                     <!-- Imagen a la izquierda -->
                     <img style="
@@ -25,6 +25,7 @@
                             <ion-card-title>{{item.apellido}} {{item.nombre}}</ion-card-title>
                             <ion-card-subtitle>DNI: {{item.dni}}</ion-card-subtitle>
                             <ion-card-subtitle>Correo: {{item.correo}}</ion-card-subtitle>
+                            <ion-button (click)="approveUser(item)" style="font-weight: bold;"> Aprobar cliente </ion-button>
                         </ion-card-header>
                     </div>
                 </div>

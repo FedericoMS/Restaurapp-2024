@@ -38,9 +38,15 @@ export class FirestoreService {
     );
   }
 
-  updateUser(usuario: any) {
+  updateUserByUID(usuario: any) {
     return this.firestore
       .doc<any>(`usuarios/${usuario.uid}`)
+      .update(usuario);
+  }
+
+  updateUser(usuario: any) {
+    return this.firestore
+      .doc<any>(`usuarios/${usuario.id}`)
       .update(usuario);
   }
 
