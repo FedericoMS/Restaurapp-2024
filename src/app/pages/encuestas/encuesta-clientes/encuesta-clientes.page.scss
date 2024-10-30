@@ -9,7 +9,7 @@ main {
 }
 
 form {
-  padding: 20px;
+  padding-top: 30px;
   width: 90%;
   min-height: 100vh;
   max-height: 100vh;
@@ -21,8 +21,9 @@ label {
   display: block;
   color: #fff;
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 input[type="range"] {
@@ -33,23 +34,18 @@ input[type="range"] {
 input[type="radio"],
 input[type="checkbox"] {
   accent-color: #e3d081;
+  width: 20px;
+  height: 20px;
 }
 
 select,
-input[type="text"],
-button {
+input[type="text"] {
   width: 100%;
   padding: 10px;
-  margin-top: 8px;
-  margin-bottom: 16px;
+  margin: 0;
+  margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-input[type="file"] {
-  border: none;
-  margin-top: 10px;
-  color: #fff;
 }
 
 ion-toolbar {
@@ -60,7 +56,7 @@ ion-toolbar {
 .div-radios,
 .div-cheks {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   text-align: center;
 }
 
@@ -80,4 +76,27 @@ p {
   text-align: center;
   font-weight: bold;
   color: #fff;
+  font-size: 1.2rem;
+}
+
+@media (max-height: 670px) {
+  label,
+  p {
+    font-size: 1rem;
+  }
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+  }
+  select,
+  input[type="text"] {
+    height: 38px;
+  }
+  form {
+    padding-top: 10px;
+  }
+  ion-button {
+    --height: 40px;
+  }
 }
