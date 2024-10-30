@@ -168,7 +168,8 @@ export class EncuestaClientesPage implements OnInit {
         });
       }
       this.util.mostrarSpinner = false;
-      this.router.navigateByUrl('algun lugar');
+      this.util.showToast('Se cargo exitosamente', 'lightgreen', 'center');
+      // this.router.navigateByUrl('algun lugar');
     }, 2000);
   }
 }
