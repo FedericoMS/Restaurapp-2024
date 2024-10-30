@@ -16,17 +16,17 @@ export class FirestoreService {
   constructor(private firestore: AngularFirestore) {}
   storage: AngularFireStorage = inject(AngularFireStorage);
 
-  //Agregar un empleado
-  async addUsuario(emp: Empleado) {
+  //Agregar un usuarios
+  async addUsuario(emp : any) {
     const colImagenes = this.firestore.collection('usuarios');
     const documento = colImagenes.doc();
     emp.id = documento.ref.id;
     await documento.set({ ...emp });
   }
 
-  //Obtener los empleados
+  //Obtener los usuarios
   getUsuarios() : any {
-    const col = this.firestore.collection('usuarios');
+    const col = this.firestore.collection('usuarios').valueChanges();
     return col;
   }
 

@@ -28,29 +28,28 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('registro');
   }
 
-  
-  loginUser() {
-   
-    if (this.user.email == '' || this.user.password == '') {
-      
-      this.userService.showToast('Campos vacíos', 'red', 'center', 'error', 'white', true)
-  
+
+  async loginUser() {
+    if (this.user.email === '' || this.user.password === '') {
+      this.userService.showToast('Campos vacíos', 'red', 'center', 'error', 'white', true);
+    } else {
+      try {
+        await this.userService.login({ email: this.user.email, password: this.user.password });
+        this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
+
+        const rol = await this.userService.getRole();
+        if (rol == 'dueño' || rol == 'supervisor') {
+          this.router.navigateByUrl('home-duenio-supervisor');
         }
         else {
-          this.userService.login({ email: this.user.email, password: this.user.password })
-          .then(() => {
-            this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black')
-            this.router.navigateByUrl('home');
-         
-          })
-          .catch(() => {
-          this.userService.showToast('Alguno de los datos es incorrecto', 'red', 'center', 'error', 'white', true)
-         
-        });
-
-
+          this.router.navigateByUrl('home');
+        }
+      } catch (error) {
+        this.userService.showToast('Alguno de los datos es incorrecto', 'red', 'center', 'error', 'white', true);
+      }
     }
   }
+
 
   fastLogin(email: string, pass: string) {
     this.user.email = email;
