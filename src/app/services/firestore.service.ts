@@ -8,6 +8,7 @@ import {
   ref,
   getDownloadURL,
 } from '@angular/fire/storage';
+import { Encuesta } from '../clases/encuesta';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,16 @@ export class FirestoreService {
     return col;
   }
 
+  //Encuesta
+  async addEncuesta(
+    encuesta: Encuesta,
+    collection: 'clientes' | 'empleados' | 'supervisor' = 'clientes'
+  ) {
+    const encuestas = this.firestore.collection('encuesta_' + collection);
+    const documento = encuestas.doc(encuesta['question']);
+    await documento.set({ ...encuesta });
+  }
+
   async uploadImage(path: string, data_url: string) {
     return uploadString(ref(getStorage(), path), data_url, 'data_url').then(
       () => {
@@ -39,8 +50,6 @@ export class FirestoreService {
   }
 
   updateUser(usuario: any) {
-    return this.firestore
-      .doc<any>(`usuarios/${usuario.uid}`)
-      .update(usuario);
+    return this.firestore.doc<any>(`usuarios/${usuario.uid}`).update(usuario);
   }
 }

@@ -16,7 +16,7 @@
         id="overallSatisfaction"
         name="overallSatisfaction"
         min="1"
-        max="10"
+        max="5"
       />
     </div>
     <br />
@@ -28,7 +28,8 @@
             type="radio"
             id="ambientCalm"
             name="environment"
-            value="Calm"
+            value="Tranquilo"
+            checked
           />
           <label for="ambientCalm">Tranquilo</label><br />
         </div>
@@ -37,7 +38,7 @@
             type="radio"
             id="ambientLively"
             name="environment"
-            value="Lively"
+            value="Animado"
           />
           <label for="ambientLively">Animado</label><br />
         </div>
@@ -46,7 +47,7 @@
             type="radio"
             id="ambientNoisy"
             name="environment"
-            value="Noisy"
+            value="Ruidoso"
           />
           <label for="ambientNoisy">Ruidoso</label>
         </div>
@@ -61,7 +62,7 @@
             type="checkbox"
             id="cleanDiningArea"
             name="cleanliness"
-            value="DiningArea"
+            value="Atención"
           />
           <label for="cleanDiningArea">La Atención</label><br />
         </div>
@@ -70,7 +71,8 @@
             type="checkbox"
             id="cleanRestrooms"
             name="cleanliness"
-            value="Restrooms"
+            value="Baños"
+            checked
           />
           <label for="cleanRestrooms">Los Baños</label><br />
         </div>
@@ -79,7 +81,7 @@
             type="checkbox"
             id="cleanTables"
             name="cleanliness"
-            value="Tables"
+            value="Mesas"
           />
           <label for="cleanTables">Las Mesas</label>
         </div>
@@ -91,10 +93,10 @@
         >¿Con qué frecuencia visita el restaurante?</label
       >
       <select id="visitFrequency" name="visitFrequency">
-        <option value="First time">Primera vez</option>
-        <option value="Weekly">Semanalmente</option>
-        <option value="Monthly">Mensualmente</option>
-        <option value="Rarely">Rara vez</option>
+        <option value="Primera_vez">Primera vez</option>
+        <option value="Semanalmente">Semanalmente</option>
+        <option value="Mensualmente">Mensualmente</option>
+        <option value="Rara_vez">Rara vez</option>
       </select>
     </div>
 

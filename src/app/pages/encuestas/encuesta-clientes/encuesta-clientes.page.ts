@@ -9,6 +9,8 @@ import {
   IonButton,
 } from '@ionic/angular/standalone';
 import { UtilService } from 'src/app/services/util.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { Encuesta } from 'src/app/clases/encuesta';
 
 @Component({
   selector: 'app-encuesta-clientes',
@@ -27,7 +29,8 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class EncuestaClientesPage implements OnInit {
   private util = inject(UtilService);
-  img?: string = '';
+  private fire = inject(FirestoreService);
+  imgs: string[] = [];
   // Clientes
   // ● Se le permitirá cargar una encuesta de satisfacción por medio de un formulario, con
   // la opción de cargar hasta tres (3) fotos máximo, relacionada a la encuesta.
@@ -40,7 +43,10 @@ export class EncuestaClientesPage implements OnInit {
 
   async sacar_foto() {
     try {
-      this.img = (await this.util.takePicturePrompt()).dataUrl;
+      const img = (await this.util.takePicturePrompt()).dataUrl;
+      if (img) {
+        this.imgs.push(img);
+      }
     } catch (error) {
       console.log(error);
     }
