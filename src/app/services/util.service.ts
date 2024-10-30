@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class UtilService {
+  mostrarSpinner = false;
+
   constructor() {}
 
   async scan(): Promise<string> {

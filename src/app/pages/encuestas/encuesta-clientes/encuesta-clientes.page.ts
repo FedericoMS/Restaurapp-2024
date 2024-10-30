@@ -14,6 +14,8 @@ import { UtilService } from 'src/app/services/util.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Encuesta } from 'src/app/clases/encuesta';
 import { Subscription } from 'rxjs';
+import { SpinnerComponent } from '../../../components/spinner/spinner.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-encuesta-clientes',
@@ -30,11 +32,14 @@ import { Subscription } from 'rxjs';
     IonToolbar,
     CommonModule,
     FormsModule,
+    SpinnerComponent,
   ],
 })
 export class EncuestaClientesPage implements OnInit {
   private util = inject(UtilService);
   private fire = inject(FirestoreService);
+  private router = inject(Router);
+
   imgs: string[] = [];
   sub?: Subscription;
   res_encuestas: Encuesta[] = [];
@@ -56,6 +61,8 @@ export class EncuestaClientesPage implements OnInit {
   }
 
   get_resultados_encuesta() {
+    this.util.mostrarSpinner = true;
+
     this.sub = this.fire
       .getCollection('encuesta_clientes')
       .valueChanges()
@@ -64,6 +71,7 @@ export class EncuestaClientesPage implements OnInit {
         this.res_encuestas.forEach((value) => {
           this.derivarTipos(value);
         });
+        this.util.mostrarSpinner = false;
       });
   }
 
@@ -108,8 +116,8 @@ export class EncuestaClientesPage implements OnInit {
   }
 
   cambiarRange(event: any) {
-    const aux = event.detail.value;
-    console.log(aux);
+    this.range_select = event.detail.value;
+    console.log(this.range_select);
   }
 
   cambiarCheck(num: number) {
@@ -127,25 +135,23 @@ export class EncuestaClientesPage implements OnInit {
   }
 
   guardar() {
-    if (this.chek && this.range && this.radio && this.select) {
-      this.chek['Atención'] = this.check_1
-        ? this.chek['Atención'] + 1
-        : this.chek['Atención'];
+    this.util.mostrarSpinner = true;
+    setTimeout(() => {
+      if (this.chek && this.range && this.radio && this.select) {
+        if (this.check_1) this.chek['Atención']++;
+        if (this.check_2) this.chek['Baños']++;
+        if (this.check_3) this.chek['Mesas']++;
 
-      this.chek['Baños'] = this.check_1
-        ? this.chek['Baños'] + 1
-        : this.chek['Baños'];
+        this.range[this.range_select]++;
+        this.select[this.Select_ok]++;
+        this.radio[this.radioSelect]++;
 
-      this.chek['Mesas'] = this.check_1
-        ? this.chek['Mesas'] + 1
-        : this.chek['Mesas'];
-
-      this.range[this.range_select]++;
-
-      this.select[this.Select_ok]++;
-
-      this.radio[this.radioSelect]++;
-    }
-    console.log(this.res_encuestas);
+        this.res_encuestas.forEach((value) => {
+          this.fire.addEncuesta(value);
+        });
+      }
+      this.util.mostrarSpinner = false;
+      this.router.navigateByUrl('algun lugar');
+    }, 2000);
   }
 }
