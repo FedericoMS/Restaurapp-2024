@@ -95,6 +95,7 @@ export class EncuestaEmpleadosPage implements OnInit {
       const img = (await this.util.takePicture()).dataUrl;
       if (img) {
         this.img = img;
+        this.checkImg = 1;
       }
     } catch (error) {
       console.log(error);
@@ -150,24 +151,35 @@ export class EncuestaEmpleadosPage implements OnInit {
   }
 
   guardar() {
-    this.util.mostrarSpinner = true;
-    setTimeout(() => {
-      if (this.chek && this.range && this.radio && this.select) {
-        if (this.check_1) this.chek['Cocina']++;
-        if (this.check_2) this.chek['Baños']++;
-        if (this.check_3) this.chek['Mesas']++;
+    if (this.checkImg === 1) {
+      this.util.mostrarSpinner = true;
+      setTimeout(() => {
+        if (this.chek && this.range && this.radio && this.select) {
+          if (this.check_1) this.chek['Cocina']++;
+          if (this.check_2) this.chek['Baños']++;
+          if (this.check_3) this.chek['Mesas']++;
 
-        this.range[this.range_select]++;
-        this.select[this.Select_ok]++;
-        this.radio[this.radioSelect]++;
+          this.range[this.range_select]++;
+          this.select[this.Select_ok]++;
+          this.radio[this.radioSelect]++;
 
-        this.res_encuestas.forEach((value) => {
-          this.fire.addEncuesta(value, 'empleados');
-        });
-      }
-      this.util.mostrarSpinner = false;
-      this.util.showToast('Se cargo exitosamente', 'lightgreen', 'center');
-      // this.router.navigateByUrl('algun lugar');
-    }, 2000);
+          this.res_encuestas.forEach((value) => {
+            this.fire.addEncuesta(value, 'empleados');
+          });
+        }
+        this.util.mostrarSpinner = false;
+        this.util.showToast('Se cargo exitosamente', 'lightgreen', 'center');
+        // this.router.navigateByUrl('algun lugar');
+      }, 2000);
+    } else {
+      this.util.showToast(
+        'Le falto subir la foto',
+        'red',
+        'center',
+        'error',
+        'white',
+        true
+      );
+    }
   }
 }
