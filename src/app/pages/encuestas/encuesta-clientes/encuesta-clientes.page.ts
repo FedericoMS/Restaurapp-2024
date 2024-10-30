@@ -56,7 +56,7 @@ export class EncuestaClientesPage implements OnInit {
   check_1 = false;
   check_2 = true;
   check_3 = false;
-  range_select: number = 0;
+  range_select: number = 1;
 
   constructor() {
     addIcons({ cameraOutline });
