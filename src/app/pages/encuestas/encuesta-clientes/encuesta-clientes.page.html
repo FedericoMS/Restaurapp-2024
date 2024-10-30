@@ -5,7 +5,13 @@
 </ion-header>
 
 <main>
-  <!-- <ion-button (click)="sacar_foto()"> Subir imagen </ion-button> -->
+  <div class="top">
+    <ion-button (click)="sacar_foto()" class="btn-top">
+      Subir fotos (máximo 3)
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
+    <span>{{this.imgs.length}}/3 fotos</span>
+  </div>
   <form>
     <div class="ion-margin-bottom">
       <label for="overallSatisfaction"
@@ -21,7 +27,7 @@
     <div class="ion-margin-bottom">
       <p>¿Cómo describiría el ambiente del restaurante?</p>
       <div class="div-radios">
-        <div>
+        <div class="div-rdo-chek">
           <input
             type="radio"
             id="ambientCalm"
@@ -32,7 +38,7 @@
           />
           <label for="ambientCalm">Tranquilo</label><br />
         </div>
-        <div>
+        <div class="div-rdo-chek">
           <input
             type="radio"
             id="ambientLively"
@@ -42,7 +48,7 @@
           />
           <label for="ambientLively">Animado</label><br />
         </div>
-        <div>
+        <div class="div-rdo-chek">
           <input
             type="radio"
             id="ambientNoisy"
@@ -58,7 +64,7 @@
     <div class="ion-margin-bottom">
       <p>¿Qué es lo que más le gusto del restaurante?</p>
       <div class="div-cheks">
-        <div>
+        <div class="div-rdo-chek">
           <input
             type="checkbox"
             id="cleanDiningArea"
@@ -68,7 +74,7 @@
           />
           <label for="cleanDiningArea">La Atención</label><br />
         </div>
-        <div>
+        <div class="div-rdo-chek">
           <input
             type="checkbox"
             id="cleanRestrooms"
@@ -79,7 +85,7 @@
           />
           <label for="cleanRestrooms">Los Baños</label><br />
         </div>
-        <div>
+        <div class="div-rdo-chek">
           <input
             type="checkbox"
             id="cleanTables"

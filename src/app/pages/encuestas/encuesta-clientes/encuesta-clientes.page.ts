@@ -9,6 +9,7 @@ import {
   IonButton,
   IonRange,
   IonItem,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { UtilService } from 'src/app/services/util.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -16,6 +17,8 @@ import { Encuesta } from 'src/app/clases/encuesta';
 import { Subscription } from 'rxjs';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
 import { Router } from '@angular/router';
+import { cameraOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-encuesta-clientes',
@@ -23,6 +26,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./encuesta-clientes.page.scss'],
   standalone: true,
   imports: [
+    IonIcon,
     IonItem,
     IonRange,
     IonButton,
@@ -54,7 +58,9 @@ export class EncuestaClientesPage implements OnInit {
   check_3 = false;
   range_select: number = 0;
 
-  constructor() {}
+  constructor() {
+    addIcons({ cameraOutline });
+  }
 
   ngOnInit() {
     this.get_resultados_encuesta();
@@ -76,13 +82,24 @@ export class EncuestaClientesPage implements OnInit {
   }
 
   async sacar_foto() {
-    try {
-      const img = (await this.util.takePicturePrompt()).dataUrl;
-      if (img) {
-        this.imgs.push(img);
+    if (this.imgs.length < 3) {
+      try {
+        const img = (await this.util.takePicturePrompt()).dataUrl;
+        if (img) {
+          this.imgs.push(img);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      this.util.showToast(
+        'Máximo 3 fotos',
+        'red',
+        'top',
+        'error',
+        'white',
+        true
+      );
     }
   }
 
