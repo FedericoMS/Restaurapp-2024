@@ -15,12 +15,9 @@ import {
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
-<<<<<<< HEAD
-=======
 import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/clases/alert';
->>>>>>> origin/main
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 // import { Alert } from 'src/app/clases/alert';
@@ -33,7 +30,6 @@ import {
 } from 'ionicons/icons';
 import { cuilValidator } from 'src/app/validators/cuilValidator';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
-import { Usuario } from 'src/app/clases/usuario';
 
 @Component({
   selector: 'app-alta-empleado',
