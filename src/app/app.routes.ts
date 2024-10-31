@@ -25,21 +25,26 @@ export const routes: Routes = [
       import('./pages/alta-empleado/alta-empleado.page').then(
         (m) => m.AltaEmpleadoPage
       ),
-  },  {
+  },
+  {
     path: 'encuesta-clientes',
-    loadComponent: () => import('./pages/encuestas/encuesta-clientes/encuesta-clientes.page').then( m => m.EncuestaClientesPage)
+    loadComponent: () =>
+      import('./pages/encuestas/encuesta-clientes/encuesta-clientes.page').then(
+        (m) => m.EncuestaClientesPage
+      ),
   },
   {
     path: 'encuesta-empleados',
-    loadComponent: () => import('./pages/encuestas/encuesta-empleados/encuesta-empleados.page').then( m => m.EncuestaEmpleadosPage)
-  },
-  {
-    path: 'alta-duenio-supervisor',
-    loadComponent: () => import('./pages/alta-duenio-supervisor/alta-duenio-supervisor.page').then( m => m.AltaDuenioSupervisorPage)
+    loadComponent: () =>
+      import(
+        './pages/encuestas/encuesta-empleados/encuesta-empleados.page'
+      ).then((m) => m.EncuestaEmpleadosPage),
   },
   {
     path: 'encuesta-empleados',
-    loadComponent: () => import('./pages/encuestas/encuesta-empleados/encuesta-empleados.page').then( m => m.EncuestaEmpleadosPage)
+    loadComponent: () =>
+      import(
+        './pages/encuestas/encuesta-empleados/encuesta-empleados.page'
+      ).then((m) => m.EncuestaEmpleadosPage),
   },
-
 ];

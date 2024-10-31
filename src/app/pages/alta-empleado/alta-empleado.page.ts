@@ -17,7 +17,6 @@ import {
 } from '@ionic/angular/standalone';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
-import { Empleado } from 'src/app/clases/empleado';
 // import { Alert } from 'src/app/clases/alert';
 import { addIcons } from 'ionicons';
 import {
@@ -28,6 +27,7 @@ import {
 } from 'ionicons/icons';
 import { cuilValidator } from 'src/app/validators/cuilValidator';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import { Usuario } from 'src/app/clases/usuario';
 
 @Component({
   selector: 'app-alta-empleado',
@@ -61,7 +61,7 @@ export class AltaEmpleadoPage implements OnInit {
   private util = inject(UtilService);
   fb: FormBuilder = inject(FormBuilder);
   fg: FormGroup;
-  list_roles = Empleado.get_roles().splice(0, 4);
+  list_roles = Usuario.get_roles().splice(0, 4);
   foto_url: string = '';
   img?: string = '';
   isLoading: boolean = false;
@@ -102,7 +102,16 @@ export class AltaEmpleadoPage implements OnInit {
       // Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
     }
   }
-
+  generarUser() {
+    const user = new Usuario();
+    user.nombre = this.fg.controls['nombre'].value;
+    user.apellido = this.fg.controls['apellido'].value;
+    user.dni = this.fg.controls['dni'].value;
+    user.cuil = this.fg.controls['cuil'].value;
+    user.foto_url = this.foto_url;
+    user.rol = this.fg.controls['rol'].value;
+    return user;
+  }
   async cargar() {
     if (this.fg.valid) {
       //Se deberia agregar un spinner para la espera
@@ -111,18 +120,8 @@ export class AltaEmpleadoPage implements OnInit {
       await this.upload_storage();
       //Agrego el empleado a firestores
       this.fire
-        .addUsuario(
-          new Empleado(
-            this.fg.controls['nombre'].value,
-            this.fg.controls['apellido'].value,
-            this.fg.controls['dni'].value,
-            this.fg.controls['cuil'].value,
-            this.foto_url,
-            this.fg.controls['rol'].value
-          )
-        )
+        .addUsuario(this.generarUser())
         .then(() => {
-          // Alert.success('Se cargo exitosamente el empleado', '');
           this.util.showToast(
             'Se cargo exitosamente el empleado',
             'lightgreen',
@@ -139,20 +138,11 @@ export class AltaEmpleadoPage implements OnInit {
             'top',
             'error'
           );
-
-          // Alert.error(
-          //   'Hubo un problema al cargar el empleado',
-          //   'Vuelva a intentar más tarde'
-          // );
         })
         .finally(() => {
           this.isLoading = false;
         });
     } else {
-      // Alert.error(
-      //   'Ocurrió un error',
-      //   'Verifique que todos los campos estén completos sin errores!'
-      // );
       this.util.showToast(
         'Verifique que todos los campos estén completos sin errores!',
         'red',
