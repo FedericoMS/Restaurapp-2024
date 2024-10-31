@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonSegmentButton, IonLabel, IonSegment } from '@ionic/angular/standalone';
-import { Usuario } from 'src/app/clases/usuario';
+import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 import { addIcons } from 'ionicons';
 import { cameraOutline, checkmark, closeOutline, qrCodeOutline} from 'ionicons/icons'
-import { cuilValidator } from 'src/app/validators/cuilValidator';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { UserService } from 'src/app/services/user.service';
 
@@ -74,11 +73,12 @@ export class AltaClientePage implements OnInit {
           '',
           this.foto_url,
           this.fg.controls['rol'].value,
+          EstadoAprobacion.Aprobado,
           this.fg.controls['correo'].value
         )
       }
       else{
-        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,'');
+        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,EstadoAprobacion.Aprobado);
       }
 
       this.firestore.addUsuario(user)

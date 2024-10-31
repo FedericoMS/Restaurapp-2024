@@ -17,7 +17,7 @@ import {
   IonItem,
   IonButton,
 } from '@ionic/angular/standalone';
-import { Usuario } from 'src/app/clases/usuario';
+import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/clases/alert';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -109,7 +109,8 @@ export class AltaEmpleadoPage implements OnInit {
             this.fg.controls['dni'].value,
             this.fg.controls['cuil'].value,
             this.foto_url,
-            this.fg.controls['rol'].value
+            this.fg.controls['rol'].value,
+            EstadoAprobacion.Aprobado
           )
         )
         .then(() => {
