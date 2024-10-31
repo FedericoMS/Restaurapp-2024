@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonSegmentButton, IonLabel, IonSegment } from '@ionic/angular/standalone';
+import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
-import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { addIcons } from 'ionicons';
 import { cameraOutline, checkmark, closeOutline, qrCodeOutline} from 'ionicons/icons'
-import { cuilValidator } from 'src/app/validators/cuilValidator';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { UserService } from 'src/app/services/user.service';
+
 @Component({
-  selector: 'app-alta-duenio-supervisor',
-  templateUrl: './alta-duenio-supervisor.page.html',
-  styleUrls: ['./alta-duenio-supervisor.page.scss'],
+  selector: 'app-alta-cliente',
+  templateUrl: './alta-cliente.page.html',
+  styleUrls: ['./alta-cliente.page.scss'],
   standalone: true,
-  imports: [SpinnerComponent,IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonSegment, IonLabel, IonSegmentButton, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule,SpinnerComponent]
 })
-export class AltaDuenioSupervisorPage implements OnInit {
+export class AltaClientePage implements OnInit {
   fg!: FormGroup;
   list_roles = Usuario.get_roles();
   foto_url: string = '';
@@ -25,7 +25,7 @@ export class AltaDuenioSupervisorPage implements OnInit {
   isLoading: boolean;
 
 
-  constructor(private userService : UserService,private firestore : FirestoreService, private utilService : UtilService, private fb : FormBuilder){
+  constructor(private firestore : FirestoreService, private utilService : UtilService, private fb : FormBuilder, private userService : UserService){
     addIcons({qrCodeOutline,cameraOutline,closeOutline,checkmark})
     this.isLoading = false;
     this.fg = this.fb.group({
@@ -39,15 +39,9 @@ export class AltaDuenioSupervisorPage implements OnInit {
           Validators.max(99999999),
         ],
       ],
-      cuil: [
-        '',
-        [
-          Validators.required,
-          cuilValidator()
-        ],
-      ],
-
-      rol: [this.list_roles[4]],
+      rol: [this.list_roles[6]],
+      contrasenia: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -63,30 +57,37 @@ export class AltaDuenioSupervisorPage implements OnInit {
       this.fg.controls['dni'].setValue(datos.dni);
     } else {
       this.userService.showToast('Ocurrió un error. ' + 'Vuelva a intentar más tarde', 'red', 'center', 'error', 'white', true);
-
     }
   }
 
   async cargar() {
-    if (this.fg.valid) {
+    if (this.fg.valid || (this.fg.controls['rol'].value == 'anonimo' && this.fg.controls['nombre'].value !== '')) {
       this.isLoading = true;
       await this.upload_storage();
-
-      this.firestore
-        .addUsuario(
-          new Usuario(
-            this.fg.controls['nombre'].value,
-            this.fg.controls['apellido'].value,
-            this.fg.controls['dni'].value,
-            this.fg.controls['cuil'].value,
-            this.foto_url,
-            this.fg.controls['rol'].value,
-            EstadoAprobacion.Aprobado
-          )
+      let user;
+      if (this.fg.controls['rol'].value == 'cliente') {
+        user = new Usuario(
+          this.fg.controls['nombre'].value,
+          this.fg.controls['apellido'].value,
+          this.fg.controls['dni'].value,
+          '',
+          this.foto_url,
+          this.fg.controls['rol'].value,
+          EstadoAprobacion.Aprobado,
+          this.fg.controls['correo'].value
         )
+      }
+      else{
+        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,EstadoAprobacion.Aprobado);
+      }
+
+      this.firestore.addUsuario(user)
         .then(() => {
           this.userService.showToast('Se cargo exitosamente el ' + this.fg.controls['rol'].value, 'lightgreen', 'center', 'success', 'black');
-          this.fg.reset();
+          this.fg.patchValue({
+            rol: this.fg.controls['rol'].value
+          });
+          this.emptyInputs();
           this.isLoading = false;
         })
         .catch(() => {
@@ -113,32 +114,29 @@ export class AltaDuenioSupervisorPage implements OnInit {
   async upload_storage() {
     if (this.img) {
       this.foto_url = await this.firestore.uploadImage(
-        `imagenes_dueños_supervisores/${Date.now()}`,
+        `imagenes_clientes/${Date.now()}`,
         this.img
       );
     }
   }
-  allowOnlyNumbers(event: KeyboardEvent) {
-    const charCode = event.charCode;
-    if (charCode < 48 || charCode > 57) {
-      event.preventDefault();
-    }
-  }
-  
-  formatCuil() {
-    let rawValue = this.fg.get('cuil')?.value.replace(/-/g, '');
+  emptyInputs() {
+    this.fg.reset({
+      rol: this.fg.get('rol')?.value,
+      nombre: '',
+      apellido: '',
+      correo: '',
+      contrasenia: '',
+      dni: '',
+    });
     
-    if (!/^\d*$/.test(rawValue)) {
-      rawValue = rawValue.replace(/\D/g, '');
-    }
+    Object.keys(this.fg.controls).forEach((key) => {
+      const control = this.fg.get(key);
+      control?.markAsPristine();
+      control?.markAsUntouched();
+      control?.updateValueAndValidity();
+    });
   
-    if (rawValue.length > 2) {
-      rawValue = rawValue.slice(0, 2) + '-' + rawValue.slice(2);
-    }
-    if (rawValue.length > 11) {
-      rawValue = rawValue.slice(0, 11) + '-' + rawValue.slice(11);
-    }
-  
-    this.fg.get('cuil')?.setValue(rawValue, { emitEvent: false });
+    this.img = '';
   }
+
 }

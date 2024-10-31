@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Empleado } from '../clases/empleado';
+
 import {
   getStorage,
   uploadString,
   ref,
   getDownloadURL,
 } from '@angular/fire/storage';
+import { Usuario } from '../clases/usuario';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class FirestoreService {
   storage: AngularFireStorage = inject(AngularFireStorage);
 
   //Agregar un usuario
-  async addUsuario(user : any) {
+  async addUsuario(user : Usuario) {
     const colImagenes = this.firestore.collection('usuarios');
     const documento = colImagenes.doc();
     user.id = documento.ref.id;

@@ -5,7 +5,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 //import { BarcodeScanner, LensFacing } from '@capacitor-mlkit/barcode-scanning';
 import { BehaviorSubject } from 'rxjs';
-import { Usuario } from '../clases/usuario';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import Vibration from '@awesome-cordova-library/vibration';
