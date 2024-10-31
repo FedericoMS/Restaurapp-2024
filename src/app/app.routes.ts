@@ -16,10 +16,6 @@ export const routes: Routes = [
       import('./splash/splash.page').then((m) => m.SplashPage),
   },
   {
-    path: 'login',
-    loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
-  },
-  {
     path: 'alta-empleado',
     loadComponent: () =>
       import('./pages/alta-empleado/alta-empleado.page').then(
