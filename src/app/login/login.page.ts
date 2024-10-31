@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { Usuario } from '../clases/usuario';
+import { EstadoAprobacion, Usuario } from '../clases/usuario';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
   user: Usuario;
 
   constructor(public userService: UserService, private router: Router) {
-    this.user = new Usuario;
+    this.user = new Usuario('','',0,'','','',EstadoAprobacion.Pendiente,'','');
   }
 
   ngOnInit() {

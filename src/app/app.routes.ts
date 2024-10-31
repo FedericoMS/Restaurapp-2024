@@ -16,6 +16,10 @@ export const routes: Routes = [
       import('./splash/splash.page').then((m) => m.SplashPage),
   },
   {
+    path: 'login',
+    loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
+  },
+  {
     path: 'alta-empleado',
     loadComponent: () =>
       import('./pages/alta-empleado/alta-empleado.page').then(
@@ -48,6 +52,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/home-duenio-supervisor/home-duenio-supervisor.page').then(
         (m) => m.HomeDuenioSupervisorPage
+      ),
+  },
+  {
+    path: 'alta-cliente',
+    loadComponent: () =>
+      import('./pages/alta-cliente/alta-cliente.page').then(
+        (m) => m.AltaClientePage
       ),
   },
 ];

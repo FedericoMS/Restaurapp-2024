@@ -15,6 +15,12 @@ import {
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
+<<<<<<< HEAD
+=======
+import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
+import { Router } from '@angular/router';
+import { Alert } from 'src/app/clases/alert';
+>>>>>>> origin/main
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 // import { Alert } from 'src/app/clases/alert';
@@ -118,7 +124,8 @@ export class AltaEmpleadoPage implements OnInit {
             this.fg.controls['dni'].value,
             this.fg.controls['cuil'].value,
             this.foto_url,
-            this.fg.controls['rol'].value
+            this.fg.controls['rol'].value,
+            EstadoAprobacion.Aprobado
           )
         )
         .then(() => {

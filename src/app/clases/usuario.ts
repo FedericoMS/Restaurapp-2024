@@ -1,9 +1,15 @@
 import { Persona } from './persona';
 
+export enum EstadoAprobacion {
+  Rechazado = 'rechazado',
+  Pendiente = 'pendiente',
+  Aprobado = 'aprobado',
+}
+
 export class Usuario extends Persona {
   email: string;
   password: string;
-  estaAprobado: boolean;
+  estadoAprobacion: EstadoAprobacion;
   rol: string;
 
   constructor(
@@ -13,13 +19,14 @@ export class Usuario extends Persona {
     cuil: string,
     foto_url: string,
     rol: string,
+    estadoAprobacion: EstadoAprobacion,
     email: string = '',
     password: string = ''
   ) {
     super(nombre, apellido, dni, cuil, foto_url);
     this.email = email;
     this.password = password;
-    this.estaAprobado = false;
+    this.estadoAprobacion = estadoAprobacion;
     this.rol = rol;
   }
 

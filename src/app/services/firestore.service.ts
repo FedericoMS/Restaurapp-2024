@@ -18,7 +18,7 @@ export class FirestoreService {
   storage: AngularFireStorage = inject(AngularFireStorage);
 
   //Agregar un usuario
-  async addUsuario(user: any) {
+  async addUsuario(user: Usuario) {
     const colImagenes = this.firestore.collection('usuarios');
     const documento = colImagenes.doc();
     user.id = documento.ref.id;
