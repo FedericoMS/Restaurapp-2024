@@ -9,6 +9,8 @@ import { Usuario } from '../clases/usuario';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import Vibration from '@awesome-cordova-library/vibration';
+import { FirestoreService } from './firestore.service';
+import { lastValueFrom } from 'rxjs';
 
 
 @Injectable({
@@ -22,8 +24,9 @@ export class UserService {
   private userSubject: BehaviorSubject<any> = new BehaviorSubject(null);
   public user = this.userSubject.asObservable();
   public uidUser : any;
+  private userRole : string = '';
 
-  constructor(private auth: Auth, private authFire: AngularFireAuth, private router: Router, private afstorage: AngularFireStorage, private af : AngularFirestore) {
+  constructor(private auth: Auth, private authFire: AngularFireAuth, private router: Router, private afstorage: AngularFireStorage, private af : AngularFirestore, private fs : FirestoreService) {
     this.authFire.authState.subscribe((user) => {
       this.isLoggedIn = true;
       if (user != null && user != undefined) {
@@ -64,6 +67,18 @@ export class UserService {
     else {
       return false;
     }
+  }
+
+  async getRole() : Promise<string> {
+     const userProfileSnapshot : any =  await lastValueFrom(this.fs.getUserProfile(this.uidUser));
+     if (userProfileSnapshot.exists) {
+      const userProfileData = userProfileSnapshot.data();
+      return userProfileData.rol;
+      }
+      else
+      {
+        return ''
+      }
   }
 
   logout(){

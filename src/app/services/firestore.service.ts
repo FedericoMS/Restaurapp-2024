@@ -16,17 +16,17 @@ export class FirestoreService {
   constructor(private firestore: AngularFirestore) {}
   storage: AngularFireStorage = inject(AngularFireStorage);
 
-  //Agregar un empleado
-  async addUsuario(emp: Empleado) {
+  //Agregar un usuario
+  async addUsuario(user : any) {
     const colImagenes = this.firestore.collection('usuarios');
     const documento = colImagenes.doc();
-    emp.id = documento.ref.id;
-    await documento.set({ ...emp });
+    user.id = documento.ref.id;
+    await documento.set({ ...user });
   }
 
-  //Obtener los empleados
-  getUsuario() {
-    const col = this.firestore.collection('usuarios');
+  //Obtener los usuarios
+  getUsuarios() : any {
+    const col = this.firestore.collection('usuarios').valueChanges();
     return col;
   }
 
@@ -38,9 +38,19 @@ export class FirestoreService {
     );
   }
 
-  updateUser(usuario: any) {
+  updateUserByUID(usuario: any) {
     return this.firestore
       .doc<any>(`usuarios/${usuario.uid}`)
       .update(usuario);
+  }
+
+  updateUser(usuario: any) {
+    return this.firestore
+      .doc<any>(`usuarios/${usuario.id}`)
+      .update(usuario);
+  }
+
+  getUserProfile(userId: string) {
+    return this.firestore.collection('usuarios').doc(userId).get();
   }
 }

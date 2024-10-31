@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "251184336543",
+    "project_id": "pps-sp-2024",
+    "storage_bucket": "pps-sp-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251184336543:android:6c453ef38a97e41966dcaa",
+        "android_client_info": {
+          "package_name": "io.ionic.restaurant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_58Xcfw3GcgFnH-o33dsgbWZmvqqspwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

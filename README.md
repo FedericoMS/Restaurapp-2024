@@ -16,15 +16,16 @@
 ### Federico Soria (Nombre de la rama: soria)
 - [ ] Splash, animación e icono
 - [ ] Login
-- [ ] Home
+- [ ] Home supervisor/dueño
 - [ ] Servicios varios (email, push notifications)
 
 ### Lautaro García (Nombre de la rama: lautaro)
 - [ ] Alta dueño/supervisor
 - [ ] Alta cliente
-- [ ] Encuesta Supervisor
+- [ ] Home metre (lista de espera, asigna mesas)
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
 - [ ] Alta empleado
 - [ ] Encuesta Empleados
 - [ ] Encuesta Cliente
+- [ ] Home cliente (cliente y anónimo)

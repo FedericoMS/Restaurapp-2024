@@ -1,0 +1,76 @@
+ion-content {
+    --background: none;
+    background-image: url('/assets/background.png'); /* Ruta a la imagen en la carpeta src/assets */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+    background-position: center; /* Centra la imagen en el contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+  
+  }
+   
+  
+  @keyframes move-bar {
+    0% {
+      top: 0%;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+  
+  .tarjeta-usuario {
+    background-image: url('/assets/user-background.jpg');
+  }
+  
+  .usuario-container {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .usuario-detalles {
+    margin-left: 1rem;
+  }
+  
+  ion-card-header {
+    ion-card-title {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 3px 3px 3px #ff0000;
+    }
+    
+    ion-card-subtitle {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 17px;
+      text-shadow: 3px 3px 3px #ff0000;
+    }
+  }
+  
+  .transparent-item {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 22px;
+  }
+  
+  .input {
+    --background: transparent; /* Hace el input transparente */
+    --color: white; /* Color del texto */
+    --placeholder-color: rgba(255, 255, 255, 0.886); /* Color del placeholder */
+  }
+  
+  small{
+    font-size: 18px;
+  }
+  
+  .sign-up-button {
+    --background: rgba(255, 182, 193, 0.8); /* Color similar al botón de la imagen */
+    --border-radius: 20px;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
