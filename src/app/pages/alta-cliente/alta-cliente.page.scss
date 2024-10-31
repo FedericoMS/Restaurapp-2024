@@ -13,6 +13,11 @@ ion-toolbar{
     color: #54494B;
 }
 
+.ion-text-center{
+  font-weight: bold;
+  font-size: 32px;
+}
+
   
   option {
     text-transform: capitalize;
@@ -50,7 +55,7 @@ ion-toolbar{
     font-weight: bold;
     margin-bottom: 5px;
     color: rgb(143, 135, 135);
-    margin-top: 10px;
+    margin-top: 18px;
     text-align: center;
   }
   
@@ -81,6 +86,7 @@ ion-toolbar{
         width: 75%;
         transition: .2s;
         color: #F1F7ED; /* Texto en un tono burdeos oscuro */
+        font-size: 20px;
     }
 
     .login__input:active,
@@ -92,6 +98,7 @@ ion-toolbar{
 
     input::placeholder{
         color: rgb(143, 135, 135);
+        font-size: 20px;
     }
 
     .content-select{
@@ -131,7 +138,8 @@ ion-toolbar{
       .btn-top{
         width: 35%;
         --background: #91C7B1 !important;
-        font-size: 10px;
+        font-size: 16px;
+        font-weight: bold;
         color: #000000 !important;
       }
 
