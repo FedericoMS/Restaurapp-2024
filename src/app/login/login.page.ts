@@ -35,20 +35,28 @@ export class LoginPage implements OnInit {
     } else {
       try {
         await this.userService.login({ email: this.user.email, password: this.user.password });
-        this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
-
-        const rol = await this.userService.getRole();
-        if (rol == 'dueño' || rol == 'supervisor') {
-          this.router.navigateByUrl('home-duenio-supervisor');
+        
+        const isApproved = await this.userService.getIsApproved();
+        console.log(isApproved);
+        if (isApproved) {
+          this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
+          const rol = await this.userService.getRole();
+          if (rol === 'dueño' || rol === 'supervisor') {
+            this.router.navigateByUrl('home-duenio-supervisor');
+          } else {
+            this.router.navigateByUrl('home');
+          }
+        } else {
+          // Si el usuario no está aprobado
+          this.userService.showToast('¡Acceso denegado! Cuenta no habilitada', 'red', 'center', 'error', 'white', true);
         }
-        else {
-          this.router.navigateByUrl('home');
-        }
+  
       } catch (error) {
         this.userService.showToast('Alguno de los datos es incorrecto', 'red', 'center', 'error', 'white', true);
       }
     }
   }
+  
 
 
   fastLogin(email: string, pass: string) {
