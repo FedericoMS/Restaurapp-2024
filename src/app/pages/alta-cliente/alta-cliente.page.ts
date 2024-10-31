@@ -77,12 +77,12 @@ export class AltaClientePage implements OnInit {
           '',
           this.foto_url,
           this.fg.controls['rol'].value,
-          EstadoAprobacion.Aprobado,
+          EstadoAprobacion.Pendiente,
           this.fg.controls['correo'].value
         )
       }
       else{
-        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,EstadoAprobacion.Aprobado);
+        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,EstadoAprobacion.Pendiente);
       }
 
       this.firestore.addUsuario(user)

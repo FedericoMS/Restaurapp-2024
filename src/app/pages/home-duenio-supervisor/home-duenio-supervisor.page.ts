@@ -7,6 +7,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import Swal from 'sweetalert2';
 import { Usuario } from 'src/app/clases/usuario';
+import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import { EmailService } from 'src/app/services/email.service';
 
 
 @Component({
@@ -14,7 +16,7 @@ import { Usuario } from 'src/app/clases/usuario';
   templateUrl: './home-duenio-supervisor.page.html',
   styleUrls: ['./home-duenio-supervisor.page.scss'],
   standalone: true,
-  imports: [IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
 })
 export class HomeDuenioSupervisorPage implements OnInit {
 
@@ -24,8 +26,12 @@ export class HomeDuenioSupervisorPage implements OnInit {
   isSupervisor = false;
   userList: any[] = [];
   rol: any = '';
+  isLoading : boolean = false;
 
-  constructor(private userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService) {
+  constructor(private userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private emailService : EmailService) {
+    setTimeout(() => {
+      this.isLoading = true;      
+    }, 1700);
     this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
       if (user != null && user != undefined) {
         try {
@@ -58,6 +64,9 @@ export class HomeDuenioSupervisorPage implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;      
+    }, 2500);
   }
 
   /*
@@ -77,6 +86,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
         modUser.estadoAprobacion = 'aprobado';     
         console.log(modUser.estadoAprobacion);   
         this.firestoreService.updateUser(modUser)
+        this.emailService.sendApprovedAccount(modUser)
         Swal.fire({
           title: "¡Cliente aprobado!",
           confirmButtonText: "Continuar",
@@ -85,7 +95,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
       }
     });
   }
-
+  
   rejectUser(user : any) {
     let modUser : any = user;
     Swal.fire({
@@ -99,6 +109,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
         modUser.estadoAprobacion = 'rechazado';     
         console.log(modUser);   
         this.firestoreService.updateUser(modUser)
+        this.emailService.sendDisabledAccount(modUser)
         Swal.fire({
           title: "Cliente rechazado",
           confirmButtonText: "Continuar",

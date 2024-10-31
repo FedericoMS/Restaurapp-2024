@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
             this.userService.showToast('¡Acceso denegado! Cuenta rechazada', 'red', 'center', 'error', 'white', true);
 
           }
-          // Si el usuario no está aprobado
+ 
         }
   
       } catch (error) {
