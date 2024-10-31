@@ -42,15 +42,18 @@
 ### Federico Soria (Nombre de la rama: soria)
 - [ ] QR mesas
 - [ ] Gestión del ingreso al local
+- [ ] Gestión de la realización de pedidos
 
 
 ### Lautaro García (Nombre de la rama: lautaro)
 - [ ] QR local (lista de espera)
 - [ ] Chat de mozos 
+- [ ] Confirmación de pedidos
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
 - [ ] QR Propinas 
 - [ ] Carga de pedidos
+- [ ] Correcciones de estilos
 
 ## Tareas - Tercera Semana (09/11/2024 al 16/11/2024) 
 ### *En proceso de planificación dependiendo de la anterior semana*
