@@ -58,6 +58,9 @@ export class HomeDuenioSupervisorPage implements OnInit {
   ngOnInit() {
   }
 
+  /*
+  MODIFICAR TENIENDO EN CUENTA QUE SE AGREGA UN estadoAprobacion como un enum que contiene strings 'aprobado', 'rechazado' y 'pendiente'*/
+
   approveUser(user : any) {
     let modUser : any = user;
     Swal.fire({
@@ -68,7 +71,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
       heightAuto: false
     }).then((result) => {
       if (result.isConfirmed) {
-        modUser.estaAprobado = true;     
+        modUser.estadoAprobacion = modUser.estadoAprobacion.Aprobado;     
         console.log(modUser);   
         this.firestoreService.updateUser(modUser)
         Swal.fire({
@@ -79,5 +82,28 @@ export class HomeDuenioSupervisorPage implements OnInit {
       }
     });
   }
+
+  rejectUser(user : any) {
+    let modUser : any = user;
+    Swal.fire({
+      title: "¿Estás seguro de que quieres rechazar a este cliente?",
+      showCancelButton: true,
+      confirmButtonText: "Rechazar",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modUser.estadoAprobacion = modUser.estadoAprobacion.Rechazado;     
+        console.log(modUser);   
+        this.firestoreService.updateUser(modUser)
+        Swal.fire({
+          title: "Cliente rechazado",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
+  }
+    
 
 }

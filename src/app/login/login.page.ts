@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   }
 
   toRegisterPage() {
-    this.router.navigateByUrl('registro');
+    this.router.navigateByUrl('alta-cliente');
   }
 
 
