@@ -42,5 +42,9 @@ export const routes: Routes = [
     path: 'home-duenio-supervisor',
     loadComponent: () => import('./pages/home-duenio-supervisor/home-duenio-supervisor.page').then( m => m.HomeDuenioSupervisorPage)
   },
+  {
+    path: 'alta-cliente',
+    loadComponent: () => import('./pages/alta-cliente/alta-cliente.page').then( m => m.AltaClientePage)
+  },
 
 ];

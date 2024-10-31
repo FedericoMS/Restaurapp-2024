@@ -20,7 +20,7 @@
 
     @if ( fg.get('rol')?.value === 'cliente') {
       <div class="form-group login__field">
-        <input type="text" class="login__input" formControlName="correo" placeholder="Correo electrónico" maxlength="10">
+        <input type="text" class="login__input" formControlName="correo" placeholder="Correo electrónico" maxlength="30">
       </div>
       <div class="cont-p">
         @if(this.fg.controls['correo'].errors !== null && this.fg.controls["correo"].touched) { 
@@ -34,7 +34,7 @@
       </div>
   
       <div class="form-group login__field">
-        <input type="text" class="login__input" formControlName="contrasenia" placeholder="Contraseña" maxlength="10">
+        <input type="password" class="login__input" formControlName="contrasenia" placeholder="Contraseña" maxlength="10">
       </div>
       <div class="cont-p">
         @if(this.fg.controls['contrasenia'].errors !== null && this.fg.controls["contrasenia"].touched) { 

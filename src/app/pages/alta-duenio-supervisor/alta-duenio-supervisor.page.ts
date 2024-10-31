@@ -5,11 +5,11 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon } from 
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 import { Usuario } from 'src/app/clases/usuario';
-import { Alert } from 'src/app/clases/alert';
 import { addIcons } from 'ionicons';
 import { cameraOutline, checkmark, closeOutline, qrCodeOutline} from 'ionicons/icons'
 import { cuilValidator } from 'src/app/validators/cuilValidator';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-alta-duenio-supervisor',
   templateUrl: './alta-duenio-supervisor.page.html',
@@ -25,7 +25,7 @@ export class AltaDuenioSupervisorPage implements OnInit {
   isLoading: boolean;
 
 
-  constructor(private firestore : FirestoreService, private utilService : UtilService, private fb : FormBuilder){
+  constructor(private userService : UserService,private firestore : FirestoreService, private utilService : UtilService, private fb : FormBuilder){
     addIcons({qrCodeOutline,cameraOutline,closeOutline,checkmark})
     this.isLoading = false;
     this.fg = this.fb.group({
@@ -62,7 +62,8 @@ export class AltaDuenioSupervisorPage implements OnInit {
       this.fg.controls['apellido'].setValue(datos.apellido);
       this.fg.controls['dni'].setValue(datos.dni);
     } else {
-      Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
+      this.userService.showToast('Ocurrió un error. ' + 'Vuelva a intentar más tarde', 'red', 'center', 'error', 'white', true);
+
     }
   }
 
@@ -83,22 +84,16 @@ export class AltaDuenioSupervisorPage implements OnInit {
           )
         )
         .then(() => {
-          Alert.success('Se cargo exitosamente el ' + this.fg.controls['rol'].value, '');
+          this.userService.showToast('Se cargo exitosamente el ' + this.fg.controls['rol'].value, 'lightgreen', 'center', 'success', 'black');
           this.fg.reset();
           this.isLoading = false;
         })
         .catch(() => {
-          Alert.error(
-            'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
-            'Vuelva a intentar más tarde'
-          );
+          this.userService.showToast('Hubo un problema al cargar el ' + this.fg.controls['rol'].value, 'red', 'center', 'error', 'white', true);
           this.isLoading = false;
         });
     } else {
-      Alert.error(
-        'Ocurrió un error',
-        'Verifique que todos los campos estén completos sin errores!'
-      );
+      this.userService.showToast('Ocurrió un error. ' +'Verifique que todos los campos estén completos sin errores!', 'red', 'center', 'error', 'white', true);
       Object.keys(this.fg.controls).forEach((controlName) => {
         this.fg.controls[controlName].markAsTouched();
       });
@@ -108,6 +103,7 @@ export class AltaDuenioSupervisorPage implements OnInit {
   async sacar_foto() {
     try {
       this.img = await this.utilService.sacar_foto();
+      this.userService.showToast('Se cargo la foto', 'lightgreen', 'center', 'success', 'black'); 
     } catch (error) {
       console.log(error);
     }

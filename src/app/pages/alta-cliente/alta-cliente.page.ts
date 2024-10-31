@@ -9,7 +9,7 @@ import { addIcons } from 'ionicons';
 import { cameraOutline, checkmark, closeOutline, qrCodeOutline} from 'ionicons/icons'
 import { cuilValidator } from 'src/app/validators/cuilValidator';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
-import { Alert } from 'src/app/clases/alert';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-alta-cliente',
@@ -26,7 +26,7 @@ export class AltaClientePage implements OnInit {
   isLoading: boolean;
 
 
-  constructor(private firestore : FirestoreService, private utilService : UtilService, private fb : FormBuilder){
+  constructor(private firestore : FirestoreService, private utilService : UtilService, private fb : FormBuilder, private userService : UserService){
     addIcons({qrCodeOutline,cameraOutline,closeOutline,checkmark})
     this.isLoading = false;
     this.fg = this.fb.group({
@@ -57,43 +57,45 @@ export class AltaClientePage implements OnInit {
       this.fg.controls['apellido'].setValue(datos.apellido);
       this.fg.controls['dni'].setValue(datos.dni);
     } else {
-      Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
+      this.userService.showToast('Ocurrió un error. ' + 'Vuelva a intentar más tarde', 'red', 'center', 'error', 'white', true);
     }
   }
 
   async cargar() {
-    if (this.fg.valid) {
+    if (this.fg.valid || (this.fg.controls['rol'].value == 'anonimo' && this.fg.controls['nombre'].value !== '')) {
       this.isLoading = true;
       await this.upload_storage();
-
-      this.firestore
-        .addUsuario(
-          new Usuario(
-            this.fg.controls['nombre'].value,
-            this.fg.controls['apellido'].value,
-            this.fg.controls['dni'].value,
-            this.fg.controls['cuil'].value,
-            this.foto_url,
-            this.fg.controls['rol'].value
-          )
+      let user;
+      if (this.fg.controls['rol'].value == 'cliente') {
+        user = new Usuario(
+          this.fg.controls['nombre'].value,
+          this.fg.controls['apellido'].value,
+          this.fg.controls['dni'].value,
+          '',
+          this.foto_url,
+          this.fg.controls['rol'].value,
+          this.fg.controls['correo'].value
         )
+      }
+      else{
+        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,'');
+      }
+
+      this.firestore.addUsuario(user)
         .then(() => {
-          Alert.success('Se cargo exitosamente el cliente', '');
-          this.fg.reset();
+          this.userService.showToast('Se cargo exitosamente el ' + this.fg.controls['rol'].value, 'lightgreen', 'center', 'success', 'black');
+          this.fg.patchValue({
+            rol: this.fg.controls['rol'].value
+          });
+          this.emptyInputs();
           this.isLoading = false;
         })
         .catch(() => {
-          Alert.error(
-            'Hubo un problema al cargar el cliente',
-            'Vuelva a intentar más tarde'
-          );
+          this.userService.showToast('Hubo un problema al cargar el ' + this.fg.controls['rol'].value, 'red', 'center', 'error', 'white', true);
           this.isLoading = false;
         });
     } else {
-      Alert.error(
-        'Ocurrió un error',
-        'Verifique que todos los campos estén completos sin errores!'
-      );
+      this.userService.showToast('Ocurrió un error. ' +'Verifique que todos los campos estén completos sin errores!', 'red', 'center', 'error', 'white', true);
       Object.keys(this.fg.controls).forEach((controlName) => {
         this.fg.controls[controlName].markAsTouched();
       });
@@ -103,6 +105,7 @@ export class AltaClientePage implements OnInit {
   async sacar_foto() {
     try {
       this.img = await this.utilService.sacar_foto();
+      this.userService.showToast('Se cargo la foto', 'lightgreen', 'center', 'success', 'black'); 
     } catch (error) {
       console.log(error);
     }
