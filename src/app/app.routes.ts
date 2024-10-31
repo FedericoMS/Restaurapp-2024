@@ -47,4 +47,11 @@ export const routes: Routes = [
         './pages/encuestas/encuesta-empleados/encuesta-empleados.page'
       ).then((m) => m.EncuestaEmpleadosPage),
   },
+  {
+    path: 'home-duenio-supervisor',
+    loadComponent: () =>
+      import('./pages/home-duenio-supervisor/home-duenio-supervisor.page').then(
+        (m) => m.HomeDuenioSupervisorPage
+      ),
+  },
 ];

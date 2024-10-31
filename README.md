@@ -13,18 +13,19 @@
 
 ## Tareas - Primera Semana (26/10/2024 al 02/11/2024)
 
-### Federico Soria
+### Federico Soria (Nombre de la rama: soria)
 - [ ] Splash, animación e icono
 - [ ] Login
-- [ ] Home
+- [ ] Home supervisor/dueño
 - [ ] Servicios varios (email, push notifications)
 
-### Lautaro García
+### Lautaro García (Nombre de la rama: lautaro)
 - [ ] Alta dueño/supervisor
 - [ ] Alta cliente
-- [ ] Encuesta Supervisor
+- [ ] Home metre (lista de espera, asigna mesas)
 
-### Federico Cardozo
+### Federico Cardozo (Nombre de la rama: cardozo)
 - [ ] Alta empleado
 - [ ] Encuesta Empleados
 - [ ] Encuesta Cliente
+- [ ] Home cliente (cliente y anónimo)
