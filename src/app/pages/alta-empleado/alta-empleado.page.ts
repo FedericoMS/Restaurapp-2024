@@ -17,7 +17,7 @@ import {
   IonItem,
   IonButton,
 } from '@ionic/angular/standalone';
-import { Empleado } from 'src/app/clases/empleado';
+import { Usuario } from 'src/app/clases/usuario';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/clases/alert';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -54,7 +54,7 @@ export class AltaEmpleadoPage implements OnInit {
   private util = inject(UtilService);
   fb: FormBuilder = inject(FormBuilder);
   fg: FormGroup;
-  list_roles = Empleado.get_roles();
+  list_roles = Usuario.get_roles();
   foto_url: string = '';
   img?: string = '';
 
@@ -103,7 +103,7 @@ export class AltaEmpleadoPage implements OnInit {
       //Agrego el empleado a firestores
       this.fire
         .addUsuario(
-          new Empleado(
+          new Usuario(
             this.fg.controls['nombre'].value,
             this.fg.controls['apellido'].value,
             this.fg.controls['dni'].value,

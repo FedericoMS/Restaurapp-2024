@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonSegmentButton, IonLabel, IonSegment } from '@ionic/angular/standalone';
-import { Empleado } from 'src/app/clases/empleado';
+import { Usuario } from 'src/app/clases/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 import { addIcons } from 'ionicons';
@@ -20,7 +20,7 @@ import { Alert } from 'src/app/clases/alert';
 })
 export class AltaClientePage implements OnInit {
   fg!: FormGroup;
-  list_roles = Empleado.get_roles();
+  list_roles = Usuario.get_roles();
   foto_url: string = '';
   img?: string = '';
   isLoading: boolean;
@@ -68,7 +68,7 @@ export class AltaClientePage implements OnInit {
 
       this.firestore
         .addUsuario(
-          new Empleado(
+          new Usuario(
             this.fg.controls['nombre'].value,
             this.fg.controls['apellido'].value,
             this.fg.controls['dni'].value,

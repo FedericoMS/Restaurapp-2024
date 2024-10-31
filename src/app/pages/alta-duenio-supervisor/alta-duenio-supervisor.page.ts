@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
-import { Empleado } from 'src/app/clases/empleado';
+import { Usuario } from 'src/app/clases/usuario';
 import { Alert } from 'src/app/clases/alert';
 import { addIcons } from 'ionicons';
 import { cameraOutline, checkmark, closeOutline, qrCodeOutline} from 'ionicons/icons'
@@ -19,7 +19,7 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 })
 export class AltaDuenioSupervisorPage implements OnInit {
   fg!: FormGroup;
-  list_roles = Empleado.get_roles();
+  list_roles = Usuario.get_roles();
   foto_url: string = '';
   img?: string = '';
   isLoading: boolean;
@@ -73,7 +73,7 @@ export class AltaDuenioSupervisorPage implements OnInit {
 
       this.firestore
         .addUsuario(
-          new Empleado(
+          new Usuario(
             this.fg.controls['nombre'].value,
             this.fg.controls['apellido'].value,
             this.fg.controls['dni'].value,
@@ -83,13 +83,13 @@ export class AltaDuenioSupervisorPage implements OnInit {
           )
         )
         .then(() => {
-          Alert.success('Se cargo exitosamente el empleado', '');
+          Alert.success('Se cargo exitosamente el ' + this.fg.controls['rol'].value, '');
           this.fg.reset();
           this.isLoading = false;
         })
         .catch(() => {
           Alert.error(
-            'Hubo un problema al cargar el empleado',
+            'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
             'Vuelva a intentar más tarde'
           );
           this.isLoading = false;

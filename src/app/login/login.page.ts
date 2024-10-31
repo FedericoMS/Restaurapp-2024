@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
   user: Usuario;
 
   constructor(public userService: UserService, private router: Router) {
-    this.user = new Usuario;
+    this.user = new Usuario('','',0,'','','','','');
   }
 
   ngOnInit() {
