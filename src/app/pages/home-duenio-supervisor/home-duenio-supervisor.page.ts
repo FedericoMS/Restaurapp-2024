@@ -6,6 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import Swal from 'sweetalert2';
+import { Usuario } from 'src/app/clases/usuario';
+
 
 @Component({
   selector: 'app-home-duenio-supervisor',
@@ -63,6 +65,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
 
   approveUser(user : any) {
     let modUser : any = user;
+    console.log(modUser);
     Swal.fire({
       title: "¿Estás seguro de que quieres aprobar a este cliente?",
       showCancelButton: true,
@@ -71,8 +74,8 @@ export class HomeDuenioSupervisorPage implements OnInit {
       heightAuto: false
     }).then((result) => {
       if (result.isConfirmed) {
-        modUser.estadoAprobacion = modUser.estadoAprobacion.Aprobado;     
-        console.log(modUser);   
+        modUser.estadoAprobacion = 'aprobado';     
+        console.log(modUser.estadoAprobacion);   
         this.firestoreService.updateUser(modUser)
         Swal.fire({
           title: "¡Cliente aprobado!",
@@ -93,7 +96,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
       heightAuto: false
     }).then((result) => {
       if (result.isConfirmed) {
-        modUser.estadoAprobacion = modUser.estadoAprobacion.Rechazado;     
+        modUser.estadoAprobacion = 'rechazado';     
         console.log(modUser);   
         this.firestoreService.updateUser(modUser)
         Swal.fire({

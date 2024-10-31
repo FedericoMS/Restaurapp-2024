@@ -36,9 +36,9 @@ export class LoginPage implements OnInit {
       try {
         await this.userService.login({ email: this.user.email, password: this.user.password });
         
-        const isApproved = await this.userService.getIsApproved();
-        console.log(isApproved);
-        if (isApproved) {
+        const state = await this.userService.getIsApproved();
+        console.log("El estado es: " + state);
+        if (state == 'aprobado') {
           this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
           const rol = await this.userService.getRole();
           if (rol === 'dueño' || rol === 'supervisor') {
@@ -47,8 +47,17 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl('home');
           }
         } else {
+          if(state == 'pendiente')
+          {
+            this.userService.showToast('¡Acceso denegado! Cuenta pendiente de habilitación', 'red', 'center', 'error', 'white', true);
+            
+          }
+          else
+          {
+            this.userService.showToast('¡Acceso denegado! Cuenta rechazada', 'red', 'center', 'error', 'white', true);
+
+          }
           // Si el usuario no está aprobado
-          this.userService.showToast('¡Acceso denegado! Cuenta no habilitada', 'red', 'center', 'error', 'white', true);
         }
   
       } catch (error) {

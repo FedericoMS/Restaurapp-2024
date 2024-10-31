@@ -80,17 +80,17 @@ export class UserService {
       }
   }
 
-  async getIsApproved() : Promise<boolean> {
+  async getIsApproved() : Promise<string> {
     const userProfileSnapshot : any =  await lastValueFrom(this.fs.getUserProfile(this.uidUser));
    // console.log("uid del user: " + this.uidUser);
     if (userProfileSnapshot.exists) {
      const userProfileData = userProfileSnapshot.data();
    //  console.log("Datos del perfil del usuario:", userProfileData); // <-- Añade esto para verificar los datos
-     return userProfileData.estaAprobado;
+     return userProfileData.estadoAprobacion;
      }
      else
      {
-       return false;
+       return 'rechazado';
      }
  }
 
