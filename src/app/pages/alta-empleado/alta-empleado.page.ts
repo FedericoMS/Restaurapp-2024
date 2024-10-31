@@ -102,16 +102,7 @@ export class AltaEmpleadoPage implements OnInit {
       // Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
     }
   }
-  generarUser() {
-    const user = new Usuario();
-    user.nombre = this.fg.controls['nombre'].value;
-    user.apellido = this.fg.controls['apellido'].value;
-    user.dni = this.fg.controls['dni'].value;
-    user.cuil = this.fg.controls['cuil'].value;
-    user.foto_url = this.foto_url;
-    user.rol = this.fg.controls['rol'].value;
-    return user;
-  }
+
   async cargar() {
     if (this.fg.valid) {
       //Se deberia agregar un spinner para la espera
@@ -120,7 +111,16 @@ export class AltaEmpleadoPage implements OnInit {
       await this.upload_storage();
       //Agrego el empleado a firestores
       this.fire
-        .addUsuario(this.generarUser())
+        .addUsuario(
+          new Usuario(
+            this.fg.controls['nombre'].value,
+            this.fg.controls['apellido'].value,
+            this.fg.controls['dni'].value,
+            this.fg.controls['cuil'].value,
+            this.foto_url,
+            this.fg.controls['rol'].value
+          )
+        )
         .then(() => {
           this.util.showToast(
             'Se cargo exitosamente el empleado',
