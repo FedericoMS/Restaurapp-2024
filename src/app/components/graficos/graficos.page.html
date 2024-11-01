@@ -1,23 +1,58 @@
-@if(this.mostrarGraficos){
-<!-- <app-torta
-  [keys]="this.keys[0]"
-  [question]="this.question[0]"
-  [values]="this.values[0]"
-></app-torta> -->
-<!-- <app-barra
+@if(this.mostrarGraficos) {
+<!-- inicio if   -->
+@switch (this.contador) {
+<!-- incio switch   -->
+
+@case (0) {
+<app-barra
   [keys]="this.keys[1]"
   [question]="this.question[1]"
   [values]="this.values[1]"
-></app-barra> -->
-<!-- <app-dona
+></app-barra>
+}
+<!-- separador   -->
+@case (1) {
+<app-torta
+  [keys]="this.keys[0]"
+  [question]="this.question[0]"
+  [values]="this.values[0]"
+></app-torta>
+}
+<!-- separador   -->
+@case (2) {
+<app-dona
   [keys]="this.keys[2]"
   [question]="this.question[2]"
   [values]="this.values[2]"
-></app-dona> -->
+></app-dona>
+}
+<!-- separador   -->
 
+@case (3) {
 <app-polar
   [keys]="this.keys[3]"
   [question]="this.question[3]"
   [values]="this.values[3]"
 ></app-polar>
+}
+<!-- fin switch   -->
+
+} @if(this.contador > 0){
+<ion-fab vertical="center" horizontal="start">
+  <ion-fab-button (click)="restarContador()">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+} @if (this.contador < 3) {
+
+<ion-fab vertical="center" horizontal="end">
+  <ion-fab-button (click)="sumarContador()">
+    <ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+}
+
+<!-- fin if   -->
 }

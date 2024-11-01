@@ -72,24 +72,6 @@ export class DonaPage implements OnInit {
     // Opciones para estilizar el gráfico
     const options = {
       responsive: true,
-      scales: {
-        x: {
-          ticks: {
-            color: '#fff', // Cambia el color de las etiquetas en el eje X
-          },
-          grid: {
-            display: false, // Quita las líneas del grid en el eje X
-          },
-        },
-        y: {
-          ticks: {
-            color: '#fff', // Cambia el color de las etiquetas en el eje Y
-          },
-          grid: {
-            color: '#444', // Líneas del grid en un gris oscuro
-          },
-        },
-      },
       plugins: {
         legend: {
           labels: {

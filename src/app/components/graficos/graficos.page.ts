@@ -6,6 +6,9 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonFab,
+  IonIcon,
+  IonFabButton,
 } from '@ionic/angular/standalone';
 import { BarraPage } from './barra/barra.page';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -14,13 +17,17 @@ import { Encuesta } from 'src/app/clases/encuesta';
 import { TortaPage } from './torta/torta.page';
 import { DonaPage } from './dona/dona.page';
 import { PolarPage } from './polar/polar.page';
-
+import { addIcons } from 'ionicons';
+import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.page.html',
   styleUrls: ['./graficos.page.scss'],
   standalone: true,
   imports: [
+    IonFabButton,
+    IonIcon,
+    IonFab,
     IonContent,
     IonHeader,
     IonTitle,
@@ -39,8 +46,11 @@ export class GraficosPage implements OnInit {
   keys: string[][] = [];
   question: string[] = [];
   values: number[][] = [];
+  contador: number = 0;
   mostrarGraficos = false;
-  constructor() {}
+  constructor() {
+    addIcons({ chevronForwardOutline, chevronBackOutline });
+  }
 
   ngOnInit() {
     this.util.showSpinner();
@@ -76,5 +86,13 @@ export class GraficosPage implements OnInit {
       this.values.push([...aux.filter((item) => Number.isInteger(item))]);
       this.question.push(item['question']);
     });
+  }
+
+  sumarContador() {
+    this.contador++;
+  }
+
+  restarContador() {
+    this.contador--;
   }
 }
