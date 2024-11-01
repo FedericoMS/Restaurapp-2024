@@ -10,9 +10,9 @@ import {
 import { Chart, ChartType } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-barra',
-  templateUrl: './barra.page.html',
-  styleUrls: ['./barra.page.scss'],
+  selector: 'app-dona',
+  templateUrl: './dona.page.html',
+  styleUrls: ['./dona.page.scss'],
   standalone: true,
   imports: [
     IonContent,
@@ -23,7 +23,7 @@ import { Chart, ChartType } from 'chart.js/auto';
     FormsModule,
   ],
 })
-export class BarraPage implements OnInit {
+export class DonaPage implements OnInit {
   @Input() values: number[] = [];
   @Input() keys: string[] = [];
   @Input() question: string = '';
@@ -48,10 +48,10 @@ export class BarraPage implements OnInit {
           backgroundColor: [
             'rgba(255, 99, 132, 0.8)',
             'rgba(255, 159, 64, 0.8)',
-            'rgba(255, 205, 86, 0.8)',
-            'rgba(75, 192, 192, 0.8)',
-            'rgba(54, 162, 235, 0.8)',
             'rgba(153, 102, 255, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(255, 205, 86, 0.8)',
             'rgba(201, 203, 207, 0.8)',
           ],
           borderColor: [
@@ -64,6 +64,7 @@ export class BarraPage implements OnInit {
             'rgb(201, 203, 207)',
           ],
           borderWidth: 2,
+          hoverOffset: 4,
         },
       ],
     };
@@ -104,7 +105,7 @@ export class BarraPage implements OnInit {
 
     // Creamos la gráfica
     this.chart = new Chart('chart', {
-      type: 'bar' as ChartType, // Tipo de gráfica
+      type: 'doughnut' as ChartType, // Tipo de gráfica
       data, // Datos
       options, // Opciones para estilizar
     });

@@ -12,6 +12,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 import { Encuesta } from 'src/app/clases/encuesta';
 import { TortaPage } from './torta/torta.page';
+import { DonaPage } from './dona/dona.page';
 
 @Component({
   selector: 'app-graficos',
@@ -27,6 +28,7 @@ import { TortaPage } from './torta/torta.page';
     FormsModule,
     BarraPage,
     TortaPage,
+    DonaPage,
   ],
 })
 export class GraficosPage implements OnInit {
