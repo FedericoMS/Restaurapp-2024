@@ -76,5 +76,9 @@ export const routes: Routes = [
     path: 'dona',
     loadComponent: () => import('./components/graficos/dona/dona.page').then( m => m.DonaPage)
   },
+  {
+    path: 'polar',
+    loadComponent: () => import('./components/graficos/polar/polar.page').then( m => m.PolarPage)
+  },
 
 ];

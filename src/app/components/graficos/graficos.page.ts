@@ -13,6 +13,7 @@ import { UtilService } from 'src/app/services/util.service';
 import { Encuesta } from 'src/app/clases/encuesta';
 import { TortaPage } from './torta/torta.page';
 import { DonaPage } from './dona/dona.page';
+import { PolarPage } from './polar/polar.page';
 
 @Component({
   selector: 'app-graficos',
@@ -29,6 +30,7 @@ import { DonaPage } from './dona/dona.page';
     BarraPage,
     TortaPage,
     DonaPage,
+    PolarPage,
   ],
 })
 export class GraficosPage implements OnInit {

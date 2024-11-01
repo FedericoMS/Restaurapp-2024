@@ -10,9 +10,9 @@ import {
 import { Chart, ChartType } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-dona',
-  templateUrl: './dona.page.html',
-  styleUrls: ['./dona.page.scss'],
+  selector: 'app-polar',
+  templateUrl: './polar.page.html',
+  styleUrls: ['./polar.page.scss'],
   standalone: true,
   imports: [
     IonContent,
@@ -23,7 +23,7 @@ import { Chart, ChartType } from 'chart.js/auto';
     FormsModule,
   ],
 })
-export class DonaPage implements OnInit {
+export class PolarPage implements OnInit {
   @Input() values: number[] = [];
   @Input() keys: string[] = [];
   @Input() question: string = '';
@@ -46,22 +46,22 @@ export class DonaPage implements OnInit {
           label: 'Cantidad',
           data: this.values.slice(0, 7),
           backgroundColor: [
-            'rgba(255, 99, 132, 0.8)',
-            'rgba(255, 205, 86, 0.8)',
-            'rgba(75, 192, 192, 0.8)',
             'rgba(54, 162, 235, 0.8)',
             'rgba(153, 102, 255, 0.8)',
-            'rgba(201, 203, 207, 0.8)',
             'rgba(255, 159, 64, 0.8)',
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(201, 203, 207, 0.8)',
+            'rgba(255, 205, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
           ],
           borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
             'rgb(54, 162, 235)',
             'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)',
             'rgb(255, 159, 64)',
+            'rgb(255, 99, 132)',
+            'rgb(201, 203, 207)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
           ],
           borderWidth: 2,
           hoverOffset: 4,
@@ -72,24 +72,6 @@ export class DonaPage implements OnInit {
     // Opciones para estilizar el gráfico
     const options = {
       responsive: true,
-      scales: {
-        x: {
-          ticks: {
-            color: '#fff', // Cambia el color de las etiquetas en el eje X
-          },
-          grid: {
-            display: false, // Quita las líneas del grid en el eje X
-          },
-        },
-        y: {
-          ticks: {
-            color: '#fff', // Cambia el color de las etiquetas en el eje Y
-          },
-          grid: {
-            color: '#444', // Líneas del grid en un gris oscuro
-          },
-        },
-      },
       plugins: {
         legend: {
           labels: {
@@ -97,15 +79,12 @@ export class DonaPage implements OnInit {
           },
         },
       },
-      layout: {
-        padding: 20, // Añadir algo de padding alrededor
-      },
       backgroundColor: 'transparent', // Fondo transparente
     };
 
     // Creamos la gráfica
     this.chart = new Chart('chart', {
-      type: 'doughnut' as ChartType, // Tipo de gráfica
+      type: 'polarArea' as ChartType, // Tipo de gráfica
       data, // Datos
       options, // Opciones para estilizar
     });
