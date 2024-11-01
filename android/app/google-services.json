@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:251184336543:android:6c453ef38a97e41966dcaa",
         "android_client_info": {
-          "package_name": "io.ionic.restaurant"
+          "package_name": "io.ionic.starter"
         }
       },
       "oauth_client": [],
