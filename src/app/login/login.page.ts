@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   toRegisterPage() {
-    this.router.navigateByUrl('registro');
+    this.router.navigateByUrl('alta-cliente');
   }
 
   async loginUser() {
@@ -60,24 +60,32 @@ export class LoginPage implements OnInit {
       );
     } else {
       try {
-        await this.userService.login({
-          email: this.user.email,
-          password: this.user.password,
-        });
-        this.userService.showToast(
-          '¡Bienvenido!',
-          'lightgreen',
-          'center',
-          'success',
-          'black'
-        );
-
-        const rol = await this.userService.getRole();
-        if (rol == 'dueño' || rol == 'supervisor') {
-          this.router.navigateByUrl('home-duenio-supervisor');
+        await this.userService.login({ email: this.user.email, password: this.user.password });
+        
+        const state = await this.userService.getIsApproved();
+        console.log("El estado es: " + state);
+        if (state == 'aprobado') {
+          this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
+          const rol = await this.userService.getRole();
+          if (rol === 'dueño' || rol === 'supervisor') {
+            this.router.navigateByUrl('home-duenio-supervisor');
+          } else {
+            this.router.navigateByUrl('home');
+          }
         } else {
-          this.router.navigateByUrl('home');
+          if(state == 'pendiente')
+          {
+            this.userService.showToast('¡Acceso denegado! Cuenta pendiente de habilitación', 'red', 'center', 'error', 'white', true);
+            
+          }
+          else
+          {
+            this.userService.showToast('¡Acceso denegado! Cuenta rechazada', 'red', 'center', 'error', 'white', true);
+
+          }
+ 
         }
+  
       } catch (error) {
         this.userService.showToast(
           'Alguno de los datos es incorrecto',
@@ -90,6 +98,8 @@ export class LoginPage implements OnInit {
       }
     }
   }
+  
+
 
   fastLogin(email: string, pass: string) {
     this.user.email = email;
