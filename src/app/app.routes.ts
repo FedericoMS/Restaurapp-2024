@@ -60,25 +60,30 @@ export const routes: Routes = [
       import('./pages/alta-cliente/alta-cliente.page').then(
         (m) => m.AltaClientePage
       ),
-  },  {
+  },
+  {
     path: 'graficos',
-    loadComponent: () => import('./components/graficos/graficos.page').then( m => m.GraficosPage)
+    loadComponent: () =>
+      import('./components/graficos/graficos.page').then((m) => m.GraficosPage),
   },
   {
     path: 'barra',
-    loadComponent: () => import('./components/graficos/barra/barra.page').then( m => m.BarraPage)
+    loadComponent: () =>
+      import('./components/graficos/barra/barra.page').then((m) => m.BarraPage),
   },
   {
     path: 'torta',
-    loadComponent: () => import('./components/graficos/torta/torta.page').then( m => m.TortaPage)
+    loadComponent: () =>
+      import('./components/graficos/torta/torta.page').then((m) => m.TortaPage),
   },
   {
     path: 'dona',
-    loadComponent: () => import('./components/graficos/dona/dona.page').then( m => m.DonaPage)
+    loadComponent: () =>
+      import('./components/graficos/dona/dona.page').then((m) => m.DonaPage),
   },
   {
     path: 'polar',
-    loadComponent: () => import('./components/graficos/polar/polar.page').then( m => m.PolarPage)
+    loadComponent: () =>
+      import('./components/graficos/polar/polar.page').then((m) => m.PolarPage),
   },
-
 ];

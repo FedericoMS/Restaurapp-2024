@@ -52,17 +52,18 @@ export class GraficosPage implements OnInit {
   contador: number = 0;
   mostrarGraficos = false;
   router = inject(Router);
-
-  @Input() encuesta: 'clientes' | 'empleados' = 'clientes';
+  encuesta: string = 'clientes';
 
   constructor() {
     addIcons({ chevronForwardOutline, chevronBackOutline });
+    this.router.routerState.root.queryParams.forEach((item) => {
+      this.encuesta = item['encuesta'];
+    });
   }
 
   ngOnInit() {
     this.util.showSpinner();
     this.getDatos();
-    console.log(this.values);
   }
 
   async getDatos() {
@@ -73,8 +74,10 @@ export class GraficosPage implements OnInit {
         const aux = a as Encuesta[];
         this.obtenerKeys(aux);
         this.obtenerValues(aux);
-        this.mostrarGraficos = true;
-        this.util.hideSpinner();
+        setTimeout(() => {
+          this.mostrarGraficos = true;
+          this.util.hideSpinner();
+        }, 1000);
       });
   }
 
