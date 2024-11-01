@@ -26,8 +26,8 @@ export class AltaClientePage implements OnInit {
 
 
   constructor(private firestore : FirestoreService, private utilService : UtilService, private fb : FormBuilder, private userService : UserService){
-    addIcons({qrCodeOutline,cameraOutline,closeOutline,checkmark})
-    this.isLoading = false;
+    addIcons({qrCodeOutline,cameraOutline,closeOutline,checkmark});
+    this.isLoading = true;
     this.fg = this.fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
@@ -48,7 +48,11 @@ export class AltaClientePage implements OnInit {
 
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false; 
+    }, 1000);
+  }
   async cargarConQr() {
     const datos = await this.utilService.scan_dni();
     if (datos) {
@@ -73,12 +77,12 @@ export class AltaClientePage implements OnInit {
           '',
           this.foto_url,
           this.fg.controls['rol'].value,
-          EstadoAprobacion.Aprobado,
+          EstadoAprobacion.Pendiente,
           this.fg.controls['correo'].value
         )
       }
       else{
-        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,EstadoAprobacion.Aprobado);
+        user = new Usuario(this.fg.controls['nombre'].value,'',0,'',this.foto_url,this.fg.controls['rol'].value,EstadoAprobacion.Pendiente);
       }
 
       this.firestore.addUsuario(user)
@@ -95,7 +99,7 @@ export class AltaClientePage implements OnInit {
           this.isLoading = false;
         });
     } else {
-      this.userService.showToast('Ocurrió un error. ' +'Verifique que todos los campos estén completos sin errores!', 'red', 'center', 'error', 'white', true);
+      this.userService.showToast('Ocurrió un error. ' +'Verifique que todos los campos estén completos sin errores', 'red', 'center', 'error', 'white', true);
       Object.keys(this.fg.controls).forEach((controlName) => {
         this.fg.controls[controlName].markAsTouched();
       });
