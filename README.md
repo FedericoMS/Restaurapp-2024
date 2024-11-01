@@ -2,7 +2,9 @@
 
 ## Nombre del grupo: Restaurapp
 
-![Logo de Restaurapp](https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/logomail.png?alt=media&token=46f0795a-d21c-480d-924b-26cd62828301)
+<p align="center">
+![Logo de Restaurapp](https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/logogithub.png?alt=media&token=f9cf8bda-a77e-4651-9ad3-bd4cd2bbf773)
+</p>
 
 ### Integrantes:
 - **Soria Federico Martin**
