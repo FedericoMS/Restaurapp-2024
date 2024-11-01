@@ -37,8 +37,8 @@ export class HomeClientePage implements OnInit {
 
   ngOnInit() {}
 
-  scan() {
-    const data = this.util.scan();
+  async scan() {
+    const data = await this.util.scan();
     console.log(data);
   }
 }
