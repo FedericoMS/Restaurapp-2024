@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonFabButton, IonFab, IonFabList } from '@ionic/angular/standalone';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -16,7 +16,7 @@ import { EmailService } from 'src/app/services/email.service';
   templateUrl: './home-duenio-supervisor.page.html',
   styleUrls: ['./home-duenio-supervisor.page.scss'],
   standalone: true,
-  imports: [IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
+  imports: [IonFabList, IonFab, IonFabButton, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
 })
 export class HomeDuenioSupervisorPage implements OnInit {
 
@@ -28,7 +28,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
   rol: any = '';
   isLoading : boolean = false;
 
-  constructor(private userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private emailService : EmailService) {
+  constructor(public userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private emailService : EmailService) {
     setTimeout(() => {
       this.isLoading = true;      
     }, 1700);
@@ -66,7 +66,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;      
-    }, 2500);
+    }, 2700);
   }
 
   /*

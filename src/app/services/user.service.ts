@@ -99,7 +99,7 @@ export class UserService {
     this.userName = '';
     this.router.navigateByUrl('login');
     this.isLoggedIn = false;
-    this.showToast('Sesión cerrada', 'lightgreen', 'top', 'success', 'black');
+    this.showToast('Sesión cerrada', 'lightgreen', 'center', 'success', 'black');
     console.log("Sesión cerrada");
   }
 

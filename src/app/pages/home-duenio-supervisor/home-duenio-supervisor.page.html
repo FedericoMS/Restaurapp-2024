@@ -1,6 +1,20 @@
 <!-- Dueño y supervisor aceptan y rechazan clientes. Mostrar lista de clientes pendientes de aprobación
      Una vez ingresado todos los datos del cliente, el mismo estará en un listado de clientes pendientes de aprobación.-->
 
+         <!-- ******************************* MENÚ  *******************************-->
+    <ion-fab vertical="top" horizontal="start" slot="fixed">
+        <ion-fab-button color="dark">
+            <img src="/assets/menu.png"/>
+        </ion-fab-button>
+        <ion-fab-list side="bottom">
+
+            <ion-fab-button (click)="this.userService.logout()" style="border: 1px solid #000; border-radius: 50%">
+                <img src="/assets/exit.png"/>
+            </ion-fab-button>
+            
+        </ion-fab-list>
+    </ion-fab>
+
      <!-- *************************** LISTADO DE USUARIOS *************************** -->
     <div *ngIf="userList">
         <h2 class="mb-3" style="text-align: center; margin-top: 4rem; text-shadow: 1px 1px #000">
