@@ -3,7 +3,7 @@
 ## Nombre del grupo: Restaurapp
 
 <p align="center">
- <img width="200" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/logogithub.png?alt=media&token=f9cf8bda-a77e-4651-9ad3-bd4cd2bbf773" alt="Logo restaurapp">
+ <img width="270" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/logogithub.png?alt=media&token=f9cf8bda-a77e-4651-9ad3-bd4cd2bbf773" alt="Logo restaurapp">
 </p>
 
 ### Integrantes:
