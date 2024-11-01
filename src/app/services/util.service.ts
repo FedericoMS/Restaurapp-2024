@@ -162,4 +162,12 @@ export class UtilService {
       Vibration.vibrate(1000);
     }
   }
+
+  showSpinner() {
+    this.mostrarSpinner = true;
+  }
+
+  hideSpinner() {
+    this.mostrarSpinner = false;
+  }
 }
