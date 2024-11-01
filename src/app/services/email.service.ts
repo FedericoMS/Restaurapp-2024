@@ -53,7 +53,7 @@ export class EmailService {
     const templateParams = {
       to_name: user.nombre,
       message:
-        'Tu cuenta ha sido deshabilitada. Comunicarse con nosotros para conocer los motivos.',
+        'Tu cuenta ha sido deshabilitada. Comuníquese con nosotros para conocer los motivos.',
       logoUrl: 'https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/logomail.png?alt=media&token=46f0795a-d21c-480d-924b-26cd62828301',  
       from_name: 'Restaurapp',
       email_cliente: user.email,
