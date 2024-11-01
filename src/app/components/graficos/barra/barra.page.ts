@@ -43,7 +43,7 @@ export class BarraPage implements OnInit {
       labels: labels,
       datasets: [
         {
-          label: 'Frecuencia ',
+          label: 'Cantidades',
           data: this.values.slice(0, 7),
           backgroundColor: [
             'rgba(255, 99, 132, 0.8)',

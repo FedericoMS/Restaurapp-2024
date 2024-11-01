@@ -1,13 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>torta</ion-title>
+    <ion-title>Gráfico de torta </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">torta</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<main>
+  <h2>{{question}}</h2>
+  <canvas id="chart">{{ this.chart }}</canvas>
+</main>

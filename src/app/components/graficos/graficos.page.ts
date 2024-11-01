@@ -11,6 +11,7 @@ import { BarraPage } from './barra/barra.page';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
 import { Encuesta } from 'src/app/clases/encuesta';
+import { TortaPage } from './torta/torta.page';
 
 @Component({
   selector: 'app-graficos',
@@ -25,6 +26,7 @@ import { Encuesta } from 'src/app/clases/encuesta';
     CommonModule,
     FormsModule,
     BarraPage,
+    TortaPage,
   ],
 })
 export class GraficosPage implements OnInit {
@@ -39,6 +41,7 @@ export class GraficosPage implements OnInit {
   ngOnInit() {
     this.util.showSpinner();
     this.getDatos();
+    console.log(this.values);
   }
 
   async getDatos() {
