@@ -67,23 +67,10 @@ export const routes: Routes = [
       import('./components/graficos/graficos.page').then((m) => m.GraficosPage),
   },
   {
-    path: 'barra',
+    path: 'home-cliente',
     loadComponent: () =>
-      import('./components/graficos/barra/barra.page').then((m) => m.BarraPage),
-  },
-  {
-    path: 'torta',
-    loadComponent: () =>
-      import('./components/graficos/torta/torta.page').then((m) => m.TortaPage),
-  },
-  {
-    path: 'dona',
-    loadComponent: () =>
-      import('./components/graficos/dona/dona.page').then((m) => m.DonaPage),
-  },
-  {
-    path: 'polar',
-    loadComponent: () =>
-      import('./components/graficos/polar/polar.page').then((m) => m.PolarPage),
+      import('./pages/home-cliente/home-cliente.page').then(
+        (m) => m.HomeClientePage
+      ),
   },
 ];
