@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -9,6 +9,7 @@ import {
   IonFab,
   IonIcon,
   IonFabButton,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { BarraPage } from './barra/barra.page';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -19,12 +20,14 @@ import { DonaPage } from './dona/dona.page';
 import { PolarPage } from './polar/polar.page';
 import { addIcons } from 'ionicons';
 import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.page.html',
   styleUrls: ['./graficos.page.scss'],
   standalone: true,
   imports: [
+    IonButton,
     IonFabButton,
     IonIcon,
     IonFab,
@@ -48,6 +51,10 @@ export class GraficosPage implements OnInit {
   values: number[][] = [];
   contador: number = 0;
   mostrarGraficos = false;
+  router = inject(Router);
+
+  @Input() encuesta: 'clientes' | 'empleados' = 'clientes';
+
   constructor() {
     addIcons({ chevronForwardOutline, chevronBackOutline });
   }
@@ -60,7 +67,7 @@ export class GraficosPage implements OnInit {
 
   async getDatos() {
     await this.fire
-      .getCollection('encuesta_clientes')
+      .getCollection('encuesta_' + this.encuesta)
       .valueChanges()
       .forEach((a) => {
         const aux = a as Encuesta[];
@@ -94,5 +101,9 @@ export class GraficosPage implements OnInit {
 
   restarContador() {
     this.contador--;
+  }
+
+  finalizar() {
+    // this.router.navigateByUrl('algun_lugar');
   }
 }

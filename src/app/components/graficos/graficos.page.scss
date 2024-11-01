@@ -1,4 +1,15 @@
-ion-fab-button {
+ion-fab-button,
+ion-button {
   --background: #e3d081 !important;
   color: #54494b;
+}
+ion-button {
+  width: 60%;
+  margin-bottom: 4rem;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
