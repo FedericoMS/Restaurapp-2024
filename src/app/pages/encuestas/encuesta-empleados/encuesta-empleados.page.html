@@ -1,13 +1,120 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>encuesta_empleados</ion-title>
+    <ion-title class="ion-text-center">Encuesta empleado</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">encuesta_empleados</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<main>
+  <div class="top">
+    <ion-button (click)="sacar_foto()" class="btn-top">
+      Imagen del espacio
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-button>
+    <span>{{checkImg}}/1 foto</span>
+  </div>
+  <form>
+    <div class="ion-margin-bottom">
+      <label for="visitFrequency">Estado de Limpieza</label>
+      <select id="visitFrequency" name="visitFrequency">
+        <option value="Excelente" (click)="cambiarSelect('Excelente')">
+          Excelente
+        </option>
+        <option value="Bueno" (click)="cambiarSelect('Bueno')">Bueno</option>
+        <option value="Regular" (click)="cambiarSelect('Regular')">
+          Regular
+        </option>
+        <option value="Malo" (click)="cambiarSelect('Malo')">Malo</option>
+      </select>
+    </div>
+
+    <div class="ion-margin-bottom">
+      <p>
+        ¿Encuentras algún desorden o obstáculo que impida realizar tu trabajo?
+      </p>
+      <div class="div-radios">
+        <div class="div-rdo-chek">
+          <input
+            type="radio"
+            id="ambientCalm"
+            name="environment"
+            value="Si"
+            (click)="cambiarRadio('Si')"
+            checked
+          />
+          <label for="ambientCalm">Si</label><br />
+        </div>
+        <div class="div-rdo-chek">
+          <input
+            type="radio"
+            id="ambientLively"
+            name="environment"
+            value="No"
+            (click)="cambiarRadio('No')"
+          />
+          <label for="ambientLively">No</label><br />
+        </div>
+      </div>
+    </div>
+
+    <div class="ion-margin-bottom">
+      <p>¿Qué le gustaria que este más limpio y ordenado?</p>
+      <div class="div-cheks">
+        <div class="div-rdo-chek">
+          <input
+            type="checkbox"
+            id="cleanDiningArea"
+            name="cleanliness"
+            value="Cocina"
+            (click)="cambiarCheck(1)"
+          />
+          <label for="cleanDiningArea">La cocina</label><br />
+        </div>
+        <div class="div-rdo-chek">
+          <input
+            type="checkbox"
+            id="cleanRestrooms"
+            name="cleanliness"
+            value="Baños"
+            (click)="cambiarCheck(2)"
+            checked
+          />
+          <label for="cleanRestrooms">Los Baños</label><br />
+        </div>
+        <div class="div-rdo-chek">
+          <input
+            type="checkbox"
+            id="cleanTables"
+            name="cleanliness"
+            value="Mesas"
+            (click)="cambiarCheck(3)"
+          />
+          <label for="cleanTables">Las Mesas</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ion-margin-bottom">
+      <label for="overallSatisfaction">Calidad del espacio</label>
+      <ion-range
+        min="1"
+        max="5"
+        step="1"
+        (ionChange)="cambiarRange($event)"
+      ></ion-range>
+    </div>
+
+    <div>
+      <label for="comments">Comentarios</label>
+      <input
+        type="text"
+        id="comments"
+        name="comments"
+        placeholder="Ingrese sus comentarios..."
+      />
+    </div>
+
+    <ion-button type="submit" class="load" (click)="guardar()">
+      Enviar Encuesta
+    </ion-button>
+  </form>
+</main>

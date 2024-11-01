@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -12,16 +12,24 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonFab,
-  IonLabel,
-  IonItem,
   IonButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/clases/alert';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
+// import { Alert } from 'src/app/clases/alert';
+import { addIcons } from 'ionicons';
+import {
+  cameraOutline,
+  checkmark,
+  closeOutline,
+  qrCodeOutline,
+} from 'ionicons/icons';
+import { cuilValidator } from 'src/app/validators/cuilValidator';
+import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-alta-empleado',
@@ -29,9 +37,8 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./alta-empleado.page.scss'],
   standalone: true,
   imports: [
-    IonItem,
-    IonLabel,
-    IonFab,
+    SpinnerComponent,
+    IonIcon,
     IonButton,
     IonContent,
     IonHeader,
@@ -39,7 +46,9 @@ import { UtilService } from 'src/app/services/util.service';
     IonToolbar,
     CommonModule,
     FormsModule,
+    FormsModule,
     ReactiveFormsModule,
+    TitleCasePipe,
   ],
 })
 export class AltaEmpleadoPage implements OnInit {
@@ -54,11 +63,14 @@ export class AltaEmpleadoPage implements OnInit {
   private util = inject(UtilService);
   fb: FormBuilder = inject(FormBuilder);
   fg: FormGroup;
-  list_roles = Usuario.get_roles();
+  list_roles = Usuario.get_roles().splice(0, 4);
   foto_url: string = '';
   img?: string = '';
+  isLoading: boolean = false;
 
   constructor() {
+    addIcons({ qrCodeOutline, cameraOutline, closeOutline, checkmark });
+
     this.fg = this.fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
@@ -70,14 +82,7 @@ export class AltaEmpleadoPage implements OnInit {
           Validators.max(99999999),
         ],
       ],
-      cuil: [
-        '',
-        [
-          Validators.required,
-          Validators.min(1000000000),
-          Validators.max(99999999999),
-        ],
-      ],
+      cuil: ['', [Validators.required, cuilValidator()]],
 
       rol: [this.list_roles[0]],
     });
@@ -91,13 +96,19 @@ export class AltaEmpleadoPage implements OnInit {
       this.fg.controls['apellido'].setValue(datos.apellido);
       this.fg.controls['dni'].setValue(datos.dni);
     } else {
-      Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
+      this.util.showToast(
+        'Ocurrió un error, Vuelva a intentar más tarde',
+        'red',
+        'top'
+      );
+      // Alert.error('Ocurrió un error', 'Vuelva a intentar más tarde');
     }
   }
 
   async cargar() {
     if (this.fg.valid) {
       //Se deberia agregar un spinner para la espera
+      this.isLoading = true;
       //Subo la imagen al storage
       await this.upload_storage();
       //Agrego el empleado a firestores
@@ -114,20 +125,32 @@ export class AltaEmpleadoPage implements OnInit {
           )
         )
         .then(() => {
-          Alert.success('Se cargo exitosamente el empleado', '');
+          this.util.showToast(
+            'Se cargo exitosamente el empleado',
+            'lightgreen',
+            'top'
+          );
           //Reseteo el form para que empiece de cero
           this.fg.reset();
+          this.fg.controls['rol'].setValue(this.list_roles[0]);
         })
         .catch(() => {
-          Alert.error(
+          this.util.showToast(
             'Hubo un problema al cargar el empleado',
-            'Vuelva a intentar más tarde'
+            'red',
+            'top',
+            'error'
           );
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     } else {
-      Alert.error(
-        'Ocurrió un error',
-        'Verifique que todos los campos estén completos sin errores!'
+      this.util.showToast(
+        'Verifique que todos los campos estén completos sin errores!',
+        'red',
+        'top',
+        'error'
       );
       //Muestro todos los errores
       Object.keys(this.fg.controls).forEach((controlName) => {
@@ -150,6 +173,30 @@ export class AltaEmpleadoPage implements OnInit {
         `imagenes_empelados/${Date.now()}`,
         this.img
       );
+    }
+  }
+
+  formatCuil() {
+    let rawValue = this.fg.get('cuil')?.value.replace(/-/g, '');
+
+    if (!/^\d*$/.test(rawValue)) {
+      rawValue = rawValue.replace(/\D/g, '');
+    }
+
+    if (rawValue.length > 2) {
+      rawValue = rawValue.slice(0, 2) + '-' + rawValue.slice(2);
+    }
+    if (rawValue.length > 11) {
+      rawValue = rawValue.slice(0, 11) + '-' + rawValue.slice(11);
+    }
+
+    this.fg.get('cuil')?.setValue(rawValue, { emitEvent: false });
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent) {
+    const charCode = event.charCode;
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
     }
   }
 }
