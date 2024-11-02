@@ -10,6 +10,7 @@ import {
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { EstadoAprobacion, Usuario } from '../clases/usuario';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
@@ -23,12 +24,15 @@ import { EstadoAprobacion, Usuario } from '../clases/usuario';
     IonToolbar,
     CommonModule,
     FormsModule,
+    SpinnerComponent
   ],
 })
 export class LoginPage implements OnInit {
   user: Usuario;
+  isLoading: boolean;
 
   constructor(public userService: UserService, private router: Router) {
+    this.isLoading = false;
     this.user = new Usuario(
       '',
       '',
@@ -60,11 +64,13 @@ export class LoginPage implements OnInit {
       );
     } else {
       try {
+        this.isLoading = true;
         await this.userService.login({ email: this.user.email, password: this.user.password });
         
         const state = await this.userService.getIsApproved();
         console.log("El estado es: " + state);
         if (state == 'aprobado') {
+          this.emptyInputs();
           this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
           const rol = await this.userService.getRole();
           if (rol === 'dueño' || rol === 'supervisor') {
@@ -83,8 +89,8 @@ export class LoginPage implements OnInit {
             this.userService.showToast('¡Acceso denegado! Cuenta rechazada', 'red', 'center', 'error', 'white', true);
 
           }
- 
         }
+        this.isLoading = false;
   
       } catch (error) {
         this.userService.showToast(
@@ -105,4 +111,10 @@ export class LoginPage implements OnInit {
     this.user.email = email;
     this.user.password = pass;
   }
+
+  emptyInputs(){
+    this.user.email = '';
+    this.user.password = '';
+  }
+
 }
