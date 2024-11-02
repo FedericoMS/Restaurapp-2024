@@ -27,11 +27,12 @@ export class HomeDuenioSupervisorPage implements OnInit {
   userList: any[] = [];
   rol: any = '';
   isLoading : boolean = false;
+  isEmpty : boolean = false;
 
   constructor(public userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private emailService : EmailService) {
     setTimeout(() => {
       this.isLoading = true;      
-    }, 1700);
+    }, 1100);
     this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
       if (user != null && user != undefined) {
         try {
@@ -57,7 +58,11 @@ export class HomeDuenioSupervisorPage implements OnInit {
     });
     this.firestoreService.getUsuarios().subscribe((users: any) => {
       this.userList = users;
-      // this.userList.sort(this.orderByLastName);
+      // Verificar si hay algún cliente con estadoAprobacion == 'pendiente'
+     /* if (!this.userList.some((user: any) => user.estadoAprobacion === 'pendiente' && user.rol === 'cliente')) {
+        this.isEmpty = true;
+        console.log(this.isEmpty);
+      }*/
     });
 
 
