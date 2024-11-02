@@ -160,24 +160,25 @@
       </ion-button>
     </div>
 
-    <div class="form-group content-select">
-      <div class="content-photo">
-        <label> Foto </label>
-        @if (img == '') {
-        <ion-icon name="close-outline" class="icon-validate-foto"></ion-icon>
-        } @else {
-        <ion-icon name="checkmark" class="icon-validate-foto"></ion-icon>
-        }
-      </div>
-      
+    <div>
 
-    </div>  
-    <div class="cont-p required_img">
-      @if(this.fg.controls['img'].errors !== null &&
+      <div class="form-group content-select">
+        <div class="content-photo">
+          <label> Foto </label>
+          @if (img == '') {
+            <ion-icon name="close-outline" class="icon-validate-foto"></ion-icon>
+          } @else {
+            <ion-icon name="checkmark" class="icon-validate-foto"></ion-icon>
+          }
+        </div>
+      </div>  
+      <div class="cont-p required_img">
+        @if(this.fg.controls['img'].errors !== null &&
       this.fg.controls["img"].touched) {
-      @if(this.fg.controls['img'].errors!['required']) {
-      <p>Debes ingresar una foto</p>
-      } }
+        @if(this.fg.controls['img'].errors!['required']) {
+          <p>Debes ingresar una foto</p>
+        } }
+      </div>
     </div>
 
     <ion-button
