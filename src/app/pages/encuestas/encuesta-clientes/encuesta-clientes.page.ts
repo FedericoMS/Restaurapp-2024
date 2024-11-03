@@ -168,7 +168,7 @@ export class EncuestaClientesPage implements OnInit {
         });
       }
       this.util.mostrarSpinner = false;
-      this.util.showToast('Se cargo exitosamente', 'lightgreen', 'center');
+      this.util.showToast('Se cargó exitosamente', 'lightgreen', 'center');
       setTimeout(() => {
         this.router.navigate(['/graficos'], {
           queryParams: { encuesta: 'clientes' },

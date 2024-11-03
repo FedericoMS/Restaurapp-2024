@@ -170,4 +170,32 @@ export class UtilService {
   hideSpinner() {
     this.mostrarSpinner = false;
   }
+
+  msjError(
+    msj: string,
+    position:
+      | 'top-right'
+      | 'top-left'
+      | 'bottom-right'
+      | 'bottom-left'
+      | 'center'
+      | 'top'
+      | 'bottom' = 'top'
+  ) {
+    this.showToast(msj, 'red', position, 'error', 'white', true);
+  }
+
+  msjExito(
+    msj: string = 'Se cargo exitosamente',
+    position:
+      | 'top-right'
+      | 'top-left'
+      | 'bottom-right'
+      | 'bottom-left'
+      | 'center'
+      | 'top'
+      | 'bottom' = 'top'
+  ) {
+    this.showToast(msj, 'lightgreen', position);
+  }
 }

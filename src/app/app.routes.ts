@@ -72,5 +72,9 @@ export const routes: Routes = [
       import('./pages/home-cliente/home-cliente.page').then(
         (m) => m.HomeClientePage
       ),
+  },  {
+    path: 'ingreso-local',
+    loadComponent: () => import('./pages/ingreso-local/ingreso-local.page').then( m => m.IngresoLocalPage)
   },
+
 ];
