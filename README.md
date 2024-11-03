@@ -71,5 +71,13 @@
 ## Lista de códigos QR
 
 <p align="center">
- <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2Frestaurapp.png?alt=media&token=3c149239-5547-406e-9ea6-6f8684a1a0b0" alt="QR Restaurapp">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2Frestaurapp.png?alt=media&token=3c149239-5547-406e-9ea6-6f8684a1a0b0" alt="QR Restaurapp">
+</p>
+
+<p align="center">
+ <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F1%20.png?alt=media&token=06c8d4c2-3c1b-407e-b47e-c40553ed7948" alt="QR Mesa 1">
+
+ <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F2.png?alt=media&token=e1064327-d15f-415a-a6e0-e081e99ace6d" alt="QR Mesa 1">
+
+ <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F3.png?alt=media&token=f5f46b5e-95ba-4918-b036-338b1129adfd" alt="QR Mesa 1">
 </p>
