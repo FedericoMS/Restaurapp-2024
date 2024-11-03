@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -13,6 +13,7 @@ import {
 import { addIcons } from 'ionicons';
 import { qrCodeOutline } from 'ionicons/icons';
 import { UtilService } from 'src/app/services/util.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home-cliente',
   templateUrl: './home-cliente.page.html',
@@ -31,6 +32,9 @@ import { UtilService } from 'src/app/services/util.service';
   ],
 })
 export class HomeClientePage implements OnInit {
+  router = inject(Router);
+  flagMesa = false;
+
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
   }
@@ -40,5 +44,22 @@ export class HomeClientePage implements OnInit {
   async scan() {
     const data = await this.util.scan();
     console.log(data);
+    if (data === '1') {
+      this.util.msjError('QR inválido, todavia no se le asigno una mesa');
+    } else if (data === '2') {
+      this.util.msjError('Mesa inválida, su mesa es la');
+    } else {
+      // this.router.navigateByUrl('algun lugar');
+    }
+  }
+
+  pedirMesa() {
+    this.flagMesa = true;
+  }
+
+  verEncuestas() {
+    this.router.navigate(['/graficos'], {
+      queryParams: { encuesta: 'clientes' },
+    });
   }
 }

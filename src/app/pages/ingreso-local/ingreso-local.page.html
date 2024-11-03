@@ -4,12 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
-<main class="main">
-  <img src="assets/logo.png" alt="logo" />
-  <div>
-    <ion-button class="load" (click)="scan()">
-      Capturar QR &nbsp;&nbsp;
-      <ion-icon name="qr-code-outline"></ion-icon>
-    </ion-button>
+<main class="container">
+  <div (click)="scan()">
+    <span>CAPTURAR QR </span>
+    <img src="assets/qr.png" alt="qr" />
   </div>
 </main>

@@ -5,12 +5,19 @@
 </ion-header>
 
 <main class="container">
-  <div class="mesa">
+  @if (this.flagMesa) {
+  <div class="mesa" (click)="scan()">
+    <span>VINCULAR CON LA MESA</span>
+    <img src="assets/qr.png" alt="mesa" />
+  </div>
+  } @else {
+  <div class="mesa" (click)="pedirMesa()">
     <span>PEDIR UNA MESA</span>
     <img src="assets/mesa.png" alt="mesa" />
   </div>
+  }
 
-  <div class="grafico">
+  <div class="grafico" (click)="verEncuestas()">
     <span>VER ENCUESTAS</span>
     <img src="assets/grafico.png" alt="mesa" />
   </div>

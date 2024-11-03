@@ -41,13 +41,6 @@ export const routes: Routes = [
       ).then((m) => m.EncuestaEmpleadosPage),
   },
   {
-    path: 'encuesta-empleados',
-    loadComponent: () =>
-      import(
-        './pages/encuestas/encuesta-empleados/encuesta-empleados.page'
-      ).then((m) => m.EncuestaEmpleadosPage),
-  },
-  {
     path: 'home-duenio-supervisor',
     loadComponent: () =>
       import('./pages/home-duenio-supervisor/home-duenio-supervisor.page').then(
@@ -72,9 +65,12 @@ export const routes: Routes = [
       import('./pages/home-cliente/home-cliente.page').then(
         (m) => m.HomeClientePage
       ),
-  },  {
-    path: 'ingreso-local',
-    loadComponent: () => import('./pages/ingreso-local/ingreso-local.page').then( m => m.IngresoLocalPage)
   },
-
+  {
+    path: 'ingreso-local',
+    loadComponent: () =>
+      import('./pages/ingreso-local/ingreso-local.page').then(
+        (m) => m.IngresoLocalPage
+      ),
+  },
 ];
