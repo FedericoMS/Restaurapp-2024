@@ -58,6 +58,8 @@ ion-toolbar {
   min-height: 100vh;
   max-height: 100vh;
   flex-direction: column;
+  gap: 10px; /* Espacio entre botones */
+  padding: 10px; /* Espacio alrededor del contenido */
 }
 
 .load {
