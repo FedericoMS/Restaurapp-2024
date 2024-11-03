@@ -75,9 +75,17 @@
 </p>
 
 <p align="center">
- <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F1%20.png?alt=media&token=06c8d4c2-3c1b-407e-b47e-c40553ed7948" alt="QR Mesa 1">
+ <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F1%20.png?alt=media&token=06c8d4c2-3c1b-407e-b47e-c40553ed7948" alt="QR Mesa 1">
 
- <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F2.png?alt=media&token=e1064327-d15f-415a-a6e0-e081e99ace6d" alt="QR Mesa 1">
+ <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F2.png?alt=media&token=e1064327-d15f-415a-a6e0-e081e99ace6d" alt="QR Mesa 2">
 
- <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F3.png?alt=media&token=f5f46b5e-95ba-4918-b036-338b1129adfd" alt="QR Mesa 1">
+ <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F3.png?alt=media&token=f5f46b5e-95ba-4918-b036-338b1129adfd" alt="QR Mesa 3">
+</p>
+
+<p align="center">
+ <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F4.png?alt=media&token=a989fae4-553e-44ca-aa8d-c124aa7b8957" alt="QR Mesa 1">
+
+ <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F5.png?alt=media&token=462b5a55-c39e-4f44-91a6-8176524220b2" alt="QR Mesa 1">
+
+ <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F6.png?alt=media&token=50ba6c80-90e9-4932-b255-7e61685c5993" alt="QR Mesa 1">
 </p>
