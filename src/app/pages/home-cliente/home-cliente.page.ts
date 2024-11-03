@@ -9,6 +9,7 @@ import {
   IonTabButton,
   IonButton,
   IonIcon,
+  IonText,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { qrCodeOutline } from 'ionicons/icons';
@@ -20,6 +21,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-cliente.page.scss'],
   standalone: true,
   imports: [
+    IonText,
     IonIcon,
     IonButton,
     IonTabButton,
@@ -34,12 +36,18 @@ import { Router } from '@angular/router';
 export class HomeClientePage implements OnInit {
   router = inject(Router);
   flagMesa = false;
+  msj = 'Mesa sin asignar';
+  msjColor = 'danger';
 
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //Dependiendo el cambio
+    this.msj = 'Su mesa es la numero 1';
+    this.msjColor = 'primary';
+  }
 
   async scan() {
     const data = await this.util.scan();
