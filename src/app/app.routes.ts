@@ -72,5 +72,9 @@ export const routes: Routes = [
       import('./pages/ingreso-local/ingreso-local.page').then(
         (m) => m.IngresoLocalPage
       ),
+  },  {
+    path: 'comentarios',
+    loadComponent: () => import('./pages/comentarios/comentarios.page').then( m => m.ComentariosPage)
   },
+
 ];

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Comentarios de clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @for (item of comentarios; track $index) {
+  <p><ion-icon name="person-sharp"></ion-icon>&nbsp;&nbsp;{{item}}</p>
+  }
+</ion-content>
