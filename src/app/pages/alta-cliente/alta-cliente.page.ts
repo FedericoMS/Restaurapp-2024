@@ -90,8 +90,11 @@ export class AltaClientePage implements OnInit {
         ],
       ],
       rol: [this.list_roles[6]],
-      contrasenia: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
+      contrasenia: ['', [Validators.required]],
+      contraseniaRepetida: ['',[Validators.required]],
+      img: ['',[Validators.required]],
+      
     });
   }
 
@@ -124,53 +127,67 @@ export class AltaClientePage implements OnInit {
       (this.fg.controls['rol'].value == 'anonimo' &&
         this.fg.controls['nombre'].value !== '')
     ) {
-      this.isLoading = true;
-      await this.upload_storage();
-      let user;
-      if (this.fg.controls['rol'].value == 'cliente') {
-        user = new Usuario(
-          this.fg.controls['nombre'].value,
-          this.fg.controls['apellido'].value,
-          this.fg.controls['dni'].value,
-          '',
-          this.foto_url,
-          this.fg.controls['rol'].value,
-          EstadoAprobacion.Pendiente,
-          this.fg.controls['correo'].value,
-          this.fg.controls['contrasenia'].value
-        );
-      } else {
-        user = new Usuario(
-          this.fg.controls['nombre'].value,
-          '',
-          0,
-          '',
-          this.foto_url,
-          this.fg.controls['rol'].value,
-          EstadoAprobacion.Pendiente
+
+      if (this.fg.controls['contrasenia'].value !== this.fg.controls['contraseniaRepetida'].value) {
+        this.userService.showToast(
+          'Las contraseñas no coinicden, reingresar!',
+          'red',
+          'center',
+          'error',
+          'white',
+          true
         );
       }
-      this.userService
-        .createUser(user)
-        .then(() => {
-          this.fg.patchValue({
-            rol: this.fg.controls['rol'].value,
-          });
-          this.emptyInputs();
-          this.isLoading = false;
-          this.router.navigate(['/login']);
-        })
-        .catch(() => {
-          this.userService.showToast(
-            'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
-            'red',
-            'center',
-            'error',
-            'white',
-            true
+      else{
+        this.isLoading = true;
+        await this.upload_storage();
+        let user;
+        if (this.fg.controls['rol'].value == 'cliente') {
+          user = new Usuario(
+            this.fg.controls['nombre'].value,
+            this.fg.controls['apellido'].value,
+            this.fg.controls['dni'].value,
+            '',
+            this.foto_url,
+            this.fg.controls['rol'].value,
+            EstadoAprobacion.Pendiente,
+            this.fg.controls['correo'].value,
+            this.fg.controls['contrasenia'].value
           );
-          this.isLoading = false;
-        });
+        } else {
+          user = new Usuario(
+            this.fg.controls['nombre'].value,
+            '',
+            0,
+            '',
+            this.foto_url,
+            this.fg.controls['rol'].value,
+            EstadoAprobacion.Pendiente
+          );
+        }
+        this.userService
+          .createUser(user)
+          .then(() => {
+            this.fg.patchValue({
+              rol: this.fg.controls['rol'].value,
+            });
+            this.emptyInputs();
+            this.isLoading = false;
+            this.router.navigate(['/login']);
+          })
+          .catch(() => {
+            this.userService.showToast(
+              'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
+              'red',
+              'center',
+              'error',
+              'white',
+              true
+            );
+            this.isLoading = false;
+          });
+      }
+      
     } else {
       this.userService.showToast(
         'Ocurrió un error. ' +
@@ -190,6 +207,7 @@ export class AltaClientePage implements OnInit {
   async sacar_foto() {
     try {
       this.img = await this.utilService.sacar_foto();
+      this.fg.get('img')?.setValue(this.img ?? '');
       this.userService.showToast(
         'Se cargó la foto',
         'lightgreen',

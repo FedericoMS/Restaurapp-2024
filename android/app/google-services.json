@@ -5,7 +5,7 @@
     "storage_bucket": "pps-sp-2024.appspot.com"
   },
   "client": [
-    {
+    { 
       "client_info": {
         "mobilesdk_app_id": "1:251184336543:android:6c453ef38a97e41966dcaa",
         "android_client_info": {

@@ -9,11 +9,11 @@ ion-content {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  height: 70vh;
-  max-height: 80vh;
-  padding: 5vh 2vw; /* Añadido padding para separarlo de los bordes en pantallas pequeñas */
+  height: 100vh;
+  max-height: 100vh;
+  padding: 5vh 2vw;
 }
 
 /* Animación de deslizamiento */
@@ -53,9 +53,9 @@ img {
 
 /* Estilos específicos para header */
 .header {
-  font-size: 10vw;
+  font-size: 11vw;
   margin-top: 5vh;
-  margin-bottom: 3vh;
+  margin-bottom: 10vh;
 }
 
 /* Estilos específicos para footer */
@@ -69,7 +69,7 @@ img {
 /*PANTALLA LAUTARO 360 X 640 APROX*/
 @media (max-height: 640px) {
   .header {
-      font-size: 6vw;
+      font-size: 10vw;
   }
   .footer {
       font-size: 10vw;

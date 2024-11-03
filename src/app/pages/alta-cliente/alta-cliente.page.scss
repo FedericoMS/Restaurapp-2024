@@ -168,7 +168,7 @@ ion-segment {
 }
 
 .anonimo {
-  height: 100%;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -203,3 +203,58 @@ ion-segment {
   width: 30px;
   height: 30px;
 }
+
+.required_img{
+  text-align: center !important;
+
+  p{
+    margin-left: 0 !important;
+
+  }
+}
+
+
+.content-photo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@media (max-height: 640px) {
+  label{
+    margin-top: 5px;
+    font-size: 10px;
+  }
+  .login__input{
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+
+  .btn-top{
+    font-size: 10px;
+  }
+  input::placeholder{
+    font-size: 14px;
+  }
+
+  ion-segment{
+    margin-top: 14px;
+  }
+
+  .icon-validate-foto{
+    font-size: 20px;
+  }
+  .load{
+    font-size: 20px !important;
+    margin-top: 0px;
+  }
+
+}
+
+
+
+
+
+
