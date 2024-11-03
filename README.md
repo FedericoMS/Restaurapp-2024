@@ -26,7 +26,6 @@
 ### Lautaro García (Nombre de la rama: lautaro)
 - ✅ Alta dueño/supervisor
 - ✅ Alta cliente
-- [ ] Home metre (lista de espera, asigna mesas)
 - ✅ Spinners
 - ✅ Generación de clases
 
@@ -34,28 +33,26 @@
 - ✅ Alta empleado
 - ✅ Encuesta Empleados
 - ✅ Encuesta Cliente
-- [ ] Home cliente (cliente y anónimo)
 - ✅ Generación de clases
 
 
 ## Tareas - Segunda Semana (02/11/2024 al 09/11/2024) 
-### *En proceso de planificación dependiendo de la anterior semana*
 
 ### Federico Soria (Nombre de la rama: soria)
-- [ ] QR mesas
-- [ ] Gestión del ingreso al local
-- [ ] Gestión de la realización de pedidos
+- ✅ Generación de QR's
+- [ ] Home mozo
+- [ ] Componente Menú
 
 
 ### Lautaro García (Nombre de la rama: lautaro)
-- [ ] QR local (lista de espera)
-- [ ] Chat de mozos 
-- [ ] Confirmación de pedidos
+- [ ] Home metre (lista de espera, asigna mesas)
+- [ ] Chat de mozos/mesas 
+- ✅ Correcciones de estilos
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
-- [ ] QR Propinas 
 - [ ] Carga de pedidos
-- [ ] Correcciones de estilos
+- [ ] Home cliente (cliente y anónimo)
+- [ ] Ingreso al local
 
 ## Tareas - Tercera Semana (09/11/2024 al 16/11/2024) 
 ### *En proceso de planificación dependiendo de la anterior semana*
@@ -69,3 +66,10 @@
 ### Federico Cardozo (Nombre de la rama: cardozo)
 *A completar*
 
+
+
+## Lista de códigos QR
+
+<p align="center">
+ <img width="300" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2Frestaurapp.png?alt=media&token=3c149239-5547-406e-9ea6-6f8684a1a0b0" alt="QR Restaurapp">
+</p>
