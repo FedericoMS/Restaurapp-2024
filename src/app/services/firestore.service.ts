@@ -41,6 +41,16 @@ export class FirestoreService {
     await documento.set({ ...encuesta });
   }
 
+  //Comentarios
+  async addComentarios(
+    comentario: string,
+    collection: 'clientes' | 'empleados' | 'supervisor' = 'clientes'
+  ) {
+    const encuestas = this.firestore.collection('comentarios_' + collection);
+    const documento = encuestas.doc();
+    await documento.set(comentario);
+  }
+
   //Obtner cualquier collection
   getCollection(path: string) {
     const col = this.firestore.collection(path);

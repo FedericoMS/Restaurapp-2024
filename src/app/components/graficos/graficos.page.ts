@@ -107,6 +107,6 @@ export class GraficosPage implements OnInit {
   }
 
   finalizar() {
-    // this.router.navigateByUrl('algun_lugar');
+    this.router.navigateByUrl('/comentarios');
   }
 }

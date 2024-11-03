@@ -57,6 +57,7 @@ export class EncuestaClientesPage implements OnInit {
   check_2 = true;
   check_3 = false;
   range_select: number = 1;
+  comentario = '';
 
   constructor() {
     addIcons({ cameraOutline });
@@ -166,6 +167,7 @@ export class EncuestaClientesPage implements OnInit {
         this.res_encuestas.forEach((value) => {
           this.fire.addEncuesta(value);
         });
+        if (this.comentario !== '') this.fire.addComentarios(this.comentario);
       }
       this.util.mostrarSpinner = false;
       this.util.showToast('Se cargó exitosamente', 'lightgreen', 'center');
