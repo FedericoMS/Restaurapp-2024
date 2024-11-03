@@ -42,6 +42,7 @@
 - ✅ Generación de QR's
 - [ ] Home mozo
 - [ ] Componente Menú
+- ✅ Agregado de bases de datos "pedidos", "productos", "mesas"
 
 
 ### Lautaro García (Nombre de la rama: lautaro)

@@ -7,6 +7,7 @@ export class Producto {
     nombre: string;
     precio: number;
     tiempoPreparacion: number;
+    tipo : string;
 
     constructor() {
         this.descripcion = '';
@@ -17,5 +18,6 @@ export class Producto {
         this.nombre = '';
         this.precio = 0;
         this.tiempoPreparacion = 0;
+        this.tipo = '';
     }
 }
