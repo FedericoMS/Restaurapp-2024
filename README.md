@@ -82,6 +82,9 @@
  <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F3.png?alt=media&token=f5f46b5e-95ba-4918-b036-338b1129adfd" alt="QR Mesa 3">
 </p>
 
+
+
+
 <p align="center">
  <img width="230" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/qr%2F4.png?alt=media&token=a989fae4-553e-44ca-aa8d-c124aa7b8957" alt="QR Mesa 1">
 
