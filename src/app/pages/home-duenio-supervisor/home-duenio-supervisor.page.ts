@@ -35,6 +35,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
     }, 1100);
     this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
       if (user != null && user != undefined) {
+        /*
         try {
           this.rol = this.userService.getRole()
           if (this.rol) {
@@ -51,7 +52,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
           }
         } catch (error) {
           console.error('Error al obtener el perfil del usuario:', error);
-        }
+        }*/
       }
 
       this.userAuth = user;
