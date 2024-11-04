@@ -180,7 +180,7 @@ export class UtilService {
       | 'bottom-left'
       | 'center'
       | 'top'
-      | 'bottom' = 'top'
+      | 'bottom' = 'center'
   ) {
     this.showToast(msj, 'red', position, 'error', 'white', true);
   }
@@ -194,7 +194,7 @@ export class UtilService {
       | 'bottom-left'
       | 'center'
       | 'top'
-      | 'bottom' = 'top'
+      | 'bottom' = 'center'
   ) {
     this.showToast(msj, 'lightgreen', position);
   }

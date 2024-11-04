@@ -76,4 +76,12 @@ export class FirestoreService {
   getUserProfile(userId: string) {
     return this.firestore.collection('usuarios').doc(userId).get();
   }
+
+  //Agregar cualquier objeto
+  async add(data: any, path: string = 'lista_de_espera') {
+    const col = this.firestore.collection(path);
+    const documento = col.doc();
+    data.id = documento.ref.id;
+    await documento.set({ ...data });
+  }
 }

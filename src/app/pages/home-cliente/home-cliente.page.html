@@ -5,10 +5,10 @@
 </ion-header>
 
 <main class="container">
-  @if (!this.flagMesa) {
+  @if (this.flagMesa) {
   <div class="mesa" (click)="scan()">
     <span>VINCULAR CON LA MESA</span>
-    <ion-text [color]="msjColor">{{msj}}</ion-text>
+    <ion-text [color]="msjColor">{{msj | uppercase}}</ion-text>
     <img src="assets/qr.png" alt="mesa" />
   </div>
   } @else {
