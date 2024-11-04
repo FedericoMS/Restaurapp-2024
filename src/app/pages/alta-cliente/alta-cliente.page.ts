@@ -17,8 +17,7 @@ import {
   IonSegmentButton,
   IonLabel,
   IonSegment,
-  IonButtons,
-} from '@ionic/angular/standalone';
+  IonButtons, IonInput } from '@ionic/angular/standalone';
 import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -39,7 +38,7 @@ import { Router } from '@angular/router';
   templateUrl: './alta-cliente.page.html',
   styleUrls: ['./alta-cliente.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonInput, 
     IonButtons,
     IonSegment,
     IonLabel,
@@ -60,7 +59,6 @@ export class AltaClientePage implements OnInit {
   fg!: FormGroup;
   list_roles = Usuario.get_roles();
   foto_url: string = '';
-  img?: string = '';
   isLoading: boolean;
 
   constructor(
@@ -206,8 +204,7 @@ export class AltaClientePage implements OnInit {
 
   async sacar_foto() {
     try {
-      this.img = await this.utilService.sacar_foto();
-      this.fg.get('img')?.setValue(this.img ?? '');
+      this.fg.get('img')?.setValue(await this.utilService.sacar_foto() ?? '');
       this.userService.showToast(
         'Se cargó la foto',
         'lightgreen',
@@ -221,10 +218,10 @@ export class AltaClientePage implements OnInit {
   }
 
   async upload_storage() {
-    if (this.img) {
+    if (this.fg.get('img')?.value) {
       this.foto_url = await this.firestore.uploadImage(
         `imagenes_clientes/${Date.now()}`,
-        this.img
+        this.fg.get('img')?.value
       );
     }
   }
@@ -245,7 +242,7 @@ export class AltaClientePage implements OnInit {
       control?.updateValueAndValidity();
     });
 
-    this.img = '';
+    this.fg.get('img')?.setValue('');
   }
 
   goBack(): void {
