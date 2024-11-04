@@ -41,6 +41,11 @@ export class FirestoreService {
     const col = this.firestore.collection('pedidos').valueChanges();
     return col;
   }
+  
+  getProductos(): any {
+    const col = this.firestore.collection('productos').valueChanges();
+    return col;
+  }
 
   //Encuesta
   async addEncuesta(
