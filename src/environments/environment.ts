@@ -11,7 +11,8 @@ export const environment = {
     storageBucket: "pps-sp-2024.appspot.com",
     messagingSenderId: "251184336543",
     appId: "1:251184336543:web:524b1e99eeb2de3966dcaa"
-  }
+  },
+  fcmUrl: 'https://fcm.googleapis.com/v1/projects/pps-sp-2024/messages:send',
 };
 
 /*

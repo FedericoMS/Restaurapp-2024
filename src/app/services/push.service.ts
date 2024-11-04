@@ -95,9 +95,9 @@ export class PushService {
       }
     );
   }
-
+/*
     //RESOLVER lo de fcmUrl 
-  /* sendPushNotification(req : any): Observable<any> {
+   sendPushNotification(req : any): Observable<any> {
      console.log('push notification');
      return this.http.post<Observable<any>>(environment.fcmUrl, req, {
        headers: {

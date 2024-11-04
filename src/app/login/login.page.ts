@@ -10,7 +10,7 @@ import {
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { EstadoAprobacion, Usuario } from '../clases/usuario';
-import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { PushService } from '../services/push.service';
 
 @Component({
   selector: 'app-login',
@@ -24,15 +24,12 @@ import { SpinnerComponent } from '../components/spinner/spinner.component';
     IonToolbar,
     CommonModule,
     FormsModule,
-    SpinnerComponent
   ],
 })
 export class LoginPage implements OnInit {
   user: Usuario;
-  isLoading: boolean;
 
   constructor(public userService: UserService, private router: Router) {
-    this.isLoading = false;
     this.user = new Usuario(
       '',
       '',
@@ -46,7 +43,7 @@ export class LoginPage implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   toRegisterPage() {
     this.router.navigateByUrl('alta-cliente');
@@ -54,43 +51,52 @@ export class LoginPage implements OnInit {
 
   async loginUser() {
     if (this.user.email === '' || this.user.password === '') {
-      this.userService.showToast(
-        'Campos vacíos',
-        'red',
-        'center',
-        'error',
-        'white',
-        true
-      );
+      this.userService.showToast('Campos vacíos','red', 'center','error','white', true);
     } else {
       try {
-        this.isLoading = true;
         await this.userService.login({ email: this.user.email, password: this.user.password });
-        
         const state = await this.userService.getIsApproved();
         console.log("El estado es: " + state);
-        if (state == 'aprobado') {
-          this.emptyInputs();
+  
+        if (state === 'aprobado') {
           this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
+  
           const rol = await this.userService.getRole();
-          if (rol === 'dueño' || rol === 'supervisor') {
-            this.router.navigateByUrl('home-duenio-supervisor');
-          } else {
-            this.router.navigateByUrl('home');
+          switch (rol) {
+            case 'dueño':
+              this.router.navigateByUrl('home-duenio-supervisor');
+              break;
+            case 'supervisor':
+              this.router.navigateByUrl('home-duenio-supervisor');
+              break;  
+            case 'mozo':
+              this.router.navigateByUrl('home-mozo');
+              break;
+  
+            case 'cliente':
+              this.router.navigateByUrl('home-cliente-anonimo');
+              break;
+  
+            case 'anonimo':
+              this.router.navigateByUrl('home-cliente-anonimo');
+              break;
+  
+            case 'metre':
+              this.router.navigateByUrl('home-metre');
+              break;
+  
+            default:
+              this.router.navigateByUrl('home');
+              break;
           }
+  
         } else {
-          if(state == 'pendiente')
-          {
-            this.userService.showToast('¡Acceso denegado! Cuenta pendiente de habilitación', 'red', 'center', 'error', 'white', true);
-            
-          }
-          else
-          {
-            this.userService.showToast('¡Acceso denegado! Cuenta rechazada', 'red', 'center', 'error', 'white', true);
-
-          }
+          const message = state === 'pendiente' 
+            ? '¡Acceso denegado! Cuenta pendiente de habilitación' 
+            : '¡Acceso denegado! Cuenta rechazada';
+  
+          this.userService.showToast(message, 'red', 'center', 'error', 'white', true);
         }
-        this.isLoading = false;
   
       } catch (error) {
         this.userService.showToast(
@@ -111,10 +117,4 @@ export class LoginPage implements OnInit {
     this.user.email = email;
     this.user.password = pass;
   }
-
-  emptyInputs(){
-    this.user.email = '';
-    this.user.password = '';
-  }
-
 }

@@ -31,6 +31,16 @@ export class FirestoreService {
     return col;
   }
 
+  getMesas(): any {
+    const col = this.firestore.collection('mesas').valueChanges();
+    return col;
+  }
+
+  getPedidos(): any {
+    const col = this.firestore.collection('pedidos').valueChanges();
+    return col;
+  }
+
   //Encuesta
   async addEncuesta(
     encuesta: Encuesta,
@@ -59,9 +69,11 @@ export class FirestoreService {
     return this.firestore.doc<any>(`usuarios/${usuario.uid}`).update(usuario);
   }
 
+  
   updateUser(usuario: any) {
     return this.firestore.doc<any>(`usuarios/${usuario.id}`).update(usuario);
   }
+    
 
   getUserProfile(userId: string) {
     return this.firestore.collection('usuarios').doc(userId).get();
