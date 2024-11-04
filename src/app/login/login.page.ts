@@ -46,6 +46,7 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
   toRegisterPage() {
+    this.emptyInputs();
     this.router.navigateByUrl('alta-cliente');
   }
 
@@ -60,7 +61,7 @@ export class LoginPage implements OnInit {
   
         if (state === 'aprobado') {
           this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
-  
+          this.emptyInputs();
           const rol = await this.userService.getRole();
           switch (rol) {
             case 'dueño':
@@ -116,5 +117,10 @@ export class LoginPage implements OnInit {
   fastLogin(email: string, pass: string) {
     this.user.email = email;
     this.user.password = pass;
+  }
+
+  emptyInputs(){
+    this.user.email = '';
+    this.user.password = '';
   }
 }
