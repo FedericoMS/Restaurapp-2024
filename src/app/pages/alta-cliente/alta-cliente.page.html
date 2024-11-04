@@ -150,7 +150,7 @@
         <ion-icon name="qr-code-outline"></ion-icon>
       </ion-button>
       }
-      <ion-button formControlName="img"
+      <ion-button 
         (click)="sacar_foto()"
         class="btn-top"
         [ngClass]="{ 'btn-foto-anonimo': fg.get('rol')?.value === 'anonimo' }"
@@ -165,7 +165,7 @@
       <div class="form-group content-select">
         <div class="content-photo">
           <label> Foto </label>
-          @if (img == '') {
+          @if (this.fg.get('img')?.value == '') {
             <ion-icon name="close-outline" class="icon-validate-foto"></ion-icon>
           } @else {
             <ion-icon name="checkmark" class="icon-validate-foto"></ion-icon>
