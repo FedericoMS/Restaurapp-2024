@@ -9,6 +9,7 @@ export class Pedido {
 
 
 
+    //estados de 'estado': aceptado, rechazado, pendiente
     constructor()
     {
         this.estado = '';

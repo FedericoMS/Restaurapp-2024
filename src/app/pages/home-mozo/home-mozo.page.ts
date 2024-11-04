@@ -6,6 +6,7 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-mozo',
@@ -48,9 +49,52 @@ export class HomeMozoPage implements OnInit {
   }
 
 
-  approveTask(task : any)
+  approveOrder(pedido : any)
   {
+    let modOrder : any = pedido;
+    console.log(modOrder);
+    Swal.fire({
+      title: "¿Estás seguro de que quieres aprobar este pedido?",
+      showCancelButton: true,
+      confirmButtonText: "Aprobar",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modOrder.estado = 'aprobado';     
+        console.log(modOrder.estado);   
+        this.firestoreService.updateOrder(modOrder)
+        Swal.fire({
+          title: "¡Pedido aprobado!",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
+  }
 
+  rejectOrder(pedido : any)
+  {
+    let modOrder : any = pedido;
+    console.log(modOrder);
+    Swal.fire({
+      title: "¿Estás seguro de que quieres rechazar este pedido?",
+      showCancelButton: true,
+      confirmButtonText: "Rechazar",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modOrder.estado = 'rechazado';     
+        console.log(modOrder.estado);   
+        this.firestoreService.updateOrder(modOrder)
+        Swal.fire({
+          title: "Pedido rechazado",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
   }
 
 }

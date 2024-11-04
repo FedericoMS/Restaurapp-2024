@@ -9,6 +9,7 @@ import {
 } from '@angular/fire/storage';
 import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
+import { arrayUnion } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -73,9 +74,29 @@ export class FirestoreService {
   updateUser(usuario: any) {
     return this.firestore.doc<any>(`usuarios/${usuario.id}`).update(usuario);
   }
+  
+  updateOrder(pedido: any) {
+    return this.firestore.doc<any>(`pedidos/${pedido.id}`).update(pedido);
+  }
     
 
   getUserProfile(userId: string) {
     return this.firestore.collection('usuarios').doc(userId).get();
   }
+
+// Método para agregar productos a listaProductos de un pedido. TESTEARLO LUEGO
+async addProductosAPedido(id: string, productos: { nombre: string, precio: number }[]) {
+  try {
+    // Usa arrayUnion para agregar los productos sin sobrescribir el contenido existente
+    await this.firestore.doc(`pedidos/${id}`).update({
+      listaProductos: arrayUnion(...productos)
+    });
+    console.log('Productos añadidos al pedido exitosamente');
+  } catch (error) {
+    console.error('Error al añadir productos al pedido: ', error);
+  }
+}
+
+  
+
 }
