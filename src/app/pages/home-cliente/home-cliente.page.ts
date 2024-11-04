@@ -52,8 +52,14 @@ export class HomeClientePage implements OnInit {
 
   ngOnInit() {
     //Dependiendo el cambio
-    this.msj = 'Su mesa es la numero 1';
-    this.msjColor = 'primary';
+    this.fire
+      .getCollection('mesas')
+      .valueChanges()
+      .subscribe((next) => {
+        console.log(next);
+        this.msj = 'Su mesa es la numero 1';
+        this.msjColor = 'primary';
+      });
   }
 
   async scan() {
@@ -72,11 +78,11 @@ export class HomeClientePage implements OnInit {
     this.flagMesa = true;
     this.fire.getUserProfile(this.user.uidUser).forEach((next) => {
       const cliente = next.data() as Usuario;
-      console.log(cliente);
       this.fire.add({
         cliente: cliente.nombre,
         foto_url: cliente.foto_url || '',
         id_cliente: cliente.id,
+        apellido: cliente.apellido,
       });
     });
   }
