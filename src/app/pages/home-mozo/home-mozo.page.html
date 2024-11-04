@@ -10,3 +10,32 @@
       
   </ion-fab-list>
 </ion-fab>
+
+<!-- *************************** LISTADO DE PEDIDOS *************************** -->
+<div *ngIf="listaPedidos">
+  <h2 class="mb-3" style="text-align: center; margin-top: 4rem; text-shadow: 1px 1px #000">
+      LISTA DE PEDIDOS 
+  </h2>
+
+  <div *ngFor="let item of listaPedidos;">
+      <ion-card style="border: 4px double rgb(65, 151, 167); border-radius: 30px" class="tarjeta-pedido" *ngIf="item.estado == 'pendiente'">
+          <div class="pedido-container" >
+
+              <!-- Datos  -->
+              <div class="pedido-detalles">
+                  <ion-card-header>
+                      <ion-card-title>{{item.descripcion}}</ion-card-title>
+                      <ion-card-subtitle>Tiempo de preparación: {{item.tiempoPreparacion}}</ion-card-subtitle>
+                      <ion-card-subtitle>Subtotal: {{item.monto}}</ion-card-subtitle>
+                      <!-- <ion-card-subtitle>Cliente: {{item.email}}</ion-card-subtitle> -->
+                      <button (click)="approveTask(item)" class="button-personalizado"> Aprobar </button>
+                      <!-- <button (click)="rejectUser(item)" class="button-personalizado"> Rechazar </button> -->
+                  </ion-card-header>
+              </div>
+          </div>
+      </ion-card>
+  </div>
+  <!-- <p style="text-align: center; margin-top: 10rem; font-size: 44px; text-shadow: 1px 3px 8px #000000;" *ngIf="this.isEmpty">No hay clientes en lista de espera para su aprobación</p> -->
+
+  <app-spinner [isLoading]="isLoading"></app-spinner>
+</div>

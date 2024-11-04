@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFab, IonFabList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFab, IonFabList, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -12,7 +12,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   templateUrl: './home-mozo.page.html',
   styleUrls: ['./home-mozo.page.scss'],
   standalone: true,
-  imports: [IonFabList, IonFab, IonFabButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardTitle, IonCardSubtitle, IonCardHeader, IonCard, IonFabList, IonFab, IonFabButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
 })
 export class HomeMozoPage implements OnInit {
 
@@ -42,6 +42,15 @@ export class HomeMozoPage implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;      
+    }, 2700);
+  }
+
+
+  approveTask(task : any)
+  {
+
   }
 
 }
