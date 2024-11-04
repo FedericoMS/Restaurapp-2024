@@ -84,7 +84,7 @@ export class FirestoreService {
     return this.firestore.collection('usuarios').doc(userId).get();
   }
 
-// Método para agregar productos a listaProductos de un pedido. TESTEARLO LUEGO
+// Método todavía no testeado.
 async addProductosAPedido(id: string, productos: { nombre: string, precio: number }[]) {
   try {
     // Usa arrayUnion para agregar los productos sin sobrescribir el contenido existente

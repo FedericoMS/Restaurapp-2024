@@ -1,16 +1,16 @@
-<ion-content>
-  <!-- Botón flotante del menú en la parte superior izquierda -->
-  <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button color="dark">
-      <img src="/assets/menu.png" />
+<!-- Botón flotante del menú en la parte superior izquierda -->
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button color="dark">
+    <img src="/assets/menu.png" />
+  </ion-fab-button>
+  <ion-fab-list side="bottom">
+    <ion-fab-button (click)="this.userService.logout()" style="border: 1px solid #000; border-radius: 50%">
+      <img src="/assets/exit.png" />
     </ion-fab-button>
-    <ion-fab-list side="bottom">
-      <ion-fab-button (click)="this.userService.logout()" style="border: 1px solid #000; border-radius: 50%">
-        <img src="/assets/exit.png" />
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+  </ion-fab-list>
+</ion-fab>
 
+<ion-content>
   <!-- Contenedor de la lista de pedidos -->
   <div class="pedidos-container" *ngIf="listaPedidos">
     <h2 class="titulo-lista">LISTA DE PEDIDOS</h2>
@@ -27,7 +27,7 @@
                 <th>PRECIO</th>
               </tr>
               <tr *ngFor="let producto of item.listaProductos">
-                <td>{{producto.descripcion}}</td>
+                <td>{{producto.nombre}}</td>
                 <td>{{producto.precio}}</td>
               </tr>
             </table>
