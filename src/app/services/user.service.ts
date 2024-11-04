@@ -109,7 +109,13 @@ export class UserService {
     this.userName = '';
     this.router.navigateByUrl('login');
     this.isLoggedIn = false;
-    this.showToast('Sesión cerrada', 'lightgreen', 'top', 'success', 'black');
+    this.showToast(
+      'Sesión cerrada',
+      'lightgreen',
+      'center',
+      'success',
+      'black'
+    );
     console.log('Sesión cerrada');
   }
 
@@ -130,52 +136,37 @@ export class UserService {
         if (data != null) {
           // Guardar el nuevo usuario en Firestore
           this.af
-            .collection('managedUsers')
+            .collection('usuarios')
             .doc(data.user?.uid)
             .set({
               id: data.user?.uid,
-              apellidos: newUser.apellidos,
-              nombres: newUser.nombres,
+              apellido: newUser.apellido,
+              nombre: newUser.nombre,
               dni: newUser.dni,
               rol: newUser.rol,
               email: newUser.email,
               password: newUser.password,
-              userPhoto: newUser.userPhoto,
+              foto_url: newUser.foto_url,
+              estadoAprobacion: newUser.estadoAprobacion,
             })
             .then(() => {
               this.showToast(
-                '¡Registro exitoso!',
+                '¡Registro exitoso! Su cuenta queda pendiente de aprobación',
                 'lightgreen',
-                'top',
+                'center',
                 'success',
                 'black'
               );
-
-              // Restaurar la sesión del admin después de crear el usuario
-              if (currentUser) {
-                signInWithEmailAndPassword(
-                  this.auth,
-                  currentUser.email!,
-                  '111111'
-                )
-                  .then(() => {
-                    // this.showToast('Sesión del admin restaurada', 'lightgreen', 'top', 'success', 'black');
-                  })
-                  .catch((err) => {
-                    console.error(
-                      'Error al restaurar la sesión del admin:',
-                      err
-                    );
-                  });
-              }
             })
             .catch((error) => {
               // Manejo de errores al guardar en Firestore
               this.showToast(
                 'Ocurrió un error al guardar los datos del usuario',
                 'red',
-                'top',
-                'error'
+                'center',
+                'error',
+                'white',
+                true
               );
             });
         }
@@ -186,22 +177,28 @@ export class UserService {
           this.showToast(
             'El correo electrónico ya está en uso',
             'red',
-            'top',
-            'error'
+            'center',
+            'error',
+            'white',
+            true
           );
         } else if (error.code === 'auth/weak-password') {
           this.showToast(
             'La contraseña debe contener al menos 6 caracteres',
             'red',
-            'top',
-            'error'
+            'center',
+            'error',
+            'white',
+            true
           );
         } else {
           this.showToast(
             'Ocurrió un error al registrar el usuario: ' + error.message,
             'red',
-            'top',
-            'error'
+            'center',
+            'error',
+            'white',
+            true
           );
         }
       });

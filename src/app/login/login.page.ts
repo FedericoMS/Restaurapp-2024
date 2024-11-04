@@ -10,6 +10,7 @@ import {
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { EstadoAprobacion, Usuario } from '../clases/usuario';
+import { PushService } from '../services/push.service';
 
 @Component({
   selector: 'app-login',
@@ -45,6 +46,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   toRegisterPage() {
+    this.emptyInputs();
     this.router.navigateByUrl('alta-cliente');
   }
 
@@ -64,10 +66,10 @@ export class LoginPage implements OnInit {
           email: this.user.email,
           password: this.user.password,
         });
-
         const state = await this.userService.getIsApproved();
         console.log('El estado es: ' + state);
-        if (state == 'aprobado') {
+
+        if (state === 'aprobado') {
           this.userService.showToast(
             '¡Bienvenido!',
             'lightgreen',
@@ -75,32 +77,49 @@ export class LoginPage implements OnInit {
             'success',
             'black'
           );
+          this.emptyInputs();
           const rol = await this.userService.getRole();
-          if (rol === 'dueño' || rol === 'supervisor') {
-            this.router.navigateByUrl('home-duenio-supervisor');
-          } else {
-            this.router.navigateByUrl('home');
+          switch (rol) {
+            case 'dueño':
+              this.router.navigateByUrl('home-duenio-supervisor');
+              break;
+            case 'supervisor':
+              this.router.navigateByUrl('home-duenio-supervisor');
+              break;
+            case 'mozo':
+              this.router.navigateByUrl('home-mozo');
+              break;
+
+            case 'cliente':
+              this.router.navigateByUrl('home-cliente-anonimo');
+              break;
+
+            case 'anonimo':
+              this.router.navigateByUrl('home-cliente-anonimo');
+              break;
+
+            case 'metre':
+              this.router.navigateByUrl('home-metre');
+              break;
+
+            default:
+              this.router.navigateByUrl('home');
+              break;
           }
         } else {
-          if (state == 'pendiente') {
-            this.userService.showToast(
-              '¡Acceso denegado! Cuenta pendiente de habilitación',
-              'red',
-              'center',
-              'error',
-              'white',
-              true
-            );
-          } else {
-            this.userService.showToast(
-              '¡Acceso denegado! Cuenta rechazada',
-              'red',
-              'center',
-              'error',
-              'white',
-              true
-            );
-          }
+          const message =
+            state === 'pendiente'
+              ? '¡Acceso denegado! Cuenta pendiente de habilitación'
+              : '¡Acceso denegado! Cuenta rechazada';
+
+          this.userService.showToast(
+            message,
+            'red',
+            'center',
+            'error',
+            'white',
+            true
+          );
         }
       } catch (error) {
         this.userService.showToast(
@@ -118,5 +137,10 @@ export class LoginPage implements OnInit {
   fastLogin(email: string, pass: string) {
     this.user.email = email;
     this.user.password = pass;
+  }
+
+  emptyInputs() {
+    this.user.email = '';
+    this.user.password = '';
   }
 }

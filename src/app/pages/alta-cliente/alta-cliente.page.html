@@ -1,13 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title class="ion-text-center">Cargar Cliente</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-icon
+        class="icon"
+        name="arrow-back-circle-outline"
+        (click)="goBack()"
+      ></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <main>
-
-
-  <form [formGroup]="fg" class="form-container" [ngClass]="{ 'anonimo': fg.get('rol')?.value === 'anonimo' }">
-
+  <form
+    [formGroup]="fg"
+    class="form-container"
+    [ngClass]="{ 'anonimo': fg.get('rol')?.value === 'anonimo' }"
+  >
     <ion-segment formControlName="rol" (ionChange)="emptyInputs()">
       <ion-segment-button value="cliente">
         <ion-label>Cliente</ion-label>
@@ -17,113 +26,167 @@
       </ion-segment-button>
     </ion-segment>
 
-
     @if ( fg.get('rol')?.value === 'cliente') {
       <div class="form-group login__field">
-        <input type="text" class="login__input" formControlName="correo" placeholder="Correo electrónico" maxlength="30">
+        <input
+          type="text"
+          class="login__input"
+          formControlName="correo"
+          placeholder="Correo electrónico"
+          maxlength="30"
+        />
       </div>
       <div class="cont-p">
-        @if(this.fg.controls['correo'].errors !== null && this.fg.controls["correo"].touched) { 
+        @if(this.fg.controls['correo'].errors !== null && this.fg.controls["correo"].touched) {
           @if(this.fg.controls['correo'].errors!['required']) {
-            <p>Debes ingresar un correo electrónico</p>
+          <p>Debes ingresar un correo electrónico</p>
+          } @else if(this.fg.controls['correo'].errors!['email']) {
+          <p>Formato invalido del email</p>
           } 
-          @else if(this.fg.controls['correo'].errors!['email']) {
-            <p>Formato invalido del email</p>
+        }
+      </div>
+
+      <div class="form-group login__field">
+        <input
+          type="password"
+          class="login__input"
+          formControlName="contrasenia"
+          placeholder="Contraseña"
+          maxlength="14"
+        />
+      </div>
+      <div class="cont-p">
+        @if(this.fg.controls['contrasenia'].errors !== null && this.fg.controls["contrasenia"].touched) {
+          @if(this.fg.controls['contrasenia'].errors!['required']) {
+          <p>Debes ingresar una contraseña</p>
           }
         }
       </div>
-  
+
       <div class="form-group login__field">
-        <input type="password" class="login__input" formControlName="contrasenia" placeholder="Contraseña" maxlength="14">
+        <input
+          type="password"
+          class="login__input"
+          formControlName="contraseniaRepetida"
+          placeholder="Repetir contraseña"
+          maxlength="14"
+        />
       </div>
       <div class="cont-p">
-        @if(this.fg.controls['contrasenia'].errors !== null && this.fg.controls["contrasenia"].touched) { 
-          @if(this.fg.controls['contrasenia'].errors!['required']) {
-            <p>Debes ingresar una contraseña</p>
+        @if(this.fg.controls['contraseniaRepetida'].errors !== null && this.fg.controls["contraseniaRepetida"].touched) {
+          @if(this.fg.controls['contraseniaRepetida'].errors!['required']) {
+          <p>Debes repetir la contraseña</p>
           } 
         }
       </div>
     }
 
-
-
-
-
     <div>
       <div class="form-group login__field">
-        <input type="text" class="login__input" formControlName="nombre" placeholder="Nombre" [ngClass]="{ 'nombre-anonimo': fg.get('rol')?.value === 'anonimo' }">
+        <input
+          type="text"
+          class="login__input"
+          formControlName="nombre"
+          placeholder="Nombre"
+          [ngClass]="{ 'nombre-anonimo': fg.get('rol')?.value === 'anonimo' }"
+        />
       </div>
       <div class="cont-p">
-        @if(this.fg.controls['nombre'].errors !== null && this.fg.controls["nombre"].touched) { 
-          @if(this.fg.controls['nombre'].errors!['required']) {
-            <p [ngClass]="{ 'error-anonimo': fg.get('rol')?.value === 'anonimo' }">Debes ingresar un nombre</p>
-          } 
-        }
+        @if(this.fg.controls['nombre'].errors !== null &&
+        this.fg.controls["nombre"].touched) {
+        @if(this.fg.controls['nombre'].errors!['required']) {
+        <p [ngClass]="{ 'error-anonimo': fg.get('rol')?.value === 'anonimo' }">
+          Debes ingresar un nombre
+        </p>
+        } }
       </div>
     </div>
 
-
     @if ( fg.get('rol')?.value === 'cliente') {
       <div class="form-group login__field">
-        <input type="text" class="login__input" formControlName="apellido" placeholder="Apellido">
+        <input
+          type="text"
+          class="login__input"
+          formControlName="apellido"
+          placeholder="Apellido"
+        />
       </div>
       <div class="cont-p">
-        @if(this.fg.controls['apellido'].errors !== null && this.fg.controls["apellido"].touched) { 
-          @if(this.fg.controls['apellido'].errors!['required']) {
-          <p>Debes ingresar un apellido</p>
-          }
-        }
+        @if(this.fg.controls['apellido'].errors !== null &&
+        this.fg.controls["apellido"].touched) {
+        @if(this.fg.controls['apellido'].errors!['required']) {
+        <p>Debes ingresar un apellido</p>
+        } }
       </div>
-  
+
       <div class="form-group login__field">
-        <input type="number" class="login__input" formControlName="dni" placeholder="Dni">
+        <input
+          type="number"
+          class="login__input"
+          formControlName="dni"
+          placeholder="DNI"
+        />
       </div>
       <div class="cont-p">
-        @if(this.fg.controls['dni'].errors !== null && this.fg.controls["dni"].touched) 
-        { 
+        @if(this.fg.controls['dni'].errors !== null && this.fg.controls["dni"].touched) {
           @if(this.fg.controls['dni'].errors!['required']) {
             <p>Debes ingresar un número de DNI</p>
           }@else if (this.fg.controls['dni'].errors!['min'] ){
             <p>Faltan números en el DNI</p>
           }@else if ((this.fg.controls['dni'].errors!['max']) ) {
             <p>Sobran números en el DNI</p>
-          }
-       }
+          } 
+        }
       </div>
     }
 
+    <div
+      class="cont-btns"
+      [ngClass]="{ 'cont-btn-anonimo': fg.get('rol')?.value === 'anonimo' }">
 
-    <div class="cont-btns" [ngClass]="{ 'cont-btn-anonimo': fg.get('rol')?.value === 'anonimo' }">
       @if ( fg.get('rol')?.value === 'cliente') {
-        <ion-button (click)="cargarConQr()" class="btn-top" >
-          Cargar con QR
-          <ion-icon name="qr-code-outline"></ion-icon>
-        </ion-button>
+      <ion-button (click)="cargarConQr()" class="btn-top">
+        Cargar con QR
+        <ion-icon name="qr-code-outline"></ion-icon>
+      </ion-button>
       }
-      <ion-button (click)="sacar_foto()" class="btn-top" [ngClass]="{ 'btn-foto-anonimo': fg.get('rol')?.value === 'anonimo' }">
+      <ion-button 
+        (click)="sacar_foto()"
+        class="btn-top"
+        [ngClass]="{ 'btn-foto-anonimo': fg.get('rol')?.value === 'anonimo' }"
+      >
         Sacar foto
         <ion-icon name="camera-outline"></ion-icon>
       </ion-button>
     </div>
 
+    <div>
 
-
-    <div class="form-group content-select">
-      <div>
-        <label>
-          Foto
-        </label>
-        @if (img == '') {
-          <ion-icon name="close-outline" class="icon-validate-foto"></ion-icon>
-        }
-        @else {
-          <ion-icon name="checkmark" class="icon-validate-foto"></ion-icon>
-        }
-        
+      <div class="form-group content-select">
+        <div class="content-photo">
+          <label> Foto </label>
+          @if (this.fg.get('img')?.value == '') {
+            <ion-icon name="close-outline" class="icon-validate-foto"></ion-icon>
+          } @else {
+            <ion-icon name="checkmark" class="icon-validate-foto"></ion-icon>
+          }
+        </div>
+      </div>  
+      <div class="cont-p required_img">
+        @if(this.fg.controls['img'].errors !== null &&
+      this.fg.controls["img"].touched) {
+        @if(this.fg.controls['img'].errors!['required']) {
+          <p>Debes ingresar una foto</p>
+        } }
       </div>
     </div>
 
-    <ion-button type="submit" class="load" style="font-size: 28px;" (click)="cargar()">
+    <ion-button
+      type="submit"
+      class="load"
+      style="font-size: 28px"
+      (click)="cargar()"
+    >
       Cargar
     </ion-button>
   </form>

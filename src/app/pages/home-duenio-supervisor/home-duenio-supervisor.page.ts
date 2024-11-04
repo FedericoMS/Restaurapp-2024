@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonFabButton, IonFab, IonFabList } from '@ionic/angular/standalone';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -16,7 +16,7 @@ import { EmailService } from 'src/app/services/email.service';
   templateUrl: './home-duenio-supervisor.page.html',
   styleUrls: ['./home-duenio-supervisor.page.scss'],
   standalone: true,
-  imports: [IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
+  imports: [IonFabList, IonFab, IonFabButton, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
 })
 export class HomeDuenioSupervisorPage implements OnInit {
 
@@ -27,13 +27,15 @@ export class HomeDuenioSupervisorPage implements OnInit {
   userList: any[] = [];
   rol: any = '';
   isLoading : boolean = false;
+  isEmpty : boolean = false;
 
-  constructor(private userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private emailService : EmailService) {
+  constructor(public userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private emailService : EmailService) {
     setTimeout(() => {
       this.isLoading = true;      
-    }, 1700);
+    }, 1100);
     this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
       if (user != null && user != undefined) {
+        /*
         try {
           this.rol = this.userService.getRole()
           if (this.rol) {
@@ -50,14 +52,18 @@ export class HomeDuenioSupervisorPage implements OnInit {
           }
         } catch (error) {
           console.error('Error al obtener el perfil del usuario:', error);
-        }
+        }*/
       }
 
       this.userAuth = user;
     });
     this.firestoreService.getUsuarios().subscribe((users: any) => {
       this.userList = users;
-      // this.userList.sort(this.orderByLastName);
+      // Verificar si hay algún cliente con estadoAprobacion == 'pendiente'
+     /* if (!this.userList.some((user: any) => user.estadoAprobacion === 'pendiente' && user.rol === 'cliente')) {
+        this.isEmpty = true;
+        console.log(this.isEmpty);
+      }*/
     });
 
 
@@ -66,7 +72,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;      
-    }, 2500);
+    }, 2700);
   }
 
   /*
