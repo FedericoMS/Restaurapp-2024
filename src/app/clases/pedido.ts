@@ -5,6 +5,7 @@ export class Pedido {
     listaProductos : any[];
     monto : number;
     tiempoPreparacion : number;
+    nroMesa : number;
 
 
 
@@ -16,6 +17,7 @@ export class Pedido {
         this.listaProductos = [];
         this.monto = 0;
         this.tiempoPreparacion = 0;
+        this.nroMesa = 0;
 
     }
 }
