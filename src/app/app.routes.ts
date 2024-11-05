@@ -68,5 +68,9 @@ export const routes: Routes = [
     path: 'home-metre',
     loadComponent: () => import('./pages/home-metre/home-metre.page').then( m => m.HomeMetrePage)
   },
+  {
+    path: 'carta',
+    loadComponent: () => import('./pages/carta/carta.page').then( m => m.CartaPage)
+  },
 
 ];

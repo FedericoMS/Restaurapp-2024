@@ -42,10 +42,10 @@ export class FirestoreService {
     return col;
   }
   
-  getProductos(): any {
+  /*getProductos(): any {
     const col = this.firestore.collection('productos').valueChanges();
     return col;
-  }
+  }*/
 
   //Encuesta
   async addEncuesta(
