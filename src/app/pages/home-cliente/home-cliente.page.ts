@@ -67,18 +67,16 @@ export class HomeClientePage implements OnInit {
       .valueChanges()
       .subscribe((next) => {
         const mesa = next as Mesa[];
-        if (!this.mesaAsignada && this.cliente?.id) {
-          mesa.forEach((item) => {
-            if (item.idCliente === this.cliente?.id) {
-              this.mesa = item;
-              this.mesaAsignada = true;
-              this.flagMesa = true;
-              console.log(this.mesa);
-              this.msj = 'Su mesa es la numero ' + item.numero;
-              this.msjColor = 'primary';
-            }
-          });
-        }
+        mesa.forEach((item) => {
+          if (this.cliente?.id && item.idCliente === this.cliente?.id) {
+            this.mesa = item;
+            this.mesaAsignada = true;
+            this.flagMesa = true;
+            console.log(this.mesa);
+            this.msj = 'Su mesa es la numero ' + item.numero;
+            this.msjColor = 'primary';
+          }
+        });
         this.util.hideSpinner();
       });
   }
@@ -92,7 +90,9 @@ export class HomeClientePage implements OnInit {
       // this.router.navigateByUrl('algun lugar');
       console.log('se rutea a pedidos');
     } else {
-      this.util.msjError('Mesa inválida, su mesa es la');
+      this.util.msjError(
+        'Mesa inválida, su mesa es la numero ' + this.mesa?.numero
+      );
     }
   }
 
