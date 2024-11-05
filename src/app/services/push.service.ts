@@ -46,7 +46,7 @@ export class PushService {
       async (token: Token) => {
         console.log('Registration token: ', token.value);
         this.user.token = token.value;
-        this.firestoreService.updateUser(this.user);
+        this.firestoreService.updateDatabase('usuarios',this.user);
       }
     );
     //Pasa esto cuando el registro de las notificaciones push finaliza con errores

@@ -15,14 +15,17 @@ import { addIcons } from 'ionicons';
   imports: [IonIcon, IonFabList, IonFabButton, IonFab, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class HomeMetrePage implements OnInit {
-  listUsersWaiting! : Array<any>;
-  listTables! : Array<any>;
+  listUsersWaiting : Array<any>;
+  listTables : Array<any>;
   customer : any;
+  idUserWaiting : string;
+
   constructor(public userService: UserService, private firestore : FirestoreService) { 
     this.listUsersWaiting = [];
-    // this.customer = 'Lautaro Garcia';
+    this.customer = {};
     this.listTables = [];
     this.customer = null;
+    this.idUserWaiting = '';
   }
 
   ngOnInit() {
@@ -43,12 +46,38 @@ export class HomeMetrePage implements OnInit {
   }
 
 
-  setTable(user : any){
+  setTable(user : any, idUserWaiting : string){
     this.customer = user;
+    this.idUserWaiting = idUserWaiting
+  }
+
+  saveTable(table : any){
+    if(this.customer.cliente !== '' && this.customer.id_cliente !== '' && this.idUserWaiting !== ''){
+      table.nombreCliente = this.customer.cliente;
+      table.idCliente = this.customer.id_cliente;
+      table.estado = 'ocupada';
+      
+      this.firestore.updateDatabase('mesas',table);
+      this.firestore.removeObjectDatabase('lista_de_espera',this.idUserWaiting);
+      this.emptyValues();
+      this.userService.showToast(
+        'Se asigno la mesa' + table.numero + ' al usuario ' + table.nombreCliente,
+        'lightgreen',
+        'center',
+        'success',
+        'black'
+      );
+    }
   }
 
 
+
   goBack(){
+    this.emptyValues()
+  }
+
+  emptyValues(){
+    this.idUserWaiting = '';
     this.customer = null;
   }
 

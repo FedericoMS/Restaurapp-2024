@@ -20,11 +20,14 @@
         <div class="card">
           <div class="content-card">
             @for (item of listUsersWaiting; track $index) {
-              <div class="elements" (click)="setTable({cliente: item.cliente, idCliente: item.id_cliente})">
+              <div class="elements" (click)="setTable({cliente: item.cliente, id_cliente: item.id_cliente}, item.id)">
                 <img src={{item.foto_url}} alt={{item.cliente}}>
                 <h2>{{item.cliente}}</h2>
               </div>
             }
+            <!-- @empty {
+              <h2>No hay usuarios por asignar</h2>
+            } -->
           </div>
         </div>
     </div>
@@ -45,18 +48,22 @@
         <div class="content-card-table">
 
           @for (item of listTables; track $index) {
-
-            <div class="table" >
-              <div class="table-content">
-                <h2>Mesa: {{item.numero}}</h2>
-                <div>
-                  <h3>Tipo: {{item.tipo}}</h3>
-                  <h3>Cantidad comensales: {{item.cantidadComensales}}</h3>  
-                  <h3>Estado: {{item.estado}}</h3>
+            @if (item.estado == 'libre') {
+              <div class="table" (click)="saveTable(item)">
+                <div class="table-content">
+                  <h2>Mesa: {{item.numero}}</h2>
+                  <div>
+                    <h3>Tipo: {{item.tipo}}</h3>
+                    <h3>Cantidad comensales: {{item.cantidadComensales}}</h3>  
+                    <h3>Estado: {{item.estado}}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
+            }
           }
+          <!-- @empty {
+            <h1>No hay tablas disponibles</h1>
+          } -->
 
 
 

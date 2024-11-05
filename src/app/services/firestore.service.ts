@@ -65,17 +65,18 @@ export class FirestoreService {
     );
   }
 
-  updateUserByUID(usuario: any) {
-    return this.firestore.doc<any>(`usuarios/${usuario.uid}`).update(usuario);
-  }
-
-  
-  updateUser(usuario: any) {
-    return this.firestore.doc<any>(`usuarios/${usuario.id}`).update(usuario);
-  }
-    
-
   getUserProfile(userId: string) {
     return this.firestore.collection('usuarios').doc(userId).get();
   }
+
+
+  updateDatabase(colection : string, object: any) {
+    return this.firestore.doc<any>(`${colection}/${object.id}`).update(object);
+  }
+    
+  removeObjectDatabase(colection : string, id: any){
+    return this.firestore.doc<any>(`${colection}/${id}`).delete();
+  }
+  
+
 }
