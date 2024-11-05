@@ -1,55 +1,101 @@
 <div class="container">
-	<div class="screen">
-		<div class="screen__content">
-			<div class="login">
-				<h2>Inicio de sesión</h2>
-				<div class="login__field">					
-					<input type="text" class="login__input" [(ngModel)]="user.email" placeholder="Correo electrónico">
-				</div>
-				<div class="login__field">				
-					<input type="password" class="login__input" [(ngModel)]="user.password" placeholder="Contraseña">
-				</div>
-				<button class="button login__submit" (click)="loginUser()">
-					<span class="button__text">Ingresar</span>					
-				</button>				
-				<button class="button login__submit" (click)="toRegisterPage()">
-					<span class="button__text">Registrarse como cliente</span>					
-				</button>				
-
-			</div>
-			<div class="button-container">
-
-				<button class="button login__fastlogin" (click)="fastLogin('federico.martin.soria@gmail.com', '111111')">
-					<img src="../../assets/profiles/dueño.png" alt="dueño" class="icon-login-fast">
-				</button>			
-				<button class="button login__fastlogin" (click)="fastLogin('supervisor@supervisor.com', '111111')">
-					<img src="../../assets/profiles/supervisor.png" alt="supervisor" class="icon-login-fast">
-				</button>			
-				<button class="button login__fastlogin" (click)="fastLogin('metre@metre.com', '111111')">
-					<img src="../../assets/profiles/metre.png" alt="metre" class="icon-login-fast">
-				
-				</button>			
-
-			</div>
-			<div class="button-container">
-				
-				<button class="button login__fastlogin" (click)="fastLogin('cocinero@cocinero.com', '111111')">
-					<img src="../../assets/profiles/cocinero.png" alt="cocinero" class="icon-login-fast">
-				</button>			
-				<button class="button login__fastlogin" (click)="fastLogin('cliente@cliente.com', '111111')">
-					<img src="../../assets/profiles/cliente.png" alt="cliente" class="icon-login-fast">					
-				</button>			
-				<button class="button login__fastlogin" (click)="fastLogin('mozo@mozo.com', '111111')">
-					<img src="../../assets/profiles/mozo.png" alt="mozo" class="icon-login-fast">				
-				</button>			
-
-			</div>
-		</div>
-		<div class="screen__background">
-			<span class="screen__background__shape screen__background__shape4"></span>
-			<span class="screen__background__shape screen__background__shape3"></span>		
-			<span class="screen__background__shape screen__background__shape2"></span>
-			<span class="screen__background__shape screen__background__shape1"></span>
-		</div>		
-	</div>
+  <div class="screen">
+    <div class="screen__content">
+      <div class="login">
+        <h2>Inicio de sesión</h2>
+        <div class="login__field">
+          <input
+            type="text"
+            class="login__input"
+            [(ngModel)]="user.email"
+            placeholder="Correo electrónico"
+          />
+        </div>
+        <div class="login__field">
+          <input
+            type="password"
+            class="login__input"
+            [(ngModel)]="user.password"
+            placeholder="Contraseña"
+          />
+        </div>
+        <button class="button login__submit" (click)="loginUser()">
+          <span class="button__text">Ingresar</span>
+        </button>
+        <button class="button login__submit" (click)="toRegisterPage()">
+          <span class="button__text">Registrarse como cliente</span>
+        </button>
+      </div>
+      <div class="button-container">
+        <button
+          class="button login__fastlogin"
+          (click)="fastLogin('federico.martin.soria@gmail.com', '111111')"
+        >
+          <img
+            src="../../assets/profiles/dueño.png"
+            alt="dueño"
+            class="icon-login-fast"
+          />
+        </button>
+        <button
+          class="button login__fastlogin"
+          (click)="fastLogin('supervisor@supervisor.com', '111111')"
+        >
+          <img
+            src="../../assets/profiles/supervisor.png"
+            alt="supervisor"
+            class="icon-login-fast"
+          />
+        </button>
+        <button
+          class="button login__fastlogin"
+          (click)="fastLogin('metre@metre.com', '111111')"
+        >
+          <img
+            src="../../assets/profiles/metre.png"
+            alt="metre"
+            class="icon-login-fast"
+          />
+        </button>
+      </div>
+      <div class="button-container">
+        <button
+          class="button login__fastlogin"
+          (click)="fastLogin('cocinero@cocinero.com', '111111')"
+        >
+          <img
+            src="../../assets/profiles/cocinero.png"
+            alt="cocinero"
+            class="icon-login-fast"
+          />
+        </button>
+        <button
+          class="button login__fastlogin"
+          (click)="fastLogin('lauti1718garcia@gmail.com', 'aaa123')"
+        >
+          <img
+            src="../../assets/profiles/cliente.png"
+            alt="cliente"
+            class="icon-login-fast"
+          />
+        </button>
+        <button
+          class="button login__fastlogin"
+          (click)="fastLogin('mozo@mozo.com', '111111')"
+        >
+          <img
+            src="../../assets/profiles/mozo.png"
+            alt="mozo"
+            class="icon-login-fast"
+          />
+        </button>
+      </div>
+    </div>
+    <div class="screen__background">
+      <span class="screen__background__shape screen__background__shape4"></span>
+      <span class="screen__background__shape screen__background__shape3"></span>
+      <span class="screen__background__shape screen__background__shape2"></span>
+      <span class="screen__background__shape screen__background__shape1"></span>
+    </div>
+  </div>
 </div>

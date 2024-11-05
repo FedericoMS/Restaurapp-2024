@@ -10,6 +10,7 @@ import {
   IonIcon,
   IonFabButton,
   IonButton,
+  IonButtons,
 } from '@ionic/angular/standalone';
 import { BarraPage } from './barra/barra.page';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -18,15 +19,21 @@ import { Encuesta } from 'src/app/clases/encuesta';
 import { TortaPage } from './torta/torta.page';
 import { DonaPage } from './dona/dona.page';
 import { PolarPage } from './polar/polar.page';
-import { addIcons } from 'ionicons';
-import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
+import {
+  chevronForwardOutline,
+  chevronBackOutline,
+  arrowBackCircleOutline,
+} from 'ionicons/icons';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.page.html',
   styleUrls: ['./graficos.page.scss'],
   standalone: true,
   imports: [
+    IonButtons,
     IonButton,
     IonFabButton,
     IonIcon,
@@ -53,9 +60,14 @@ export class GraficosPage implements OnInit {
   mostrarGraficos = false;
   router = inject(Router);
   encuesta: string = 'clientes';
+  titulo: string = 'Gráfico de barra';
 
   constructor() {
-    addIcons({ chevronForwardOutline, chevronBackOutline });
+    addIcons({
+      chevronForwardOutline,
+      chevronBackOutline,
+      arrowBackCircleOutline,
+    });
     this.router.routerState.root.queryParams.forEach((item) => {
       this.encuesta = item['encuesta'];
     });
@@ -100,13 +112,35 @@ export class GraficosPage implements OnInit {
 
   sumarContador() {
     this.contador++;
+    this.cambiarTitulo();
   }
 
   restarContador() {
     this.contador--;
+    this.cambiarTitulo();
   }
 
   finalizar() {
     this.router.navigateByUrl('/comentarios');
+  }
+
+  cambiarTitulo() {
+    switch (this.contador) {
+      case 0:
+        this.titulo = 'Gráfico de barra';
+        break;
+      case 1:
+        this.titulo = 'Gráfico de torta';
+        break;
+      case 2:
+        this.titulo = 'Gráfico circular';
+        break;
+      case 3:
+        this.titulo = 'Gráfico de área polar';
+        break;
+    }
+  }
+  goBack(): void {
+    this.router.navigateByUrl('/home-cliente-anonimo', { replaceUrl: true });
   }
 }

@@ -40,14 +40,14 @@ export class IngresoLocalPage implements OnInit {
   ngOnInit() {}
 
   async scan() {
-    // const data = await this.util.scan();
-    // if (data === 'restaurapp') {
-    this.router.navigateByUrl('/home-cliente');
-    // } else {
-    // this.util.msjError(
-    //   'No podes vincularte con una mesa sin estar en la sala de espera!'
-    //   );
-    // }
-    // console.log(data);
+    const data = await this.util.scan();
+    if (data === 'restaurapp') {
+      this.router.navigateByUrl('/home-cliente', { replaceUrl: true });
+    } else {
+      this.util.msjError(
+        'No podes vincularte con una mesa sin estar en la sala de espera!'
+      );
+    }
+    console.log(data);
   }
 }

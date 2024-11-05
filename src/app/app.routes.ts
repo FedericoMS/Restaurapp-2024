@@ -67,7 +67,7 @@ export const routes: Routes = [
       import('./components/graficos/graficos.page').then((m) => m.GraficosPage),
   },
   {
-    path: 'home-cliente',
+    path: 'home-cliente-anonimo',
     loadComponent: () =>
       import('./pages/home-cliente/home-cliente.page').then(
         (m) => m.HomeClientePage

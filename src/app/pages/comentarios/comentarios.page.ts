@@ -7,18 +7,21 @@ import {
   IonTitle,
   IonToolbar,
   IonIcon,
+  IonButtons,
 } from '@ionic/angular/standalone';
 import { UtilService } from 'src/app/services/util.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { addIcons } from 'ionicons';
-import { personSharp } from 'ionicons/icons';
+import { personSharp, arrowBackCircleOutline } from 'ionicons/icons';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-comentarios',
   templateUrl: './comentarios.page.html',
   styleUrls: ['./comentarios.page.scss'],
   standalone: true,
   imports: [
+    IonButtons,
     IonIcon,
     IonContent,
     IonHeader,
@@ -30,11 +33,12 @@ import { Subscription } from 'rxjs';
 })
 export class ComentariosPage implements OnInit {
   util = inject(UtilService);
+  router = inject(Router);
   fire = inject(FirestoreService);
   sub?: Subscription;
   comentarios: string[] = [];
   constructor() {
-    addIcons({ personSharp });
+    addIcons({ personSharp, arrowBackCircleOutline });
   }
 
   ngOnInit() {
@@ -53,5 +57,11 @@ export class ComentariosPage implements OnInit {
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+  }
+  goBack(): void {
+    this.router.navigate(['/graficos'], {
+      queryParams: { encuesta: 'clientes' },
+      replaceUrl: true,
+    });
   }
 }

@@ -10,6 +10,9 @@ import {
   IonButton,
   IonIcon,
   IonText,
+  IonFab,
+  IonFabButton,
+  IonFabList,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { qrCodeOutline } from 'ionicons/icons';
@@ -18,12 +21,16 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Usuario } from 'src/app/clases/usuario';
+import { Mesa } from 'src/app/clases/mesa';
 @Component({
   selector: 'app-home-cliente',
   templateUrl: './home-cliente.page.html',
   styleUrls: ['./home-cliente.page.scss'],
   standalone: true,
   imports: [
+    IonFabList,
+    IonFabButton,
+    IonFab,
     IonText,
     IonIcon,
     IonButton,
@@ -43,46 +50,61 @@ export class HomeClientePage implements OnInit {
   msj = 'Mesa sin asignar';
   msjColor = 'danger';
   cliente?: Usuario;
+  mesa?: Mesa;
   fire = inject(FirestoreService);
-  user = inject(UserService);
+  userService = inject(UserService);
+  mesaAsignada = false;
 
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
   }
 
   ngOnInit() {
+    this.util.showSpinner();
     //Dependiendo el cambio
     this.fire
       .getCollection('mesas')
       .valueChanges()
       .subscribe((next) => {
-        console.log(next);
-        this.msj = 'Su mesa es la numero 1';
-        this.msjColor = 'primary';
+        const mesa = next as Mesa[];
+        if (!this.mesaAsignada && this.cliente?.id) {
+          mesa.forEach((item) => {
+            if (item.idCliente === this.cliente?.id) {
+              this.mesa = item;
+              this.mesaAsignada = true;
+              this.flagMesa = true;
+              console.log(this.mesa);
+              this.msj = 'Su mesa es la numero ' + item.numero;
+              this.msjColor = 'primary';
+            }
+          });
+        }
+        this.util.hideSpinner();
       });
   }
 
   async scan() {
     const data = await this.util.scan();
     console.log(data);
-    if (data === '1') {
+    if (!this.mesaAsignada) {
       this.util.msjError('QR inválido, todavia no se le asigno una mesa');
-    } else if (data === '2') {
-      this.util.msjError('Mesa inválida, su mesa es la');
-    } else {
+    } else if (data === this.mesa?.numero.toString()) {
       // this.router.navigateByUrl('algun lugar');
+      console.log('se rutea a pedidos');
+    } else {
+      this.util.msjError('Mesa inválida, su mesa es la');
     }
   }
 
   pedirMesa() {
     this.flagMesa = true;
-    this.fire.getUserProfile(this.user.uidUser).forEach((next) => {
-      const cliente = next.data() as Usuario;
+    this.fire.getUserProfile(this.userService.uidUser).forEach((next) => {
+      this.cliente = next.data() as Usuario;
       this.fire.add({
-        cliente: cliente.nombre,
-        foto_url: cliente.foto_url || '',
-        id_cliente: cliente.id,
-        apellido: cliente.apellido,
+        cliente: this.cliente.nombre,
+        foto_url: this.cliente.foto_url || '',
+        id_cliente: this.cliente.id,
+        apellido: this.cliente.apellido,
       });
     });
   }

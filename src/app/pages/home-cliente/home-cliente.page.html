@@ -4,22 +4,36 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button color="dark">
+    <img src="/assets/menu.png" />
+  </ion-fab-button>
+  <ion-fab-list side="bottom">
+    <ion-fab-button
+      (click)="this.userService.logout()"
+      style="border: 1px solid #000; border-radius: 50%"
+    >
+      <img src="/assets/exit.png" />
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
 <main class="container">
   @if (this.flagMesa) {
   <div class="mesa" (click)="scan()">
     <span>VINCULAR CON LA MESA</span>
     <ion-text [color]="msjColor">{{msj | uppercase}}</ion-text>
-    <img src="assets/qr.png" alt="mesa" />
+    <img src="assets/qr.png" alt="mesa" class="img" />
   </div>
   } @else {
   <div class="mesa" (click)="pedirMesa()">
     <span>PEDIR UNA MESA</span>
-    <img src="assets/mesa.png" alt="mesa" />
+    <img src="assets/mesa.png" alt="mesa" class="img" />
   </div>
   }
 
   <div class="grafico" (click)="verEncuestas()">
     <span>VER ENCUESTAS</span>
-    <img src="assets/grafico.png" alt="mesa" />
+    <img src="assets/grafico.png" alt="mesa" class="img" />
   </div>
 </main>

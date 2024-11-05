@@ -1,5 +1,17 @@
 @if(this.mostrarGraficos) {
 <!-- inicio if   -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon
+        class="icon"
+        name="arrow-back-circle-outline"
+        (click)="goBack()"
+      ></ion-icon>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{this.titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 @switch (this.contador) {
 <!-- incio switch   -->
 
