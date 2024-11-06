@@ -49,7 +49,7 @@ export class CartaPage implements OnInit {
 
   agregarProducto(producto: any) {
     const productoEnCarrito = this.carrito.find(item => item.nombre === producto.nombre);
-    this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'en preparación', precio: producto.precio });
+    this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'en preparación', precio: producto.precio, tipo: producto.tipo });
     this.total += producto.precio;
 
   }
