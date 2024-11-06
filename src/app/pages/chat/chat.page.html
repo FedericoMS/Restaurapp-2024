@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{section}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon class="icon" name="arrow-back-circle-outline" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="chat-container">
+    <div class="chat-content">
+      <div class="content-main" >
+        <ul class="chat-list mt-2">
+          @for (message of arrayMessages; track $index) {
+              <li [ngClass]="{'out': message.username === currentUser}">
+                <div class="day" *ngIf="validateSameDay(message.time ,$index)">
+                  <h3>{{ message.time | dayName}}</h3>
+                  <h5>{{ message.time | date: 'd/M/yy' }}</h5>
+                </div>
+                
+                <div class="chat-body">
+                  <div class="chat-message" [ngClass]="{'text4a': section == 'PPS-4B' && message.username == currentUser}">
+                      @if (message.username != currentUser) {
+                        <h5>{{message.username | titlecase}}</h5>
+                      }
+                      <p>{{message.message}}</p>
+                      <p class="time">{{message.time | date : 'HH:mm'}}</p>
+                  </div>
+                </div>
+              </li>
+          }
+        </ul>
+        <div #scrollAnchor></div>
+      </div>
+  
+      <div class="message-content-input">
+        <input maxlength="21"  [(ngModel)]="message" type="text" class="form-control"  name="message" placeholder="Escribir un mensaje"/>
+        <ion-button (click)="sendMessage()"> <ion-icon name="send-outline"></ion-icon> </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

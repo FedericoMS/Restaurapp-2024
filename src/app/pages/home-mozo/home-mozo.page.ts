@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFab, IonFabList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFab, IonFabList, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { UserService } from 'src/app/services/user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { addIcons } from 'ionicons';
+import { chatbubblesOutline } from 'ionicons/icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-mozo',
   templateUrl: './home-mozo.page.html',
   styleUrls: ['./home-mozo.page.scss'],
   standalone: true,
-  imports: [IonFabList, IonFab, IonFabButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonIcon, IonButton, IonFabList, IonFab, IonFabButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class HomeMozoPage implements OnInit {
 
@@ -21,7 +24,10 @@ export class HomeMozoPage implements OnInit {
   userAuth: any = this.angularFireAuth.authState;
   
 
-  constructor(public userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService) {
+  constructor(public userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private router : Router) {
+    addIcons({chatbubblesOutline})
+
+
     setTimeout(() => {
       this.isLoading = true;      
     }, 1100);
@@ -42,6 +48,11 @@ export class HomeMozoPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+
+  goChat(){
+    this.router.navigateByUrl('chat');
   }
 
 }

@@ -9,12 +9,14 @@ import {
 } from '@angular/fire/storage';
 import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
+import {  Firestore, collection, collectionData,query,orderBy} from '@angular/fire/firestore';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private fs : Firestore) {}
   storage: AngularFireStorage = inject(AngularFireStorage);
 
   //Agregar un usuario
@@ -77,6 +79,20 @@ export class FirestoreService {
   removeObjectDatabase(colection : string, id: any){
     return this.firestore.doc<any>(`${colection}/${id}`).delete();
   }
-  
+ 
+  getMessages(): any {
+    const data = query(collection(this.fs, 'chats'), orderBy('time', 'asc'));
+    return collectionData<any>(data)
+    .pipe(map( (messages : any) => {
+        return messages.map( (message : any) => ({
+          username: message.username,
+          message: message.message,
+          time: message.time.toDate(),
+          section: message.section
+        }));
+      })
+    ) 
+  }
+
 
 }
