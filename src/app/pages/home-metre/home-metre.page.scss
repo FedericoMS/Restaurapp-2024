@@ -158,3 +158,18 @@ ion-content{
     font-size: 12px;
     font-family: monospace;
 }
+
+
+.without-data{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.without-data h2{
+    font-size: 15px;
+    color: #000000;
+    font-weight: 900;
+    font-family: math;
+}

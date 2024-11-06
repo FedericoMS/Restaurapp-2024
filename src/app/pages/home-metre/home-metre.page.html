@@ -16,20 +16,24 @@
     <div class="content" style="margin-top: 80px;">
 
         <h1 class="title">LISTADO DE ESPERA</h1>
-
-        <div class="card">
-          <div class="content-card">
-            @for (item of listUsersWaiting; track $index) {
-              <div class="elements" (click)="setTable({cliente: item.cliente, id_cliente: item.id_cliente}, item.id)">
-                <img src={{item.foto_url}} alt={{item.cliente}}>
-                <h2>{{item.cliente}}</h2>
-              </div>
-            }
-            <!-- @empty {
-              <h2>No hay usuarios por asignar</h2>
-            } -->
+        @if (!isLoading) {
+          <div class="card">
+            <div class="content-card">
+              @for (item of listUsersWaiting; track $index) {
+                <div class="elements" (click)="setTable({cliente: item.cliente, id_cliente: item.id_cliente}, item.id)">
+                  <img src={{item.foto_url}} alt={{item.cliente}}>
+                  <h2>{{item.cliente}}</h2>
+                </div>
+              }
+              @empty {
+                <div class="without-data">
+                  <h2>No hay usuarios por asignar</h2>
+                </div>
+              }
+            </div>
           </div>
-        </div>
+        }
+
     </div>
   </body>
 }
@@ -61,9 +65,11 @@
               </div>
             }
           }
-          <!-- @empty {
-            <h1>No hay tablas disponibles</h1>
-          } -->
+          @empty {
+            <div class="without-data">
+              <h2 style="font-size: 20px;">No hay mesas disponibles</h2>
+            </div>
+          }
 
 
 
@@ -73,3 +79,4 @@
   </ion-content>
 
 }
+<app-spinner [isLoading]="isLoading"></app-spinner>
