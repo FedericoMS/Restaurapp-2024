@@ -46,10 +46,23 @@ ion-segment-button{
 
 .total-container {
   text-align: center;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: bold;
   color: #fff;
   padding: 1rem;
   background-color: #820200;
   text-shadow: 3px 3px 3px #000;
+}
+
+@media (max-height: 640px) {
+  .total-container {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    padding: 1rem;
+    background-color: #820200;
+    text-shadow: 3px 3px 3px #000;
+  }
+ 
 }

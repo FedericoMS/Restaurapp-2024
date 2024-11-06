@@ -47,6 +47,21 @@ ion-content {
       text-shadow: 3px 3px 3px #ff0000;
     }
   }
+
+  ion-toolbar.custom-toolbar {
+    --background: #4f0000; 
+    --color: #ffffff; 
+    border-bottom: 1px solid #4197a7;
+  }
+
+  ion-title{
+    font-size: 1.7rem;
+    font-weight: bold;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 3px 3px 3px #000;
+  }
   
   .transparent-item {
     display: block;
@@ -146,7 +161,7 @@ ion-content {
 }
 
 .pedido-tabla td {
-  background-color: #3b8e5b;
+  background-color: #000000;
 }
 
 /* Total del pedido */
