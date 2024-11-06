@@ -74,7 +74,7 @@ export class HomeMetrePage implements OnInit {
           this.firestore.removeObjectDatabase('lista_de_espera',this.idUserWaiting);
           this.emptyValues();
           this.userService.showToast(
-            'Se asigno la mesa' + table.numero + ' al usuario ' + table.nombreCliente,
+            'Se asignó la mesa ' + table.numero + ' al cliente ' + table.nombreCliente,
             'lightgreen',
             'center',
             'success',
