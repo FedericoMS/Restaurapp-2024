@@ -43,17 +43,15 @@ export class CartaPage implements OnInit {
     if (this.filtroActual === 'todo') {
       this.productosFiltrados = this.productos;
     } else {
-      console.log("hola");
       this.productosFiltrados = this.productos.filter(producto => producto.tipo === this.filtroActual);
     }
   }
 
   agregarProducto(producto: any) {
     const productoEnCarrito = this.carrito.find(item => item.nombre === producto.nombre);
-    if (!productoEnCarrito) {
-      this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion });
-      this.total += producto.precio;
-    }
+    this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'en preparación' });
+    this.total += producto.precio;
+
   }
 
   quitarProducto(producto: any) {
@@ -77,7 +75,7 @@ export class CartaPage implements OnInit {
       idCliente: 'ID DEL CLIENTE',
       listaProductos: this.carrito,
       monto: this.total,
-      nroMesa: this.nroMesa,
+      nroMesa: this.nroMesa, //El número de mesa a tomar es el del cliente que está haciendo el pedido
       tiempoPreparacion: this.carrito.reduce((acc, item) => Math.max(acc, item.tiempoPreparacion), 0)
     };
     
@@ -101,7 +99,6 @@ export class CartaPage implements OnInit {
   {
     this.filtroActual = tipo;
     this.filtrarProductos();
-    console.log(this.filtroActual);
   }
 }
 

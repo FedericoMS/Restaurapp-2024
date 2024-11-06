@@ -6,6 +6,29 @@ ion-content {
   background-repeat: no-repeat;
 }
 
+ion-button{
+  font-weight: bold;
+}
+
+ion-toolbar.custom-toolbar {
+  --background: #4f0000; 
+  --color: #ffffff; 
+  border-bottom: 1px solid #4197a7;
+}
+
+ion-title{
+  font-size: 1.7rem;
+  font-weight: bold;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 3px 3px 3px #000;
+}
+
+ion-segment-button{
+  font-weight: bold;
+}
+
 .producto-card {
   border: 1px solid #4197a7;
   border-radius: 10px;
@@ -23,9 +46,10 @@ ion-content {
 
 .total-container {
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-weight: bold;
   color: #fff;
   padding: 1rem;
   background-color: #820200;
+  text-shadow: 3px 3px 3px #000;
 }

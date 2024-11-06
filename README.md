@@ -40,20 +40,22 @@
 
 ### Federico Soria (Nombre de la rama: soria)
 - ✅ Generación de QR's
-- [ ] Home mozo
-- [ ] Componente Menú
+- ✅ Home mozo
+- [ ] Componente Carta
 - ✅ Agregado de bases de datos "pedidos", "productos", "mesas"
+- [ ] Gestión de carga de pedidos
 
 
 ### Lautaro García (Nombre de la rama: lautaro)
-- [ ] Home metre (lista de espera, asigna mesas)
+- ✅ Home metre (lista de espera, asigna mesas)
 - [ ] Chat de mozos/mesas 
-- ✅ Correcciones de estilos
+- ✅ Arreglo de visualización del Splash Screen
+- ✅ Limpieza de credenciales al cerrar sesión y reemplazo de botones por imágenes en el inicio de sesión
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
-- [ ] Carga de pedidos
-- [ ] Home cliente (cliente y anónimo)
-- [ ] Ingreso al local
+- ✅ Home cliente (cliente y anónimo)
+- ✅ Ingreso al local
+- [ ] Home cocinero/bartender
 
 ## Tareas - Tercera Semana (09/11/2024 al 16/11/2024) 
 ### *En proceso de planificación dependiendo de la anterior semana*
