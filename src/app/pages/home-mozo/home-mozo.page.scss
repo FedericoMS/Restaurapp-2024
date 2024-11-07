@@ -1,8 +1,8 @@
-ion-button{
+.btn-chat{
     --background: #e3d081;
     --color: #1b1b1a;
-    font-weight: 800;
-    font-size: 14px;
+    font-weight: 700;
+    font-size: 20px;
     --border-radius: 20px !important;
     --border-color: #989591;
     font-family: Raleway, sans-serif;
@@ -25,4 +25,10 @@ ion-icon{
     width: 30px;
     height: 30px;
     margin-right: 10px;
+}
+
+@media (height > 640px) {
+    .btn-chat{
+        font-size: 23px;
+    }
 }
