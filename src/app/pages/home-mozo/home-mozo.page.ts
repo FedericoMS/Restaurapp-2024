@@ -61,11 +61,12 @@ export class HomeMozoPage implements OnInit {
       heightAuto: false
     }).then((result) => {
       if (result.isConfirmed) {
-        modOrder.estado = 'aprobado';     
+        modOrder.estado = 'en preparación';     
         console.log(modOrder.estado);   
-        this.firestoreService.updateOrder(modOrder)
+       // this.firestoreService.updateOrder(modOrder)
+        this.firestoreService.updateOrder(modOrder, 'en preparación', 'en preparación');
         Swal.fire({
-          title: "¡Pedido aprobado!",
+          title: "¡Pedido en preparación!",
           confirmButtonText: "Continuar",
           heightAuto: false
         })
@@ -87,7 +88,8 @@ export class HomeMozoPage implements OnInit {
       if (result.isConfirmed) {
         modOrder.estado = 'rechazado';     
         console.log(modOrder.estado);   
-        this.firestoreService.updateOrder(modOrder)
+      //  this.firestoreService.updateOrder(modOrder)
+      this.firestoreService.updateOrder(modOrder, 'rechazado', 'rechazado');
         Swal.fire({
           title: "Pedido rechazado",
           confirmButtonText: "Continuar",

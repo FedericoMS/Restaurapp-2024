@@ -4,6 +4,18 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Botón flotante del menú en la parte superior izquierda -->
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button color="dark">
+    <img src="/assets/menu.png" />
+  </ion-fab-button>
+  <ion-fab-list side="bottom">
+    <ion-fab-button (click)="this.userService.logout()" style="border: 1px solid #000; border-radius: 50%">
+      <img src="/assets/exit.png" />
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
 <ion-content>
 
   <!-- Botones de filtro -->
@@ -25,10 +37,7 @@
   <!-- Lista de productos filtrados -->
   <ion-list *ngIf="productosFiltrados.length > 0">
     <ion-card *ngFor="let producto of productosFiltrados" class="producto-card">
-      <swiper-container 
-      (slidechange)="swiperSlideChanged($event)"
-      pagination="true" 
-      class="swiper">
+      <swiper-container (slidechange)="swiperSlideChanged($event)" pagination="true" class="swiper">
         <swiper-slide>
           <img [src]="producto.foto1" alt="Imagen de {{ producto.nombre }}" />
         </swiper-slide>
@@ -62,13 +71,14 @@
     </ion-card>
   </ion-list>
 
-  
+
 </ion-content>
 
 <ion-footer>
   <!-- Total -->
   <div class="total-container">
     <p>Total: ${{ total }}</p>
+     <p>Tiempo estimado de elaboración: {{ this.tiempoElaboracion }} mins</p>
     <ion-button color="success" expand="block" (click)="realizarPedido()">Pedir</ion-button>
   </div>
 </ion-footer>

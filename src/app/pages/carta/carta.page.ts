@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentButton, IonList,
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,9 +24,10 @@ export class CartaPage implements OnInit {
   filtroActual: string = 'todo';
   total: number = 0;
   nroMesa: number = 0; 
-  idCliente : any = ''
+  idCliente : any = this.userService.uidUser;
+  tiempoElaboracion : number = 0;
 
-  constructor(private firestoreService: FirestoreService, private userService : UserService) {}
+  constructor(private firestoreService: FirestoreService, public userService : UserService) {}
 
   ngOnInit() {
     this.cargarProductos();
@@ -48,8 +50,7 @@ export class CartaPage implements OnInit {
   }
 
   agregarProducto(producto: any) {
-    const productoEnCarrito = this.carrito.find(item => item.nombre === producto.nombre);
-    this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'en preparación', precio: producto.precio, tipo: producto.tipo });
+    this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'pendiente', precio: producto.precio, tipo: producto.tipo });
     this.total += producto.precio;
 
   }
@@ -100,6 +101,7 @@ export class CartaPage implements OnInit {
     this.filtroActual = tipo;
     this.filtrarProductos();
   }
+
 }
 
 

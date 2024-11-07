@@ -88,9 +88,15 @@ export class FirestoreService {
     return this.firestore.doc<any>(`usuarios/${usuario.id}`).update(usuario);
   }
   
-  updateOrder(pedido: any) {
+  updateOrder(pedido: any, nuevoEstadoPedido: string, nuevoEstadoProductos: string) {
+    pedido.estado = nuevoEstadoPedido;
+    pedido.listaProductos = pedido.listaProductos.map((producto: any) => ({
+      ...producto,
+      estado: nuevoEstadoProductos
+    }));
     return this.firestore.doc<any>(`pedidos/${pedido.id}`).update(pedido);
   }
+  
     
 
   getUserProfile(userId: string) {
