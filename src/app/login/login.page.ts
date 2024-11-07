@@ -62,8 +62,12 @@ export class LoginPage implements OnInit {
         if (state === 'aprobado') {
           this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
           this.emptyInputs();
-          const rol = await this.userService.getRole();
-          switch (rol) {
+          const dataUser = await this.userService.getUserData();
+          this.userService.uidUser = dataUser.id;
+          this.userService.setUserName(dataUser.nombre + ' ' + dataUser.apellido);
+          this.userService.nroMesa = dataUser.nroMesa == null ? 0 : dataUser.nroMesa;
+          console.log(this.userService.nroMesa);
+          switch (dataUser.rol) {
             case 'dueño':
               this.router.navigateByUrl('home-duenio-supervisor');
               break;

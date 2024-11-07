@@ -9,13 +9,15 @@ import {
 } from '@angular/fire/storage';
 import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
+import {  Firestore, collection, collectionData,query,orderBy, addDoc} from '@angular/fire/firestore';
+import { map } from 'rxjs';
 import { arrayUnion } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private fs : Firestore) {}
   storage: AngularFireStorage = inject(AngularFireStorage);
 
   //Agregar un usuario
@@ -79,9 +81,51 @@ export class FirestoreService {
     );
   }
 
-  updateUserByUID(usuario: any) {
-    return this.firestore.doc<any>(`usuarios/${usuario.uid}`).update(usuario);
+  getUserProfile(userId: string) {
+    return this.firestore.collection('usuarios').doc(userId).get();
   }
+
+
+  updateDatabase(colection : string, object: any) {
+    return this.firestore.doc<any>(`${colection}/${object.id}`).update(object);
+  }
+    
+  removeObjectDatabase(colection : string, id: any){
+    return this.firestore.doc<any>(`${colection}/${id}`).delete();
+  }
+ 
+  getMessages(): any {
+    const data = query(collection(this.fs, 'chats'), orderBy('time', 'asc'));
+    return collectionData<any>(data)
+    .pipe(map( (messages : any) => {
+        return messages.map( (message : any) => ({
+          username: message.username,
+          message: message.message,
+          time: message.time.toDate(),
+          id_user: message.id_user,
+          nroMesa: message.nroMesa
+        }));
+      })
+    ) 
+  }
+
+  sendMessage(username : string, message: string, id_user:string, nroMesa:number) : void
+  {
+    try {
+      const date = new Date();
+      addDoc(collection(this.fs,"chats"),{
+        username: username,
+        message: message,
+        time: date,
+        id_user: id_user,
+        nroMesa: nroMesa
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  }
+
+
 
   
   updateUser(usuario: any) {
