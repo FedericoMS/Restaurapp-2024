@@ -25,7 +25,6 @@ export class HomeMetrePage implements OnInit {
 
   constructor(public userService: UserService, private firestore : FirestoreService) { 
     this.listUsersWaiting = [];
-    this.customer = {};
     this.listTables = [];
     this.customer = null;
     this.idUserWaiting = '';

@@ -5,12 +5,12 @@
 }
 
 .title{
-    font-size: 22px;
+    font-size: 26px;
     font-family: Raleway, sans-serif;
-    font-weight: 700;
+    font-weight: 900;
     color: #e3d081;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .card{
@@ -31,7 +31,7 @@
     max-height: 80%;
     overflow-y: auto;
     flex-direction: column;
-    padding: 20px 8px;
+    padding: 20px 15px;
     gap: 25px;
     border: 2px solid black;
 }
@@ -46,7 +46,9 @@
     border-bottom: 2px solid #B33951;
     padding-bottom: 15px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer; 
+    cursor: pointer;
+    gap: 18px;
+
     &:active {
         transform: scale(0.98); 
     }
@@ -54,17 +56,22 @@
 }
 
 .elements img{
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
     border-radius: 20px;
     border: 2px solid #1f1b1b;
 }
 
 .elements h2{
     color: #B33951;
-    font-size: 15px;
+    font-size: 22px;
     font-family: Raleway, sans-serif;
     font-weight: 700;
+    margin: 0;
+    text-transform: capitalize;
+    white-space: pre-line;
+    word-wrap: break-word;
+    text-align: center;
 }
 
 ///// CUSTOMER
@@ -87,22 +94,24 @@ ion-content{
 .customer-header{
     width: 100%;
     padding: 2px 50px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .customer-content-title{
     border-top: 1px solid #B33951;
     border-bottom: 1px solid #B33951;
-    padding: 25px 0px;
+    padding: 20px 0px;
+
 }
 
 .customer-name{
     width: 100%;
-    font-size: 20px;
+    font-size: 23px;
     text-align: center;
     margin: 0;
     color: #54494B;
     font-weight: 700;
+    text-transform: capitalize;
 }
 
 .card-table{
@@ -148,15 +157,16 @@ ion-content{
 .table-content h2{
     color: #B33951;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 900;
     margin: 0;
     font-family: Raleway, sans-serif;
 }
 .table-content h3{
-    color: #000000;
-    font-size: 12px;
+    color: #4a3939;
+    font-size: 15px;
     font-family: monospace;
+    font-weight: 600;
 }
 
 
@@ -168,8 +178,54 @@ ion-content{
 }
 
 .without-data h2{
-    font-size: 15px;
+    font-size: 20px;
     color: #000000;
     font-weight: 900;
     font-family: math;
 }
+
+@media (height > 640px) {
+    .elements h2{
+        font-size: 28px;
+    }
+    .elements img{
+        width: 120px;
+        height: 120px;
+    }
+    .elements{
+        gap: 50px;
+    }
+    .title{
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .customer-name{
+        font-size: 33px;   
+    }
+
+    .card-table{
+        height: 88%;
+    }
+
+    .content-card-table{
+        height: 80%;
+        max-height: 85%;
+        padding: 40px 30px;
+        gap: 32px;
+    }
+
+    .table-content h2{
+        font-size: 36px;
+    }
+    .table-content h3{
+        font-size: 21px;
+    }
+
+    .table{
+        height: 165px;
+        padding-bottom: 30px;
+    }
+
+}
+  
