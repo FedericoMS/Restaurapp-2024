@@ -44,6 +44,7 @@
 - [ ] Componente Carta
 - ✅ Agregado de bases de datos "pedidos", "productos", "mesas"
 - [ ] Gestión de carga de pedidos
+-  [ ]  Home cocinero/bartender
 
 
 ### Lautaro García (Nombre de la rama: lautaro)
@@ -55,7 +56,7 @@
 ### Federico Cardozo (Nombre de la rama: cardozo)
 - ✅ Home cliente (cliente y anónimo)
 - ✅ Ingreso al local
-- [ ] Home cocinero/bartender
+- [ ] Implementación de push notifications
 
 ## Tareas - Tercera Semana (09/11/2024 al 16/11/2024) 
 ### *En proceso de planificación dependiendo de la anterior semana*

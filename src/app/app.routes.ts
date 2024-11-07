@@ -72,5 +72,9 @@ export const routes: Routes = [
     path: 'carta',
     loadComponent: () => import('./pages/carta/carta.page').then( m => m.CartaPage)
   },
+  {
+    path: 'home-cocinero-bartender',
+    loadComponent: () => import('./pages/home-cocinero-bartender/home-cocinero-bartender.page').then( m => m.HomeCocineroBartenderPage)
+  },
 
 ];

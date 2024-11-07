@@ -49,10 +49,13 @@ export class CartaPage implements OnInit {
     }
   }
 
+
   agregarProducto(producto: any) {
     this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'pendiente', precio: producto.precio, tipo: producto.tipo });
     this.total += producto.precio;
-
+    
+    // Recalcular el tiempo de elaboración (tiempo máximo de preparación entre todos los productos en el carrito)
+    this.tiempoElaboracion = Math.max(this.tiempoElaboracion, producto.tiempoPreparacion);
   }
 
   quitarProducto(producto: any) {
@@ -60,6 +63,11 @@ export class CartaPage implements OnInit {
     if (index > -1) {
       this.carrito.splice(index, 1);
       this.total -= producto.precio;
+
+      // Recalcular el tiempo de elaboración después de quitar un producto
+      this.tiempoElaboracion = this.carrito.length > 0 
+        ? Math.max(...this.carrito.map(item => item.tiempoPreparacion))
+        : 0;  // Si el carrito está vacío, el tiempo de elaboración es 0
     }
   }
 
@@ -71,7 +79,7 @@ export class CartaPage implements OnInit {
     }
     
     const pedido = {
-      estado: 'pendiente',
+      estado: 'pendiente de confirmación',
       //idCliente: this.idCliente, // Puedes reemplazar esto con el ID real del cliente
       idCliente: 'ID DEL CLIENTE',
       listaProductos: this.carrito,
@@ -85,6 +93,7 @@ export class CartaPage implements OnInit {
       console.log("Pedido realizado exitosamente");
       this.carrito = []; // Limpiar carrito
       this.total = 0; // Reiniciar total
+      this.tiempoElaboracion = 0;
       this.userService.showToast('Pedido realizado exitosamente', 'lightgreen', 'center', 'success', 'black', true);
     } catch (error) {
       console.error("Error al realizar el pedido:", error);

@@ -86,6 +86,14 @@ export class LoginPage implements OnInit {
               this.router.navigateByUrl('home-metre');
               break;
   
+            case 'cocinero':
+              this.router.navigateByUrl('home-cocinero-bartender');
+              break;
+  
+            case 'bartender':
+              this.router.navigateByUrl('home-cocinero-bartender');
+              break;
+  
             default:
               this.router.navigateByUrl('home');
               break;

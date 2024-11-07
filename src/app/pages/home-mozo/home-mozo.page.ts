@@ -32,14 +32,7 @@ export class HomeMozoPage implements OnInit {
     });
     this.firestoreService.getPedidos().subscribe((pedidos: any) => {
       this.listaPedidos = pedidos;
-      // Verificar si hay algún cliente con estadoAprobacion == 'pendiente'
-     /* if (!this.userList.some((user: any) => user.estadoAprobacion === 'pendiente' && user.rol === 'cliente')) {
-        this.isEmpty = true;
-        console.log(this.isEmpty);
-      }*/
     });
-
-
   }
 
   ngOnInit() {
@@ -63,8 +56,7 @@ export class HomeMozoPage implements OnInit {
       if (result.isConfirmed) {
         modOrder.estado = 'en preparación';     
         console.log(modOrder.estado);   
-       // this.firestoreService.updateOrder(modOrder)
-        this.firestoreService.updateOrder(modOrder, 'en preparación', 'en preparación');
+        this.firestoreService.updateOrderAndProducts(modOrder, 'en preparación', 'en preparación');
         Swal.fire({
           title: "¡Pedido en preparación!",
           confirmButtonText: "Continuar",
@@ -88,10 +80,33 @@ export class HomeMozoPage implements OnInit {
       if (result.isConfirmed) {
         modOrder.estado = 'rechazado';     
         console.log(modOrder.estado);   
-      //  this.firestoreService.updateOrder(modOrder)
-      this.firestoreService.updateOrder(modOrder, 'rechazado', 'rechazado');
+      this.firestoreService.updateOrderAndProducts(modOrder, 'rechazado', 'rechazado');
         Swal.fire({
           title: "Pedido rechazado",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
+  }
+
+  deliverOrder(pedido : any)
+  {
+    let modOrder : any = pedido;
+    console.log(modOrder);
+    Swal.fire({
+      title: "¿Estás seguro de que quieres entregar este pedido?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modOrder.estado = 'en entrega';     
+        console.log(modOrder.estado);   
+        this.firestoreService.updateOrder(modOrder)
+        Swal.fire({
+          title: "Pedido en entrega",
           confirmButtonText: "Continuar",
           heightAuto: false
         })
