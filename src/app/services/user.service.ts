@@ -27,6 +27,7 @@ export class UserService {
   public user = this.userSubject.asObservable();
   public uidUser: any;
   private userRole: string = '';
+  public nroMesa: number = 0;
 
   constructor(
     private auth: Auth,
@@ -36,19 +37,19 @@ export class UserService {
     private af: AngularFirestore,
     private fs: FirestoreService
   ) {
-    this.authFire.authState.subscribe((user) => {
-      this.isLoggedIn = true;
-      if (user != null && user != undefined) {
-        let userArray: any = user.email?.split('@');
-        this.userName = userArray[0];
-        console.log('Hola, soy el usuario: ' + this.userName);
-      }
-      console.log('Hola, soy el usuario con el mail: ' + user?.email);
-      this.email = user?.email;
+    // this.authFire.authState.subscribe((user) => {
+    //   this.isLoggedIn = true;
+    //   if (user != null && user != undefined) {
+    //     let userArray: any = user.email?.split('@');
+    //     this.userName = userArray[0];
+    //     console.log('Hola, soy el usuario: ' + this.userName);
+    //   }
+    //   console.log('Hola, soy el usuario con el mail: ' + user?.email);
+    //   this.email = user?.email;
 
-      // Emitir el usuario a través del BehaviorSubject
-      this.userSubject.next(user);
-    });
+    //   // Emitir el usuario a través del BehaviorSubject
+    //   this.userSubject.next(user);
+    // });
   }
 
   login({ email, password }: any) {
@@ -67,6 +68,10 @@ export class UserService {
     return this.userName;
   }
 
+  setUserName(username: string){
+    this.userName = username;
+  }
+
   checkEmail(email: string) {
     const regex =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -77,7 +82,7 @@ export class UserService {
     }
   }
 
-  async getRole(): Promise<string> {
+  async getRole(): Promise<string> { // BORRAR
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );
@@ -88,6 +93,19 @@ export class UserService {
       return '';
     }
   }
+
+  async getUserData(): Promise<any> { 
+    const userProfileSnapshot: any = await lastValueFrom(
+      this.fs.getUserProfile(this.uidUser)
+    );
+    if (userProfileSnapshot.exists) {
+      const userProfileData = userProfileSnapshot.data();
+      return userProfileData;
+    } else {
+      return '';
+    }
+  }
+
 
   async getIsApproved(): Promise<string> {
     const userProfileSnapshot: any = await lastValueFrom(

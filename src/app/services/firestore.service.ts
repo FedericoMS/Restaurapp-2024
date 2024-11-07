@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/storage';
 import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
-import {  Firestore, collection, collectionData,query,orderBy} from '@angular/fire/firestore';
+import {  Firestore, collection, collectionData,query,orderBy, addDoc} from '@angular/fire/firestore';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -88,10 +88,27 @@ export class FirestoreService {
           username: message.username,
           message: message.message,
           time: message.time.toDate(),
-          section: message.section
+          id_user: message.id_user,
+          nroMesa: message.nroMesa
         }));
       })
     ) 
+  }
+
+  sendMessage(username : string, message: string, id_user:string, nroMesa:number) : void
+  {
+    try {
+      const date = new Date();
+      addDoc(collection(this.fs,"chats"),{
+        username: username,
+        message: message,
+        time: date,
+        id_user: id_user,
+        nroMesa: nroMesa
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   }
 
 

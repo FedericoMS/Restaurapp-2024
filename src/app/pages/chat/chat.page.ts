@@ -9,6 +9,7 @@ import {  Router } from '@angular/router';
 
 import { DayNamePipe } from 'src/app/pipes/day-name.pipe';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-chat',
@@ -19,14 +20,13 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class ChatPage implements OnInit, AfterViewInit {
   @ViewChild('scrollAnchor', { static: false }) private scrollAnchor!: ElementRef;
-  section: string;
+
   arrayMessages!: any;
   message! : string;
-  currentUser = 'lautaro'
 
-  constructor(private location : Location, private router : Router,private firestore : FirestoreService) { 
+  constructor(private router : Router,private firestore : FirestoreService, public userService : UserService) { 
     addIcons({arrowBackCircleOutline,sendOutline});
-    this.section = '';
+    this.message = '';
   }
 
   ngOnInit() {
@@ -38,6 +38,7 @@ export class ChatPage implements OnInit, AfterViewInit {
       {
         this.arrayMessages.push(message);
       }
+      console.log(this.arrayMessages);
       this.scrollToBottom();
     })
   }
@@ -61,8 +62,11 @@ export class ChatPage implements OnInit, AfterViewInit {
 
   sendMessage() : void{
     if (this.message != '') {
-      // this.database.sendMessage(this.auth.nameUser,this.message, this.section);
-      // this.message = '';
+      this.firestore.sendMessage(this.userService.getUserName(),this.message, this.userService.uidUser,this.userService.nroMesa);
+      this.message = '';
+    }
+    else{
+      this.userService.showToast('No has cargado un mensaje','red', 'center','error','white', true);
     }
   }
   

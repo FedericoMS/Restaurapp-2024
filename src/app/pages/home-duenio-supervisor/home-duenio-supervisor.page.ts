@@ -33,6 +33,9 @@ export class HomeDuenioSupervisorPage implements OnInit {
     setTimeout(() => {
       this.isLoading = true;      
     }, 1100);
+
+    console.log(userService.getUserName());
+
     this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
       if (user != null && user != undefined) {
         /*

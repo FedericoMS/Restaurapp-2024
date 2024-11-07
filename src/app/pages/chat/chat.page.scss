@@ -55,25 +55,25 @@ ion-title{
     align-items: center;
     color: black;
     font-weight: bold;
+    font-family:  Raleway, sans-serif;
   
     h3 {
-      font-size: 25px;
+      font-size: 32px;
       margin-bottom: 2px;
     }
   
     h5 {
-      font-size: 12px;
+      font-size: 18px;
       margin-top: 0px;
     }
   }
 
   .chat-message {
     border-radius: 15px;
-    padding: 2px 15px;
-    background: rgb(56 58 47);
+    padding: 4px 20px;
+    background: rgb(56, 58, 47);
     display: inline-block;
     position: relative;
-    font-family: "Tinos", serif;
   }
 
   .chat-message:before {
@@ -93,14 +93,14 @@ ion-title{
   }
   
   .out .chat-message {
-    background: #007418;
+    background: #B33951;
   }
   
   .chat-message h5 {
     margin: 5px 0 5px 0;
     font-weight: 700;
     line-height: 100%;
-    font-size: 10px;
+    font-size: 14px;
     text-align: start;
     color: #12dddc;
   }
@@ -109,8 +109,16 @@ ion-title{
     line-height: 18px;
     margin: 0;
     padding: 0;
-    font-size: 10px;
   }
+
+  .chat-message .message{
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .chat-message .time{
+    font-size: 14px;
+  }
+
   
   .chat-body {
     float: left;
@@ -134,15 +142,15 @@ ion-title{
     width: 85%;
     padding: 12px;
     border-radius: 8px;
-    border: 1px solid #ffffff;
-    font-size: 12px;
+    border: 1px solid #e3d081;
+    font-size: 14px;
     background: #261919;
     color: white;
     margin-right: 10px;
   }
   
   .message-content-input input:focus {
-    border-color: #7fff7d ;
+    border-color: #ffde58 ;
     outline: none; 
   }
 
@@ -153,3 +161,74 @@ ion-title{
     color: #e3d081;
   }
   
+
+  @media (height > 640px) {
+    .chat-list li .day{
+      h3{
+        font-size: 35px;
+      }
+      h5{
+        font-size: 20px;
+      }
+    }
+
+    .chat-message{
+      padding: 8px 24px;
+    }
+    .chat-message .message{
+      font-size: 20px;
+    }
+    .chat-message .time{
+      font-size: 18px;
+    }
+    .chat-message h5{
+      font-size: 16px;
+    }
+
+    .message-content-input input{
+      width: 85%;
+      padding: 18px;
+      font-size: 16px;
+    }
+
+    .icon-send{
+      height: 25px;
+      width: 25px;
+    }
+
+}
+  
+  
+@media (height > 830px) {
+  .chat-list li .day{
+    h3{
+      font-size: 37px;
+    }
+    h5{
+      font-size: 22px;
+    }
+  }
+
+  .chat-message{
+    padding: 12px 26px;
+  }
+  .chat-message .message{
+    font-size: 21px;
+  }
+  .chat-message .time{
+    font-size: 19px;
+  }
+  .chat-message h5{
+    font-size: 17px;
+  }
+
+  .message-content-input input{
+    padding: 20px;
+    font-size: 18px;
+  }
+
+  .icon-send{
+    height: 27px;
+    width: 27px;
+  }
+}
