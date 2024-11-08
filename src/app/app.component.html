@@ -1,8 +1,5 @@
-@if (this.util.mostrarSpinner) {
-<app-spinner [isLoading]="true"></app-spinner>
-
-}
+<app-spinner [isLoading]="this.util.mostrarSpinner"></app-spinner>
 
 <ion-app>
-  <ion-router-outlet [hidden]="this.util.mostrarSpinner"></ion-router-outlet>
+  <ion-router-outlet></ion-router-outlet>
 </ion-app>

@@ -66,6 +66,7 @@ export class EncuestaEmpleadosPage implements OnInit {
   check_2 = true;
   check_3 = false;
   range_select: number = 1;
+  comentario = '';
 
   constructor() {
     addIcons({ cameraOutline });
@@ -163,13 +164,18 @@ export class EncuestaEmpleadosPage implements OnInit {
           this.select[this.Select_ok]++;
           this.radio[this.radioSelect]++;
 
+          if (this.comentario !== '') this.fire.addComentarios(this.comentario);
           this.res_encuestas.forEach((value) => {
             this.fire.addEncuesta(value, 'empleados');
           });
         }
         this.util.mostrarSpinner = false;
         this.util.showToast('Se cargo exitosamente', 'lightgreen', 'center');
-        // this.router.navigateByUrl('algun lugar');
+        setTimeout(() => {
+          this.router.navigate(['/graficos'], {
+            queryParams: { encuesta: 'empleados' },
+          });
+        }, 2200);
       }, 2000);
     } else {
       this.util.showToast(

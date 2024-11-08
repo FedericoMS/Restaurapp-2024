@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import {
+  IonApp,
+  IonRouterOutlet,
+  IonFab,
+  IonFabList,
+  IonFabButton,
+} from '@ionic/angular/standalone';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -12,7 +18,14 @@ register();
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet, SpinnerComponent],
+  imports: [
+    IonFabButton,
+    IonFabList,
+    IonFab,
+    IonApp,
+    IonRouterOutlet,
+    SpinnerComponent,
+  ],
 })
 export class AppComponent {
   util = inject(UtilService);

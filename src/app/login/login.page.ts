@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
     );
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   toRegisterPage() {
     this.emptyInputs();
@@ -52,20 +52,39 @@ export class LoginPage implements OnInit {
 
   async loginUser() {
     if (this.user.email === '' || this.user.password === '') {
-      this.userService.showToast('Campos vacíos','red', 'center','error','white', true);
+      this.userService.showToast(
+        'Campos vacíos',
+        'red',
+        'center',
+        'error',
+        'white',
+        true
+      );
     } else {
       try {
-        await this.userService.login({ email: this.user.email, password: this.user.password });
+        await this.userService.login({
+          email: this.user.email,
+          password: this.user.password,
+        });
         const state = await this.userService.getIsApproved();
-        console.log("El estado es: " + state);
-  
+        console.log('El estado es: ' + state);
+
         if (state === 'aprobado') {
-          this.userService.showToast('¡Bienvenido!', 'lightgreen', 'center', 'success', 'black');
+          this.userService.showToast(
+            '¡Bienvenido!',
+            'lightgreen',
+            'center',
+            'success',
+            'black'
+          );
           this.emptyInputs();
           const dataUser = await this.userService.getUserData();
           this.userService.uidUser = dataUser.id;
-          this.userService.setUserName(dataUser.nombre + ' ' + dataUser.apellido);
-          this.userService.nroMesa = dataUser.nroMesa == null ? 0 : dataUser.nroMesa;
+          this.userService.setUserName(
+            dataUser.nombre + ' ' + dataUser.apellido
+          );
+          this.userService.nroMesa =
+            dataUser.nroMesa == null ? 0 : dataUser.nroMesa;
           console.log(this.userService.nroMesa);
           switch (dataUser.rol) {
             case 'dueño':
@@ -73,44 +92,50 @@ export class LoginPage implements OnInit {
               break;
             case 'supervisor':
               this.router.navigateByUrl('home-duenio-supervisor');
-              break;  
+              break;
             case 'mozo':
               this.router.navigateByUrl('home-mozo');
               break;
-  
+
             case 'cliente':
-              this.router.navigateByUrl('home-cliente');
+              this.router.navigateByUrl('ingreso-local');
               break;
-  
+
             case 'anonimo':
-              this.router.navigateByUrl('home-cliente');
+              this.router.navigateByUrl('home-cliente-anonimo');
               break;
-  
+
             case 'metre':
               this.router.navigateByUrl('home-metre');
               break;
-  
+
             case 'cocinero':
               this.router.navigateByUrl('home-cocinero-bartender');
               break;
-  
+
             case 'bartender':
               this.router.navigateByUrl('home-cocinero-bartender');
               break;
-  
+
             default:
               this.router.navigateByUrl('home');
               break;
           }
-  
         } else {
-          const message = state === 'pendiente' 
-            ? '¡Acceso denegado! Cuenta pendiente de habilitación' 
-            : '¡Acceso denegado! Cuenta rechazada';
-  
-          this.userService.showToast(message, 'red', 'center', 'error', 'white', true);
+          const message =
+            state === 'pendiente'
+              ? '¡Acceso denegado! Cuenta pendiente de habilitación'
+              : '¡Acceso denegado! Cuenta rechazada';
+
+          this.userService.showToast(
+            message,
+            'red',
+            'center',
+            'error',
+            'white',
+            true
+          );
         }
-  
       } catch (error) {
         this.userService.showToast(
           'Alguno de los datos es incorrecto',
@@ -123,15 +148,13 @@ export class LoginPage implements OnInit {
       }
     }
   }
-  
-
 
   fastLogin(email: string, pass: string) {
     this.user.email = email;
     this.user.password = pass;
   }
 
-  emptyInputs(){
+  emptyInputs() {
     this.user.email = '';
     this.user.password = '';
   }

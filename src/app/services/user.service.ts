@@ -46,7 +46,6 @@ export class UserService {
     //   }
     //   console.log('Hola, soy el usuario con el mail: ' + user?.email);
     //   this.email = user?.email;
-
     //   // Emitir el usuario a través del BehaviorSubject
     //   this.userSubject.next(user);
     // });
@@ -68,7 +67,7 @@ export class UserService {
     return this.userName;
   }
 
-  setUserName(username: string){
+  setUserName(username: string) {
     this.userName = username;
   }
 
@@ -81,8 +80,6 @@ export class UserService {
       return false;
     }
   }
-
-
 
   //Creé este método para obtener cualquier campo de un objeto de firebase
   async getProperty(field : string): Promise<any> {
@@ -97,7 +94,8 @@ export class UserService {
     }
   }
 
-  async getRole(): Promise<string> { // BORRAR
+  async getRole(): Promise<string> {
+    // BORRAR
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );
@@ -109,7 +107,7 @@ export class UserService {
     }
   }
 
-  async getUserData(): Promise<any> { 
+  async getUserData(): Promise<any> {
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );
@@ -120,7 +118,6 @@ export class UserService {
       return '';
     }
   }
-
 
   async getIsApproved(): Promise<string> {
     const userProfileSnapshot: any = await lastValueFrom(
@@ -235,7 +232,6 @@ export class UserService {
         }
       });
   }
-
 
   showToast(
     title: string,

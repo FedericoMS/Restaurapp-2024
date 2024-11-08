@@ -24,7 +24,7 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-@import 'swiper/css';
+@import "swiper/css";
 
 /**
  * Ionic Dark Mode
@@ -35,13 +35,62 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.system.css";
 
-*{
-    font-family: 'Raleway', sans-serif;
+* {
+  font-family: "Raleway", sans-serif;
 }
 
-body{
-    background-image: url("./assets/background.png");
-    background-size: cover;
+body {
+  background-image: url("./assets/background.png");
+  background-size: cover;
+}
+
+ion-toolbar {
+  --background: #e3d081 !important;
+  color: #54494b;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre botones */
+  padding: 10px; /* Espacio alrededor del contenido */
+}
+
+.load {
+  width: 100%;
+  color: #000000;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  /* margin-top: 10px; */
+  font-weight: 700;
+  --background: #e3d081 !important;
+  margin-bottom: 12px;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+ion-toolbar.custom-toolbar {
+  --background: #4f0000;
+  --color: #ffffff;
+  border-bottom: 1px solid #4197a7;
+}
+
+ion-title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 3px 3px 3px #000;
 }
