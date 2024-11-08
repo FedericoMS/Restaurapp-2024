@@ -197,3 +197,33 @@ ion-content {
 .boton-aprobar {
   background-color: #5cb85c;
 }
+
+
+.button-chat{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-chat{
+  --background: #e3d081;
+  --color: #1b1b1a;
+  font-weight: 700;
+  font-size: 20px;
+  --border-radius: 20px !important;
+  --border-color: #989591;
+  font-family: Raleway, sans-serif;
+  text-transform: uppercase;
+}
+
+ion-icon{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+@media (height > 640px) {
+  .btn-chat{
+      font-size: 23px;
+  }
+}

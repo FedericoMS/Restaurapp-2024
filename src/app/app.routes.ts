@@ -77,5 +77,9 @@ export const routes: Routes = [
     path: 'home-cocinero-bartender',
     loadComponent: () => import('./pages/home-cocinero-bartender/home-cocinero-bartender.page').then( m => m.HomeCocineroBartenderPage)
   },
+  {
+    path: 'home-mozo',
+    loadComponent: () => import('./pages/home-mozo/home-mozo.page').then( m => m.HomeMozoPage)
+  },
 
 ];

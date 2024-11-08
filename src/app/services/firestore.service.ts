@@ -81,9 +81,6 @@ export class FirestoreService {
     );
   }
 
-  getUserProfile(userId: string) {
-    return this.firestore.collection('usuarios').doc(userId).get();
-  }
 
 
   updateDatabase(colection : string, object: any) {
