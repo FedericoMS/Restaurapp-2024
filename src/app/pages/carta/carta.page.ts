@@ -29,9 +29,12 @@ export class CartaPage implements OnInit {
 
   constructor(private firestoreService: FirestoreService, public userService : UserService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.cargarProductos();
-    this.idCliente = this.userService.getProperty('id');
+    //this.idCliente = this.userService.getProperty('id');
+    this.nroMesa = await this.userService.getProperty('nroMesa');
+    console.log(this.nroMesa);
+    console.log(this.idCliente);
   }
 
   cargarProductos() {
@@ -53,8 +56,6 @@ export class CartaPage implements OnInit {
   agregarProducto(producto: any) {
     this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'pendiente', precio: producto.precio, tipo: producto.tipo });
     this.total += producto.precio;
-    
-    // Recalcular el tiempo de elaboración (tiempo máximo de preparación entre todos los productos en el carrito)
     this.tiempoElaboracion = Math.max(this.tiempoElaboracion, producto.tiempoPreparacion);
   }
 
@@ -63,8 +64,6 @@ export class CartaPage implements OnInit {
     if (index > -1) {
       this.carrito.splice(index, 1);
       this.total -= producto.precio;
-
-      // Recalcular el tiempo de elaboración después de quitar un producto
       this.tiempoElaboracion = this.carrito.length > 0 
         ? Math.max(...this.carrito.map(item => item.tiempoPreparacion))
         : 0;  // Si el carrito está vacío, el tiempo de elaboración es 0
@@ -80,8 +79,8 @@ export class CartaPage implements OnInit {
     
     const pedido = {
       estado: 'pendiente de confirmación',
-      //idCliente: this.idCliente, // Puedes reemplazar esto con el ID real del cliente
-      idCliente: 'ID DEL CLIENTE',
+      idCliente: this.idCliente, // Puedes reemplazar esto con el ID real del cliente
+      //idCliente: 'ID DEL CLIENTE',
       listaProductos: this.carrito,
       monto: this.total,
       nroMesa: this.nroMesa, //El número de mesa a tomar es el del cliente que está haciendo el pedido

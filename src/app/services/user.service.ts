@@ -85,7 +85,7 @@ export class UserService {
 
 
   //Creé este método para obtener cualquier campo de un objeto de firebase
-  async getProperty(field : string): Promise<string> {
+  async getProperty(field : string): Promise<any> {
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );

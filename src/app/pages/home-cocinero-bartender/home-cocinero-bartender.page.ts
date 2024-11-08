@@ -25,7 +25,10 @@ export class HomeCocineroBartenderPage implements OnInit {
 
     setTimeout(() => {
       this.isLoading = true;
-    }, 1100);
+    }, 1800);
+
+
+
 
   }
 
@@ -44,6 +47,15 @@ export class HomeCocineroBartenderPage implements OnInit {
       this.listaPedidos = pedidos;
       this.filtrarProductos(); 
     });
+
+  // Usar await para obtener los valores resueltos antes de imprimir
+  const userId = await this.userService.getProperty('id');
+  const userRol = await this.userService.getProperty('rol');
+  const nroMesa = await this.userService.getProperty('nroMesa');
+
+  console.log(`Mi id es: ${userId}`);
+  console.log(`Mi Rol es: ${userRol}`);
+  console.log(`Mi mesa es: ${nroMesa}`);
   }
   
 
@@ -64,6 +76,13 @@ export class HomeCocineroBartenderPage implements OnInit {
       })
       .filter(pedido => pedido !== null); // Filtra los pedidos que no tienen productos relevantes para el usuario
   }
+
+  tieneProductosEnPreparacion(): boolean {
+    return this.listaPedidos && this.listaPedidos.some((pedido: any) => 
+      pedido.listaProductos && pedido.listaProductos.some((producto: any) => producto.estado === 'en preparación')
+    );
+  }
+  
   
   
   

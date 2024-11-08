@@ -118,6 +118,7 @@ export class AltaClientePage implements OnInit {
       );
     }
   }
+  
 
   async cargar() {
     if (this.fg.valid ) {
