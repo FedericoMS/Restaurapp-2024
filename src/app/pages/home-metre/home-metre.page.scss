@@ -1,0 +1,246 @@
+.content{
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.title{
+    font-size: 26px;
+    font-family: Raleway, sans-serif;
+    font-weight: 900;
+    color: #e3d081;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.content-card{
+    width: 80%;
+    height: 65%;
+    display: flex;
+    justify-content: flex-start;
+    background: #e3d081;
+    border-radius: 15px;
+    max-height: 80%;
+    overflow-y: auto;
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 25px;
+    border: 2px solid black;
+}
+
+.elements{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 150px;
+    border-bottom: 2px solid #B33951;
+    padding-bottom: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    gap: 18px;
+
+    &:active {
+        transform: scale(0.98); 
+    }
+    
+}
+
+.elements img{
+    width: 110px;
+    height: 110px;
+    border-radius: 20px;
+    border: 2px solid #1f1b1b;
+}
+
+.elements h2{
+    color: #B33951;
+    font-size: 22px;
+    font-family: Raleway, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    text-transform: capitalize;
+    white-space: pre-line;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+///// CUSTOMER
+ 
+ion-content{
+    width: 100%;
+    height: 100%;
+    --background: #e3d081 !important;
+}
+
+.icon {
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 50px;
+    height: 50px;
+    color: #B33951;
+  } 
+
+.customer-header{
+    width: 100%;
+    padding: 2px 50px;
+    margin-bottom: 20px;
+}
+
+.customer-content-title{
+    border-top: 1px solid #B33951;
+    border-bottom: 1px solid #B33951;
+    padding: 20px 0px;
+
+}
+
+.customer-name{
+    width: 100%;
+    font-size: 23px;
+    text-align: center;
+    margin: 0;
+    color: #54494B;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.card-table{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.content-card-table{
+    width: 80%;
+    height: 75%;
+    display: flex;
+    justify-content: flex-start;
+    background: transparent;
+    border-radius: 15px;
+    max-height: 80%;
+    overflow-y: auto;
+    flex-direction: column;
+    padding: 20px 30px;
+    gap: 30px;
+    border: 2px solid #B33951;
+}
+
+.table{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 145px;
+    border-bottom: 2px solid #B33951;
+
+    padding-bottom: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer; 
+    &:active {
+        transform: scale(0.98); 
+    }
+}
+
+.table-content h2{
+    color: #B33951;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0;
+    font-family: Raleway, sans-serif;
+}
+.table-content h3{
+    color: #4a3939;
+    font-size: 15px;
+    font-family: monospace;
+    font-weight: 600;
+}
+
+
+.without-data{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.without-data h2{
+    font-size: 20px;
+    color: #000000;
+    font-weight: 900;
+    font-family: math;
+}
+
+@media (height > 640px) {
+    .elements h2{
+        font-size: 28px;
+    }
+    .elements img{
+        width: 110px;
+        height: 110px;
+    }
+    .elements{
+        gap: 10px;
+    }
+    .title{
+        font-size: 30px;
+        margin-bottom: 45px;
+    }
+
+    .customer-name{
+        font-size: 28px;   
+    }
+
+
+
+    .content-card-table{
+        height: 80%;
+        max-height: 85%;
+        padding: 30px 30px;
+        gap: 35px;
+    }
+
+    .content-card{
+        gap: 27px;
+    }
+
+    .table-content h2{
+        font-size: 28px;
+    }
+    .table-content h3{
+        font-size: 18px;
+    }
+
+    .table{
+        height: 160px;
+        padding-bottom: 25px;
+    }
+
+}
+  
+@media (height > 830px) {
+    .card-table{
+        height: 86%;
+    }
+    .content-card-table{
+        height: 85%;
+    }
+
+    .title{
+        font-size: 33px;
+        margin-bottom: 45px;
+    }
+}

@@ -16,37 +16,39 @@
     </ion-fab>
 
      <!-- *************************** LISTADO DE USUARIOS *************************** -->
-    <div *ngIf="userList">
-        <h2 class="mb-3" style="text-align: center; margin-top: 4rem; text-shadow: 1px 1px #000">
-            LISTA DE CLIENTES PENDIENTES DE APROBACIÓN
-        </h2>
-
-        <div *ngFor="let item of userList;">
-            <ion-card style="border: 4px double rgb(65, 151, 167); border-radius: 30px" class="tarjeta-usuario" *ngIf="item.estadoAprobacion == 'pendiente' && item.rol == 'cliente'">
-                <div class="usuario-container" >
-                    <!-- Imagen a la izquierda -->
-                    <img style="
-                  width: 6.2rem;
-                  height: 6.2rem;
-                  object-fit: cover;
-                  border: 4px solid rgb(180, 6, 6);
-                  border-radius: 10px;
-                " src="{{item.foto_url}}" />
-    
-                    <!-- Datos a la derecha -->
-                    <div class="usuario-detalles">
-                        <ion-card-header>
-                            <ion-card-title>{{item.apellido}} {{item.nombre}}</ion-card-title>
-                            <ion-card-subtitle>DNI: {{item.dni}}</ion-card-subtitle>
-                            <ion-card-subtitle>Correo: {{item.email}}</ion-card-subtitle>
-                            <button (click)="approveUser(item)" class="button-personalizado"> Aprobar </button>
-                            <button (click)="rejectUser(item)" class="button-personalizado"> Rechazar </button>
-                        </ion-card-header>
-                    </div>
-                </div>
-            </ion-card>
-        </div>
-        <!-- <p style="text-align: center; margin-top: 10rem; font-size: 44px; text-shadow: 1px 3px 8px #000000;" *ngIf="this.isEmpty">No hay clientes en lista de espera para su aprobación</p> -->
-
-        <app-spinner [isLoading]="isLoading"></app-spinner>
-    </div>
+      <ion-content>
+          <div *ngIf="userList">
+              <h2 class="mb-3" style="text-align: center; margin-top: 4rem; text-shadow: 1px 1px #000">
+                  LISTA DE CLIENTES PENDIENTES DE APROBACIÓN
+              </h2>
+      
+              <div *ngFor="let item of userList;">
+                  <ion-card style="border: 4px double rgb(65, 151, 167); border-radius: 30px" class="tarjeta-usuario" *ngIf="item.estadoAprobacion == 'pendiente' && item.rol == 'cliente'">
+                      <div class="usuario-container" >
+                          <!-- Imagen a la izquierda -->
+                          <img style="
+                        width: 6.2rem;
+                        height: 6.2rem;
+                        object-fit: cover;
+                        border: 4px solid rgb(180, 6, 6);
+                        border-radius: 10px;
+                      " src="{{item.foto_url}}" />
+          
+                          <!-- Datos a la derecha -->
+                          <div class="usuario-detalles">
+                              <ion-card-header>
+                                  <ion-card-title>{{item.apellido}} {{item.nombre}}</ion-card-title>
+                                  <ion-card-subtitle>DNI: {{item.dni}}</ion-card-subtitle>
+                                  <ion-card-subtitle>Correo: {{item.email}}</ion-card-subtitle>
+                                  <button (click)="approveUser(item)" class="button-personalizado"> Aprobar </button>
+                                  <button (click)="rejectUser(item)" class="button-personalizado"> Rechazar </button>
+                              </ion-card-header>
+                          </div>
+                      </div>
+                  </ion-card>
+              </div>
+              <!-- <p style="text-align: center; margin-top: 10rem; font-size: 44px; text-shadow: 1px 3px 8px #000000;" *ngIf="this.isEmpty">No hay clientes en lista de espera para su aprobación</p> -->
+      
+              <app-spinner [isLoading]="isLoading"></app-spinner>
+          </div>
+      </ion-content>

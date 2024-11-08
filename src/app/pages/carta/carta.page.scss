@@ -1,0 +1,68 @@
+ion-content {
+  --background: none;
+  background-image: url('/assets/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+ion-button{
+  font-weight: bold;
+}
+
+ion-toolbar.custom-toolbar {
+  --background: #4f0000; 
+  --color: #ffffff; 
+  border-bottom: 1px solid #4197a7;
+}
+
+ion-title{
+  font-size: 1.7rem;
+  font-weight: bold;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 3px 3px 3px #000;
+}
+
+ion-segment-button{
+  font-weight: bold;
+}
+
+.producto-card {
+  border: 1px solid #4197a7;
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  color: #fff;
+  margin: 1rem;
+}
+
+.swiper {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.total-container {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #fff;
+  padding: 1rem;
+  background-color: #820200;
+  text-shadow: 3px 3px 3px #000;
+}
+
+@media (max-height: 640px) {
+  .total-container {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    padding: 1rem;
+    background-color: #820200;
+    text-shadow: 3px 3px 3px #000;
+  }
+ 
+}

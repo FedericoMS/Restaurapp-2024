@@ -1,13 +1,80 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>homeMetre</ion-title>
-  </ion-toolbar>
-</ion-header>
+@if (customer == null) {
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button color="dark">
+        <img src="/assets/menu.png"/>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">homeMetre</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+        <ion-fab-button (click)="this.userService.logout()" style="border: 1px solid #000; border-radius: 50%">
+            <img src="/assets/exit.png"/>
+        </ion-fab-button>
+        
+    </ion-fab-list>
+  </ion-fab>
+
+  <body>
+    <div class="content" style="margin-top: 80px;">
+
+        <h1 class="title">LISTA DE ESPERA</h1>
+        @if (!isLoading) {
+          <div class="card">
+            <div class="content-card">
+              @for (item of listUsersWaiting; track $index) {
+                <div class="elements" (click)="setTable({cliente: item.cliente, id_cliente: item.id_cliente}, item.id)">
+                  <img src={{item.foto_url}} alt={{item.cliente}}>
+                  <h2>{{item.cliente}}</h2>
+                </div>
+              }
+              @empty {
+                <div class="without-data">
+                  <h2>No hay usuarios por asignar</h2>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+    </div>
+  </body>
+}
+@else {
+  <ion-content>
+    <div class="content">
+      <ion-icon class="icon" name="arrow-back-circle-outline" (click)="goBack()"></ion-icon>
+      <div class="customer-header">
+        <div class="customer-content-title">
+          <h1 class="customer-name">- Cliente - <br> {{customer.cliente}}</h1>
+        </div>
+      </div>
+    
+    
+      <div class="card-table">
+        <div class="content-card-table">
+
+          @for (item of listTables; track $index) {
+            @if (item.estado == 'libre') {
+              <div class="table" (click)="saveTable(item)">
+                <div class="table-content">
+                  <h2>Mesa: {{item.numero}}</h2>
+                  <div>
+                    <h3>Tipo: {{item.tipo}}</h3>
+                    <h3>Cantidad comensales: {{item.cantidadComensales}}</h3>  
+                    <h3>Estado: {{item.estado}}</h3>
+                  </div>
+                </div>
+              </div>
+            }
+          }
+          @empty {
+            <div class="without-data">
+              <h2 style="font-size: 20px;">No hay mesas disponibles</h2>
+            </div>
+          }
+
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+}
+<app-spinner [isLoading]="isLoading"></app-spinner>

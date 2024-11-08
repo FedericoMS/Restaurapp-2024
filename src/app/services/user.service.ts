@@ -27,6 +27,7 @@ export class UserService {
   public user = this.userSubject.asObservable();
   public uidUser: any;
   private userRole: string = '';
+  public nroMesa: number = 0;
 
   constructor(
     private auth: Auth,
@@ -36,20 +37,18 @@ export class UserService {
     private af: AngularFirestore,
     private fs: FirestoreService
   ) {
-    this.authFire.authState.subscribe((user) => {
-      this.isLoggedIn = true;
-      if (user != null && user != undefined) {
-        let userArray: any = user.email?.split('@');
-        this.userName = userArray[0];
-        this.uidUser = user.uid;
-        console.log('Hola, soy el usuario: ' + this.userName);
-      }
-      console.log('Hola, soy el usuario con el mail: ' + user?.email);
-      this.email = user?.email;
-
-      // Emitir el usuario a través del BehaviorSubject
-      this.userSubject.next(user);
-    });
+    // this.authFire.authState.subscribe((user) => {
+    //   this.isLoggedIn = true;
+    //   if (user != null && user != undefined) {
+    //     let userArray: any = user.email?.split('@');
+    //     this.userName = userArray[0];
+    //     console.log('Hola, soy el usuario: ' + this.userName);
+    //   }
+    //   console.log('Hola, soy el usuario con el mail: ' + user?.email);
+    //   this.email = user?.email;
+    //   // Emitir el usuario a través del BehaviorSubject
+    //   this.userSubject.next(user);
+    // });
   }
 
   login({ email, password }: any) {
@@ -68,6 +67,10 @@ export class UserService {
     return this.userName;
   }
 
+  setUserName(username: string) {
+    this.userName = username;
+  }
+
   checkEmail(email: string) {
     const regex =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -78,13 +81,39 @@ export class UserService {
     }
   }
 
+  //Creé este método para obtener cualquier campo de un objeto de firebase
+  async getProperty(field: string): Promise<string> {
+    const userProfileSnapshot: any = await lastValueFrom(
+      this.fs.getUserProfile(this.uidUser)
+    );
+    if (userProfileSnapshot.exists) {
+      const userProfileData = userProfileSnapshot.data();
+      return userProfileData[field];
+    } else {
+      return '';
+    }
+  }
+
   async getRole(): Promise<string> {
+    // BORRAR
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );
     if (userProfileSnapshot.exists) {
       const userProfileData = userProfileSnapshot.data();
       return userProfileData.rol;
+    } else {
+      return '';
+    }
+  }
+
+  async getUserData(): Promise<any> {
+    const userProfileSnapshot: any = await lastValueFrom(
+      this.fs.getUserProfile(this.uidUser)
+    );
+    if (userProfileSnapshot.exists) {
+      const userProfileData = userProfileSnapshot.data();
+      return userProfileData;
     } else {
       return '';
     }
@@ -203,30 +232,6 @@ export class UserService {
         }
       });
   }
-
-  /*
-    async startScan() {
-      try {
-        // Solicitar permisos
-        await BarcodeScanner.requestPermissions(); // No devuelve 'granted', solo solicita los permisos
-
-        // Iniciar escaneo
-        const result = await BarcodeScanner.scan();
-
-        if (result && result.barcodes.length > 0) {
-          // Mostrar resultados del escaneo
-          console.log("Código escaneado:", result.barcodes[0].displayValue);
-          return result.barcodes[0].displayValue;  // Devuelve el primer código escaneado
-        } else {
-          console.log("No se encontró contenido en el escaneo.");
-          return null;
-        }
-      } catch (error) {
-        console.error('Error al iniciar el escaneo:', error);
-        Swal.fire('Error', 'No se pudo iniciar el escaneo', 'error');
-        return null;
-      }
-    }*/
 
   showToast(
     title: string,

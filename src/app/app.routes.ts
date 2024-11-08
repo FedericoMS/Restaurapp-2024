@@ -97,4 +97,26 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/home-metre/home-metre.page').then((m) => m.HomeMetrePage),
   },
+  {
+    path: 'chat',
+    loadComponent: () =>
+      import('./pages/chat/chat.page').then((m) => m.ChatPage),
+  },
+  {
+    path: 'carta',
+    loadComponent: () =>
+      import('./pages/carta/carta.page').then((m) => m.CartaPage),
+  },
+  {
+    path: 'home-cocinero-bartender',
+    loadComponent: () =>
+      import(
+        './pages/home-cocinero-bartender/home-cocinero-bartender.page'
+      ).then((m) => m.HomeCocineroBartenderPage),
+  },
+  {
+    path: 'home-mozo',
+    loadComponent: () =>
+      import('./pages/home-mozo/home-mozo.page').then((m) => m.HomeMozoPage),
+  },
 ];

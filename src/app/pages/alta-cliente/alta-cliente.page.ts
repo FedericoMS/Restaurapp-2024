@@ -120,13 +120,9 @@ export class AltaClientePage implements OnInit {
   }
 
   async cargar() {
-    if (
-      this.fg.valid ||
-      (this.fg.controls['rol'].value == 'anonimo' &&
-        this.fg.controls['nombre'].value !== '')
-    ) {
+    if (this.fg.valid ) {
 
-      if (this.fg.controls['contrasenia'].value !== this.fg.controls['contraseniaRepetida'].value) {
+      if (this.fg.controls['rol'].value == 'cliente' && this.fg.controls['contrasenia'].value !== this.fg.controls['contraseniaRepetida'].value) {
         this.userService.showToast(
           'Las contraseñas no coinicden, reingresar!',
           'red',

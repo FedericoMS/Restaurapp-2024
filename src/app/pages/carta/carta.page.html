@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Carta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Botón flotante del menú en la parte superior izquierda -->
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button color="dark">
+    <img src="/assets/menu.png" />
+  </ion-fab-button>
+  <ion-fab-list side="bottom">
+    <ion-fab-button (click)="this.userService.logout()" style="border: 1px solid #000; border-radius: 50%">
+      <img src="/assets/exit.png" />
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
+<ion-content>
+
+  <!-- Botones de filtro -->
+  <ion-segment color="dark">
+    <ion-segment-button (click)="cambiarTipo('todo')">
+      Todos
+    </ion-segment-button>
+    <ion-segment-button (click)="cambiarTipo('comida')">
+      Comidas
+    </ion-segment-button>
+    <ion-segment-button (click)="cambiarTipo('bebida')">
+      Bebidas
+    </ion-segment-button>
+    <ion-segment-button (click)="cambiarTipo('postre')">
+      Postres
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Lista de productos filtrados -->
+  <ion-list *ngIf="productosFiltrados.length > 0">
+    <ion-card *ngFor="let producto of productosFiltrados" class="producto-card">
+      <swiper-container (slidechange)="swiperSlideChanged($event)" pagination="true" class="swiper">
+        <swiper-slide>
+          <img [src]="producto.foto1" alt="Imagen de {{ producto.nombre }}" />
+        </swiper-slide>
+        <swiper-slide>
+          <img [src]="producto.foto2" alt="Imagen de {{ producto.nombre }}" />
+        </swiper-slide>
+        <swiper-slide>
+          <img [src]="producto.foto3" alt="Imagen de {{ producto.nombre }}" />
+        </swiper-slide>
+      </swiper-container>
+
+      <ion-card-header>
+        <ion-card-title>{{ producto.nombre }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>Precio: ${{ producto.precio }}</p>
+        <p>🕒 {{ producto.tiempoPreparacion }} minutos</p>
+        <p>{{ producto.descripcion }}</p>
+
+        <!-- Botones de agregar y quitar -->
+        <ion-row>
+          <ion-col>
+            <ion-button color="success" expand="block" class="" (click)="agregarProducto(producto)">Agregar</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="danger" expand="block" (click)="quitarProducto(producto)">Quitar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+</ion-content>
+
+<ion-footer>
+  <!-- Total -->
+  <div class="total-container">
+    <p>Total: ${{ total }}</p>
+     <p style="font-size: 18px;">Tiempo de elaboración: 🕒 {{ this.tiempoElaboracion }} mins</p>
+    <ion-button color="success" expand="block" (click)="realizarPedido()">Pedir</ion-button>
+  </div>
+</ion-footer>
