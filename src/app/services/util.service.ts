@@ -5,14 +5,25 @@ import { Alert } from '../clases/alert';
 import { Persona } from '../clases/persona';
 import Vibration from '@awesome-cordova-library/vibration';
 import Swal from 'sweetalert2';
+import { Pedido } from '../clases/pedido';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilService {
   mostrarSpinner = false;
+  pedido?: Pedido;
 
   constructor() {}
+
+  estadoPedido() {
+    if (this.pedido) Alert.comun('Su estado esta en ' + this.pedido.estado);
+    else {
+      Alert.comun('No hay pedido');
+    }
+
+    return this.pedido ? true : false;
+  }
 
   async scan(): Promise<string> {
     try {

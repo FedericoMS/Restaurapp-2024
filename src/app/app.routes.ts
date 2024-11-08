@@ -41,13 +41,6 @@ export const routes: Routes = [
       ).then((m) => m.EncuestaEmpleadosPage),
   },
   {
-    path: 'encuesta-empleados',
-    loadComponent: () =>
-      import(
-        './pages/encuestas/encuesta-empleados/encuesta-empleados.page'
-      ).then((m) => m.EncuestaEmpleadosPage),
-  },
-  {
     path: 'home-duenio-supervisor',
     loadComponent: () =>
       import('./pages/home-duenio-supervisor/home-duenio-supervisor.page').then(
@@ -118,5 +111,9 @@ export const routes: Routes = [
     path: 'home-mozo',
     loadComponent: () =>
       import('./pages/home-mozo/home-mozo.page').then((m) => m.HomeMozoPage),
+  },  {
+    path: 'sub-menu-cliente',
+    loadComponent: () => import('./pages/home-cliente/sub-menu-cliente/sub-menu-cliente.page').then( m => m.SubMenuClientePage)
   },
+
 ];
