@@ -102,7 +102,7 @@ export class LoginPage implements OnInit {
               break;
 
             case 'anonimo':
-              this.router.navigateByUrl('home-cliente-anonimo');
+              this.router.navigateByUrl('ingreso-local');
               break;
 
             case 'metre':
