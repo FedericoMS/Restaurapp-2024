@@ -93,8 +93,8 @@ export class HomeClientePage implements OnInit {
               this.msjColor = 'primary';
             }
           });
-          this.util.hideSpinner();
         }
+        this.util.hideSpinner();
       });
   }
 
