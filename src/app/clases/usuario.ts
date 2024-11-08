@@ -11,6 +11,7 @@ export class Usuario extends Persona {
   password: string;
   estadoAprobacion: EstadoAprobacion;
   rol: string;
+  nroMesa:number;
 
   constructor(
     nombre: string,
@@ -21,13 +22,15 @@ export class Usuario extends Persona {
     rol: string,
     estadoAprobacion: EstadoAprobacion,
     email: string = '',
-    password: string = ''
+    password: string = '',
+    nroMesa: number = 0
   ) {
     super(nombre, apellido, dni, cuil, foto_url);
     this.email = email;
     this.password = password;
     this.estadoAprobacion = estadoAprobacion;
     this.rol = rol;
+    this.nroMesa = nroMesa;
   }
 
   static get_roles() {

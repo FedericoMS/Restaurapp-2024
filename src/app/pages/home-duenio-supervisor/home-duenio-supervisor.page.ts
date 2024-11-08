@@ -33,6 +33,9 @@ export class HomeDuenioSupervisorPage implements OnInit {
     setTimeout(() => {
       this.isLoading = true;      
     }, 1100);
+
+    console.log(userService.getUserName());
+
     this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
       if (user != null && user != undefined) {
         /*
@@ -91,7 +94,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
       if (result.isConfirmed) {
         modUser.estadoAprobacion = 'aprobado';     
         console.log(modUser.estadoAprobacion);   
-        this.firestoreService.updateUser(modUser)
+        this.firestoreService.updateDatabase('usuarios',modUser)
         this.emailService.sendApprovedAccount(modUser)
         Swal.fire({
           title: "¡Cliente aprobado!",
@@ -114,7 +117,7 @@ export class HomeDuenioSupervisorPage implements OnInit {
       if (result.isConfirmed) {
         modUser.estadoAprobacion = 'rechazado';     
         console.log(modUser);   
-        this.firestoreService.updateUser(modUser)
+        this.firestoreService.updateDatabase('usuarios',modUser)
         this.emailService.sendDisabledAccount(modUser)
         Swal.fire({
           title: "Cliente rechazado",

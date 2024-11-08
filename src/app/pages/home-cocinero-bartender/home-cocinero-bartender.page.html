@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar class="custom-toolbar">
-    <ion-title>Mozo</ion-title>
+    <ion-title *ngIf="this.userRol == 'bartender'">Bartender</ion-title>
+    <ion-title *ngIf="this.userRol == 'cocinero'">Cocinero</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,33 +19,36 @@
 
 <ion-content>
   <!-- Contenedor de la lista de pedidos -->
-  <div class="pedidos-container" *ngIf="listaPedidos">
-    <h2 class="titulo-lista">LISTA DE PEDIDOS PENDIENTES</h2>
-    <!-- Iterar sobre cada pedido en la lista -->
-    <div *ngFor="let item of listaPedidos">
-      <ion-card class="tarjeta-pedido" *ngIf="item.estado == 'pendiente de confirmación'">
+  <div class="pedidos-container" *ngIf="pedidosFiltrados.length > 0">
+    <h2 class="titulo-lista">PEDIDOS EN PREPARACIÓN</h2>
+    <!-- Iterar sobre cada pedido en la lista filtrada -->
+    <div *ngFor="let pedido of pedidosFiltrados">
+      <ion-card class="tarjeta-pedido">
         <!-- Información del pedido -->
         <div class="pedido-detalles">
           <div class="pedido-info">
-            <p class="mesa">Mesa: {{item.nroMesa}}</p>
+            <p class="mesa">Mesa: {{pedido.nroMesa}}</p>
             <table class="pedido-tabla">
               <tr>
                 <th>PRODUCTO</th>
-                <th>PRECIO</th>
                 <th>ESTADO</th>
               </tr>
-              <tr *ngFor="let producto of item.listaProductos">
+              <!-- Iterar sobre cada producto en listaProductos del pedido filtrado -->
+              <tr *ngFor="let producto of pedido.listaProductos">
                 <td>{{producto.nombre}}</td>
-                <td>{{producto.precio}}</td>
                 <td>{{producto.estado}}</td>
+                <td>
+                  <button 
+                    class="boton-aprobar" 
+                    (click)="updateProductStatus(pedido, producto.id)"
+                    [disabled]="producto.estado === 'preparado'"
+                  >
+                    Terminar
+                  </button>
+                </td>
               </tr>
+              
             </table>
-            <p class="total">TOTAL: ${{item.monto}}</p>
-          </div>
-          <!-- Botones de aprobar y rechazar -->
-          <div class="botones">
-            <button (click)="approveOrder(item)" class="boton-aprobar">Aprobar</button>
-            <button (click)="rejectOrder(item)" class="boton-rechazar">Rechazar</button>
           </div>
         </div>
       </ion-card>
@@ -54,11 +58,3 @@
   <!-- Spinner de carga -->
   <app-spinner [isLoading]="isLoading"></app-spinner>
 </ion-content>
-
-<div class="content">
-  <div class="button-chat">
-    <ion-button class="btn-chat" (click)="goChat()"><ion-icon name="chatbubble-Outline"></ion-icon> Chat de las mesas
-    </ion-button>
-  </div>
-
-</div>

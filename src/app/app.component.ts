@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { UtilService } from './services/util.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { register } from 'swiper/element/bundle';
+register();
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       SplashScreen.hide(); // Hide the splash screen
-      this.router.navigateByUrl('splash'); // Navigate to the splash route
+      this.router.navigateByUrl('login'); // Navigate to the splash route
     });
   }
 }
