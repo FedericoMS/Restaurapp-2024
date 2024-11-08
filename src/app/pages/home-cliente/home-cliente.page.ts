@@ -87,7 +87,7 @@ export class HomeClientePage implements OnInit {
     if (!this.mesaAsignada) {
       this.util.msjError('QR inválido, todavia no se le asigno una mesa');
     } else if (data === this.mesa?.numero.toString()) {
-      // this.router.navigateByUrl('algun lugar');
+      this.router.navigateByUrl('/carta');
       console.log('se rutea a pedidos');
     } else {
       this.util.msjError(
