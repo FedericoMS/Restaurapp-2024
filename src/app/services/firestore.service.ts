@@ -140,9 +140,6 @@ export class FirestoreService {
   updateOrder(pedido: any) {
     return this.firestore.doc<any>(`pedidos/${pedido.id}`).update(pedido);
   }
-
- 
-  
     
 
   getUserProfile(userId: string) {

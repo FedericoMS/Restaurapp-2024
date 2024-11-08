@@ -5,7 +5,6 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Botón flotante del menú en la parte superior izquierda -->
 <ion-fab vertical="top" horizontal="start" slot="fixed">
   <ion-fab-button color="dark">
     <img src="/assets/menu.png" />
@@ -18,7 +17,6 @@
 </ion-fab>
 
 <ion-content>
-  <!-- Contenedor de la lista de pedidos -->
   <div class="pedidos-container" *ngIf="pedidosFiltrados.length > 0">
     <h2 class="titulo-lista">PEDIDOS EN PREPARACIÓN</h2>
     <!-- Iterar sobre cada pedido en la lista filtrada -->
@@ -31,12 +29,14 @@
             <table class="pedido-tabla">
               <tr>
                 <th>PRODUCTO</th>
-                <th>ESTADO</th>
+                <!-- <th>ESTADO</th> -->
+                <th>ELABORACIÓN</th>
+                <th>ACCIÓN</th>
               </tr>
-              <!-- Iterar sobre cada producto en listaProductos del pedido filtrado -->
               <tr *ngFor="let producto of pedido.listaProductos">
                 <td>{{producto.nombre}}</td>
-                <td>{{producto.estado}}</td>
+                <!-- <td>{{producto.estado}}</td> -->
+                <td>🕒 {{producto.tiempoPreparacion}} mins</td>
                 <td>
                   <button 
                     class="boton-aprobar" 
