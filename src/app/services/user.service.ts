@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
+  signInAnonymously,
 } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -71,6 +72,13 @@ export class UserService {
   setUserName(username: string){
     this.userName = username;
   }
+
+
+   
+  signInAsAnonymously(){
+    return signInAnonymously(this.auth);
+  }
+
 
   checkEmail(email: string) {
     const regex =
@@ -220,6 +228,25 @@ export class UserService {
         }
       });
   }
+
+  createAnonymously(anonymously: any, uid : string) {
+    return this.af
+      .collection('usuarios')
+      .doc(uid)
+      .set({
+        id: uid,
+        apellido: '',
+        nombre: anonymously.nombre,
+        dni: '',
+        rol: anonymously.rol,
+        email: '',
+        password: '',
+        foto_url: anonymously.foto_url,
+        estadoAprobacion: anonymously.estadoAprobacion,
+      })
+  }
+
+
 
   /*
     async startScan() {

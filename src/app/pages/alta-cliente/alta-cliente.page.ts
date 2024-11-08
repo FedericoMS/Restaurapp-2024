@@ -120,7 +120,7 @@ export class AltaClientePage implements OnInit {
   }
 
   async cargar() {
-    if (this.fg.valid ) {
+    if (this.fg.valid || (this.fg.controls['rol'].value == 'anonimo' && this.fg.controls['nombre'].value !== '' && this.fg.controls['img'].value !== '')) {
 
       if (this.fg.controls['rol'].value == 'cliente' && this.fg.controls['contrasenia'].value !== this.fg.controls['contraseniaRepetida'].value) {
         this.userService.showToast(
@@ -136,50 +136,79 @@ export class AltaClientePage implements OnInit {
         this.isLoading = true;
         await this.upload_storage();
         let user;
+
         if (this.fg.controls['rol'].value == 'cliente') {
-          user = new Usuario(
-            this.fg.controls['nombre'].value,
-            this.fg.controls['apellido'].value,
-            this.fg.controls['dni'].value,
-            '',
-            this.foto_url,
-            this.fg.controls['rol'].value,
-            EstadoAprobacion.Pendiente,
-            this.fg.controls['correo'].value,
-            this.fg.controls['contrasenia'].value
-          );
-        } else {
-          user = new Usuario(
-            this.fg.controls['nombre'].value,
-            '',
-            0,
-            '',
-            this.foto_url,
-            this.fg.controls['rol'].value,
-            EstadoAprobacion.Pendiente
-          );
-        }
-        this.userService
-          .createUser(user)
-          .then(() => {
-            this.fg.patchValue({
-              rol: this.fg.controls['rol'].value,
-            });
-            this.emptyInputs();
-            this.isLoading = false;
-            this.router.navigate(['/login']);
-          })
-          .catch(() => {
-            this.userService.showToast(
-              'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
-              'red',
-              'center',
-              'error',
-              'white',
-              true
+            user = new Usuario(
+              this.fg.controls['nombre'].value,
+              this.fg.controls['apellido'].value,
+              this.fg.controls['dni'].value,
+              '',
+              this.foto_url,
+              'cliente',
+              EstadoAprobacion.Pendiente,
+              this.fg.controls['correo'].value,
+              this.fg.controls['contrasenia'].value
             );
-            this.isLoading = false;
-          });
+
+            this.userService
+            .createUser(user)
+            .then(() => {
+              this.fg.patchValue({
+                rol: this.fg.controls['rol'].value,
+              });
+              this.emptyInputs();
+              this.isLoading = false;
+              this.router.navigate(['/login']);
+            })
+            .catch(() => {
+              this.userService.showToast(
+                'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
+                'red',
+                'center',
+                'error',
+                'white',
+                true
+              );
+              this.isLoading = false;
+            });
+
+
+        } else {
+          this.userService.signInAsAnonymously().then((response)=>{
+            const user = new Usuario(
+                this.fg.controls['nombre'].value,
+                '',
+                0,
+                '',
+                this.foto_url,
+                'cliente',
+                EstadoAprobacion.Aprobado
+              );
+    
+              this.userService
+              .createAnonymously(user, response.user.uid)
+              .then(() => {
+                this.fg.patchValue({
+                  rol: this.fg.controls['rol'].value,
+                });
+                this.emptyInputs();
+                this.isLoading = false;
+                this.router.navigate(['/home']);
+              })
+              .catch(() => {
+                this.userService.showToast(
+                  'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
+                  'red',
+                  'center',
+                  'error',
+                  'white',
+                  true
+                );
+                this.isLoading = false;
+              });
+          })     
+        }
+
       }
       
     } else {
