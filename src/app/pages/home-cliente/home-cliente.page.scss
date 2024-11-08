@@ -41,3 +41,9 @@ ion-text {
   font-weight: 600;
   font-size: 18px;
 }
+
+@media (max-height: 640px) {
+  .img {
+    width: 50%;
+  }
+}
