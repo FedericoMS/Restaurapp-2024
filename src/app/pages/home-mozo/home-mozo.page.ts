@@ -29,11 +29,11 @@ export class HomeMozoPage implements OnInit {
     addIcons({ chatbubbleOutline });
     setTimeout(() => {
       this.isLoading = true;      
-    }, 1100);
-    this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
-      this.userAuth = user;
-      console.log(user);
-    });
+    }, 1800);
+    // this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
+    //   this.userAuth = user;
+    //   console.log(user);
+    // });
     this.firestoreService.getPedidos().subscribe((pedidos: any) => {
       this.listaPedidos = pedidos;
     });
@@ -42,7 +42,7 @@ export class HomeMozoPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;      
-    }, 2700);
+    }, 2500);
   }
 
 
@@ -121,6 +121,10 @@ export class HomeMozoPage implements OnInit {
   goChat(){
     this.router.navigateByUrl('chat');
   }
-
+  
+  tienePedidosPendientes(): boolean {
+    return this.listaPedidos && this.listaPedidos.some((pedido: any) => pedido.estado === 'pendiente de confirmación');
+  }
+  
 
 }

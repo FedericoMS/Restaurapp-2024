@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentButton, IonList,
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -27,11 +27,14 @@ export class CartaPage implements OnInit {
   idCliente : any = this.userService.uidUser;
   tiempoElaboracion : number = 0;
 
-  constructor(private firestoreService: FirestoreService, public userService : UserService) {}
+  constructor(private firestoreService: FirestoreService, public userService : UserService, private router : Router) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.cargarProductos();
-    this.idCliente = this.userService.getProperty('id');
+    //this.idCliente = this.userService.getProperty('id');
+    this.nroMesa = await this.userService.getProperty('nroMesa');
+    console.log(this.nroMesa);
+    console.log(this.idCliente);
   }
 
   cargarProductos() {
@@ -53,8 +56,6 @@ export class CartaPage implements OnInit {
   agregarProducto(producto: any) {
     this.carrito.push({ nombre: producto.nombre, tiempoPreparacion: producto.tiempoPreparacion, estado: 'pendiente', precio: producto.precio, tipo: producto.tipo });
     this.total += producto.precio;
-    
-    // Recalcular el tiempo de elaboración (tiempo máximo de preparación entre todos los productos en el carrito)
     this.tiempoElaboracion = Math.max(this.tiempoElaboracion, producto.tiempoPreparacion);
   }
 
@@ -63,8 +64,6 @@ export class CartaPage implements OnInit {
     if (index > -1) {
       this.carrito.splice(index, 1);
       this.total -= producto.precio;
-
-      // Recalcular el tiempo de elaboración después de quitar un producto
       this.tiempoElaboracion = this.carrito.length > 0 
         ? Math.max(...this.carrito.map(item => item.tiempoPreparacion))
         : 0;  // Si el carrito está vacío, el tiempo de elaboración es 0
@@ -80,8 +79,8 @@ export class CartaPage implements OnInit {
     
     const pedido = {
       estado: 'pendiente de confirmación',
-      //idCliente: this.idCliente, // Puedes reemplazar esto con el ID real del cliente
-      idCliente: 'ID DEL CLIENTE',
+      idCliente: this.idCliente, // Puedes reemplazar esto con el ID real del cliente
+      //idCliente: 'ID DEL CLIENTE',
       listaProductos: this.carrito,
       monto: this.total,
       nroMesa: this.nroMesa, //El número de mesa a tomar es el del cliente que está haciendo el pedido
@@ -95,6 +94,7 @@ export class CartaPage implements OnInit {
       this.total = 0; // Reiniciar total
       this.tiempoElaboracion = 0;
       this.userService.showToast('Pedido realizado exitosamente', 'lightgreen', 'center', 'success', 'black', true);
+      this.router.navigateByUrl('/home-cliente-anonimo');
     } catch (error) {
       console.error("Error al realizar el pedido:", error);
     }
