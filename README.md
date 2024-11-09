@@ -57,7 +57,7 @@
 - ✅ Home cliente (cliente y anónimo)
 - ✅ Ingreso al local
 - ✅ Implementación de push notifications (hecho parcialmente)
-- [ ] Redireccionamiento en distintas etapas de cliente/anónimo
+- ✅ Redireccionamiento en distintas etapas de cliente/anónimo
 
 ## Tareas - Tercera Semana (09/11/2024 al 16/11/2024) 
 ### *En proceso de planificación dependiendo de la anterior semana*
