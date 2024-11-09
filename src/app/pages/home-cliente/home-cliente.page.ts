@@ -147,10 +147,9 @@ export class HomeClientePage implements OnInit {
   }
 
   verEncuestas() {
-    // this.router.navigate(['/graficos'], {
-    //   queryParams: { encuesta: 'clientes' },
-    // });
-    this.router.navigateByUrl('/sub-menu-cliente');
+    this.router.navigate(['/graficos'], {
+      queryParams: { encuesta: 'clientes' },
+    });
   }
 
   goChat() {
