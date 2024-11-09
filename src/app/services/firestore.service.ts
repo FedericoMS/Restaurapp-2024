@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   getStorage,
@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/storage';
 import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
-import {  Firestore, collection, collectionData,query,orderBy, addDoc} from '@angular/fire/firestore';
+import {  Firestore, collection, collectionData,query,orderBy, addDoc, getDocs, where, QuerySnapshot, updateDoc} from '@angular/fire/firestore';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -111,5 +111,18 @@ export class FirestoreService {
     }
   }
 
+  updateNroMesaUsuario(id: number, nroMesa : number) : void{
+    try {
+      getDocs(query(collection(this.fs, 'usuarios'), where("id", "==", id)))
+      .then((querySnapshot: QuerySnapshot<DocumentData>) => {
+        querySnapshot.forEach((doc) => {
+          updateDoc(doc.ref, { nroMesa: nroMesa });
+        });
+      })
+
+    } catch (error) {
+      console.error("Error updating user verification by admin: ", error);
+    }
+  }
 
 }
