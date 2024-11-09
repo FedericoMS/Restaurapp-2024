@@ -72,14 +72,18 @@ export class HomeClientePage implements OnInit {
     this.fire.getUserProfile2(this.userService.uidUser).subscribe((next) => {
       const aux: Usuario = next as Usuario;
       this.cliente = aux;
+      this.userService.nroMesa = aux.nroMesa;
+
       if (aux.lista_espera) {
         this.flagMesa = true;
       }
       if (aux.nroMesa) {
-        this.userService.nroMesa = aux.nroMesa;
         this.msj = 'Su mesa es la número ' + aux.nroMesa;
         this.msjColor = 'primary';
         this.fire.updateUser(this.cliente);
+      } else {
+        this.msj = 'Mesa sin asignar';
+        this.msjColor = 'danger';
       }
     });
     this.get_pedidos();
