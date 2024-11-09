@@ -23,7 +23,7 @@
                 
                 <div class="chat-body">
                   <div class="chat-message">
-                      @if (message.username.toLowerCase() !== userService.getUserName().toLowerCase()) {
+                      @if (message.id_user !== this.userService.uidUser) {
                         @if (message.nroMesa !== 0) {
                           <h5>Mesa {{message.nroMesa}} : {{message.username | titlecase}}</h5>
                         }@else {
@@ -41,7 +41,7 @@
       </div>
   
       <div class="message-content-input">
-        <input maxlength="21"  [(ngModel)]="message" type="text" class="form-control"  name="message" placeholder="Escribir un mensaje"/>
+        <input maxlength="100"  [(ngModel)]="message" type="text" class="form-control"  name="message" placeholder="Escribir un mensaje"/>
         <ion-button (click)="sendMessage()"> <ion-icon class="icon-send" name="send-outline"></ion-icon> </ion-button>
       </div>
     </div>

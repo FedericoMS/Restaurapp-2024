@@ -79,6 +79,7 @@ export class HomeClientePage implements OnInit {
       if (aux.nroMesa) {
         this.msj = 'Su mesa es la número ' + aux.nroMesa;
         this.msjColor = 'primary';
+        console.log("NG ONINIT");
         this.fire.updateUser(this.cliente);
       } else {
         this.msj = 'Mesa sin asignar';
@@ -141,7 +142,7 @@ export class HomeClientePage implements OnInit {
       this.cliente.lista_espera = true;
       this.fire.updateUser(this.cliente);
       this.fire.add({
-        cliente: this.cliente.nombre,
+        cliente: `${this.cliente.nombre} ${this.cliente.apellido ?? ''}`,
         foto_url: this.cliente.foto_url || '',
         id_cliente: this.cliente.id,
       });

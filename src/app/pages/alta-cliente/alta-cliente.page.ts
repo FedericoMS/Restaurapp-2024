@@ -140,8 +140,8 @@ export class AltaClientePage implements OnInit {
 
         if (this.fg.controls['rol'].value == 'cliente') {
             user = new Usuario(
-              this.fg.controls['nombre'].value,
-              this.fg.controls['apellido'].value,
+              this.fg.controls['nombre'].value.toLowerCase(),
+              this.fg.controls['apellido'].value.toLowerCase(),
               this.fg.controls['dni'].value,
               '',
               this.foto_url,
@@ -177,7 +177,7 @@ export class AltaClientePage implements OnInit {
         } else {
           this.userService.signInAsAnonymously().then((response)=>{
             const user = new Usuario(
-                this.fg.controls['nombre'].value,
+                this.fg.controls['nombre'].value.toLowerCase(),
                 '',
                 0,
                 '',

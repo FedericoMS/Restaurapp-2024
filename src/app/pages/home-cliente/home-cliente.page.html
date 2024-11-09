@@ -4,6 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button color="dark">
+    <img src="/assets/menu.png" />
+  </ion-fab-button>
+  <ion-fab-list side="bottom">
+    <ion-fab-button
+      (click)="this.userService.logout()"
+      style="border: 1px solid #000; border-radius: 50%"
+    >
+      <img src="/assets/exit.png" />
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
 <ion-content>
   @if(this.userService.nroMesa){
   <br />
@@ -14,22 +28,9 @@
       </ion-button>
     </div>
   </div>
-  <br />
   }
 
-  <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button color="dark">
-      <img src="/assets/menu.png" />
-    </ion-fab-button>
-    <ion-fab-list side="bottom">
-      <ion-fab-button
-        (click)="this.userService.logout()"
-        style="border: 1px solid #000; border-radius: 50%"
-      >
-        <img src="/assets/exit.png" />
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+
 
   <main class="container">
     @if (this.flagMesa) {

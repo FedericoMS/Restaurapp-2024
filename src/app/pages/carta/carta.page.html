@@ -35,7 +35,7 @@
   </ion-segment>
 
   <!-- Lista de productos filtrados -->
-  <ion-list *ngIf="productosFiltrados.length > 0">
+  <ion-list *ngIf="productosFiltrados.length > 0" style="background-color: #1e1e1e;">
     <ion-card *ngFor="let producto of productosFiltrados" class="producto-card">
       <swiper-container (slidechange)="swiperSlideChanged($event)" pagination="true" class="swiper">
         <swiper-slide>

@@ -1,3 +1,7 @@
+ion-content{
+  --background: #1e1e1e;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,6 +9,7 @@
   height: 100%;
   gap: 10px; /* Espacio entre botones */
   padding: 10px; /* Espacio alrededor del contenido */
+
 }
 
 .grafico {
@@ -57,6 +62,7 @@ ion-text {
   --border-color: #989591;
   font-family: Raleway, sans-serif;
   text-transform: uppercase;
+  margin-bottom: 0;
 }
 
 ion-icon {
@@ -68,6 +74,7 @@ ion-icon {
 @media (height > 640px) {
   .btn-chat {
     font-size: 23px;
+    
   }
 }
 @media (max-height: 640px) {
