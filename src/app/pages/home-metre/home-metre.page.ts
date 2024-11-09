@@ -68,7 +68,7 @@ export class HomeMetrePage implements OnInit {
           table.nombreCliente = this.customer.cliente;
           table.idCliente = this.customer.id_cliente;
           table.estado = 'ocupada';
-          
+          this.firestore.updateNroMesaUsuario(table.idCliente, table.numero)
           this.firestore.updateDatabase('mesas',table);
           this.firestore.removeObjectDatabase('lista_de_espera',this.idUserWaiting);
           this.emptyValues();
