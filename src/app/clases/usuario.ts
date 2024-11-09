@@ -11,7 +11,8 @@ export class Usuario extends Persona {
   password: string;
   estadoAprobacion: EstadoAprobacion;
   rol: string;
-  nroMesa:number;
+  nroMesa: number;
+  lista_espera: boolean;
 
   constructor(
     nombre: string,
@@ -31,6 +32,7 @@ export class Usuario extends Persona {
     this.estadoAprobacion = estadoAprobacion;
     this.rol = rol;
     this.nroMesa = nroMesa;
+    this.lista_espera = false;
   }
 
   static get_roles() {

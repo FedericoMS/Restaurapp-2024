@@ -15,7 +15,7 @@ import {
   IonFabList,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { qrCodeOutline } from 'ionicons/icons';
+import { chatbubbleOutline, qrCodeOutline } from 'ionicons/icons';
 import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -53,17 +53,15 @@ export class HomeClientePage implements OnInit {
   msj = 'Mesa sin asignar';
   msjColor = 'danger';
   cliente?: Usuario;
-  mesa?: Mesa;
   fire = inject(FirestoreService);
   userService = inject(UserService);
   mesaAsignada = this.userService.nroMesa > 0;
-  cantidad_de_veces_que_escaneo = 0;
   sub_mesas?: Subscription;
   sub_pedidos?: Subscription;
   pedido?: Pedido;
 
   constructor(private util: UtilService) {
-    addIcons({ qrCodeOutline });
+    addIcons({ qrCodeOutline, chatbubbleOutline });
   }
   ngOnDestroy(): void {
     this.sub_mesas?.unsubscribe();
@@ -71,31 +69,20 @@ export class HomeClientePage implements OnInit {
   }
 
   ngOnInit() {
-    this.util.showSpinner();
-    //Dependiendo el cambio capturo la mesa asignada
-    this.get_mesas();
+    this.fire.getUserProfile2(this.userService.uidUser).subscribe((next) => {
+      const aux: Usuario = next as Usuario;
+      this.cliente = aux;
+      if (aux.lista_espera) {
+        this.flagMesa = true;
+      }
+      if (aux.nroMesa) {
+        this.userService.nroMesa = aux.nroMesa;
+        this.msj = 'Su mesa es la número ' + aux.nroMesa;
+        this.msjColor = 'primary';
+        this.fire.updateUser(this.cliente);
+      }
+    });
     this.get_pedidos();
-  }
-
-  get_mesas() {
-    this.sub_mesas = this.fire
-      .getCollection('mesas')
-      .valueChanges()
-      .subscribe((next) => {
-        const mesa = next as Mesa[];
-        if (!this.userService.nroMesa) {
-          mesa.forEach((item) => {
-            if (this.cliente?.id && item.idCliente === this.cliente?.id) {
-              this.mesa = item;
-              this.mesaAsignada = true;
-              this.flagMesa = true;
-              this.msj = 'Su mesa es la numero ' + item.numero;
-              this.msjColor = 'primary';
-            }
-          });
-        }
-        this.util.hideSpinner();
-      });
   }
 
   get_pedidos() {
@@ -103,19 +90,17 @@ export class HomeClientePage implements OnInit {
       .getCollection('pedidos')
       .valueChanges()
       .subscribe((next) => {
-        const mesa = next as Pedido[];
-        if (!this.userService.nroMesa) {
-          mesa.forEach((item) => {
-            if (
-              this.cliente?.id &&
-              item.idCliente === this.cliente?.id &&
-              item.estado !== 'finalizado'
-            ) {
-              this.pedido = item;
-              this.util.pedido = this.pedido;
-            }
-          });
-        }
+        const pedido = next as Pedido[];
+        pedido.forEach((item) => {
+          if (
+            this.cliente?.id &&
+            item.idCliente === this.cliente?.id &&
+            item.estado !== 'finalizado'
+          ) {
+            this.pedido = item;
+            this.util.pedido = this.pedido;
+          }
+        });
       });
   }
 
@@ -123,32 +108,26 @@ export class HomeClientePage implements OnInit {
     const data = await this.util.scan();
     console.log(data);
     if (!this.userService.nroMesa) {
-      this.util.msjError('QR inválido, todavia no se le asigno una mesa');
+      this.util.msjError('QR inválido, todavía no se le asignó una mesa');
       //Acciones segun la cantidad de veces que escaneo el qr de la mesa
-      this.accionesDeEscanner();
     } else if (data === this.userService.nroMesa.toString()) {
       //si es la primera vez que escanea la mesa lo asigno a la carta
-      this.cantidad_de_veces_que_escaneo++;
+      this.accionesDeEscanner();
     } else {
       this.util.msjError(
-        'Mesa inválida, su mesa es la numero ' + this.mesa?.numero
+        'Mesa inválida, su mesa es la número ' + this.cliente?.nroMesa
       );
     }
   }
 
   accionesDeEscanner() {
-    switch (this.cantidad_de_veces_que_escaneo) {
-      case 0:
-        this.router.navigateByUrl('/carta');
-        break;
-      case 1:
-        //Estado del pedido
-        if (!this.util.estadoPedido()) this.cantidad_de_veces_que_escaneo = 0;
-        break;
-      default:
-        //Ir a encuesta
-        this.router.navigateByUrl('/sub-menu-cliente');
-        break;
+    if (this.userService.nroMesa && this.pedido === undefined) {
+      this.router.navigateByUrl('/carta');
+    } else if (this.pedido && this.userService.nroMesa) {
+      this.util.estadoPedido();
+    } else if (this.pedido?.estado === 'en preparación') {
+      //Ir a encuesta
+      this.router.navigateByUrl('/sub-menu-cliente');
     }
   }
 
@@ -156,6 +135,8 @@ export class HomeClientePage implements OnInit {
     this.flagMesa = true;
     this.fire.getUserProfile(this.userService.uidUser).forEach((next) => {
       this.cliente = next.data() as Usuario;
+      this.cliente.lista_espera = true;
+      this.fire.updateUser(this.cliente);
       this.fire.add({
         cliente: this.cliente.nombre,
         foto_url: this.cliente.foto_url || '',
@@ -166,8 +147,13 @@ export class HomeClientePage implements OnInit {
   }
 
   verEncuestas() {
-    this.router.navigate(['/graficos'], {
-      queryParams: { encuesta: 'clientes' },
-    });
+    // this.router.navigate(['/graficos'], {
+    //   queryParams: { encuesta: 'clientes' },
+    // });
+    this.router.navigateByUrl('/sub-menu-cliente');
+  }
+
+  goChat() {
+    this.router.navigateByUrl('chat');
   }
 }
