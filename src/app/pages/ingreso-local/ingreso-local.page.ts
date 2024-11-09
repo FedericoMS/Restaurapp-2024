@@ -43,6 +43,7 @@ export class IngresoLocalPage implements OnInit {
   private router = inject(Router);
   private fire = inject(FirestoreService);
   userService = inject(UserService);
+
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
     this.fire.getUserProfile(this.userService.uidUser).subscribe((next) => {
@@ -54,26 +55,7 @@ export class IngresoLocalPage implements OnInit {
     });
   }
 
-  async ngOnInit() {
-    if (this.userService.nroMesa) {
-      this.router.navigateByUrl('/home-cliente-anonimo');
-    }
-    await this.fire
-      .getCollection('lista_de_espera')
-      .valueChanges()
-      .forEach(async (item: any) => {
-        this.util.showSpinner();
-        await item.forEach((val: any) => {
-          if (val.id_cliente === this.userService.uidUser) {
-            this.util.hideSpinner();
-            this.router.navigate(['/home-cliente-anonimo'], {
-              queryParams: { espera: true },
-            });
-          }
-        });
-        this.util.hideSpinner();
-      });
-  }
+  ngOnInit() {}
 
   async scan() {
     const data = await this.util.scan();
