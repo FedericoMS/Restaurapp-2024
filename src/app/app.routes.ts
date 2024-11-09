@@ -111,9 +111,12 @@ export const routes: Routes = [
     path: 'home-mozo',
     loadComponent: () =>
       import('./pages/home-mozo/home-mozo.page').then((m) => m.HomeMozoPage),
-  },  {
-    path: 'sub-menu-cliente',
-    loadComponent: () => import('./pages/home-cliente/sub-menu-cliente/sub-menu-cliente.page').then( m => m.SubMenuClientePage)
   },
-
+  {
+    path: 'sub-menu-cliente',
+    loadComponent: () =>
+      import(
+        './pages/home-cliente/sub-menu-cliente/sub-menu-cliente.page'
+      ).then((m) => m.SubMenuClientePage),
+  },
 ];

@@ -18,6 +18,7 @@ import { qrCodeOutline } from 'ionicons/icons';
 import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
 @Component({
   selector: 'app-ingreso-local',
   templateUrl: './ingreso-local.page.html',
@@ -41,11 +42,31 @@ import { UserService } from 'src/app/services/user.service';
 export class IngresoLocalPage implements OnInit {
   private router = inject(Router);
   userService = inject(UserService);
+  fire = inject(FirestoreService);
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    if (this.userService.nroMesa) {
+      this.router.navigateByUrl('/home-cliente-anonimo');
+    }
+    await this.fire
+      .getCollection('lista_de_espera')
+      .valueChanges()
+      .forEach(async (item: any) => {
+        this.util.showSpinner();
+        await item.forEach((val: any) => {
+          if (val.id_cliente === this.userService.uidUser) {
+            this.util.hideSpinner();
+            this.router.navigate(['/home-cliente-anonimo'], {
+              queryParams: { espera: true },
+            });
+          }
+        });
+        this.util.hideSpinner();
+      });
+  }
 
   async scan() {
     const data = await this.util.scan();
