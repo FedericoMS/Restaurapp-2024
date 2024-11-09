@@ -79,8 +79,10 @@ export class HomeClientePage implements OnInit {
       if (aux.nroMesa) {
         this.msj = 'Su mesa es la número ' + aux.nroMesa;
         this.msjColor = 'primary';
-        console.log("NG ONINIT");
-        this.fire.updateUser(this.cliente);
+        if(this.userService.nroMesa !== aux.nroMesa){
+          console.log("NG ONINIT");
+          this.fire.updateUser(this.cliente);
+        }
       } else {
         this.msj = 'Mesa sin asignar';
         this.msjColor = 'danger';
