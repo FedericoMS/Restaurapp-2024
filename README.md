@@ -47,13 +47,13 @@
 - ✅  Home cocinero/bartender (hecho parcialmente)
 
 
-### Lautaro García (Nombre de la rama: lautaro)
+### Lautaro García (Nombre de las ramas: lautaro - garcia)
 - ✅ Home metre (lista de espera, asigna mesas)
 - ✅ Chat de mozos/mesas 
 - ✅ Arreglo de visualización del Splash Screen
 - ✅ Limpieza de credenciales al cerrar sesión y reemplazo de botones por imágenes en el inicio de sesión
 
-### Federico Cardozo (Nombre de la rama: cardozo)
+### Federico Cardozo (Nombre de las ramas: cardozo - fede)
 - ✅ Home cliente (cliente y anónimo)
 - ✅ Ingreso al local
 - ✅ Implementación de push notifications (hecho parcialmente)
