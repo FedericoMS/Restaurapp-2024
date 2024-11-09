@@ -36,4 +36,15 @@ export class Alert {
 
     return alert;
   }
+
+  static comun(titulo = '', texto = '') {
+    return Swal.fire({
+      title: titulo,
+      text: texto,
+      showCancelButton: false,
+      confirmButtonText: 'Aceptar',
+      heightAuto: false,
+      allowOutsideClick: false, // Impide cerrar al hacer clic fuera del modal
+    });
+  }
 }

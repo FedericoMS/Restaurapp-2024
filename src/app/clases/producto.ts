@@ -8,6 +8,8 @@ export class Producto {
     precio: number;
     tiempoPreparacion: number;
     tipo : string;
+    estado : string; 
+    //Estado puede ser: en preparación, terminado, cancelado
 
     constructor() {
         this.descripcion = '';
@@ -19,5 +21,6 @@ export class Producto {
         this.precio = 0;
         this.tiempoPreparacion = 0;
         this.tipo = '';
+        this.estado = '';
     }
 }

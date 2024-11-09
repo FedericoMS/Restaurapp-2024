@@ -5,8 +5,11 @@ export class Mesa {
     idCliente : string;
     numero : number;
     tipo : string;
+    nombreCliente : string;
 
 
+
+    //Estado puede ser: libre, ocupada
     constructor()
     {
         this.cantidadComensales = 0;
@@ -14,6 +17,7 @@ export class Mesa {
         this.id = '';
         this.idCliente = '';
         this.numero = 0;
-        this.tipo = ''
+        this.tipo = '';
+        this.nombreCliente = '';
     }
 }

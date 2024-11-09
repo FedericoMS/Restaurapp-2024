@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 10px; /* Espacio entre botones */
+  padding: 10px; /* Espacio alrededor del contenido */
+}
+
+.pedido {
+  background: #e3d081;
+  color: #000000;
+}
+
+div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.encuesta {
+  background: #91c7b1;
+  color: #000000;
+}
+
+.img {
+  max-width: 80%; /* Ajusta el tamaño de la imagen para adaptarse */
+  height: auto;
+  margin-bottom: 10px; /* Espacio entre imagen y texto */
+}
+
+span {
+  font-size: 1.5em; /* Tamaño de texto */
+}
+
+@media (max-height: 640px) {
+  .img {
+    width: 50%;
+  }
+}

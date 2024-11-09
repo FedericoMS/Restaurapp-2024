@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
-  signInAnonymously,
+  signInAnonymously
 } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -47,11 +47,33 @@ export class UserService {
     //   }
     //   console.log('Hola, soy el usuario con el mail: ' + user?.email);
     //   this.email = user?.email;
-
     //   // Emitir el usuario a través del BehaviorSubject
     //   this.userSubject.next(user);
     // });
   }
+
+  signInAsAnonymously(){
+    return signInAnonymously(this.auth);
+  }
+
+  createAnonymously(anonymously: any, uid : string) {
+    return this.af
+      .collection('usuarios')
+      .doc(uid)
+      .set({
+        id: uid,
+        apellido: '',
+        nombre: anonymously.nombre,
+        dni: '',
+        rol: anonymously.rol,
+        email: '',
+        password: '',
+        foto_url: anonymously.foto_url,
+        estadoAprobacion: anonymously.estadoAprobacion,
+      })
+  }
+
+
 
   login({ email, password }: any) {
     return signInWithEmailAndPassword(this.auth, email, password)
@@ -69,16 +91,9 @@ export class UserService {
     return this.userName;
   }
 
-  setUserName(username: string){
+  setUserName(username: string) {
     this.userName = username;
   }
-
-
-   
-  signInAsAnonymously(){
-    return signInAnonymously(this.auth);
-  }
-
 
   checkEmail(email: string) {
     const regex =
@@ -90,7 +105,21 @@ export class UserService {
     }
   }
 
-  async getRole(): Promise<string> { // BORRAR
+  //Creé este método para obtener cualquier campo de un objeto de firebase
+  async getProperty(field: string): Promise<string> {
+    const userProfileSnapshot: any = await lastValueFrom(
+      this.fs.getUserProfile(this.uidUser)
+    );
+    if (userProfileSnapshot.exists) {
+      const userProfileData = userProfileSnapshot.data();
+      return userProfileData[field];
+    } else {
+      return '';
+    }
+  }
+
+  async getRole(): Promise<string> {
+    // BORRAR
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );
@@ -102,7 +131,7 @@ export class UserService {
     }
   }
 
-  async getUserData(): Promise<any> { 
+  async getUserData(): Promise<any> {
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );
@@ -113,7 +142,6 @@ export class UserService {
       return '';
     }
   }
-
 
   async getIsApproved(): Promise<string> {
     const userProfileSnapshot: any = await lastValueFrom(
@@ -228,49 +256,6 @@ export class UserService {
         }
       });
   }
-
-  createAnonymously(anonymously: any, uid : string) {
-    return this.af
-      .collection('usuarios')
-      .doc(uid)
-      .set({
-        id: uid,
-        apellido: '',
-        nombre: anonymously.nombre,
-        dni: '',
-        rol: anonymously.rol,
-        email: '',
-        password: '',
-        foto_url: anonymously.foto_url,
-        estadoAprobacion: anonymously.estadoAprobacion,
-      })
-  }
-
-
-
-  /*
-    async startScan() {
-      try {
-        // Solicitar permisos
-        await BarcodeScanner.requestPermissions(); // No devuelve 'granted', solo solicita los permisos
-
-        // Iniciar escaneo
-        const result = await BarcodeScanner.scan();
-
-        if (result && result.barcodes.length > 0) {
-          // Mostrar resultados del escaneo
-          console.log("Código escaneado:", result.barcodes[0].displayValue);
-          return result.barcodes[0].displayValue;  // Devuelve el primer código escaneado
-        } else {
-          console.log("No se encontró contenido en el escaneo.");
-          return null;
-        }
-      } catch (error) {
-        console.error('Error al iniciar el escaneo:', error);
-        Swal.fire('Error', 'No se pudo iniciar el escaneo', 'error');
-        return null;
-      }
-    }*/
 
   showToast(
     title: string,

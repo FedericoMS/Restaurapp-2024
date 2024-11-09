@@ -11,15 +11,23 @@ import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
 import {  Firestore, collection, collectionData,query,orderBy, addDoc, getDocs, where, QuerySnapshot, updateDoc} from '@angular/fire/firestore';
 import { map } from 'rxjs';
+import { arrayUnion } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
-  constructor(private firestore: AngularFirestore, private fs : Firestore) {}
+  constructor(private firestore: AngularFirestore, private fs: Firestore) {}
   storage: AngularFireStorage = inject(AngularFireStorage);
 
   //Agregar un usuario
+  async addObject(object: any, databaseName: string) {
+    const colImagenes = this.firestore.collection(databaseName);
+    const documento = colImagenes.doc();
+    object.id = documento.ref.id;
+    await documento.set({ ...object });
+  }
+
   async addUsuario(user: Usuario) {
     const colImagenes = this.firestore.collection('usuarios');
     const documento = colImagenes.doc();
@@ -43,6 +51,11 @@ export class FirestoreService {
     return col;
   }
 
+  /*getProductos(): any {
+    const col = this.firestore.collection('productos').valueChanges();
+    return col;
+  }*/
+
   //Encuesta
   async addEncuesta(
     encuesta: Encuesta,
@@ -51,6 +64,16 @@ export class FirestoreService {
     const encuestas = this.firestore.collection('encuesta_' + collection);
     const documento = encuestas.doc(encuesta['question']);
     await documento.set({ ...encuesta });
+  }
+
+  //Comentarios
+  async addComentarios(
+    comentario: string,
+    collection: 'clientes' | 'empleados' | 'supervisor' = 'clientes'
+  ) {
+    const encuestas = this.firestore.collection('comentarios_' + collection);
+    const documento = encuestas.doc();
+    await documento.set({ msj: comentario });
   }
 
   //Obtner cualquier collection
@@ -67,50 +90,95 @@ export class FirestoreService {
     );
   }
 
-  getUserProfile(userId: string) {
-    return this.firestore.collection('usuarios').doc(userId).get();
-  }
-
-
-  updateDatabase(colection : string, object: any) {
+  updateDatabase(colection: string, object: any) {
     return this.firestore.doc<any>(`${colection}/${object.id}`).update(object);
   }
-    
-  removeObjectDatabase(colection : string, id: any){
+
+  removeObjectDatabase(colection: string, id: any) {
     return this.firestore.doc<any>(`${colection}/${id}`).delete();
   }
- 
+
   getMessages(): any {
     const data = query(collection(this.fs, 'chats'), orderBy('time', 'asc'));
-    return collectionData<any>(data)
-    .pipe(map( (messages : any) => {
-        return messages.map( (message : any) => ({
+    return collectionData<any>(data).pipe(
+      map((messages: any) => {
+        return messages.map((message: any) => ({
           username: message.username,
           message: message.message,
           time: message.time.toDate(),
           id_user: message.id_user,
-          nroMesa: message.nroMesa
+          nroMesa: message.nroMesa,
         }));
       })
-    ) 
+    );
   }
 
-  sendMessage(username : string, message: string, id_user:string, nroMesa:number) : void
-  {
+  sendMessage(
+    username: string,
+    message: string,
+    id_user: string,
+    nroMesa: number
+  ): void {
     try {
       const date = new Date();
-      addDoc(collection(this.fs,"chats"),{
+      addDoc(collection(this.fs, 'chats'), {
         username: username,
         message: message,
         time: date,
         id_user: id_user,
-        nroMesa: nroMesa
+        nroMesa: nroMesa,
       });
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error('Error adding document: ', error);
     }
   }
 
+  updateUser(usuario: any) {
+    return this.firestore.doc<any>(`usuarios/${usuario.id}`).update(usuario);
+  }
+
+  updateOrderAndProducts(
+    pedido: any,
+    nuevoEstadoPedido: string,
+    nuevoEstadoProductos: string
+  ) {
+    pedido.estado = nuevoEstadoPedido;
+    pedido.listaProductos = pedido.listaProductos.map((producto: any) => ({
+      ...producto,
+      estado: nuevoEstadoProductos,
+    }));
+    return this.firestore.doc<any>(`pedidos/${pedido.id}`).update(pedido);
+  }
+  updateOrder(pedido: any) {
+    return this.firestore.doc<any>(`pedidos/${pedido.id}`).update(pedido);
+  }
+
+  getUserProfile(userId: string) {
+    return this.firestore.collection('usuarios').doc(userId).get();
+  }
+
+  //Agregar cualquier objeto
+  async add(data: any, path: string = 'lista_de_espera') {
+    const col = this.firestore.collection(path);
+    const documento = col.doc();
+    data.id = documento.ref.id;
+    await documento.set({ ...data });
+  }
+  // Método todavía no testeado.
+  async addProductosAPedido(
+    id: string,
+    productos: { nombre: string; precio: number }[]
+  ) {
+    try {
+      // Usa arrayUnion para agregar los productos sin sobrescribir el contenido existente
+      await this.firestore.doc(`pedidos/${id}`).update({
+        listaProductos: arrayUnion(...productos),
+      });
+      console.log('Productos añadidos al pedido exitosamente');
+    } catch (error) {
+      console.error('Error al añadir productos al pedido: ', error);
+    }
+  }
   updateNroMesaUsuario(id: number, nroMesa : number) : void{
     try {
       getDocs(query(collection(this.fs, 'usuarios'), where("id", "==", id)))

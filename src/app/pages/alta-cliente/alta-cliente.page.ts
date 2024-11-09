@@ -193,7 +193,7 @@ export class AltaClientePage implements OnInit {
                 });
                 this.emptyInputs();
                 this.isLoading = false;
-                this.router.navigate(['/home']);
+                this.router.navigate(['/ingreso-local']);
               })
               .catch(() => {
                 this.userService.showToast(
