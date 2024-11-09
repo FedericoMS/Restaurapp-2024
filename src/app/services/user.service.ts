@@ -37,20 +37,7 @@ export class UserService {
     private afstorage: AngularFireStorage,
     private af: AngularFirestore,
     private fs: FirestoreService
-  ) {
-    // this.authFire.authState.subscribe((user) => {
-    //   this.isLoggedIn = true;
-    //   if (user != null && user != undefined) {
-    //     let userArray: any = user.email?.split('@');
-    //     this.userName = userArray[0];
-    //     console.log('Hola, soy el usuario: ' + this.userName);
-    //   }
-    //   console.log('Hola, soy el usuario con el mail: ' + user?.email);
-    //   this.email = user?.email;
-    //   // Emitir el usuario a través del BehaviorSubject
-    //   this.userSubject.next(user);
-    // });
-  }
+  ) {}
 
   login({ email, password }: any) {
     return signInWithEmailAndPassword(this.auth, email, password)
@@ -90,7 +77,7 @@ export class UserService {
   }
 
   //Creé este método para obtener cualquier campo de un objeto de firebase
-  async getProperty(field: string): Promise<string> {
+  async getProperty(field : string): Promise<any> {
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );

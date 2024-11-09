@@ -51,6 +51,10 @@
     </div>
   </div>
 
+  <div *ngIf="!this.tienePedidosPendientes()">
+    <h2 class="titulo-lista" style="margin-top: 7rem;">No hay pedidos pendientes de confirmación</h2>
+  </div>
+
   <!-- Spinner de carga -->
   <app-spinner [isLoading]="isLoading"></app-spinner>
 </ion-content>

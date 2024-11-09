@@ -41,10 +41,17 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class IngresoLocalPage implements OnInit {
   private router = inject(Router);
+  private fire = inject(FirestoreService);
   userService = inject(UserService);
-  fire = inject(FirestoreService);
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
+    this.fire.getUserProfile(this.userService.uidUser).subscribe((next) => {
+      console.log(next.data());
+      const aux: any = next.data();
+      if (aux.lista_espera) {
+        this.router.navigateByUrl('/home-cliente-anonimo');
+      }
+    });
   }
 
   async ngOnInit() {

@@ -118,6 +118,7 @@ export class AltaClientePage implements OnInit {
       );
     }
   }
+  
 
   async cargar() {
     if (this.fg.valid || (this.fg.controls['rol'].value == 'anonimo' && this.fg.controls['nombre'].value !== '' && this.fg.controls['img'].value !== '')) {
