@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentButton, IonList,
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class CartaPage implements OnInit {
   idCliente : any = this.userService.uidUser;
   tiempoElaboracion : number = 0;
 
-  constructor(private firestoreService: FirestoreService, public userService : UserService) {}
+  constructor(private firestoreService: FirestoreService, public userService : UserService, private router : Router) {}
 
   async ngOnInit() {
     this.cargarProductos();
@@ -94,6 +94,7 @@ export class CartaPage implements OnInit {
       this.total = 0; // Reiniciar total
       this.tiempoElaboracion = 0;
       this.userService.showToast('Pedido realizado exitosamente', 'lightgreen', 'center', 'success', 'black', true);
+      this.router.navigateByUrl('/home-cliente-anonimo');
     } catch (error) {
       console.error("Error al realizar el pedido:", error);
     }
