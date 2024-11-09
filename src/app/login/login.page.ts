@@ -18,10 +18,6 @@ import { PushService } from '../services/push.service';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
     FormsModule,
   ],

@@ -16,7 +16,7 @@ import { EmailService } from 'src/app/services/email.service';
   templateUrl: './home-duenio-supervisor.page.html',
   styleUrls: ['./home-duenio-supervisor.page.scss'],
   standalone: true,
-  imports: [IonFabList, IonFab, IonFabButton, IonButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
+  imports: [IonFabList, IonFab, IonFabButton, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonContent, CommonModule, FormsModule, SpinnerComponent]
 })
 export class HomeDuenioSupervisorPage implements OnInit {
 

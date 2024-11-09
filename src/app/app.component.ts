@@ -19,9 +19,6 @@ register();
   templateUrl: 'app.component.html',
   standalone: true,
   imports: [
-    IonFabButton,
-    IonFabList,
-    IonFab,
     IonApp,
     IonRouterOutlet,
     SpinnerComponent,

@@ -14,7 +14,7 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
   templateUrl: './home-metre.page.html',
   styleUrls: ['./home-metre.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonFabList, IonFabButton, IonFab, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,SpinnerComponent]
+  imports: [IonIcon, IonFabList, IonFabButton, IonFab, IonContent, CommonModule, FormsModule,SpinnerComponent]
 })
 export class HomeMetrePage implements OnInit {
   listUsersWaiting : Array<any>;
