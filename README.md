@@ -47,23 +47,24 @@
 - ✅  Home cocinero/bartender (hecho parcialmente)
 
 
-### Lautaro García (Nombre de la rama: lautaro)
+### Lautaro García (Nombre de las ramas: lautaro - garcia)
 - ✅ Home metre (lista de espera, asigna mesas)
 - ✅ Chat de mozos/mesas 
 - ✅ Arreglo de visualización del Splash Screen
 - ✅ Limpieza de credenciales al cerrar sesión y reemplazo de botones por imágenes en el inicio de sesión
 
-### Federico Cardozo (Nombre de la rama: cardozo)
+### Federico Cardozo (Nombre de las ramas: cardozo - fede)
 - ✅ Home cliente (cliente y anónimo)
 - ✅ Ingreso al local
 - ✅ Implementación de push notifications (hecho parcialmente)
-- [ ] Redireccionamiento en distintas etapas de cliente/anónimo
+- ✅ Redireccionamiento en distintas etapas de cliente/anónimo
 
 ## Tareas - Tercera Semana (09/11/2024 al 16/11/2024) 
 ### *En proceso de planificación dependiendo de la anterior semana*
 
 ### Federico Soria (Nombre de la rama: soria)
 - [ ]  Home cocinero/bartender
+- [ ]  Funcionalidades para cocinero y bartender
 *A completar*
 
 ### Lautaro García (Nombre de la rama: lautaro)
@@ -72,6 +73,7 @@
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
 - [ ]  Cuenta a pagar de cliente
+- [ ]  Implementación completa de Push Notifications
 *A completar*
 
 

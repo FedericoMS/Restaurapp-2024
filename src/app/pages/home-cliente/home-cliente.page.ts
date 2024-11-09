@@ -37,7 +37,6 @@ import { Alert } from 'src/app/clases/alert';
     IonText,
     IonIcon,
     IonButton,
-    IonTabButton,
     IonContent,
     IonHeader,
     IonTitle,

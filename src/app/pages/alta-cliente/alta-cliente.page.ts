@@ -38,14 +38,14 @@ import { Router } from '@angular/router';
   templateUrl: './alta-cliente.page.html',
   styleUrls: ['./alta-cliente.page.scss'],
   standalone: true,
-  imports: [IonInput, 
+  imports: 
+  [ 
     IonButtons,
     IonSegment,
     IonLabel,
     IonSegmentButton,
     IonIcon,
     IonButton,
-    IonContent,
     IonHeader,
     IonTitle,
     IonToolbar,

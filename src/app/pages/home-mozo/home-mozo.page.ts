@@ -16,7 +16,7 @@ import { chatbubbleOutline } from 'ionicons/icons';
   templateUrl: './home-mozo.page.html',
   styleUrls: ['./home-mozo.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonButton, IonCardTitle, IonCardSubtitle, IonCardHeader, IonCard, IonFabList, IonFab, IonFabButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
+  imports: [IonIcon, IonButton, IonCard, IonFabList, IonFab, IonFabButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, SpinnerComponent]
 })
 export class HomeMozoPage implements OnInit {
 

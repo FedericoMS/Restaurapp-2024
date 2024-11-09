@@ -27,16 +27,13 @@ import { addIcons } from 'ionicons';
   standalone: true,
   imports: [
     IonIcon,
-    IonItem,
     IonRange,
     IonButton,
-    IonContent,
     IonHeader,
     IonTitle,
     IonToolbar,
     CommonModule,
     FormsModule,
-    SpinnerComponent,
   ],
 })
 export class EncuestaClientesPage implements OnInit {

@@ -38,7 +38,6 @@ import { addIcons } from 'ionicons';
     IonFabButton,
     IonIcon,
     IonFab,
-    IonContent,
     IonHeader,
     IonTitle,
     IonToolbar,

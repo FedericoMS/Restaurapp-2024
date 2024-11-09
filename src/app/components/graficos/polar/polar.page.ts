@@ -15,10 +15,6 @@ import { Chart, ChartType } from 'chart.js/auto';
   styleUrls: ['./polar.page.scss'],
   standalone: true,
   imports: [
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
     FormsModule,
   ],
