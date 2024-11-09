@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
-  signInAnonymously
+  signInAnonymously,
 } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -39,28 +39,24 @@ export class UserService {
     private fs: FirestoreService
   ) {}
 
-  signInAsAnonymously(){
+  signInAsAnonymously() {
     return signInAnonymously(this.auth);
   }
 
-  createAnonymously(anonymously: any, uid : string) {
-    return this.af
-      .collection('usuarios')
-      .doc(uid)
-      .set({
-        id: uid,
-        apellido: '',
-        nombre: anonymously.nombre,
-        dni: '',
-        rol: anonymously.rol,
-        email: '',
-        password: '',
-        foto_url: anonymously.foto_url,
-        estadoAprobacion: anonymously.estadoAprobacion,
-      })
+  createAnonymously(anonymously: any, uid: string) {
+    this.uidUser = uid;
+    return this.af.collection('usuarios').doc(uid).set({
+      id: uid,
+      apellido: '',
+      nombre: anonymously.nombre,
+      dni: '',
+      rol: anonymously.rol,
+      email: '',
+      password: '',
+      foto_url: anonymously.foto_url,
+      estadoAprobacion: anonymously.estadoAprobacion,
+    });
   }
-
-
 
   login({ email, password }: any) {
     return signInWithEmailAndPassword(this.auth, email, password)
@@ -93,7 +89,7 @@ export class UserService {
   }
 
   //Creé este método para obtener cualquier campo de un objeto de firebase
-  async getProperty(field : string): Promise<any> {
+  async getProperty(field: string): Promise<any> {
     const userProfileSnapshot: any = await lastValueFrom(
       this.fs.getUserProfile(this.uidUser)
     );
@@ -174,6 +170,7 @@ export class UserService {
     )
       .then((data) => {
         if (data != null) {
+          this.uidUser = data.user.uid;
           // Guardar el nuevo usuario en Firestore
           this.af
             .collection('usuarios')
