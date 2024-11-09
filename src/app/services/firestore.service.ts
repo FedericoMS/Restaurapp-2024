@@ -164,6 +164,10 @@ export class FirestoreService {
     return this.firestore.collection('usuarios').doc(userId).get();
   }
 
+  getUserProfile2(userId: string) {
+    return this.firestore.collection('usuarios').doc(userId).valueChanges();
+  }
+
   //Agregar cualquier objeto
   async add(data: any, path: string = 'lista_de_espera') {
     const col = this.firestore.collection(path);

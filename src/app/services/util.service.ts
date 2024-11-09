@@ -17,7 +17,7 @@ export class UtilService {
   constructor() {}
 
   estadoPedido() {
-    if (this.pedido) Alert.comun('Su estado esta en ' + this.pedido.estado);
+    if (this.pedido) Alert.comun('Su estado está ' + this.pedido.estado);
     else {
       Alert.comun('No hay pedido');
     }
