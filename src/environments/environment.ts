@@ -4,15 +4,14 @@
 
 export const environment = {
   production: false,
-  firebase : {
-    apiKey: "AIzaSyDPv8fGdo3mb76upJou0gsZm98Vxv5JEP0",
-    authDomain: "pps-sp-2024.firebaseapp.com",
-    projectId: "pps-sp-2024",
-    storageBucket: "pps-sp-2024.appspot.com",
-    messagingSenderId: "251184336543",
-    appId: "1:251184336543:web:524b1e99eeb2de3966dcaa"
+  firebase: {
+    projectId: 'relevamiento-9920e',
+    appId: '1:660598558698:web:54561fd89a0bbc29a8ac93',
+    storageBucket: 'relevamiento-9920e.appspot.com',
+    apiKey: 'AIzaSyDAqv6022dR1FYpNYNSUF3omUkaGeYF6Ww',
+    authDomain: 'relevamiento-9920e.firebaseapp.com',
+    messagingSenderId: '660598558698',
   },
-  fcmUrl: 'https://fcm.googleapis.com/v1/projects/pps-sp-2024/messages:send',
 };
 
 /*

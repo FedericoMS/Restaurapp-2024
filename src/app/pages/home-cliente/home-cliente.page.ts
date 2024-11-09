@@ -55,7 +55,7 @@ export class HomeClientePage implements OnInit {
   fire = inject(FirestoreService);
   userService = inject(UserService);
   mesaAsignada = this.userService.nroMesa > 0;
-  sub_mesas?: Subscription;
+  sub_user?: Subscription;
   sub_pedidos?: Subscription;
   pedido?: Pedido;
   mostrarPedirMesa = false;
@@ -65,28 +65,30 @@ export class HomeClientePage implements OnInit {
     addIcons({ qrCodeOutline, chatbubbleOutline });
   }
   ngOnDestroy(): void {
-    this.sub_mesas?.unsubscribe();
     this.sub_pedidos?.unsubscribe();
+    this.sub_user?.unsubscribe();
   }
 
   ngOnInit() {
-    this.fire.getUserProfile2(this.userService.uidUser).subscribe((next) => {
-      const aux: Usuario = next as Usuario;
-      this.cliente = aux;
-      this.userService.nroMesa = aux.nroMesa;
+    this.sub_user = this.fire
+      .getUserProfile2(this.userService.uidUser)
+      .subscribe((next) => {
+        const aux: Usuario = next as Usuario;
+        this.cliente = aux;
+        this.userService.nroMesa = aux.nroMesa;
 
-      if (aux.lista_espera) {
-        this.flagMesa = true;
-      }
-      if (aux.nroMesa) {
-        this.msj = 'Su mesa es la número ' + aux.nroMesa;
-        this.msjColor = 'primary';
-        this.fire.updateUser(this.cliente);
-      } else {
-        this.msj = 'Mesa sin asignar';
-        this.msjColor = 'danger';
-      }
-    });
+        if (aux.lista_espera) {
+          this.flagMesa = true;
+        }
+        if (aux.nroMesa) {
+          this.msj = 'Su mesa es la número ' + aux.nroMesa;
+          this.msjColor = 'primary';
+          this.fire.updateUser(this.cliente);
+        } else {
+          this.msj = 'Mesa sin asignar';
+          this.msjColor = 'danger';
+        }
+      });
     this.get_pedidos();
   }
 
