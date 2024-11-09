@@ -23,7 +23,7 @@
                 
                 <div class="chat-body">
                   <div class="chat-message">
-                      @if (message.username != this.userService.getUserName()) {
+                      @if (message.username.toLowerCase() !== userService.getUserName().toLowerCase()) {
                         @if (message.nroMesa !== 0) {
                           <h5>Mesa {{message.nroMesa}} : {{message.username | titlecase}}</h5>
                         }@else {

@@ -24,7 +24,7 @@ export class ChatPage implements OnInit, AfterViewInit {
   arrayMessages!: any;
   message! : string;
 
-  constructor(private router : Router,private firestore : FirestoreService, public userService : UserService) { 
+  constructor(private router : Router,private firestore : FirestoreService, public userService : UserService,private location : Location) { 
     addIcons({arrowBackCircleOutline,sendOutline});
     this.message = '';
   }
@@ -57,7 +57,7 @@ export class ChatPage implements OnInit, AfterViewInit {
 
 
   goBack() : void{
-    this.router.navigateByUrl('home-mozo');
+    this.location.back();
   }
 
   sendMessage() : void{
