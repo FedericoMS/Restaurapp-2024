@@ -9,9 +9,21 @@ import {
 } from '@angular/fire/storage';
 import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
-import {  Firestore, collection, collectionData,query,orderBy, addDoc, getDocs, where, QuerySnapshot, updateDoc} from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  collectionData,
+  query,
+  orderBy,
+  addDoc,
+  getDocs,
+  where,
+  QuerySnapshot,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { map } from 'rxjs';
 import { arrayUnion } from 'firebase/firestore';
+import { PushService } from './push.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +31,7 @@ import { arrayUnion } from 'firebase/firestore';
 export class FirestoreService {
   constructor(private firestore: AngularFirestore, private fs: Firestore) {}
   storage: AngularFireStorage = inject(AngularFireStorage);
+  // push = inject(PushService); //linea 136
 
   //Agregar un usuario
   async addObject(object: any, databaseName: string) {
@@ -117,7 +130,8 @@ export class FirestoreService {
     username: string,
     message: string,
     id_user: string,
-    nroMesa: number
+    nroMesa: number,
+    rol: string = ''
   ): void {
     try {
       const date = new Date();
@@ -128,6 +142,14 @@ export class FirestoreService {
         id_user: id_user,
         nroMesa: nroMesa,
       });
+      //Enviar notificacion a los mozos
+      if (rol === 'cliente') {
+        // this.push.send_push_notification(
+        //   'Nuevo mensaje',
+        //   'Respondele al cliente!',
+        //   'cliente'
+        // );
+      }
     } catch (error) {
       console.error('Error adding document: ', error);
     }
@@ -183,18 +205,17 @@ export class FirestoreService {
       console.error('Error al añadir productos al pedido: ', error);
     }
   }
-  updateNroMesaUsuario(id: number, nroMesa : number) : void{
+  updateNroMesaUsuario(id: number, nroMesa: number): void {
     try {
-      getDocs(query(collection(this.fs, 'usuarios'), where("id", "==", id)))
-      .then((querySnapshot: QuerySnapshot<DocumentData>) => {
+      getDocs(
+        query(collection(this.fs, 'usuarios'), where('id', '==', id))
+      ).then((querySnapshot: QuerySnapshot<DocumentData>) => {
         querySnapshot.forEach((doc) => {
           updateDoc(doc.ref, { nroMesa: nroMesa });
         });
-      })
-
+      });
     } catch (error) {
-      console.error("Error updating user verification by admin: ", error);
+      console.error('Error updating user verification by admin: ', error);
     }
   }
-
 }

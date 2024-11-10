@@ -31,7 +31,6 @@ export class PushService {
   ) {}
 
   async initialize(): Promise<void> {
-    this.addListeners();
     // Previamente, se verifica que se esté utilizando un dispositivo móvil y que el usuario no tenga un token previo
     if (this.platform.is('capacitor') && this.user && this.user.token === '') {
       const result = await PushNotifications.requestPermissions();
@@ -39,6 +38,7 @@ export class PushService {
         await PushNotifications.register();
       }
     }
+    this.addListeners();
   }
 
   getUser(): void {
@@ -114,7 +114,7 @@ export class PushService {
     );
   }
 
-  enviar_notifiacion(title: string, msj: string, token: string) {
+  private send_notification(title: string, msj: string, token: string) {
     const url =
       'https://mi-servidor-notificaciones-1086868851593.us-central1.run.app/notify';
 
@@ -128,17 +128,15 @@ export class PushService {
         console.log(res);
       });
   }
-  /*
-    //RESOLVER lo de fcmUrl
-   sendPushNotification(req : any): Observable<any> {
-     console.log('push notification');
-     return this.http.post<Observable<any>>(environment.fcmUrl, req, {
-       headers: {
-         // eslint-disable-next-line @typescript-eslint/naming-convention
-         Authorization: `key=${environment.fcmServerKey}`,
-         // eslint-disable-next-line @typescript-eslint/naming-convention
-         'Content-Type': 'application/json',
-       },
-     });
-   }*/
+
+  send_push_notification(title: string, msj: string, rol: string) {
+    this.firestoreService.getUsuarios().forEach((item: Usuario[]) => {
+      const users = item as Usuario[];
+      users.forEach((usuario) => {
+        if (usuario.rol === rol) {
+          this.send_notification(title, msj, usuario.token);
+        }
+      });
+    });
+  }
 }
