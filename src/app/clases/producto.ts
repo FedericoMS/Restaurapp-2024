@@ -9,7 +9,8 @@ export class Producto {
     tiempoPreparacion: number;
     tipo : string;
     estado : string; 
-    //Estado puede ser: en preparación, terminado, cancelado
+    //Estado puede ser: rechazado, pendiente de confirmación, en preparación, preparado
+                      //recibido y pagado 
 
     constructor() {
         this.descripcion = '';

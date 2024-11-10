@@ -197,4 +197,22 @@ export class FirestoreService {
     }
   }
 
+  async updateOrderPartial(orderId: string, data: any): Promise<void> {
+    await this.firestore.collection('pedidos').doc(orderId).update(data);
+  }
+  
+
+  async getPedidoById(orderId: string): Promise<any> {
+    const orderRef = this.firestore.collection('pedidos').doc(orderId);
+    const snapshot : any = await orderRef.get().toPromise();
+    
+    if (snapshot.exists) {
+      return snapshot.data();
+    } else {
+      console.error('Pedido no encontrado');
+      return null;
+    }
+  }
+  
+
 }

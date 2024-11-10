@@ -19,10 +19,10 @@
 <ion-content>
   <!-- Contenedor de la lista de pedidos -->
   <div class="pedidos-container" *ngIf="listaPedidos">
-    <h2 class="titulo-lista">PEDIDOS PENDIENTES</h2>
+    <h2 class="titulo-lista">PEDIDOS</h2>
     <!-- Iterar sobre cada pedido en la lista -->
     <div *ngFor="let item of listaPedidos">
-      <ion-card class="tarjeta-pedido" *ngIf="item.estado == 'pendiente de confirmación'">
+      <ion-card class="tarjeta-pedido">
         <!-- Información del pedido -->
         <div class="pedido-detalles">
           <div class="pedido-info">
@@ -40,9 +40,10 @@
               </tr>
             </table>
             <p class="total">TOTAL: ${{item.monto}}</p>
+            <p class="total" *ngIf="item.estado == 'preparado'">Listo para entregar</p>
           </div>
           <!-- Botones de aprobar y rechazar -->
-          <div class="botones">
+          <div class="botones" *ngIf="item.estado == 'pendiente'">
             <button (click)="approveOrder(item)" class="boton-aprobar">Aprobar</button>
             <button (click)="rejectOrder(item)" class="boton-rechazar">Rechazar</button>
           </div>
@@ -51,9 +52,9 @@
     </div>
   </div>
 
-  <div *ngIf="!this.tienePedidosPendientes()">
+  <!-- <div *ngIf="!this.tienePedidosPendientes()">
     <h2 class="titulo-lista" style="margin-top: 7rem;">No hay pedidos pendientes de confirmación</h2>
-  </div>
+  </div> -->
 
   <!-- Spinner de carga -->
   <app-spinner [isLoading]="isLoading"></app-spinner>

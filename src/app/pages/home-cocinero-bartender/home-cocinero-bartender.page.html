@@ -39,12 +39,13 @@
                 <td>🕒 {{producto.tiempoPreparacion}} mins</td>
                 <td>
                   <button 
-                    class="boton-aprobar" 
-                    (click)="updateProductStatus(pedido, producto.id)"
-                    [disabled]="producto.estado === 'preparado'"
-                  >
-                    Terminar
-                  </button>
+                  class="boton-aprobar" 
+                  (click)="updateProductStatus(pedido, producto.nombre)"
+                  [disabled]="producto.estado === 'preparado'"
+                >
+                  Terminar
+                </button>
+                
                 </td>
               </tr>
               

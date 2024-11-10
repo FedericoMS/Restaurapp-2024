@@ -16,8 +16,8 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 })
 export class HomeCocineroBartenderPage implements OnInit {
 
-  userRol : any = '';
-  isLoading : boolean = false;
+  userRol: any = '';
+  isLoading: boolean = false;
   listaPedidos: any[] = [];
   pedidosFiltrados: any[] = [];
 
@@ -38,26 +38,26 @@ export class HomeCocineroBartenderPage implements OnInit {
   async ngOnInit() {
     this.userRol = await this.userService.getRole();
     console.log('Mi rol es: ' + this.userRol);
-    
+
     setTimeout(() => {
-      this.isLoading = false;      
+      this.isLoading = false;
     }, 2600);
-  
+
     this.firestoreService.getPedidos().subscribe((pedidos: any) => {
       this.listaPedidos = pedidos;
-      this.filtrarProductos(); 
+      this.filtrarProductos();
     });
 
-  // Usar await para obtener los valores resueltos antes de imprimir
-  const userId = await this.userService.getProperty('id');
-  const userRol = await this.userService.getProperty('rol');
-  const nroMesa = await this.userService.getProperty('nroMesa');
+    // Usar await para obtener los valores resueltos antes de imprimir
+    const userId = await this.userService.getProperty('id');
+    const userRol = await this.userService.getProperty('rol');
+    //const nroMesa = await this.userService.getProperty('nroMesa');
 
-  console.log(`Mi id es: ${userId}`);
-  console.log(`Mi Rol es: ${userRol}`);
-  console.log(`Mi mesa es: ${nroMesa}`);
+    console.log(`Mi id es: ${userId}`);
+    console.log(`Mi Rol es: ${userRol}`);
+    //console.log(`Mi mesa es: ${nroMesa}`);
   }
-  
+
 
   filtrarProductos() {
     this.pedidosFiltrados = this.listaPedidos
@@ -66,11 +66,11 @@ export class HomeCocineroBartenderPage implements OnInit {
         const productosFiltrados = pedido.listaProductos.filter((producto: { tipo: string; estado: string }) => {
           const esProductoParaCocinero = (producto.tipo === 'comida' || producto.tipo === 'postre') && producto.estado === 'en preparación';
           const esProductoParaBartender = producto.tipo === 'bebida' && producto.estado === 'en preparación';
-          
+
           // Retorna true si el producto corresponde al rol actual y está en "en preparación"
           return this.userRol === 'cocinero' ? esProductoParaCocinero : esProductoParaBartender;
         });
-  
+
         // Si hay productos filtrados, devuelve el pedido con solo esos productos; si no, retorna null
         return productosFiltrados.length > 0 ? { ...pedido, listaProductos: productosFiltrados } : null;
       })
@@ -78,47 +78,67 @@ export class HomeCocineroBartenderPage implements OnInit {
   }
 
   tieneProductosEnPreparacion(): boolean {
-    return this.listaPedidos && this.listaPedidos.some((pedido: any) => 
+    return this.listaPedidos && this.listaPedidos.some((pedido: any) =>
       pedido.listaProductos && pedido.listaProductos.some((producto: any) => producto.estado === 'en preparación')
     );
   }
-  
-  
-  
-  
 
-  updateProductStatus(pedido: any, productoId: string) {
-    /*
-    // Clonamos el pedido para evitar modificar el original
-    let modOrder: any = { ...pedido };
+
+
+
+
+  async updateProductStatus(pedido: any, productoNombre: string) {
+    try {
+      const pedidoData = await this.firestoreService.getPedidoById(pedido.id);
   
-    // Encontramos el producto específico y actualizamos solo su estado
-    modOrder.listaProductos = modOrder.listaProductos.map((producto: any) =>
-      producto.id === productoId ? { ...producto, estado: 'preparado' } : producto
-    );
+      if (!pedidoData) return; 
   
-    // Verificamos si todos los productos están en "preparado"
-    const todosProductosPreparados = modOrder.listaProductos.every((producto: any) => producto.estado === 'preparado');
+      const listaProductosActualizada = [...pedidoData.listaProductos];  
+      const productoIndex = listaProductosActualizada.findIndex((producto: any) => producto.nombre == productoNombre && producto.estado == 'en preparación');
+      
+      if (productoIndex !== -1) {
+        listaProductosActualizada[productoIndex].estado = 'preparado';
+        const todosProductosPreparados : boolean = listaProductosActualizada.every((producto: any) => producto.estado === 'preparado');
+        const nuevoEstadoPedido = todosProductosPreparados ? 'preparado' : 'en preparación';
   
-    // Si todos los productos están "preparado", actualizamos el estado del pedido a "preparado"
-    modOrder.estado = todosProductosPreparados ? 'preparado' : 'en preparación';
+        // Actualizar en Firestore el array completo con el producto actualizado y el estado del pedido si es necesario
+        await this.firestoreService.updateOrderPartial(pedido.id, {
+          listaProductos: listaProductosActualizada,
+          estado: nuevoEstadoPedido
+        });
   
-    // Actualizamos el pedido en Firestore con el cambio en el producto y el estado del pedido si es necesario
-    this.firestoreService.updateOrderPartial(pedido.id, productoId, 'preparado', modOrder.estado);
+        // Mostrar confirmación
+        Swal.fire({
+          title: "Producto terminado!",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        });
   
-    // Mensaje de confirmación
-    Swal.fire({
-      title: "Producto terminado!",
-      confirmButtonText: "Continuar",
-      heightAuto: false
-    });*/
+      } else {
+        console.error("Producto no encontrado en el pedido.");
+      }
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error);
+      Swal.fire({
+        title: "Error al actualizar el producto",
+        text: "Intenta nuevamente",
+        icon: "error",
+        confirmButtonText: "OK",
+        heightAuto: false
+      });
+    }
   }
   
   
-  
-  
-  
-  
-
 
 }
+
+
+
+
+
+
+
+
+
+
