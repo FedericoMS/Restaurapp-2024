@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/storage';
 import { Encuesta } from '../clases/encuesta';
 import { Usuario } from '../clases/usuario';
-import {  Firestore, collection, collectionData,query,orderBy, addDoc, getDocs, where, QuerySnapshot, updateDoc} from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, query, orderBy, addDoc, getDocs, where, QuerySnapshot, updateDoc } from '@angular/fire/firestore';
 import { map } from 'rxjs';
 import { arrayUnion } from 'firebase/firestore';
 
@@ -17,7 +17,7 @@ import { arrayUnion } from 'firebase/firestore';
   providedIn: 'root',
 })
 export class FirestoreService {
-  constructor(private firestore: AngularFirestore, private fs: Firestore) {}
+  constructor(private firestore: AngularFirestore, private fs: Firestore) { }
   storage: AngularFireStorage = inject(AngularFireStorage);
 
   //Agregar un usuario
@@ -183,14 +183,14 @@ export class FirestoreService {
       console.error('Error al añadir productos al pedido: ', error);
     }
   }
-  updateNroMesaUsuario(id: number, nroMesa : number) : void{
+  updateNroMesaUsuario(id: number, nroMesa: number): void {
     try {
       getDocs(query(collection(this.fs, 'usuarios'), where("id", "==", id)))
-      .then((querySnapshot: QuerySnapshot<DocumentData>) => {
-        querySnapshot.forEach((doc) => {
-          updateDoc(doc.ref, { nroMesa: nroMesa });
-        });
-      })
+        .then((querySnapshot: QuerySnapshot<DocumentData>) => {
+          querySnapshot.forEach((doc) => {
+            updateDoc(doc.ref, { nroMesa: nroMesa });
+          });
+        })
 
     } catch (error) {
       console.error("Error updating user verification by admin: ", error);
@@ -200,12 +200,12 @@ export class FirestoreService {
   async updateOrderPartial(orderId: string, data: any): Promise<void> {
     await this.firestore.collection('pedidos').doc(orderId).update(data);
   }
-  
+
 
   async getPedidoById(orderId: string): Promise<any> {
     const orderRef = this.firestore.collection('pedidos').doc(orderId);
-    const snapshot : any = await orderRef.get().toPromise();
-    
+    const snapshot: any = await orderRef.get().toPromise();
+
     if (snapshot.exists) {
       return snapshot.data();
     } else {
@@ -214,30 +214,12 @@ export class FirestoreService {
     }
   }
 
-/*  updateTableStatus(nroMesa: number) {
-    this.firestore.collection('mesas', ref => ref.where('nroMesa', '==', nroMesa))
-        .get()
-        .subscribe(snapshot => {
-            if (!snapshot.empty) {
-                // Obtenemos el ID del primer documento que coincide con el nroMesa
-                const mesaId = snapshot.docs[0].id;
-                
-                // Actualizamos el estado de la mesa a 'libre'
-                this.firestore.doc(`mesas/${mesaId}`).update({ estado: 'libre' })
-                    .then(() => {
-                        console.log(`El estado de la mesa ${nroMesa} ha sido actualizado a 'libre'`);
-                    })
-                    .catch(error => {
-                        console.error('Error actualizando el estado de la mesa:', error);
-                    });
-            } else {
-                console.log(`No se encontró una mesa con el número ${nroMesa}`);
-            }
-        }, error => {
-            console.error('Error obteniendo la mesa:', error);
-        });
-}*/
-
-  
+  updateTableStatus(nroMesa: number) {
+    this.firestore.doc(`mesas/${nroMesa}`).update({ estado: 'libre' })
+  }
 
 }
+
+
+
+

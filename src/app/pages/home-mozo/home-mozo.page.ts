@@ -133,6 +133,7 @@ export class HomeMozoPage implements OnInit {
         modOrder.estado = 'finalizado';     
         console.log(modOrder.estado);   
         this.firestoreService.updateOrder(modOrder);
+        this.firestoreService.updateTableStatus(modOrder.nroMesa);
         //AGREGAR FUNCIÓN QUE LIBERE LA MESA ACTUAL
     //    this.firestoreService.updateDatabase('mesas', )
         Swal.fire({
