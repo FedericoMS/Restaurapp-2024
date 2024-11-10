@@ -10,7 +10,7 @@ export class Pedido {
 
 
     //estados de 'estado': rechazado, pendiente de confirmación, en preparación,
-                         //preparado, en entrega, recibido, pagado
+                         //preparado, recibido, pagado, finalizado
     constructor()
     {
         this.estado = '';

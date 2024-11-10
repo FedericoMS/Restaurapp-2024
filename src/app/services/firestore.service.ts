@@ -213,6 +213,31 @@ export class FirestoreService {
       return null;
     }
   }
+
+/*  updateTableStatus(nroMesa: number) {
+    this.firestore.collection('mesas', ref => ref.where('nroMesa', '==', nroMesa))
+        .get()
+        .subscribe(snapshot => {
+            if (!snapshot.empty) {
+                // Obtenemos el ID del primer documento que coincide con el nroMesa
+                const mesaId = snapshot.docs[0].id;
+                
+                // Actualizamos el estado de la mesa a 'libre'
+                this.firestore.doc(`mesas/${mesaId}`).update({ estado: 'libre' })
+                    .then(() => {
+                        console.log(`El estado de la mesa ${nroMesa} ha sido actualizado a 'libre'`);
+                    })
+                    .catch(error => {
+                        console.error('Error actualizando el estado de la mesa:', error);
+                    });
+            } else {
+                console.log(`No se encontró una mesa con el número ${nroMesa}`);
+            }
+        }, error => {
+            console.error('Error obteniendo la mesa:', error);
+        });
+}*/
+
   
 
 }

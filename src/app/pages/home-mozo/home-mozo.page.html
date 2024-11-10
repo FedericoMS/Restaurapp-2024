@@ -40,12 +40,14 @@
               </tr>
             </table>
             <p class="total">TOTAL: ${{item.monto}}</p>
-            <p class="total" *ngIf="item.estado == 'preparado'">Listo para entregar</p>
+            <p class="total" *ngIf="item.estado == 'preparado'" style="font-size: 1.6rem">Listo para entregar</p>
+            <p class="total" *ngIf="item.estado == 'recibido'" style="font-size: 1.6rem">Pedido recibido</p>
           </div>
           <!-- Botones de aprobar y rechazar -->
-          <div class="botones" *ngIf="item.estado == 'pendiente'">
-            <button (click)="approveOrder(item)" class="boton-aprobar">Aprobar</button>
-            <button (click)="rejectOrder(item)" class="boton-rechazar">Rechazar</button>
+          <div class="botones">
+            <button (click)="confirmPayment(item)" class="boton-aprobar" *ngIf="item.estado == 'pagado'">Confirmar pago</button>
+            <button (click)="approveOrder(item)" class="boton-aprobar" *ngIf="item.estado == 'pendiente'">Aprobar</button>
+            <button (click)="rejectOrder(item)" class="boton-rechazar" *ngIf="item.estado == 'pendiente'">Rechazar</button>
           </div>
         </div>
       </ion-card>

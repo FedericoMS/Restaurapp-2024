@@ -118,6 +118,32 @@ export class HomeMozoPage implements OnInit {
     });
   }
 
+  confirmPayment(pedido : any)
+  {
+    let modOrder : any = pedido;
+    console.log(modOrder);
+    Swal.fire({
+      title: "¿Estás seguro de que quieres confirmar el pago de este pedido?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modOrder.estado = 'finalizado';     
+        console.log(modOrder.estado);   
+        this.firestoreService.updateOrder(modOrder);
+        //AGREGAR FUNCIÓN QUE LIBERE LA MESA ACTUAL
+    //    this.firestoreService.updateDatabase('mesas', )
+        Swal.fire({
+          title: "Pedido finalizado",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
+  }
+
   goChat(){
     this.router.navigateByUrl('chat');
   }
