@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   ActionPerformed,
   PushNotifications,
@@ -6,14 +6,9 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { Platform } from '@ionic/angular';
-import { Firestore, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { FirestoreService } from './firestore.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { UserService } from './user.service';
 import { Usuario } from '../clases/usuario';
 
 @Injectable({
@@ -21,35 +16,40 @@ import { Usuario } from '../clases/usuario';
 })
 export class PushService {
   private user?: Usuario;
+  private token: string = '';
 
   constructor(
-    private firestoreService: FirestoreService,
     private platform: Platform,
-    public userService: UserService,
     private http: HttpClient,
     public afs: AngularFirestore
-  ) {}
+  ) {
+    this.initialize();
+  }
 
   async initialize(): Promise<void> {
-    this.addListeners();
     // Previamente, se verifica que se esté utilizando un dispositivo móvil y que el usuario no tenga un token previo
-    if (this.platform.is('capacitor') && this.user && this.user.token === '') {
-      const result = await PushNotifications.requestPermissions();
-      if (result.receive === 'granted') {
-        await PushNotifications.register();
-      }
+    const result = await PushNotifications.requestPermissions();
+    if (result.receive === 'granted') {
+      await PushNotifications.register();
     }
+    this.addListeners();
   }
 
   getUser(uidUser: string): void {
-    console.log('entro');
     this.afs
       .collection('usuarios')
       .doc(uidUser)
-      .valueChanges()
+      .get()
       .subscribe((usuario) => {
-        this.user = usuario as Usuario;
-        this.initialize();
+        this.user = usuario.data() as Usuario;
+        //Guardo el token en el usuario
+        if (this.user) {
+          this.user.token = this.token;
+          this.afs
+            .collection('usuarios')
+            .doc(this.user.id)
+            .update({ ...this.user });
+        }
       });
   }
 
@@ -59,12 +59,7 @@ export class PushService {
       'registration',
       async (token: Token) => {
         console.log('Registration token: ', token.value);
-        //Guardo el token en el usuario
-        if (this.user) {
-          this.user.token = token.value;
-          console.log('usuario', this.user);
-          this.firestoreService.updateDatabase('usuarios', this.user);
-        }
+        this.token = token.value;
       }
     );
     //Pasa esto cuando el registro de las notificaciones push finaliza con errores
@@ -130,13 +125,19 @@ export class PushService {
   }
 
   send_push_notification(title: string, msj: string, rol: string) {
-    this.firestoreService.getUsuarios().forEach((item: Usuario[]) => {
-      const users = item as Usuario[];
-      users.forEach((usuario) => {
-        if (usuario.rol === rol) {
-          this.send_notification(title, msj, usuario.token);
-        }
+    let flag = true;
+    this.afs
+      .collection('usuarios')
+      .get()
+      .subscribe((snapshot) => {
+        snapshot.forEach((item) => {
+          const user = item.data() as Usuario;
+          if (flag && user.rol === rol && user.token !== '') {
+            this.send_notification(title, msj, user.token);
+            flag = false;
+            console.log('push notification: ', title, ' : ', msj);
+          }
+        });
       });
-    });
   }
 }

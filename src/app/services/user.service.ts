@@ -65,7 +65,6 @@ export class UserService {
       .then((u) => {
         this.isLoggedIn = true;
         this.uidUser = u.user.uid;
-        console.log('uid: ', this.uidUser);
         //Obtengo el usuario y guardo el token en la db
         this.push.getUser(u.user.uid);
       })

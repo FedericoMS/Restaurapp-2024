@@ -62,7 +62,7 @@ export class AltaClientePage implements OnInit {
   list_roles = Usuario.get_roles();
   foto_url: string = '';
   isLoading: boolean;
-  push = inject(PushService); //linea 169 y 206
+  push = inject(PushService); //linea 169
   constructor(
     private firestore: FirestoreService,
     private utilService: UtilService,
@@ -202,7 +202,6 @@ export class AltaClientePage implements OnInit {
                 });
                 this.emptyInputs();
                 this.isLoading = false;
-                //Enviar notificacion al metre
                 this.router.navigate(['/ingreso-local']);
               })
               .catch(() => {
@@ -287,7 +286,7 @@ export class AltaClientePage implements OnInit {
     // Enviar notificacion a los dueños y supervisores
     this.push.send_push_notification(
       'Nuevo cliente',
-      'Apruba o rechaza al nuevo cliente!',
+      'Aprueba o rechaza al nuevo cliente!',
       'dueño'
     );
   }

@@ -70,7 +70,6 @@ export class IngresoLocalPage implements OnInit {
     const data = await this.util.scan();
     if (data === 'restaurapp') {
       this.enviar_notificacion_metre();
-
       this.router.navigateByUrl('/home-cliente-anonimo', { replaceUrl: true });
     } else {
       this.util.msjError(
