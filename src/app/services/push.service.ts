@@ -10,6 +10,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Usuario } from '../clases/usuario';
+import { AppState, App } from '@capacitor/app';
 
 @Injectable({
   providedIn: 'root',
@@ -69,23 +70,33 @@ export class PushService {
     //Esto ocurre cuando el dispositivo móvil recibe una notificación push
     await PushNotifications.addListener(
       'pushNotificationReceived',
-      (notification: PushNotificationSchema) => {
+      async (notification: PushNotificationSchema) => {
         //Este evento solo se activa cuando tenemos la app en primer plano
         console.log('Push notification received: ', notification);
         console.log('data: ', notification.data);
+        //Detecta el estado de la app
+        const appState = await App.getState();
         //Esto se hace en el caso de que querramos que nos aparezca la notificación en la task bar del celular ya que por defecto las push en primer plano no lo hacen, de no ser necesario esto se puede sacar.
-        LocalNotifications.schedule({
-          notifications: [
-            {
-              title: notification.title || '',
-              body: notification.body || '',
-              id: new Date().getMilliseconds(),
-              extra: {
-                data: notification.data,
+        if (appState.isActive) {
+          // La app está en primer plano
+          LocalNotifications.schedule({
+            notifications: [
+              {
+                title: notification.title || '',
+                body: notification.body || '',
+                id: new Date().getTime(),
+                extra: {
+                  data: notification.data,
+                },
               },
-            },
-          ],
-        });
+            ],
+          });
+        } else {
+          // La app está en segundo plano, no se necesita programar la notificación local
+          console.log(
+            'App en segundo plano, solo se muestra la notificación push'
+          );
+        }
       }
     );
     //Cuando se realiza una accion sobre la notificación push sucede lo siguiente
@@ -125,16 +136,14 @@ export class PushService {
   }
 
   send_push_notification(title: string, msj: string, rol: string) {
-    let flag = true;
     this.afs
       .collection('usuarios')
       .get()
       .subscribe((snapshot) => {
         snapshot.forEach((item) => {
           const user = item.data() as Usuario;
-          if (flag && user.rol === rol && user.token !== '') {
+          if (user.rol === rol && user.token !== '') {
             this.send_notification(title, msj, user.token);
-            flag = false;
             console.log('push notification: ', title, ' : ', msj);
           }
         });
