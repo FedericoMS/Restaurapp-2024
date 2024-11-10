@@ -113,6 +113,21 @@ export class PushService {
       }
     );
   }
+
+  enviar_notifiacion(title: string, msj: string, token: string) {
+    const url =
+      'https://mi-servidor-notificaciones-1086868851593.us-central1.run.app/notify';
+
+    this.http
+      .post(url, {
+        title: title,
+        body: msj,
+        token: token,
+      })
+      .forEach((res) => {
+        console.log(res);
+      });
+  }
   /*
     //RESOLVER lo de fcmUrl
    sendPushNotification(req : any): Observable<any> {
