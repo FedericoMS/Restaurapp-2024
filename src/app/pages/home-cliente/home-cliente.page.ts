@@ -57,6 +57,7 @@ export class HomeClientePage implements OnInit {
   mesaAsignada = this.userService.nroMesa > 0;
   sub_user?: Subscription;
   sub_pedidos?: Subscription;
+  sub_pedir_mesa?: Subscription;
   pedido?: Pedido;
 
   constructor(private util: UtilService) {
@@ -65,6 +66,7 @@ export class HomeClientePage implements OnInit {
   ngOnDestroy(): void {
     this.sub_user?.unsubscribe();
     this.sub_pedidos?.unsubscribe();
+    this.sub_pedir_mesa?.unsubscribe();
   }
 
   ngOnInit() {
@@ -141,16 +143,18 @@ export class HomeClientePage implements OnInit {
 
   pedirMesa() {
     this.flagMesa = true;
-    this.fire.getUserProfile(this.userService.uidUser).forEach((next) => {
-      this.cliente = next.data() as Usuario;
-      this.cliente.lista_espera = true;
-      this.fire.updateUser(this.cliente);
-      this.fire.add({
-        cliente: `${this.cliente.nombre} ${this.cliente.apellido ?? ''}`,
-        foto_url: this.cliente.foto_url || '',
-        id_cliente: this.cliente.id,
+    this.sub_pedir_mesa = this.fire
+      .getUserProfile(this.userService.uidUser)
+      .subscribe((next) => {
+        this.cliente = next.data() as Usuario;
+        this.cliente.lista_espera = true;
+        this.fire.updateUser(this.cliente);
+        this.fire.add({
+          cliente: `${this.cliente.nombre} ${this.cliente.apellido ?? ''}`,
+          foto_url: this.cliente.foto_url || '',
+          id_cliente: this.cliente.id,
+        });
       });
-    });
   }
 
   verEncuestas() {

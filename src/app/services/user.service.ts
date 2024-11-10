@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 import {
   Auth,
@@ -16,6 +16,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import Vibration from '@awesome-cordova-library/vibration';
 import { FirestoreService } from './firestore.service';
 import { lastValueFrom } from 'rxjs';
+import { PushService } from './push.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,7 @@ export class UserService {
   public uidUser: any;
   private userRole: string = '';
   public nroMesa: number = 0;
+  private push = inject(PushService); //linea 69
 
   constructor(
     private auth: Auth,
@@ -63,6 +65,8 @@ export class UserService {
       .then((u) => {
         this.isLoggedIn = true;
         this.uidUser = u.user.uid;
+        //Obtengo el usuario y guardo el token en la db
+        this.push.getUser(u.user.uid);
       })
       .catch((err) => {
         console.log('Hubo un error: ' + err);

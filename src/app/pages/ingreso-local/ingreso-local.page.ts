@@ -19,6 +19,8 @@ import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { Subscription } from 'rxjs';
+import { PushService } from 'src/app/services/push.service';
 @Component({
   selector: 'app-ingreso-local',
   templateUrl: './ingreso-local.page.html',
@@ -43,23 +45,31 @@ export class IngresoLocalPage implements OnInit {
   private router = inject(Router);
   private fire = inject(FirestoreService);
   userService = inject(UserService);
+  sub?: Subscription;
+  push = inject(PushService);
 
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
-    this.fire.getUserProfile(this.userService.uidUser).subscribe((next) => {
-      console.log(next.data());
-      const aux: any = next.data();
-      if (aux.lista_espera) {
-        this.router.navigateByUrl('/home-cliente-anonimo');
-      }
-    });
+    this.sub = this.fire
+      .getUserProfile(this.userService.uidUser)
+      .subscribe((next) => {
+        console.log(next.data());
+        const aux: any = next.data();
+        if (aux.lista_espera) {
+          this.router.navigateByUrl('/home-cliente-anonimo');
+        }
+      });
   }
 
   ngOnInit() {}
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
 
   async scan() {
     const data = await this.util.scan();
     if (data === 'restaurapp') {
+      this.enviar_notificacion_metre();
       this.router.navigateByUrl('/home-cliente-anonimo', { replaceUrl: true });
     } else {
       this.util.msjError(
@@ -67,5 +77,14 @@ export class IngresoLocalPage implements OnInit {
       );
     }
     console.log(data);
+  }
+
+  enviar_notificacion_metre() {
+    // Enviar notificacion a los dueños y supervisores
+    this.push.send_push_notification(
+      'Ingreso un nuevo cliente',
+      'Asignale una mesa al nuevo cliente!',
+      'metre'
+    );
   }
 }

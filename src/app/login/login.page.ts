@@ -94,7 +94,7 @@ export class LoginPage implements OnInit {
               break;
 
             case 'cliente':
-              this.router.navigateByUrl('carta');
+              this.router.navigateByUrl('ingreso-local');
               break;
 
             case 'anonimo':

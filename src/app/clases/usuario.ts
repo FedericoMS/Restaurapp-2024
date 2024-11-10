@@ -13,7 +13,7 @@ export class Usuario extends Persona {
   rol: string;
   nroMesa: number;
   lista_espera: boolean;
-
+  token: string;
   constructor(
     nombre: string,
     apellido: string,
@@ -33,6 +33,7 @@ export class Usuario extends Persona {
     this.rol = rol;
     this.nroMesa = nroMesa;
     this.lista_espera = false;
+    this.token = '';
   }
 
   static get_roles() {

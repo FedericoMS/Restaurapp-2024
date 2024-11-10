@@ -18,11 +18,7 @@ register();
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [
-    IonApp,
-    IonRouterOutlet,
-    SpinnerComponent,
-  ],
+  imports: [IonApp, IonRouterOutlet, SpinnerComponent],
 })
 export class AppComponent {
   util = inject(UtilService);
@@ -34,7 +30,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       SplashScreen.hide(); // Hide the splash screen
-      this.router.navigateByUrl('login'); // Navigate to the splash route
+      this.router.navigateByUrl('splash'); // Navigate to the splash route
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -17,7 +17,9 @@ import {
   IonSegmentButton,
   IonLabel,
   IonSegment,
-  IonButtons, IonInput } from '@ionic/angular/standalone';
+  IonButtons,
+  IonInput,
+} from '@ionic/angular/standalone';
 import { EstadoAprobacion, Usuario } from 'src/app/clases/usuario';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -32,14 +34,14 @@ import {
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { PushService } from 'src/app/services/push.service';
 
 @Component({
   selector: 'app-alta-cliente',
   templateUrl: './alta-cliente.page.html',
   styleUrls: ['./alta-cliente.page.scss'],
   standalone: true,
-  imports: 
-  [ 
+  imports: [
     IonButtons,
     IonSegment,
     IonLabel,
@@ -60,7 +62,7 @@ export class AltaClientePage implements OnInit {
   list_roles = Usuario.get_roles();
   foto_url: string = '';
   isLoading: boolean;
-
+  push = inject(PushService); //linea 169
   constructor(
     private firestore: FirestoreService,
     private utilService: UtilService,
@@ -90,9 +92,8 @@ export class AltaClientePage implements OnInit {
       rol: [this.list_roles[6]],
       correo: ['', [Validators.required, Validators.email]],
       contrasenia: ['', [Validators.required]],
-      contraseniaRepetida: ['',[Validators.required]],
-      img: ['',[Validators.required]],
-      
+      contraseniaRepetida: ['', [Validators.required]],
+      img: ['', [Validators.required]],
     });
   }
 
@@ -118,12 +119,19 @@ export class AltaClientePage implements OnInit {
       );
     }
   }
-  
 
   async cargar() {
-    if (this.fg.valid || (this.fg.controls['rol'].value == 'anonimo' && this.fg.controls['nombre'].value !== '' && this.fg.controls['img'].value !== '')) {
-
-      if (this.fg.controls['rol'].value == 'cliente' && this.fg.controls['contrasenia'].value !== this.fg.controls['contraseniaRepetida'].value) {
+    if (
+      this.fg.valid ||
+      (this.fg.controls['rol'].value == 'anonimo' &&
+        this.fg.controls['nombre'].value !== '' &&
+        this.fg.controls['img'].value !== '')
+    ) {
+      if (
+        this.fg.controls['rol'].value == 'cliente' &&
+        this.fg.controls['contrasenia'].value !==
+          this.fg.controls['contraseniaRepetida'].value
+      ) {
         this.userService.showToast(
           'Las contraseñas no coinicden, reingresar!',
           'red',
@@ -132,38 +140,40 @@ export class AltaClientePage implements OnInit {
           'white',
           true
         );
-      }
-      else{
+      } else {
         this.isLoading = true;
         await this.upload_storage();
         let user;
 
         if (this.fg.controls['rol'].value == 'cliente') {
-            user = new Usuario(
-              this.fg.controls['nombre'].value.toLowerCase(),
-              this.fg.controls['apellido'].value.toLowerCase(),
-              this.fg.controls['dni'].value,
-              '',
-              this.foto_url,
-              'cliente',
-              EstadoAprobacion.Pendiente,
-              this.fg.controls['correo'].value,
-              this.fg.controls['contrasenia'].value
-            );
+          user = new Usuario(
+            this.fg.controls['nombre'].value.toLowerCase(),
+            this.fg.controls['apellido'].value.toLowerCase(),
+            this.fg.controls['dni'].value,
+            '',
+            this.foto_url,
+            'cliente',
+            EstadoAprobacion.Pendiente,
+            this.fg.controls['correo'].value,
+            this.fg.controls['contrasenia'].value
+          );
 
-            this.userService
+          this.userService
             .createUser(user)
             .then(() => {
               this.fg.patchValue({
                 rol: this.fg.controls['rol'].value,
               });
               this.emptyInputs();
+              //Enviar notificacion a los dueños y supervisores
+              this.enviar_notificacion();
               this.isLoading = false;
               this.router.navigate(['/login']);
             })
             .catch(() => {
               this.userService.showToast(
-                'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
+                'Hubo un problema al cargar el ' +
+                  this.fg.controls['rol'].value,
                 'red',
                 'center',
                 'error',
@@ -172,21 +182,19 @@ export class AltaClientePage implements OnInit {
               );
               this.isLoading = false;
             });
-
-
         } else {
-          this.userService.signInAsAnonymously().then((response)=>{
+          this.userService.signInAsAnonymously().then((response) => {
             const user = new Usuario(
-                this.fg.controls['nombre'].value.toLowerCase(),
-                '',
-                0,
-                '',
-                this.foto_url,
-                'cliente',
-                EstadoAprobacion.Aprobado
-              );
-    
-              this.userService
+              this.fg.controls['nombre'].value.toLowerCase(),
+              '',
+              0,
+              '',
+              this.foto_url,
+              'cliente',
+              EstadoAprobacion.Aprobado
+            );
+
+            this.userService
               .createAnonymously(user, response.user.uid)
               .then(() => {
                 this.fg.patchValue({
@@ -198,7 +206,8 @@ export class AltaClientePage implements OnInit {
               })
               .catch(() => {
                 this.userService.showToast(
-                  'Hubo un problema al cargar el ' + this.fg.controls['rol'].value,
+                  'Hubo un problema al cargar el ' +
+                    this.fg.controls['rol'].value,
                   'red',
                   'center',
                   'error',
@@ -207,11 +216,9 @@ export class AltaClientePage implements OnInit {
                 );
                 this.isLoading = false;
               });
-          })     
+          });
         }
-
       }
-      
     } else {
       this.userService.showToast(
         'Ocurrió un error. ' +
@@ -230,7 +237,7 @@ export class AltaClientePage implements OnInit {
 
   async sacar_foto() {
     try {
-      this.fg.get('img')?.setValue(await this.utilService.sacar_foto() ?? '');
+      this.fg.get('img')?.setValue((await this.utilService.sacar_foto()) ?? '');
       this.userService.showToast(
         'Se cargó la foto',
         'lightgreen',
@@ -273,5 +280,14 @@ export class AltaClientePage implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/login']);
+  }
+
+  enviar_notificacion() {
+    // Enviar notificacion a los dueños y supervisores
+    this.push.send_push_notification(
+      'Nuevo cliente',
+      'Aprueba o rechaza al nuevo cliente!',
+      'dueño'
+    );
   }
 }
