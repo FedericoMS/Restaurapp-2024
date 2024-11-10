@@ -31,6 +31,7 @@ export class PushService {
   ) {}
 
   async initialize(): Promise<void> {
+    this.addListeners();
     // Previamente, se verifica que se esté utilizando un dispositivo móvil y que el usuario no tenga un token previo
     if (this.platform.is('capacitor') && this.user && this.user.token === '') {
       const result = await PushNotifications.requestPermissions();
@@ -38,20 +39,18 @@ export class PushService {
         await PushNotifications.register();
       }
     }
-    this.addListeners();
   }
 
-  getUser(): void {
+  getUser(uidUser: string): void {
+    console.log('entro');
     this.afs
       .collection('usuarios')
-      .doc(this.userService.uidUser)
+      .doc(uidUser)
       .valueChanges()
       .subscribe((usuario) => {
         this.user = usuario as Usuario;
+        this.initialize();
       });
-    setTimeout(() => {
-      this.initialize();
-    }, 2000);
   }
 
   //Esto sucede cuando el registro de las notificaciones push finaliza sin errores
@@ -63,6 +62,7 @@ export class PushService {
         //Guardo el token en el usuario
         if (this.user) {
           this.user.token = token.value;
+          console.log('usuario', this.user);
           this.firestoreService.updateDatabase('usuarios', this.user);
         }
       }

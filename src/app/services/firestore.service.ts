@@ -31,7 +31,7 @@ import { PushService } from './push.service';
 export class FirestoreService {
   constructor(private firestore: AngularFirestore, private fs: Firestore) {}
   storage: AngularFireStorage = inject(AngularFireStorage);
-  // push = inject(PushService); //linea 136
+  push = inject(PushService); //linea 136
 
   //Agregar un usuario
   async addObject(object: any, databaseName: string) {
@@ -144,11 +144,11 @@ export class FirestoreService {
       });
       //Enviar notificacion a los mozos
       if (rol === 'cliente') {
-        // this.push.send_push_notification(
-        //   'Nuevo mensaje',
-        //   'Respondele al cliente!',
-        //   'cliente'
-        // );
+        this.push.send_push_notification(
+          'Nuevo mensaje',
+          'Respondele al cliente!',
+          'cliente'
+        );
       }
     } catch (error) {
       console.error('Error adding document: ', error);

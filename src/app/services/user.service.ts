@@ -30,7 +30,7 @@ export class UserService {
   public uidUser: any;
   private userRole: string = '';
   public nroMesa: number = 0;
-  // private push = inject(PushService);//linea 69
+  private push = inject(PushService); //linea 69
 
   constructor(
     private auth: Auth,
@@ -65,8 +65,9 @@ export class UserService {
       .then((u) => {
         this.isLoggedIn = true;
         this.uidUser = u.user.uid;
+        console.log('uid: ', this.uidUser);
         //Obtengo el usuario y guardo el token en la db
-        // this.push.getUser();
+        this.push.getUser(u.user.uid);
       })
       .catch((err) => {
         console.log('Hubo un error: ' + err);
