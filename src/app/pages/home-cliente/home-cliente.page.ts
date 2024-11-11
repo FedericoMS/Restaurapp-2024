@@ -133,11 +133,11 @@ export class HomeClientePage implements OnInit {
   accionesDeEscanner() {
     if (this.userService.nroMesa && this.pedido === undefined) {
       this.router.navigateByUrl('/carta');
-    } else if (this.pedido && this.userService.nroMesa) {
-      this.util.estadoPedido();
-    } else if (this.pedido?.estado === 'en preparación') {
+    } else if (this.pedido?.estado === 'preparado') {
       //Ir a encuesta
       this.router.navigateByUrl('/sub-menu-cliente');
+    } else if (this.pedido && this.userService.nroMesa) {
+      this.util.estadoPedido();
     }
   }
 
