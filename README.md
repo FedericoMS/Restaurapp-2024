@@ -64,16 +64,16 @@
 ### Federico Soria (Nombre de la rama: soria)
 - [ ]  Home cocinero/bartender
 - [ ]  Funcionalidades para cocinero y bartender
-*A completar*
+
 
 ### Lautaro García (Nombre de la rama: lautaro)
-- [ ]  Correcciones
-*A completar*
+- [ ]  Correcciones de bugs
+
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
 - [ ]  Cuenta a pagar de cliente
 - [ ]  Implementación completa de Push Notifications
-*A completar*
+
 
 
 
