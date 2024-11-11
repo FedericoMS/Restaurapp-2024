@@ -118,5 +118,9 @@ export const routes: Routes = [
       import(
         './pages/home-cliente/sub-menu-cliente/sub-menu-cliente.page'
       ).then((m) => m.SubMenuClientePage),
+  },  {
+    path: 'cuenta',
+    loadComponent: () => import('./pages/cuenta/cuenta.page').then( m => m.CuentaPage)
   },
+
 ];

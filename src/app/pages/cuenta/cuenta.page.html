@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Cuenta</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon class="icon" name="arrow-back-circle-outline" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div>
+      <ion-card class="tarjeta-pedido">
+        <!-- Información del pedido -->
+        <div class="pedido-detalles">
+          <div class="pedido-info">
+            <p class="mesa">Mesa: {{this.pedido.nroMesa}}</p>
+            <table class="pedido-tabla">
+              <tr>
+                <th>PRODUCTO</th>
+                <th>PRECIO</th>
+              </tr>
+              <tr *ngFor="let producto of pedido.listaProductos">
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.precio}}</td>
+              </tr>
+            </table>
+            <p class="total">TOTAL: ${{pedido.monto}}</p>
+          </div>
+          <!-- Botones de aprobar y rechazar -->
+          <div class="botones">
+            <button (click)="pay(pedido)" class="boton-aprobar" *ngIf="pedido.estado == 'recibido'">Confirmar pago</button>
+          </div>
+        </div>
+      </ion-card>
+    </div>
+
+
+</ion-content>
