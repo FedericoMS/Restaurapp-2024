@@ -48,29 +48,47 @@ export class HomeMozoPage implements OnInit {
   }
 
 
-  approveOrder(pedido : any)
-  {
-    let modOrder : any = pedido;
+  approveOrder(pedido: any) {
+    let modOrder: any = pedido;
     console.log(modOrder);
+
     Swal.fire({
-      title: "¿Estás seguro de que quieres aprobar este pedido?",
-      showCancelButton: true,
-      confirmButtonText: "Aprobar",
-      cancelButtonText: `Cancelar`,
-      heightAuto: false
+        title: "¿Estás seguro de que quieres aprobar este pedido?",
+        showCancelButton: true,
+        confirmButtonText: "Aprobar",
+        cancelButtonText: `Cancelar`,
+        heightAuto: false
     }).then((result) => {
-      if (result.isConfirmed) {
-        modOrder.estado = 'en preparación';     
-        console.log(modOrder.estado);   
-        this.firestoreService.updateOrderAndProducts(modOrder, 'en preparación', 'en preparación');
-        Swal.fire({
-          title: "¡Pedido en preparación!",
-          confirmButtonText: "Continuar",
-          heightAuto: false
-        })
-      }
+        if (result.isConfirmed) {
+            modOrder.estado = 'en preparación';
+            console.log(modOrder.estado);
+            this.firestoreService.updateOrderAndProducts(modOrder, 'en preparación', 'en preparación');
+            const hasFoodOrDessert = modOrder.listaProductos.some((producto: any) => 
+                producto.tipo === 'postre' || producto.tipo === 'comida'
+            );
+            if (hasFoodOrDessert) {
+                this.push.send_push_notification(
+                    'Nuevo pedido para preparar', 
+                    'Tienes un nuevo pedido para preparar', 
+                    'cocinero'
+                );
+            } else {
+                this.push.send_push_notification(
+                    'Nuevo pedido para preparar', 
+                    'Tienes un nuevo pedido para preparar', 
+                    'bartender'
+                );
+            }
+
+            Swal.fire({
+                title: "¡Pedido en preparación!",
+                confirmButtonText: "Continuar",
+                heightAuto: false
+            });
+        }
     });
-  }
+}
+
 
   rejectOrder(pedido : any)
   {

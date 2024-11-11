@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import Swal from 'sweetalert2';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import { PushService } from 'src/app/services/push.service';
 
 @Component({
   selector: 'app-home-cocinero-bartender',
@@ -20,6 +21,7 @@ export class HomeCocineroBartenderPage implements OnInit {
   isLoading: boolean = false;
   listaPedidos: any[] = [];
   pedidosFiltrados: any[] = [];
+  push = inject(PushService);
 
   constructor(public userService: UserService, private firestoreService: FirestoreService) {
 
@@ -100,6 +102,10 @@ export class HomeCocineroBartenderPage implements OnInit {
         listaProductosActualizada[productoIndex].estado = 'preparado';
         const todosProductosPreparados : boolean = listaProductosActualizada.every((producto: any) => producto.estado === 'preparado');
         const nuevoEstadoPedido = todosProductosPreparados ? 'preparado' : 'en preparación';
+        if(nuevoEstadoPedido == 'preparado')
+        {
+          this.push.send_push_notification('Pedido preparado', 'Tienes un pedido listo para entregar', 'mozo');
+        }
   
         // Actualizar en Firestore el array completo con el producto actualizado y el estado del pedido si es necesario
         await this.firestoreService.updateOrderPartial(pedido.id, {
