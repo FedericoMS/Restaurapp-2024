@@ -16,17 +16,15 @@ ion-toolbar.custom-toolbar {
   border-bottom: 1px solid #4197a7;
 }
 
-ion-title{
-  font-size: 1.7rem;
-  font-weight: bold;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  text-shadow: 3px 3px 3px #000;
-}
 
 ion-segment-button{
   font-weight: bold;
+}
+
+.ion-text-center {
+  font-weight: bold;
+  font-size: 32px;
+  color: #54494b; 
 }
 
 .producto-card {

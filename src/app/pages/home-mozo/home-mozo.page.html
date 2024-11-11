@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="custom-toolbar">
-    <ion-title>Mozo</ion-title>
+    <ion-title class="ion-text-center">Mozo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -46,8 +46,8 @@
           <!-- Botones de aprobar y rechazar -->
           <div class="botones">
             <button (click)="confirmPayment(item)" class="boton-aprobar" *ngIf="item.estado == 'pagado'">Confirmar pago</button>
-            <button (click)="approveOrder(item)" class="boton-aprobar" *ngIf="item.estado == 'pendiente'">Aprobar</button>
-            <button (click)="rejectOrder(item)" class="boton-rechazar" *ngIf="item.estado == 'pendiente'">Rechazar</button>
+            <button (click)="approveOrder(item)" class="boton-aprobar" *ngIf="item.estado == 'pendiente de confirmación'">Aprobar</button>
+            <button (click)="rejectOrder(item)" class="boton-rechazar" *ngIf="item.estado == 'pendiente de confirmación'">Rechazar</button>
           </div>
         </div>
       </ion-card>
