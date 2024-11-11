@@ -121,3 +121,78 @@
 
 </p>
 <br>
+
+
+## Splash Screen e inicio de sesión
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fsplash.jpg?alt=media&token=ad5cec9e-a619-48be-a093-6d3aa5600cca" alt="Splash Screen%">
+
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Flogin.jpg?alt=media&token=55eb87c4-0785-4157-aff3-68868df2cf01" alt="Login">
+ 
+</p>
+
+
+## Alta de cliente y anónimo
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Falta%20cliente.jpg?alt=media&token=35937d04-1ade-43b0-b5bd-1031bc301db8" alt="Alta cliente">
+  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Falta%20an%C3%B3nimo.jpg?alt=media&token=74f83bc9-34e7-4f03-b65e-d8db7dae427f" alt="Alta anónimo">
+ 
+</p>
+
+## Ingreso al local
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fingreso%20local.jpg?alt=media&token=155bbe11-f013-47e0-860a-ec5058630320" alt="Alta cliente">  
+</p>
+
+## Menú de cliente
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmenu%20cliente.jpg?alt=media&token=a9bb83e7-645a-4744-afaa-f88248ffdce1" alt="Menú cliente 1">
+  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmenu%20cliente%202.jpg?alt=media&token=755588b8-003b-4730-b05f-4a8bd7218376" alt="Menú cliente 2">
+ 
+</p>
+
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmenu%20cliente%203.jpg?alt=media&token=e935bf4a-6159-4056-be2b-de779c2f1b84" alt="Menú cliente 3">  
+</p>
+
+
+## Gráficos y estadísticas
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%201.jpg?alt=media&token=f6677fbc-0445-448b-97e0-2f7697c5fe77" alt="gráfico 1">  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%202.jpg?alt=media&token=d5f9bb0d-5660-4d63-91af-c6b3b1c521b0" alt="gráfico 2">  
+</p>
+
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%203.jpg?alt=media&token=c59c48ab-ceb1-4cc8-8760-e63f599a056d" alt="gráfico 3">  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%204.jpg?alt=media&token=f819a51e-1eed-4fd9-9f3d-af36ea3d5457" alt="gráfico 4">  
+</p>
+
+## Carta
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fcarta.jpg?alt=media&token=150f76dc-aca2-400a-8a17-385bae3684cf" alt="carta">  
+</p>
+
+
+## Mozo
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmozo.jpg?alt=media&token=9382ff2a-c3c9-49ef-9813-a2e24a9db1bd" alt="Mozo">  
+</p>
+
+## Bartender y cocinero
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fbartender.jpg?alt=media&token=534c4da4-a800-4ceb-bc2a-c1cac4a792b7" alt="Bartender">  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fcocinero.jpg?alt=media&token=153ffd88-443d-4fb1-ad06-5370893a70d7" alt="Cocinero">  
+</p>
+
+## Metre
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmetre.jpg?alt=media&token=6dfee9f1-cafa-4f58-bfd6-3e88bad1009a" alt="metre 1">  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmetre%202.jpg?alt=media&token=a9679825-6b68-48e2-9447-59d9ed8b9993" alt="metre 2">  
+</p>
+
+## Chat entre mesas y mozos
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fchat%20.jpg?alt=media&token=cf952b23-a5e9-4c2d-a9ab-c94a709c6ec3    " alt="chat">  
+</p>
