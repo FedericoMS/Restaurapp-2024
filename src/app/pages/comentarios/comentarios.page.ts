@@ -36,7 +36,7 @@ export class ComentariosPage implements OnInit {
   router = inject(Router);
   fire = inject(FirestoreService);
   sub?: Subscription;
-  comentarios: string[] = [];
+  comentarios: any[] = [];
   constructor() {
     addIcons({ personSharp, arrowBackCircleOutline });
   }
@@ -47,9 +47,11 @@ export class ComentariosPage implements OnInit {
       .getCollection('comentarios_clientes')
       .valueChanges()
       .subscribe((next) => {
-        const aux = next as any[];
+        const aux = next.sort((a : any, b : any) => a.time - b.time);
+        this.comentarios = [];
         aux.forEach((item: any) => {
-          this.comentarios.push(item.msj);
+          item.time =  item.time.toDate();
+          this.comentarios.push(item);
         });
         this.util.hideSpinner();
       });

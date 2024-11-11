@@ -86,7 +86,8 @@ export class FirestoreService {
   ) {
     const encuestas = this.firestore.collection('comentarios_' + collection);
     const documento = encuestas.doc();
-    await documento.set({ msj: comentario });
+    const date = new Date();
+    await documento.set({ msj: comentario, time : date});
   }
 
   //Obtner cualquier collection

@@ -1,20 +1,18 @@
 <ion-header>
   <ion-toolbar class="custom-toolbar">
     <ion-title class="ion-text-center">Carta</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-icon
+        class="icon"
+        name="arrow-back-circle-outline"
+        (click)="goBack()"
+      ></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<!-- Botón flotante del menú en la parte superior izquierda -->
-<ion-fab vertical="top" horizontal="start" slot="fixed">
-  <ion-fab-button color="dark">
-    <img src="/assets/menu.png" />
-  </ion-fab-button>
-  <ion-fab-list side="bottom">
-    <ion-fab-button (click)="this.userService.logout()" style="border: 1px solid #000; border-radius: 50%">
-      <img src="/assets/exit.png" />
-    </ion-fab-button>
-  </ion-fab-list>
-</ion-fab>
+
 
 <ion-content>
 

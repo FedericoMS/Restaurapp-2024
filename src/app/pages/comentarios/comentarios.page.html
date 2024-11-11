@@ -13,6 +13,12 @@
 
 <ion-content [fullscreen]="true">
   @for (item of comentarios; track $index) {
-  <p><ion-icon name="person-sharp"></ion-icon>&nbsp;&nbsp;{{item}}</p>
+    <div class="comment-card">
+      <div class="comment-header">
+        <ion-icon class="comment-icon" name="person-sharp"></ion-icon>
+        <p class="comment-message">{{ item.msj }}</p>
+      </div>
+      <span class="comment-date">{{ item.time | date: 'd/M/yy HH:mm' }}</span>
+    </div>
   }
 </ion-content>

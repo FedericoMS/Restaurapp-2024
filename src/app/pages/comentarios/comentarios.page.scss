@@ -1,10 +1,64 @@
-p {
-  background-color: rgba(0, 0, 0, 0.399);
+// p {
+//   background-color: rgba(0, 0, 0, 0.399);
+//   border: 1px solid white;
+//   padding: 15px;
+//   width: 90%;
+//   margin: 10px auto;
+//   color: white;
+// }
+ion-content {
+  --background: transparent;
+}
+
+ion-title{
+  font-size: 25px;
+  padding: 0;
+
+}
+
+
+
+
+@media (max-height: 740px) {
+  ion-title{
+    font-size: 23px;
+  }
+}
+
+
+.comment-card {
+  background-color: rgba(0, 0, 0, 0.4);
   border: 1px solid white;
   padding: 15px;
   width: 90%;
   margin: 10px auto;
+  color: white;
+  border-radius: 8px; 
+  display: flex;
+  flex-direction: column; 
 }
-ion-content {
-  --background: transparent;
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.comment-icon {
+  color: white;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0; 
+}
+
+.comment-message {
+  margin: 0;
+  font-size: 20px;
+}
+
+.comment-date {
+  align-self: flex-end;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
 }

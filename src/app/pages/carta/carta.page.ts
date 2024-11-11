@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonSegmentButton, IonList, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonRow, IonCol, IonButton } from '@ionic/angular/standalone';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Route, Router } from '@angular/router';
+import { arrowBackCircleOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 
 @Component({
@@ -27,7 +29,9 @@ export class CartaPage implements OnInit {
   idCliente : any = this.userService.uidUser;
   tiempoElaboracion : number = 0;
 
-  constructor(private firestoreService: FirestoreService, public userService : UserService, private router : Router) {}
+  constructor(private firestoreService: FirestoreService, public userService : UserService, private router : Router, private location : Location) {
+    addIcons({arrowBackCircleOutline});
+  }
 
   async ngOnInit() {
     this.cargarProductos();
@@ -109,6 +113,10 @@ export class CartaPage implements OnInit {
   {
     this.filtroActual = tipo;
     this.filtrarProductos();
+  }
+
+  goBack() : void{
+    this.location.back();
   }
 
 }

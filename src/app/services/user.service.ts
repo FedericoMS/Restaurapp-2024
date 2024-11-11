@@ -149,6 +149,8 @@ export class UserService {
     this.userName = '';
     this.router.navigateByUrl('login');
     this.isLoggedIn = false;
+    this.nroMesa = 0;
+    this.uidUser = '';
     this.showToast(
       'Sesión cerrada',
       'lightgreen',
