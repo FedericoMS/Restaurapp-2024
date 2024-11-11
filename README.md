@@ -124,6 +124,7 @@
 
 
 # Capturas de los componentes de la aplicación
+
 ## Splash Screen e inicio de sesión
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fsplash.jpg?alt=media&token=ad5cec9e-a619-48be-a093-6d3aa5600cca" alt="Splash Screen%">
