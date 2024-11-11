@@ -25,6 +25,7 @@ import { Mesa } from 'src/app/clases/mesa';
 import { Subscription } from 'rxjs';
 import { Pedido } from 'src/app/clases/pedido';
 import { Alert } from 'src/app/clases/alert';
+import { PushService } from 'src/app/services/push.service';
 @Component({
   selector: 'app-home-cliente',
   templateUrl: './home-cliente.page.html',
@@ -48,6 +49,7 @@ import { Alert } from 'src/app/clases/alert';
 })
 export class HomeClientePage implements OnInit {
   router = inject(Router);
+  push = inject(PushService);
   flagMesa = false;
   msj = 'Mesa sin asignar';
   msjColor = 'danger';
@@ -155,6 +157,7 @@ export class HomeClientePage implements OnInit {
           id_cliente: this.cliente.id,
         });
       });
+    this.enviar_notificacion_metre();
   }
 
   verEncuestas() {
@@ -165,5 +168,13 @@ export class HomeClientePage implements OnInit {
 
   goChat() {
     this.router.navigateByUrl('chat');
+  }
+
+  enviar_notificacion_metre() {
+    this.push.send_push_notification(
+      'Ingreso de nuevo cliente',
+      'Tienes un nuevo cliente pendiente de asignación de mesa',
+      'metre'
+    );
   }
 }

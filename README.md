@@ -46,11 +46,11 @@
 - ✅ Gestión de carga de pedidos
 - ✅  Home cocinero/bartender (hecho parcialmente)
 
-
 ### Lautaro García (Nombre de las ramas: lautaro - garcia)
 - ✅ Home metre (lista de espera, asigna mesas)
 - ✅ Chat de mozos/mesas 
 - ✅ Arreglo de visualización del Splash Screen
+- ✅ Implementación de correcciones hechas por el profesor
 - ✅ Limpieza de credenciales al cerrar sesión y reemplazo de botones por imágenes en el inicio de sesión
 
 ### Federico Cardozo (Nombre de las ramas: cardozo - fede)
@@ -63,16 +63,19 @@
 
 ### Federico Soria (Nombre de la rama: soria)
 - [ ]  Home cocinero/bartender
-- [ ]  Funcionalidades para cocinero y bartender
-
+- ✅  Funcionalidades para cocinero y bartender
+- [ ]  Funcionalidades entre cliente - cuenta a pagar
+- [ ]  Agregado de push notifications en partes donde faltaban
 
 ### Lautaro García (Nombre de la rama: lautaro)
 - [ ]  Correcciones de bugs
-
+- [ ]  Carga de datos de 3 semanas de operaciones
+- ✅  Optimización del uso de Firebase
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
 - [ ]  Cuenta a pagar de cliente
-- [ ]  Implementación completa de Push Notifications
+- ✅  Implementación de Push Notifications
+- [ ]  Funcionalidades entre cliente - cuenta a pagar
 
 
 

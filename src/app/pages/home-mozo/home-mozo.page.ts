@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonFabButton, IonFab, IonFabList, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonIcon } from '@ionic/angular/standalone';
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { chatbubbleOutline } from 'ionicons/icons';
+import { PushService } from 'src/app/services/push.service';
 
 @Component({
   selector: 'app-home-mozo',
@@ -22,7 +23,8 @@ export class HomeMozoPage implements OnInit {
 
   isLoading : boolean = false;
   listaPedidos : any;
-  userAuth: any = this.angularFireAuth.authState;
+  //userAuth: any = this.angularFireAuth.authState;
+  push = inject(PushService);
   
 
   constructor(public userService: UserService, private angularFireAuth: AngularFireAuth, private firestoreService: FirestoreService, private router : Router) {
@@ -151,6 +153,14 @@ export class HomeMozoPage implements OnInit {
   
   tienePedidosPendientes(): boolean {
     return this.listaPedidos && this.listaPedidos.some((pedido: any) => pedido.estado === 'pendiente de confirmación');
+  }
+
+  enviar_notificacion_mozo() {
+    this.push.send_push_notification(
+      'Nuevo pedido',
+      'Tienes un nuevo pedido',
+      'mozo'
+    );
   }
   
 

@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  inject,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -19,6 +20,7 @@ import {
 import { addIcons } from 'ionicons';
 import { sendOutline, arrowBackCircleOutline } from 'ionicons/icons';
 import { Router } from '@angular/router';
+import { PushService } from 'src/app/services/push.service';
 
 import { DayNamePipe } from 'src/app/pipes/day-name.pipe';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -45,6 +47,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ChatPage implements OnInit, AfterViewInit {
   @ViewChild('scrollAnchor', { static: false })
   private scrollAnchor!: ElementRef;
+  push = inject(PushService);
 
   arrayMessages!: any;
   message!: string;
@@ -96,6 +99,10 @@ export class ChatPage implements OnInit, AfterViewInit {
         this.userService.nroMesa,
         rol
       );
+      if(rol == 'cliente')
+      {
+        this.enviar_notificacion_mozo()
+      }
       this.message = '';
     } else {
       this.userService.showToast(
@@ -122,5 +129,13 @@ export class ChatPage implements OnInit, AfterViewInit {
       date.getFullYear() === previousMessageDate.getFullYear();
 
     return !isSameDay;
+  }
+
+  enviar_notificacion_mozo() {
+    this.push.send_push_notification(
+      'Nuevo mensaje',
+      'Tienes un nuevo mensaje',
+      'mozo'
+    );
   }
 }

@@ -286,7 +286,7 @@ export class AltaClientePage implements OnInit {
     // Enviar notificacion a los dueños y supervisores
     this.push.send_push_notification(
       'Nuevo cliente',
-      'Aprueba o rechaza al nuevo cliente!',
+      'Tienes un nuevo cliente pendiente de aprobación',
       'dueño'
     );
   }

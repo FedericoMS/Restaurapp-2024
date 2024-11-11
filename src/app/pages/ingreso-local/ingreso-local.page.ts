@@ -46,7 +46,6 @@ export class IngresoLocalPage implements OnInit {
   private fire = inject(FirestoreService);
   userService = inject(UserService);
   sub?: Subscription;
-  push = inject(PushService);
 
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline });
@@ -69,7 +68,6 @@ export class IngresoLocalPage implements OnInit {
   async scan() {
     const data = await this.util.scan();
     if (data === 'restaurapp') {
-      this.enviar_notificacion_metre();
       this.router.navigateByUrl('/home-cliente-anonimo', { replaceUrl: true });
     } else {
       this.util.msjError(
@@ -79,12 +77,5 @@ export class IngresoLocalPage implements OnInit {
     console.log(data);
   }
 
-  enviar_notificacion_metre() {
-    // Enviar notificacion a los dueños y supervisores
-    this.push.send_push_notification(
-      'Ingreso un nuevo cliente',
-      'Asignale una mesa al nuevo cliente!',
-      'metre'
-    );
-  }
+
 }
