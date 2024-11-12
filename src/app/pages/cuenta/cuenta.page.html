@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title class="ion-text-center">Cuenta</ion-title>
     <ion-buttons slot="start">
-      <ion-icon class="icon" name="arrow-back-circle-outline" (click)="goBack()"></ion-icon>
+      <ion-icon class="icon" name="arrow-back-circle-outline" (click)="goBack()" style="color: #54494b; width: 45px; height: 45px;"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -23,13 +23,19 @@
                 <td>{{producto.nombre}}</td>
                 <td>{{producto.precio}}</td>
               </tr>
+              <tr>
+                <td>Propina</td>
+                <td>{{this.tip}}</td>
+              </tr>
             </table>
-            <p class="total">TOTAL: ${{pedido.monto}}</p>
+            <p class="total" style="font-size: 26px;">SubTotal: ${{pedido.monto}}</p>
+            <p class="total" *ngIf="tipFlag">TOTAL: ${{this.montoFinal}}</p>
             <p class="total" *ngIf="pedido.estado == 'pagado' || pedido.estado == 'finalizado'">CUENTA PAGADA</p>
           </div>
           <!-- Botones de aprobar y rechazar -->
           <div class="botones">
-            <button (click)="pay(pedido)" class="boton-aprobar" *ngIf="pedido.estado == 'recibido'">Pagar</button>
+            <button (click)="scanTip()" class="boton-aprobar" *ngIf="pedido.estado == 'recibido' && !tipFlag">Escanear propina</button>
+            <button (click)="pay(pedido)" class="boton-aprobar" *ngIf="pedido.estado == 'recibido' && tipFlag">Pagar</button>
           </div>
         </div>
       </ion-card>

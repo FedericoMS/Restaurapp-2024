@@ -7,6 +7,7 @@ import { addIcons } from 'ionicons';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -21,6 +22,10 @@ export class CuentaPage implements OnInit {
   userService = inject(UserService);
   pedido: any = {};
   idCliente : any = this.userService.uidUser;
+  util = inject(UtilService);
+  montoFinal : number = 0;
+  tipFlag : boolean = false;
+  tip : string = '0%';
 
   constructor(private firestore : FirestoreService) { 
     addIcons({ arrowBackCircleOutline });
@@ -34,7 +39,9 @@ export class CuentaPage implements OnInit {
     await this.firestore.getPedidoEspecifico(this.idCliente, 'recibido').subscribe(
       (pedido: any) => {
         this.pedido = pedido[0];
+        this.montoFinal = this.pedido.monto;
         console.log('Pedido encontrado:', this.pedido); 
+        console.log('El monto final es: ' + this.montoFinal);
       }
     );
     console.log('idCliente:', this.idCliente); 
@@ -58,6 +65,7 @@ export class CuentaPage implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         modOrder.estado = 'pagado';     
+        modOrder.monto = this.montoFinal;     
         console.log(modOrder.estado);   
       this.firestore.updateOrderAndProducts(modOrder, 'pagado', 'pagado');
         Swal.fire({
@@ -67,6 +75,36 @@ export class CuentaPage implements OnInit {
         })
       }
     });
+  }
 
+  async scanTip() {
+    const data = await this.util.scan();
+    switch(data) {
+      case('5'):      
+        this.montoFinal = Math.round(this.montoFinal * 1.05);
+        this.tip = '5%'
+        this.tipFlag = true;        
+        break;
+        case('10'):      
+        this.montoFinal = Math.round(this.montoFinal * 1.10);
+        this.tip = '10%'
+        this.tipFlag = true;        
+        break;
+        case('15'):      
+        this.montoFinal = Math.round(this.montoFinal * 1.15);
+        this.tip = '15%'
+        this.tipFlag = true;        
+        break;
+        case('20'):      
+        this.montoFinal = Math.round(this.montoFinal * 1.20);
+        this.tip = '20%'
+        this.tipFlag = true;        
+        break;     
+        default:
+        this.tip = '0%'
+        this.tipFlag = true;        
+        break;
+    }
+    
   }
 }
