@@ -25,10 +25,11 @@
               </tr>
             </table>
             <p class="total">TOTAL: ${{pedido.monto}}</p>
+            <p class="total" *ngIf="pedido.estado == 'pagado' || pedido.estado == 'finalizado'">CUENTA PAGADA</p>
           </div>
           <!-- Botones de aprobar y rechazar -->
           <div class="botones">
-            <button (click)="pay(pedido)" class="boton-aprobar" *ngIf="pedido.estado == 'recibido'">Confirmar pago</button>
+            <button (click)="pay(pedido)" class="boton-aprobar" *ngIf="pedido.estado == 'recibido'">Pagar</button>
           </div>
         </div>
       </ion-card>

@@ -30,6 +30,7 @@ export class CuentaPage implements OnInit {
   }
 
   async ngOnInit() {
+    //REVISAR SI ES ÓPTIMO ESTE FUNCIONAMIENTO
     await this.firestore.getPedidoEspecifico(this.idCliente, 'recibido').subscribe(
       (pedido: any) => {
         this.pedido = pedido[0];
