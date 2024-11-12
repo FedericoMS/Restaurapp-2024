@@ -235,8 +235,8 @@ export class FirestoreService {
     }
   }
 
-  updateTableStatus(nroMesa: number) {
-    this.firestore.doc(`mesas/${nroMesa}`).update({ estado: 'libre' })
+  freeTable(nroMesa: number) {
+    this.firestore.doc(`mesas/${nroMesa}`).update({ estado: 'libre', idCliente: '', nombreCliente: '' })
   }
 
   getPedidoEspecifico(idCliente: string, estado: string): any {

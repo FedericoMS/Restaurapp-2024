@@ -48,6 +48,7 @@
             <button (click)="confirmPayment(item)" class="boton-aprobar" *ngIf="item.estado == 'pagado'">Confirmar pago</button>
             <button (click)="approveOrder(item)" class="boton-aprobar" *ngIf="item.estado == 'pendiente de confirmación'">Aprobar</button>
             <button (click)="rejectOrder(item)" class="boton-rechazar" *ngIf="item.estado == 'pendiente de confirmación'">Rechazar</button>
+            <button (click)="deliverOrder(item)" class="boton-rechazar" *ngIf="item.estado == 'preparado'">Entregar pedido</button>
           </div>
         </div>
       </ion-card>

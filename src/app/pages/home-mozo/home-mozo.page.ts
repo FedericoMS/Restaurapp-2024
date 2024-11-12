@@ -152,10 +152,8 @@ export class HomeMozoPage implements OnInit {
       if (result.isConfirmed) {
         modOrder.estado = 'finalizado';     
         console.log(modOrder.estado);   
-        this.firestoreService.updateOrder(modOrder);
-        this.firestoreService.updateTableStatus(modOrder.nroMesa);
-        //AGREGAR FUNCIÓN QUE LIBERE LA MESA ACTUAL
-      // this.firestoreService.updateDatabase('mesas', 1);
+        this.firestoreService.updateOrderAndProducts(modOrder, 'finalizado', 'finalizado');
+        this.firestoreService.freeTable(modOrder.nroMesa);
         Swal.fire({
           title: "Pedido finalizado",
           confirmButtonText: "Continuar",
