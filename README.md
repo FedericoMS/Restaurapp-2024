@@ -62,13 +62,13 @@
 ## Tareas - Tercera Semana (09/11/2024 al 16/11/2024) 
 
 ### Federico Soria (Nombre de la rama: soria)
-- [ ]  Home cocinero/bartender
+- ✅  Home cocinero/bartender
 - ✅  Funcionalidades para cocinero y bartender
-- [ ]  Funcionalidades entre cliente - cuenta a pagar
-- [ ]  Agregado de push notifications en partes donde faltaban
+- ✅  Componente Cuenta
+- ✅  Agregado de push notifications en partes donde faltaban
 
 ### Lautaro García (Nombre de la rama: lautaro)
-- [ ]  Correcciones de bugs
+- ✅  Correcciones de bugs
 - [ ]  Carga de datos de 3 semanas de operaciones
 - ✅  Optimización del uso de Firebase
 
