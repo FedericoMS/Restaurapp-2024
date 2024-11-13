@@ -84,7 +84,8 @@ export class CartaPage implements OnInit {
       listaProductos: this.carrito,
       monto: this.total,
       nroMesa: this.nroMesa, //El número de mesa a tomar es el del cliente que está haciendo el pedido
-      tiempoPreparacion: this.carrito.reduce((acc, item) => Math.max(acc, item.tiempoPreparacion), 0)
+      tiempoPreparacion: this.carrito.reduce((acc, item) => Math.max(acc, item.tiempoPreparacion), 0),
+      estado_cuenta : false,
     };
     
     try {
