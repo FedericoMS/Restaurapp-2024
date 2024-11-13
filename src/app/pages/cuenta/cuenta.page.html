@@ -34,8 +34,8 @@
           </div>
           <!-- Botones de aprobar y rechazar -->
           <div class="botones">
-            <button (click)="scanTip()" class="boton-aprobar" *ngIf="pedido.estado == 'recibido' && !tipFlag">Escanear propina</button>
-            <button (click)="pay(pedido)" class="boton-aprobar" *ngIf="pedido.estado == 'recibido' && tipFlag">Pagar</button>
+            <button (click)="scanTip()" class="boton-aprobar" *ngIf="pedido.estado == 'cuenta enviada' && !tipFlag">Escanear propina</button>
+            <button (click)="pay(pedido)" class="boton-aprobar" *ngIf="pedido.estado == 'cuenta enviada' && tipFlag">Pagar</button>
           </div>
         </div>
       </ion-card>

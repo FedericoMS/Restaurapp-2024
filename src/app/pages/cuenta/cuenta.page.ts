@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 import { UtilService } from 'src/app/services/util.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-cuenta',
   templateUrl: './cuenta.page.html',
@@ -51,11 +52,8 @@ export class CuentaPage implements OnInit {
   }
 
   async ngOnInit() {
-    //REVISAR SI ES ÓPTIMO ESTE FUNCIONAMIENTO
-    //Fede Soria fijate en utils guardo el pedido por si lo queres traer de ahi
-    // this.util.pedido y ahi ya lo podes traer con el id
     await this.firestore
-      .getPedidoEspecifico(this.idCliente, 'recibido')
+      .getPedidoEspecifico(this.idCliente, 'cuenta enviada')
       .subscribe((pedido: any) => {
         this.pedido = pedido[0];
         this.montoFinal = this.pedido.monto;
@@ -127,5 +125,9 @@ export class CuentaPage implements OnInit {
         this.tipFlag = true;
         break;
     }
+  }
+
+  getPedido(){
+    return this.pedido;
   }
 }
