@@ -69,13 +69,14 @@
 
 ### Lautaro García (Nombre de la rama: lautaro)
 - ✅  Correcciones de bugs
-- [ ]  Carga de datos de 3 semanas de operaciones
+- ✅  Carga de datos de 3 semanas de operaciones
 - ✅  Optimización del uso de Firebase
+- ✅  Arreglo de estilos
 
 ### Federico Cardozo (Nombre de la rama: cardozo)
-- [ ]  Cuenta a pagar de cliente
+- ✅  Cuenta a pagar desde cliente
 - ✅  Implementación de Push Notifications
-- [ ]  Funcionalidades entre cliente - cuenta a pagar
+- ✅  Funcionalidades entre cliente - cuenta a pagar
 
 
 
@@ -160,6 +161,12 @@
 
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmenu%20cliente%203.jpg?alt=media&token=e935bf4a-6159-4056-be2b-de779c2f1b84" alt="Menú cliente 3">  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fsubmenu%201.jpg?alt=media&token=6dae5ca6-b007-4208-979b-f9888ae6a74a" alt="Submenú 1">  
+</p>
+
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fsubmenu%202.jpg?alt=media&token=fe25a4b1-8485-4a80-9d4f-260bc50ceeca" alt="Submenú 2">  
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2FEstado%20pedido.jpg?alt=media&token=78b92470-c93d-400f-8797-9963cc565877" alt="Estado pedido">  
 </p>
 
 
@@ -200,4 +207,14 @@
 ## Chat entre mesas y mozos
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fchat%20.jpg?alt=media&token=cf952b23-a5e9-4c2d-a9ab-c94a709c6ec3    " alt="chat">  
+</p>
+
+## Encuesta de cliente
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2FEncuesta%20cliente.jpg?alt=media&token=349e63d4-eaee-43d7-be28-cd9783f0bbb8" alt="encuesta">  
+</p>
+
+## Cuenta
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2FCuenta%20cliente.jpg?alt=media&token=38b3f234-c4f5-4d10-bd28-85dd36451a32" alt="encuesta">  
 </p>

@@ -115,7 +115,7 @@ export class HomeCocineroBartenderPage implements OnInit {
   
         // Mostrar confirmación
         Swal.fire({
-          title: "Producto terminado!",
+          title: "¡Producto terminado!",
           confirmButtonText: "Continuar",
           heightAuto: false
         });
