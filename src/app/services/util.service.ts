@@ -197,7 +197,7 @@ export class UtilService {
   }
 
   msjExito(
-    msj: string = 'Se cargo exitosamente',
+    msj: string = 'Se cargó exitosamente',
     position:
       | 'top-right'
       | 'top-left'

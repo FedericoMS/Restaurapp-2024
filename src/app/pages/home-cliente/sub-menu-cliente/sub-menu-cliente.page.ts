@@ -82,7 +82,7 @@ export class SubMenuClientePage implements OnInit {
   realizarEncuesta() {
     if (this.util.encuesta_realizada) {
       this.util.msjError(
-        'Ya realizo la encuesta!, no puede realizar otra vez la encuesta'
+        '¡Ya realizó la encuesta! No puede realizarla otra vez'
       );
     } else {
       this.router.navigateByUrl('/encuesta-clientes', { replaceUrl: true });
@@ -110,7 +110,7 @@ export class SubMenuClientePage implements OnInit {
         break;
 
       case 1: //Ya pidio la cuenta
-        this.util.msjError('Todavia no enviaron su cuenta');
+        this.util.msjError('Todavía no enviaron su cuenta');
         break;
 
       case 2: //cuenta a pagar
