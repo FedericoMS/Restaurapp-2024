@@ -96,7 +96,7 @@ export class EncuestaClientesPage implements OnInit {
         'red',
         'top',
         'error',
-        'black',
+        'white',
         true
       );
     }
@@ -169,7 +169,7 @@ export class EncuestaClientesPage implements OnInit {
       }
       this.util.mostrarSpinner = false;
       this.util.encuesta_realizada = true;
-      this.util.showToast('Se cargó exitosamente', 'lightgreen', 'center');
+      this.util.showToast('Se cargó exitosamente', 'lightgreen', 'center', 'success', 'black');
       setTimeout(() => {
         this.router.navigateByUrl('/sub-menu-cliente', { replaceUrl: true });
       }, 2200);
