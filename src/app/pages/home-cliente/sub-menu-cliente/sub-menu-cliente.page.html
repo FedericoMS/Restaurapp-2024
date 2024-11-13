@@ -1,16 +1,33 @@
-<ion-header>
-  <ion-toolbar class="custom-toolbar">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon
+        class="icon"
+        name="arrow-back-circle-outline"
+        (click)="goBack()"
+      ></ion-icon>
+    </ion-buttons>
     <ion-title class="ion-text-center">Cliente</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <main class="container">
-  <div class="encuesta" (click)="pedirCuenta()">
-    <span>{{texto}}</span>
-    <img src="assets/cuenta.png" alt="pedido" class="img" />
-  </div>
+  @if(!disable_encuesta){
   <div class="pedido" (click)="realizarEncuesta()">
     <span>REALIZAR ENCUESTA</span>
     <img src="assets/grafico.png" alt="encuesta" class="img" />
   </div>
+  } @if(mostrarCuenta){
+  <div class="encuesta" (click)="pedirCuenta()">
+    <span>{{texto}}</span>
+    <img src="assets/cuenta.png" alt="cuenta" class="img" />
+  </div>
+
+  }@else {
+
+  <div class="encuesta" (click)="verEstadoPedido()">
+    <span>ESTADO DEL PEDIDO</span>
+    <img src="assets/estado_pedido.png" alt="pedido" class="img" />
+  </div>
+  }
 </main>

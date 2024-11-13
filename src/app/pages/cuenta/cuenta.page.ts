@@ -52,6 +52,8 @@ export class CuentaPage implements OnInit {
 
   async ngOnInit() {
     //REVISAR SI ES ÓPTIMO ESTE FUNCIONAMIENTO
+    //Fede Soria fijate en utils guardo el pedido por si lo queres traer de ahi
+    // this.util.pedido y ahi ya lo podes traer con el id
     await this.firestore
       .getPedidoEspecifico(this.idCliente, 'recibido')
       .subscribe((pedido: any) => {

@@ -2,7 +2,6 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-  IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
@@ -70,7 +69,8 @@ export class GraficosPage implements OnInit {
     });
     this.router.routerState.root.queryParams.forEach((item) => {
       this.encuesta = item['encuesta'];
-      this.subMenu = item['subMenu'] || false;
+      this.subMenu = item['subMenu'] ? true : false;
+      console.log('item: ', item);
     });
   }
 

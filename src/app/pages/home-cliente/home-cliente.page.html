@@ -30,8 +30,6 @@
   </div>
   }
 
-
-
   <main class="container">
     @if (this.flagMesa) {
     <div class="mesa" (click)="scan()">
@@ -44,11 +42,16 @@
       <span>PEDIR UNA MESA</span>
       <img src="assets/mesa.png" alt="mesa" class="img" />
     </div>
-    }
-
+    } @if(pedido && pedido.estado === 'en entrega') {
+    <div class="grafico" (click)="approveOrder(pedido)">
+      <span>CONFIRMAR PEDIDO</span>
+      <img src="assets/recido.png" alt="mesa" class="img" />
+    </div>
+    } @else {
     <div class="grafico" (click)="verEncuestas()">
       <span>VER ENCUESTAS</span>
       <img src="assets/grafico.png" alt="mesa" class="img" />
     </div>
+    }
   </main>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent,
@@ -9,6 +9,8 @@ import {
   IonFabList,
   IonFab,
   IonFabButton,
+  IonButtons,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util.service';
@@ -17,13 +19,17 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { Subscription } from 'rxjs';
 import { Pedido } from 'src/app/clases/pedido';
 import { Alert } from 'src/app/clases/alert';
-
+import { UserService } from 'src/app/services/user.service';
+import { addIcons } from 'ionicons';
+import { sendOutline, arrowBackCircleOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-sub-menu-cliente',
   templateUrl: './sub-menu-cliente.page.html',
   styleUrls: ['./sub-menu-cliente.page.scss'],
   standalone: true,
   imports: [
+    IonIcon,
+    IonButtons,
     IonFabButton,
     IonFab,
     IonFabList,
@@ -40,11 +46,19 @@ export class SubMenuClientePage implements OnInit {
   util = inject(UtilService);
   push = inject(PushService);
   fire = inject(FirestoreService);
+  userService = inject(UserService);
   disable_encuesta = false;
   sub?: Subscription;
   texto = 'PEDIR LA CUENTA';
   estado_cuenta = 0;
-  constructor() {}
+  mostrarCuenta = false;
+
+  constructor(private location: Location) {
+    addIcons({ arrowBackCircleOutline, sendOutline });
+    this.router.routerState.root.queryParams.forEach((item) => {
+      this.mostrarCuenta = item['cuenta'] ? true : false;
+    });
+  }
 
   ngOnInit() {
     this.sub = this.fire
@@ -76,6 +90,10 @@ export class SubMenuClientePage implements OnInit {
     }
   }
 
+  verEstadoPedido() {
+    this.util.estadoPedido();
+  }
+
   pedirCuenta() {
     switch (this.estado_cuenta) {
       case 0: //No pidio la cuenta
@@ -100,5 +118,9 @@ export class SubMenuClientePage implements OnInit {
         this.router.navigateByUrl('/cuenta', { replaceUrl: true });
         break;
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
