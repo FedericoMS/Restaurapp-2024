@@ -13,7 +13,7 @@ import { Pedido } from '../clases/pedido';
 export class UtilService {
   mostrarSpinner = false;
   pedido?: Pedido;
-
+  encuesta_realizada = false;
   constructor() {}
 
   estadoPedido() {

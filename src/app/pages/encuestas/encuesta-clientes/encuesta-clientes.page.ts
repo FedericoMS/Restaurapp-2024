@@ -34,7 +34,7 @@ import { addIcons } from 'ionicons';
     IonToolbar,
     CommonModule,
     FormsModule,
-    IonContent
+    IonContent,
   ],
 })
 export class EncuestaClientesPage implements OnInit {
@@ -168,6 +168,7 @@ export class EncuestaClientesPage implements OnInit {
         if (this.comentario !== '') this.fire.addComentarios(this.comentario);
       }
       this.util.mostrarSpinner = false;
+      this.util.encuesta_realizada = true;
       this.util.showToast('Se cargó exitosamente', 'lightgreen', 'center');
       setTimeout(() => {
         this.router.navigateByUrl('/sub-menu-cliente', { replaceUrl: true });

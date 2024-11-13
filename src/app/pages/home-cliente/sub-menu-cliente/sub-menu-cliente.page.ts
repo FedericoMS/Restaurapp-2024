@@ -80,13 +80,12 @@ export class SubMenuClientePage implements OnInit {
   }
 
   realizarEncuesta() {
-    if (this.disable_encuesta) {
+    if (this.util.encuesta_realizada) {
       this.util.msjError(
         'Ya realizo la encuesta!, no puede realizar otra vez la encuesta'
       );
     } else {
       this.router.navigateByUrl('/encuesta-clientes', { replaceUrl: true });
-      this.disable_encuesta = true;
     }
   }
 

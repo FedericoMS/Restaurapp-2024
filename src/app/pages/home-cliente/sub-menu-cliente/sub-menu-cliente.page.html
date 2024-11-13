@@ -12,7 +12,7 @@
 </ion-header>
 
 <main class="container">
-  @if(!disable_encuesta){
+  @if(!this.util.encuesta_realizada){
   <div class="pedido" (click)="realizarEncuesta()">
     <span>REALIZAR ENCUESTA</span>
     <img src="assets/grafico.png" alt="encuesta" class="img" />
