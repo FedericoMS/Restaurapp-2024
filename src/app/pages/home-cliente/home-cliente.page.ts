@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
 import { Pedido } from 'src/app/clases/pedido';
 import { Alert } from 'src/app/clases/alert';
 import { PushService } from 'src/app/services/push.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home-cliente',
   templateUrl: './home-cliente.page.html',
@@ -61,6 +62,7 @@ export class HomeClientePage implements OnInit {
   sub_pedidos?: Subscription;
   sub_pedir_mesa?: Subscription;
   pedido?: Pedido;
+  chequeoEstadoRecibido = false;
 
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline, chatbubbleOutline });
@@ -135,11 +137,14 @@ export class HomeClientePage implements OnInit {
   accionesDeEscanner() {
     if (this.userService.nroMesa && this.pedido === undefined) {
       this.router.navigateByUrl('/carta');
-    } else if (this.pedido?.estado === 'preparado') {
+    } else if (this.pedido?.estado === 'en entrega') {
+      this.approveOrder(this.pedido);
+    } else if (this.chequeoEstadoRecibido) {
       //Ir a encuesta
       this.router.navigateByUrl('/sub-menu-cliente');
     } else if (this.pedido && this.userService.nroMesa) {
       this.util.estadoPedido();
+      this.chequeoEstadoRecibido = this.pedido.estado === 'recibido';
     }
   }
 
@@ -176,5 +181,21 @@ export class HomeClientePage implements OnInit {
       'Tienes un nuevo cliente pendiente de asignación de mesa',
       'metre'
     );
+  }
+
+  approveOrder(pedido: Pedido) {
+    Swal.fire({
+      title: 'El estado de su pedido es entregado',
+      text: '¿Estás seguro de que quieres confirmar la entrega del pedido?',
+      showCancelButton: true,
+      confirmButtonText: 'Si, aceptar',
+      cancelButtonText: `No, cancelar`,
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        pedido.estado = 'recibido';
+        this.fire.updateOrderAndProducts(pedido, 'recibido', 'recibido');
+      }
+    });
   }
 }
