@@ -9,7 +9,7 @@ export class Pedido {
   estado_cuenta: boolean;
 
   //estados de 'estado': rechazado, pendiente de confirmación, en preparación,
-  //preparado, en entrega, recibido, pagado, finalizado
+  //preparado, en entrega, recibido, cuenta pedida, cuenta enviada, pagado, finalizado
   constructor() {
     this.estado = '';
     this.id = '';
