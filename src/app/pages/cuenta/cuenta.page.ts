@@ -51,8 +51,8 @@ export class CuentaPage implements OnInit {
     addIcons({ arrowBackCircleOutline });
   }
 
-  async ngOnInit() {
-    await this.firestore
+  ngOnInit() {
+      this.firestore
       .getPedidoEspecifico(this.idCliente, 'cuenta enviada')
       .subscribe((pedido: any) => {
         this.pedido = pedido[0];

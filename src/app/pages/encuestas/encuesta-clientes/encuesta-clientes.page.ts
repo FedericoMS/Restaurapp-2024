@@ -34,6 +34,7 @@ import { addIcons } from 'ionicons';
     IonToolbar,
     CommonModule,
     FormsModule,
+    IonContent
   ],
 })
 export class EncuestaClientesPage implements OnInit {
@@ -95,7 +96,7 @@ export class EncuestaClientesPage implements OnInit {
         'red',
         'top',
         'error',
-        'white',
+        'black',
         true
       );
     }

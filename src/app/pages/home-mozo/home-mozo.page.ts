@@ -177,6 +177,7 @@ export class HomeMozoPage implements OnInit {
       if (result.isConfirmed) {
         modOrder.estado = 'finalizado';     
         console.log(modOrder.estado);   
+        this.firestoreService.updateNroMesaUsuario(modOrder.idCliente, 0);
         this.firestoreService.updateOrderAndProducts(modOrder, 'finalizado', 'finalizado');
         this.firestoreService.freeTable(modOrder.nroMesa);
         Swal.fire({
