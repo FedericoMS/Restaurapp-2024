@@ -138,6 +138,31 @@ export class HomeMozoPage implements OnInit {
     });
   }
 
+  deliverBill(pedido : any)
+  {
+    let modOrder : any = pedido;
+    console.log(modOrder);
+    Swal.fire({
+      title: "¿Estás seguro de que quieres entregar la cuenta?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modOrder.estado = 'cuenta enviada';     
+        modOrder.estado_cuenta = true;     
+        console.log(modOrder.estado);   
+        this.firestoreService.updateOrder(modOrder)
+        Swal.fire({
+          title: "Se entregó la cuenta al cliente",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
+  }
+
   confirmPayment(pedido : any)
   {
     let modOrder : any = pedido;
