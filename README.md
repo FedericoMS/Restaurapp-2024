@@ -67,13 +67,13 @@
 - ✅  Componente Cuenta
 - ✅  Agregado de push notifications en partes donde faltaban
 
-### Lautaro García (Nombre de la rama: lautaro)
+### Lautaro García (Nombre de la rama: lautaro - garcia)
 - ✅  Correcciones de bugs
 - ✅  Carga de datos de 3 semanas de operaciones
 - ✅  Optimización del uso de Firebase
 - ✅  Arreglo de estilos
 
-### Federico Cardozo (Nombre de la rama: cardozo)
+### Federico Cardozo (Nombre de la rama: cardozo - fede)
 - ✅  Cuenta a pagar desde cliente
 - ✅  Implementación de Push Notifications
 - ✅  Funcionalidades entre cliente - cuenta a pagar
