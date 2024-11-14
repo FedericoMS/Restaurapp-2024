@@ -130,6 +130,7 @@
 # Capturas de los componentes de la aplicación
 
 ## Splash Screen e inicio de sesión
+Se ingresa a la app y se muestra el Splash Screen y sigue hasta el inicio de sesión.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fsplash.jpg?alt=media&token=ad5cec9e-a619-48be-a093-6d3aa5600cca" alt="Splash Screen%">
 
@@ -139,6 +140,7 @@
 
 
 ## Alta de cliente y anónimo
+Cualquier persona se puede registrar como cliente (con la posibilidad de escanear el QR del DNI) o como anónimo.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Falta%20cliente.jpg?alt=media&token=35937d04-1ade-43b0-b5bd-1031bc301db8" alt="Alta cliente">
   
@@ -147,11 +149,13 @@
 </p>
 
 ## Ingreso al local
+Se muestra un único botón para capturar el QR del ingreso al local.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fingreso%20local.jpg?alt=media&token=155bbe11-f013-47e0-860a-ec5058630320" alt="Alta cliente">  
 </p>
 
 ## Menú de cliente
+Se muestran las diferentes pantallas que el cliente ve durante el uso de la aplicación, mientras su pedido pasa por diferentes estados.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmenu%20cliente.jpg?alt=media&token=a9bb83e7-645a-4744-afaa-f88248ffdce1" alt="Menú cliente 1">
   
@@ -171,6 +175,7 @@
 
 
 ## Gráficos y estadísticas
+El cliente tiene la posibilidad de acceder en cualquier momento a encuestas y comentarios de clientes anteriores.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%201.jpg?alt=media&token=f6677fbc-0445-448b-97e0-2f7697c5fe77" alt="gráfico 1">  
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%202.jpg?alt=media&token=d5f9bb0d-5660-4d63-91af-c6b3b1c521b0" alt="gráfico 2">  
@@ -182,39 +187,46 @@
 </p>
 
 ## Carta
+La carta que se le presenta al cliente a la hora de hacer el pedido. La misma posee 3 fotos por producto.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fcarta.jpg?alt=media&token=150f76dc-aca2-400a-8a17-385bae3684cf" alt="carta">  
 </p>
 
 
 ## Mozo
+El usuario de tipo Mozo decide si aceptar o rechazar un pedido. También puede hacer entregas de los mismos y entregar la cuenta al cliente.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmozo.jpg?alt=media&token=9382ff2a-c3c9-49ef-9813-a2e24a9db1bd" alt="Mozo">  
 </p>
 
 ## Bartender y cocinero
+Los usuarios de tipo Bartender y Cocinero reciben sus productos a elaborar correspondientes a sus sectores.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fbartender.jpg?alt=media&token=534c4da4-a800-4ceb-bc2a-c1cac4a792b7" alt="Bartender">  
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fcocinero.jpg?alt=media&token=153ffd88-443d-4fb1-ad06-5370893a70d7" alt="Cocinero">  
 </p>
 
 ## Metre
+El Metre se encarga de asignarle una mesa a los clientes que están en lista de espera.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmetre.jpg?alt=media&token=6dfee9f1-cafa-4f58-bfd6-3e88bad1009a" alt="metre 1">  
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fmetre%202.jpg?alt=media&token=a9679825-6b68-48e2-9447-59d9ed8b9993" alt="metre 2">  
 </p>
 
 ## Chat entre mesas y mozos
+Los clientes pueden conversar con los mozos a través de un chat.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fchat%20.jpg?alt=media&token=cf952b23-a5e9-4c2d-a9ab-c94a709c6ec3    " alt="chat">  
 </p>
 
 ## Encuesta de cliente
+El cliente tiene la posibilidad de llenar una encuesta con sus opiniones sobre el servicio dado por Restaurapp.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2FEncuesta%20cliente.jpg?alt=media&token=349e63d4-eaee-43d7-be28-cd9783f0bbb8" alt="encuesta">  
 </p>
 
 ## Cuenta
+Una vez que el cliente terminó su comida, pide la cuenta, en la cual se tiene que escanear el porcentaje de propina que se desea dejar en base a su conformidad con el servicio.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2FCuenta%20cliente.jpg?alt=media&token=38b3f234-c4f5-4d10-bd28-85dd36451a32" alt="encuesta">  
 </p>
