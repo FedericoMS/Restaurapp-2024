@@ -40,7 +40,7 @@ export class UtilService {
           break;
 
         case 'recibido':
-          Alert.comun('Su pedido fue recibido por usted');
+          Alert.comun('Usted ya ha recibido su pedido');
           break;
 
         case 'cuenta pedida':

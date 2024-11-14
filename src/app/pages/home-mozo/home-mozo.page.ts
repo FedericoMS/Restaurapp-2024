@@ -63,16 +63,24 @@ export class HomeMozoPage implements OnInit {
             modOrder.estado = 'en preparación';
             console.log(modOrder.estado);
             this.firestoreService.updateOrderAndProducts(modOrder, 'en preparación', 'en preparación');
+
+            // Verificar si hay productos para cocinero y bartender
             const hasFoodOrDessert = modOrder.listaProductos.some((producto: any) => 
                 producto.tipo === 'postre' || producto.tipo === 'comida'
             );
+            const hasDrinks = modOrder.listaProductos.some((producto: any) => 
+                producto.tipo === 'bebida'
+            );
+
+            // Enviar notificación según el tipo de productos
             if (hasFoodOrDessert) {
                 this.push.send_push_notification(
                     'Nuevo pedido para preparar', 
                     'Tienes un nuevo pedido para preparar', 
                     'cocinero'
                 );
-            } else {
+            }
+            if (hasDrinks) {
                 this.push.send_push_notification(
                     'Nuevo pedido para preparar', 
                     'Tienes un nuevo pedido para preparar', 
@@ -88,6 +96,7 @@ export class HomeMozoPage implements OnInit {
         }
     });
 }
+
 
 
   rejectOrder(pedido : any)
