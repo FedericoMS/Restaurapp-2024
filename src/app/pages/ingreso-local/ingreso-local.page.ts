@@ -71,7 +71,7 @@ export class IngresoLocalPage implements OnInit {
       this.router.navigateByUrl('/home-cliente-anonimo', { replaceUrl: true });
     } else {
       this.util.msjError(
-        'No podes vincularte con una mesa sin estar en la sala de espera!'
+        'No podes vincularte con una mesa sin estar en la sala de espera'
       );
     }
     console.log(data);

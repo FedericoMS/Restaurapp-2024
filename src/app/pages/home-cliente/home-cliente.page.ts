@@ -193,10 +193,10 @@ export class HomeClientePage implements OnInit {
 
   approveOrder(pedido: Pedido) {
     Swal.fire({
-      title: '¿Estás seguro de que quieres confirmar la entrega del pedido?',
+      title: '¿Quieres confirmar la recepción de su pedido?',
       showCancelButton: true,
-      confirmButtonText: 'Sí, aceptar',
-      cancelButtonText: `No, cancelar`,
+      confirmButtonText: 'Sí',
+      cancelButtonText: `No`,
       heightAuto: false,
     }).then((result) => {
       if (result.isConfirmed) {
