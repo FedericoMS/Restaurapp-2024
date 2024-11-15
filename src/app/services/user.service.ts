@@ -145,6 +145,7 @@ export class UserService {
   }
 
   logout() {
+    this.push.getUserSacarToken(this.uidUser);
     this.auth.signOut();
     this.userName = '';
     this.router.navigateByUrl('login');

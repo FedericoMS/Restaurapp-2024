@@ -54,6 +54,24 @@ export class PushService {
       });
   }
 
+  getUserSacarToken(uidUser: string): void {
+    this.afs
+      .collection('usuarios')
+      .doc(uidUser)
+      .get()
+      .subscribe((usuario) => {
+        this.user = usuario.data() as Usuario;
+        //Guardo el token en el usuario
+        if (this.user) {
+          this.user.token = '';
+          this.afs
+            .collection('usuarios')
+            .doc(this.user.id)
+            .update({ ...this.user });
+        }
+      });
+  }
+
   //Esto sucede cuando el registro de las notificaciones push finaliza sin errores
   private async addListeners(): Promise<void> {
     await PushNotifications.addListener(
