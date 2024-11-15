@@ -13,15 +13,61 @@ import { Pedido } from '../clases/pedido';
 export class UtilService {
   mostrarSpinner = false;
   pedido?: Pedido;
-
-  constructor() {}
+  encuesta_realizada = false;
+  constructor() { }
 
   estadoPedido() {
-    if (this.pedido) Alert.comun('Su pedido está ' + this.pedido.estado);
+    if (this.pedido) {
+      switch (this.pedido.estado) {
+        case 'rechazado':
+          Alert.comun('Su pedido fue rechazado');
+          break;
+
+        case 'pendiente de confirmación':
+          Alert.comun('Su pedido está pendiente de confirmación');
+          break;
+
+        case 'en preparación':
+          Alert.comun('Su pedido está en preparación');
+          break;
+
+        case 'preparado':
+          Alert.comun('Su pedido está preparado');
+          break;
+
+        case 'en entrega':
+          Alert.comun('Su pedido está por ser entregado');
+          break;
+
+        case 'recibido':
+          Alert.comun('Usted ya ha recibido su pedido');
+          break;
+
+        case 'cuenta pedida':
+          Alert.comun('La cuenta ha sido solicitada al mozo');
+          break;
+
+        case 'cuenta enviada':
+          Alert.comun('La cuenta ya le ha sido entregada a usted');
+          break;
+
+        case 'pagado':
+          Alert.comun('Su pedido ha sido pagado');
+          break;
+
+        case 'finalizado':
+          Alert.comun('Su pedido está finalizado. Muchas gracias por su compra.');
+          break;
+
+        default:
+          Alert.comun('No hay pedido');
+          break;
+
+      }
+    }
     else {
       Alert.comun('No hay pedido');
     }
-
     return this.pedido ? true : false;
   }
 
@@ -197,7 +243,7 @@ export class UtilService {
   }
 
   msjExito(
-    msj: string = 'Se cargo exitosamente',
+    msj: string = 'Se cargó exitosamente',
     position:
       | 'top-right'
       | 'top-left'

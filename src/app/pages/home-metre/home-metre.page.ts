@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonFabList, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle } from '@ionic/angular/standalone';
 import { UserService } from 'src/app/services/user.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { arrowBackCircleOutline } from 'ionicons/icons';
@@ -14,7 +14,7 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
   templateUrl: './home-metre.page.html',
   styleUrls: ['./home-metre.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonHeader, IonTitle, IonToolbar, IonFabList, IonFabButton, IonFab, IonContent, CommonModule, FormsModule,SpinnerComponent]
+  imports: [IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonIcon, IonHeader, IonTitle, IonToolbar, IonFabList, IonFabButton, IonFab, IonContent, CommonModule, FormsModule,SpinnerComponent]
 })
 export class HomeMetrePage implements OnInit {
   listUsersWaiting : Array<any>;
@@ -28,16 +28,20 @@ export class HomeMetrePage implements OnInit {
     this.listTables = [];
     this.customer = null;
     this.idUserWaiting = '';
+    setTimeout(() => {
+      this.isLoading = true;
+    }, 1800);
   }
 
   ngOnInit() {
     addIcons({ arrowBackCircleOutline});
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2600);
 
-    this.isLoading = true;
     this.firestore.getCollection('lista_de_espera').valueChanges()
     .subscribe((response)=>{
       this.listUsersWaiting = response;
-      this.isLoading = false;
     })
 
     this.firestore.getCollection('mesas').valueChanges()
@@ -58,10 +62,10 @@ export class HomeMetrePage implements OnInit {
     if(this.customer.cliente !== '' && this.customer.id_cliente !== '' && this.idUserWaiting !== ''){
 
       Swal.fire({
-        title: "¿Estás seguro de que quieres aprobar a este cliente?",
+        title: "¿Quieres asignar esta mesa al cliente?",
         showCancelButton: true,
-        confirmButtonText: "Aprobar",
-        cancelButtonText: `Cancelar`,
+        confirmButtonText: "Si",
+        cancelButtonText: `No`,
         heightAuto: false
       }).then((result) => {
         if (result.isConfirmed) {

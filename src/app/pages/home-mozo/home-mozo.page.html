@@ -42,12 +42,15 @@
             <p class="total">TOTAL: ${{item.monto}}</p>
             <p class="total" *ngIf="item.estado == 'preparado'" style="font-size: 1.6rem">Listo para entregar</p>
             <p class="total" *ngIf="item.estado == 'recibido'" style="font-size: 1.6rem">Pedido recibido</p>
+            <p class="total" *ngIf="item.estado == 'cuenta enviada'" style="font-size: 1.6rem">Cuenta entregada</p>
           </div>
           <!-- Botones de aprobar y rechazar -->
           <div class="botones">
             <button (click)="confirmPayment(item)" class="boton-aprobar" *ngIf="item.estado == 'pagado'">Confirmar pago</button>
             <button (click)="approveOrder(item)" class="boton-aprobar" *ngIf="item.estado == 'pendiente de confirmación'">Aprobar</button>
             <button (click)="rejectOrder(item)" class="boton-rechazar" *ngIf="item.estado == 'pendiente de confirmación'">Rechazar</button>
+            <button (click)="deliverOrder(item)" class="boton-aprobar" *ngIf="item.estado == 'preparado'">Entregar pedido</button>
+            <button (click)="deliverBill(item)" class="boton-aprobar" *ngIf="item.estado == 'cuenta pedida'">Entregar cuenta</button>
           </div>
         </div>
       </ion-card>

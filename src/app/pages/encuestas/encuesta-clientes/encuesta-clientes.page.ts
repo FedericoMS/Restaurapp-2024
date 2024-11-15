@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent,
@@ -10,6 +10,7 @@ import {
   IonRange,
   IonItem,
   IonIcon,
+  IonButtons,
 } from '@ionic/angular/standalone';
 import { UtilService } from 'src/app/services/util.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -26,6 +27,7 @@ import { addIcons } from 'ionicons';
   styleUrls: ['./encuesta-clientes.page.scss'],
   standalone: true,
   imports: [
+    IonButtons,
     IonIcon,
     IonRange,
     IonButton,
@@ -34,6 +36,7 @@ import { addIcons } from 'ionicons';
     IonToolbar,
     CommonModule,
     FormsModule,
+    IonContent,
   ],
 })
 export class EncuestaClientesPage implements OnInit {
@@ -56,7 +59,7 @@ export class EncuestaClientesPage implements OnInit {
   range_select: number = 1;
   comentario = '';
 
-  constructor() {
+  constructor(private location: Location) {
     addIcons({ cameraOutline });
   }
 
@@ -167,12 +170,21 @@ export class EncuestaClientesPage implements OnInit {
         if (this.comentario !== '') this.fire.addComentarios(this.comentario);
       }
       this.util.mostrarSpinner = false;
-      this.util.showToast('Se cargó exitosamente', 'lightgreen', 'center');
+      this.util.encuesta_realizada = true;
+      this.util.showToast(
+        'Se cargó exitosamente',
+        'lightgreen',
+        'center',
+        'success',
+        'black'
+      );
       setTimeout(() => {
-        this.router.navigate(['/graficos'], {
-          queryParams: { encuesta: 'clientes' },
-        });
+        this.router.navigateByUrl('/sub-menu-cliente', { replaceUrl: true });
       }, 2200);
     }, 2000);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

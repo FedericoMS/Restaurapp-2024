@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
 import { Pedido } from 'src/app/clases/pedido';
 import { Alert } from 'src/app/clases/alert';
 import { PushService } from 'src/app/services/push.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home-cliente',
   templateUrl: './home-cliente.page.html',
@@ -61,6 +62,7 @@ export class HomeClientePage implements OnInit {
   sub_pedidos?: Subscription;
   sub_pedir_mesa?: Subscription;
   pedido?: Pedido;
+  chequeoEstadoRecibido = false;
 
   constructor(private util: UtilService) {
     addIcons({ qrCodeOutline, chatbubbleOutline });
@@ -135,11 +137,22 @@ export class HomeClientePage implements OnInit {
   accionesDeEscanner() {
     if (this.userService.nroMesa && this.pedido === undefined) {
       this.router.navigateByUrl('/carta');
-    } else if (this.pedido?.estado === 'preparado') {
-      //Ir a encuesta
+    } else if (this.pedido?.estado === 'en preparación') {
+      //Ir a encuesta y estado del pedido
       this.router.navigateByUrl('/sub-menu-cliente');
+    } else if (this.chequeoEstadoRecibido) {
+      //Ir a encuesta y pedir cuenta
+      this.router.navigate(['/sub-menu-cliente'], {
+        queryParams: { cuenta: true },
+      });
+    } else if (
+      this.pedido?.estado === 'pagado' ||
+      this.pedido?.estado === 'finalizado'
+    ) {
+      this.verEncuestas();
     } else if (this.pedido && this.userService.nroMesa) {
       this.util.estadoPedido();
+      this.chequeoEstadoRecibido = true;
     }
   }
 
@@ -176,5 +189,20 @@ export class HomeClientePage implements OnInit {
       'Tienes un nuevo cliente pendiente de asignación de mesa',
       'metre'
     );
+  }
+
+  approveOrder(pedido: Pedido) {
+    Swal.fire({
+      title: '¿Quieres confirmar la recepción de su pedido?',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: `No`,
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        pedido.estado = 'recibido';
+        this.fire.updateOrderAndProducts(pedido, 'recibido', 'recibido');
+      }
+    });
   }
 }

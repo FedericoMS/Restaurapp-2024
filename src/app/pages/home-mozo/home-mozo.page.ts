@@ -22,8 +22,7 @@ import { PushService } from 'src/app/services/push.service';
 export class HomeMozoPage implements OnInit {
 
   isLoading : boolean = false;
-  listaPedidos : any;
-  //userAuth: any = this.angularFireAuth.authState;
+  listaPedidos : any = [];
   push = inject(PushService);
   
 
@@ -32,12 +31,9 @@ export class HomeMozoPage implements OnInit {
     setTimeout(() => {
       this.isLoading = true;      
     }, 1800);
-    // this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
-    //   this.userAuth = user;
-    //   console.log(user);
-    // });
     this.firestoreService.getPedidos().subscribe((pedidos: any) => {
       this.listaPedidos = pedidos;
+    //  console.log(this.listaPedidos.length)
     });
   }
 
@@ -48,29 +44,56 @@ export class HomeMozoPage implements OnInit {
   }
 
 
-  approveOrder(pedido : any)
-  {
-    let modOrder : any = pedido;
+  approveOrder(pedido: any) {
+    let modOrder: any = pedido;
     console.log(modOrder);
+
     Swal.fire({
-      title: "¿Estás seguro de que quieres aprobar este pedido?",
-      showCancelButton: true,
-      confirmButtonText: "Aprobar",
-      cancelButtonText: `Cancelar`,
-      heightAuto: false
+        title: "¿Estás seguro de que quieres aprobar este pedido?",
+        showCancelButton: true,
+        confirmButtonText: "Aprobar",
+        cancelButtonText: `Cancelar`,
+        heightAuto: false
     }).then((result) => {
-      if (result.isConfirmed) {
-        modOrder.estado = 'en preparación';     
-        console.log(modOrder.estado);   
-        this.firestoreService.updateOrderAndProducts(modOrder, 'en preparación', 'en preparación');
-        Swal.fire({
-          title: "¡Pedido en preparación!",
-          confirmButtonText: "Continuar",
-          heightAuto: false
-        })
-      }
+        if (result.isConfirmed) {
+            modOrder.estado = 'en preparación';
+            console.log(modOrder.estado);
+            this.firestoreService.updateOrderAndProducts(modOrder, 'en preparación', 'en preparación');
+
+            // Verificar si hay productos para cocinero y bartender
+            const hasFoodOrDessert = modOrder.listaProductos.some((producto: any) => 
+                producto.tipo === 'postre' || producto.tipo === 'comida'
+            );
+            const hasDrinks = modOrder.listaProductos.some((producto: any) => 
+                producto.tipo === 'bebida'
+            );
+
+            // Enviar notificación según el tipo de productos
+            if (hasFoodOrDessert) {
+                this.push.send_push_notification(
+                    'Nuevo pedido para preparar', 
+                    'Tienes un nuevo pedido para preparar', 
+                    'cocinero'
+                );
+            }
+            if (hasDrinks) {
+                this.push.send_push_notification(
+                    'Nuevo pedido para preparar', 
+                    'Tienes un nuevo pedido para preparar', 
+                    'bartender'
+                );
+            }
+
+            Swal.fire({
+                title: "¡Pedido en preparación!",
+                confirmButtonText: "Continuar",
+                heightAuto: false
+            });
+        }
     });
-  }
+}
+
+
 
   rejectOrder(pedido : any)
   {
@@ -120,6 +143,31 @@ export class HomeMozoPage implements OnInit {
     });
   }
 
+  deliverBill(pedido : any)
+  {
+    let modOrder : any = pedido;
+    console.log(modOrder);
+    Swal.fire({
+      title: "¿Estás seguro de que quieres entregar la cuenta?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: `Cancelar`,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        modOrder.estado = 'cuenta enviada';     
+        modOrder.estado_cuenta = true;     
+        console.log(modOrder.estado);   
+        this.firestoreService.updateOrder(modOrder)
+        Swal.fire({
+          title: "Se entregó la cuenta al cliente",
+          confirmButtonText: "Continuar",
+          heightAuto: false
+        })
+      }
+    });
+  }
+
   confirmPayment(pedido : any)
   {
     let modOrder : any = pedido;
@@ -134,10 +182,9 @@ export class HomeMozoPage implements OnInit {
       if (result.isConfirmed) {
         modOrder.estado = 'finalizado';     
         console.log(modOrder.estado);   
-        this.firestoreService.updateOrder(modOrder);
-        this.firestoreService.updateTableStatus(modOrder.nroMesa);
-        //AGREGAR FUNCIÓN QUE LIBERE LA MESA ACTUAL
-    //    this.firestoreService.updateDatabase('mesas', )
+        this.firestoreService.updateNroMesaUsuario(modOrder.idCliente, 0);
+        this.firestoreService.updateOrderAndProducts(modOrder, 'finalizado', 'finalizado');
+        this.firestoreService.freeTable(modOrder.nroMesa);
         Swal.fire({
           title: "Pedido finalizado",
           confirmButtonText: "Continuar",

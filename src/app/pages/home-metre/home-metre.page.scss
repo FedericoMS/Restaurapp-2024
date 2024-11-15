@@ -1,7 +1,7 @@
 .content{
     width: 100%;
     height: 100%;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .title{
@@ -83,12 +83,12 @@ ion-content{
 }
 
 .icon {
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    margin-top: 65px;
+    margin-left: 5px;
+    /* margin-bottom: 10px; */
     width: 50px;
     height: 50px;
-    color: #B33951;
+    color: #e3d081;
   } 
 
 .customer-header{
@@ -98,8 +98,8 @@ ion-content{
 }
 
 .customer-content-title{
-    border-top: 1px solid #B33951;
-    border-bottom: 1px solid #B33951;
+    border-top: 1px solid #e3d081;
+    border-bottom: 1px solid #e3d081;
     padding: 20px 0px;
 
 }
@@ -109,7 +109,6 @@ ion-content{
     font-size: 23px;
     text-align: center;
     margin: 0;
-    color: #54494B;
     font-weight: 700;
     text-transform: capitalize;
 }
@@ -195,6 +194,68 @@ ion-toolbar.custom-toolbar {
     font-size: 32px;
     color: #54494b; 
   }
+
+
+    
+  ion-card-header {
+    display: flex;
+    flex-direction: column;
+    
+    ion-card-title {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 3px 3px 3px #ff0000;
+    }
+    
+    ion-card-subtitle {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 17px;
+      text-shadow: 3px 3px 3px #ff0000;
+      text-transform: capitalize;
+    }
+  }
+
+  .button-personalizado {
+    background: #FFFFFF;
+    font-size: 14px;
+    margin-top: 15px;
+    padding: 16px 20px;
+    border-radius: 26px;
+    border: 3px solid #D1A5AB;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: #B33951;
+    box-shadow: 0px 2px 2px #5E2332;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .tarjeta-usuario {
+    background-image: url('/assets/user-background.jpg');
+    --background: #1e1e1e;
+  }
+  
+  .usuario-container {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .usuario-detalles {
+    margin-left: 1rem;
+  }
+  .titulo-lista {
+    text-align: center;
+    margin-top: 1rem;
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px #000;
+  }
+
 
 @media (height > 640px) {
     .elements h2{

@@ -1,136 +1,145 @@
 <ion-header>
   <ion-toolbar class="custom-toolbar">
     <ion-title class="ion-text-center">Encuesta cliente</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon
+        class="icon"
+        name="arrow-back-circle-outline"
+        (click)="goBack()"
+      ></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<main>
-  <div class="top">
-    <ion-button (click)="sacar_foto()" class="btn-top">
-      Subir fotos (máximo 3)
-      <ion-icon name="camera-outline"></ion-icon>
-    </ion-button>
-    <span>{{this.imgs.length}}/3 fotos</span>
-  </div>
-  <form>
-    <div class="ion-margin-bottom">
-      <label for="overallSatisfaction"
-        >¿Qué tan satisfecho estuvo con su experiencia?</label
-      >
-      <ion-range
-        min="1"
-        max="5"
-        step="1"
-        (ionChange)="cambiarRange($event)"
-      ></ion-range>
+<ion-content>
+  <main>
+    <div class="top">
+      <ion-button (click)="sacar_foto()" class="btn-top">
+        Subir fotos (máximo 3)
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+      <span>{{this.imgs.length}}/3 fotos</span>
     </div>
-    <div class="ion-margin-bottom">
-      <p>¿Cómo describiría el ambiente del restaurante?</p>
-      <div class="div-radios">
-        <div class="div-rdo-chek">
-          <input
-            type="radio"
-            id="ambientCalm"
-            name="environment"
-            value="Tranquilo"
-            (click)="cambiarRadio('Tranquilo')"
-            checked
-          />
-          <label for="ambientCalm">Tranquilo</label><br />
-        </div>
-        <div class="div-rdo-chek">
-          <input
-            type="radio"
-            id="ambientLively"
-            name="environment"
-            value="Animado"
-            (click)="cambiarRadio('Animado')"
-          />
-          <label for="ambientLively">Animado</label><br />
-        </div>
-        <div class="div-rdo-chek">
-          <input
-            type="radio"
-            id="ambientNoisy"
-            name="environment"
-            value="Ruidoso"
-            (click)="cambiarRadio('Ruidoso')"
-          />
-          <label for="ambientNoisy">Ruidoso</label>
+    <form>
+      <div class="ion-margin-bottom">
+        <label for="overallSatisfaction"
+          >¿Qué tan satisfecho estuvo con su experiencia?</label
+        >
+        <ion-range
+          min="1"
+          max="5"
+          step="1"
+          (ionChange)="cambiarRange($event)"
+        ></ion-range>
+      </div>
+      <div class="ion-margin-bottom">
+        <p>¿Cómo describiría el ambiente del restaurante?</p>
+        <div class="div-radios">
+          <div class="div-rdo-chek">
+            <input
+              type="radio"
+              id="ambientCalm"
+              name="environment"
+              value="Tranquilo"
+              (click)="cambiarRadio('Tranquilo')"
+              checked
+            />
+            <label for="ambientCalm">Tranquilo</label><br />
+          </div>
+          <div class="div-rdo-chek">
+            <input
+              type="radio"
+              id="ambientLively"
+              name="environment"
+              value="Animado"
+              (click)="cambiarRadio('Animado')"
+            />
+            <label for="ambientLively">Animado</label><br />
+          </div>
+          <div class="div-rdo-chek">
+            <input
+              type="radio"
+              id="ambientNoisy"
+              name="environment"
+              value="Ruidoso"
+              (click)="cambiarRadio('Ruidoso')"
+            />
+            <label for="ambientNoisy">Ruidoso</label>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="ion-margin-bottom">
-      <p>¿Qué es lo que más le gustó del restaurante?</p>
-      <div class="div-cheks">
-        <div class="div-rdo-chek">
-          <input
-            type="checkbox"
-            id="cleanDiningArea"
-            name="cleanliness"
-            value="Atención"
-            (click)="cambiarCheck(1)"
-          />
-          <label for="cleanDiningArea">La Atención</label><br />
-        </div>
-        <div class="div-rdo-chek">
-          <input
-            type="checkbox"
-            id="cleanRestrooms"
-            name="cleanliness"
-            value="Baños"
-            (click)="cambiarCheck(2)"
-            checked
-          />
-          <label for="cleanRestrooms">Los Baños</label><br />
-        </div>
-        <div class="div-rdo-chek">
-          <input
-            type="checkbox"
-            id="cleanTables"
-            name="cleanliness"
-            value="Mesas"
-            (click)="cambiarCheck(3)"
-          />
-          <label for="cleanTables">Las Mesas</label>
+      <div class="ion-margin-bottom">
+        <p>¿Qué es lo que más le gustó del restaurante?</p>
+        <div class="div-cheks">
+          <div class="div-rdo-chek">
+            <input
+              type="checkbox"
+              id="cleanDiningArea"
+              name="cleanliness"
+              value="Atención"
+              (click)="cambiarCheck(1)"
+            />
+            <label for="cleanDiningArea">La Atención</label><br />
+          </div>
+          <div class="div-rdo-chek">
+            <input
+              type="checkbox"
+              id="cleanRestrooms"
+              name="cleanliness"
+              value="Baños"
+              (click)="cambiarCheck(2)"
+              checked
+            />
+            <label for="cleanRestrooms">Los Baños</label><br />
+          </div>
+          <div class="div-rdo-chek">
+            <input
+              type="checkbox"
+              id="cleanTables"
+              name="cleanliness"
+              value="Mesas"
+              (click)="cambiarCheck(3)"
+            />
+            <label for="cleanTables">Las Mesas</label>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="ion-margin-bottom">
-      <label for="visitFrequency"
-        >¿Con qué frecuencia visita el restaurante?</label
-      >
-      <select id="visitFrequency" name="visitFrequency">
-        <option value="Primera_vez" (click)="cambiarSelect('Primera_vez')">
-          Primera vez
-        </option>
-        <option value="Semanalmente" (click)="cambiarSelect('Semanalmente')">
-          Semanalmente
-        </option>
-        <option value="Mensualmente" (click)="cambiarSelect('Mensualmente')">
-          Mensualmente
-        </option>
-        <option value="Rara_vez" (click)="cambiarSelect('Rara_vez')">
-          Rara vez
-        </option>
-      </select>
-    </div>
+      <div class="ion-margin-bottom">
+        <label for="visitFrequency"
+          >¿Con qué frecuencia visita el restaurante?</label
+        >
+        <select id="visitFrequency" name="visitFrequency">
+          <option value="Primera_vez" (click)="cambiarSelect('Primera_vez')">
+            Primera vez
+          </option>
+          <option value="Semanalmente" (click)="cambiarSelect('Semanalmente')">
+            Semanalmente
+          </option>
+          <option value="Mensualmente" (click)="cambiarSelect('Mensualmente')">
+            Mensualmente
+          </option>
+          <option value="Rara_vez" (click)="cambiarSelect('Rara_vez')">
+            Rara vez
+          </option>
+        </select>
+      </div>
 
-    <div>
-      <label for="comments">Comentarios adicionales</label>
-      <input
-        type="text"
-        id="comments"
-        name="comments"
-        placeholder="Ingrese sus comentarios..."
-        [(ngModel)]="comentario"
-      />
-    </div>
+      <div>
+        <label for="comments">Comentarios adicionales</label>
+        <input
+          type="text"
+          id="comments"
+          name="comments"
+          placeholder="Ingrese sus comentarios..."
+          [(ngModel)]="comentario"
+        />
+      </div>
 
-    <ion-button type="submit" class="load" (click)="guardar()">
-      Enviar Encuesta
-    </ion-button>
-  </form>
-</main>
+      <ion-button type="submit" class="load" (click)="guardar()">
+        Enviar Encuesta
+      </ion-button>
+    </form>
+  </main>
+</ion-content>

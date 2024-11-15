@@ -2,7 +2,6 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
-  IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
@@ -60,6 +59,7 @@ export class GraficosPage implements OnInit {
   router = inject(Router);
   encuesta: string = 'clientes';
   titulo: string = 'Gráfico de barra';
+  subMenu = false;
 
   constructor() {
     addIcons({
@@ -69,6 +69,8 @@ export class GraficosPage implements OnInit {
     });
     this.router.routerState.root.queryParams.forEach((item) => {
       this.encuesta = item['encuesta'];
+      this.subMenu = item['subMenu'] ? true : false;
+      console.log('item: ', item);
     });
   }
 
@@ -140,6 +142,9 @@ export class GraficosPage implements OnInit {
     }
   }
   goBack(): void {
-    this.router.navigateByUrl('/home-cliente-anonimo', { replaceUrl: true });
+    if (this.subMenu)
+      this.router.navigateByUrl('/sub-menu-cliente', { replaceUrl: true });
+    else
+      this.router.navigateByUrl('/home-cliente-anonimo', { replaceUrl: true });
   }
 }

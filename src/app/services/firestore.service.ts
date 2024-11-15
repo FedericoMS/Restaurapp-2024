@@ -236,9 +236,18 @@ export class FirestoreService {
     }
   }
 
-  updateTableStatus(nroMesa: number) {
-    this.firestore.doc(`mesas/${nroMesa}`).update({ estado: 'libre' })
+  freeTable(nroMesa: number) {
+    this.firestore.doc(`mesas/${nroMesa}`).update({ estado: 'libre', idCliente: '', nombreCliente: '' })
   }
+
+  getPedidoEspecifico(idCliente: string, estado: string): any {
+    console.log('idCliente:', idCliente, 'estado:', estado);
+    // Retorna el Observable directamente
+    return this.firestore.collection('pedidos', ref =>
+      ref.where('idCliente', '==', idCliente).where('estado', '==', estado)
+    ).valueChanges();
+  }
+  
 
 }
 

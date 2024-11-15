@@ -21,31 +21,44 @@
 
   <body>
     <div class="content" style="margin-top: 80px;">
-
-        <h1 class="title">LISTA DE ESPERA</h1>
-        @if (!isLoading) {
-          <div class="card">
-            <div class="content-card">
-              @for (item of listUsersWaiting; track $index) {
-                <div class="elements" (click)="setTable({cliente: item.cliente, id_cliente: item.id_cliente}, item.id)">
-                  <img src={{item.foto_url}} alt={{item.cliente}}>
-                  <h2>{{item.cliente}}</h2>
-                </div>
-              }
-              @empty {
-                <div class="without-data">
-                  <h2>No hay usuarios por asignar</h2>
-                </div>
-              }
-            </div>
-          </div>
-        }
+      @if (listUsersWaiting.length > 0) {
+        <h2 class="mb-3" style="text-align: center; margin-top: 2.5rem; text-shadow: 1px 1px #000; color: white; margin-bottom: 20px;">
+          LISTA DE ESPERA
+        </h2>
+        
+          @for (item of listUsersWaiting; track $index) {
+            <ion-card style="border: 4px double rgb(65, 151, 167); border-radius: 30px" class="tarjeta-usuario">
+              <div class="usuario-container" >
+                  <!-- Imagen a la izquierda -->
+                  <img style="
+                width: 6.2rem;
+                height: 6.2rem;
+                object-fit: cover;
+                border: 4px solid rgb(180, 6, 6);
+                border-radius: 10px;
+              " src="{{item.foto_url}}" />
+  
+                  <!-- Datos a la derecha -->
+                  <div class="usuario-detalles">
+                      <ion-card-header >
+                        <ion-card-subtitle> {{item.cliente}}</ion-card-subtitle>
+                        <button (click)="setTable({cliente: item.cliente, id_cliente: item.id_cliente}, item.id)" class="button-personalizado"> Asignar </button>
+                      </ion-card-header>
+                  </div>
+              </div>
+          </ion-card>
+          }    
+      }@else {
+        <h2 class="titulo-lista" style="margin-top: 17rem;">No hay clientes por asignar</h2>
+      }
+      
+        
 
     </div>
   </body>
 }
 @else {
-  <ion-content>
+  <body style="overflow-y: auto;">
     <div class="content">
       <ion-icon class="icon" name="arrow-back-circle-outline" (click)="goBack()"></ion-icon>
       <div class="customer-header">
@@ -53,35 +66,41 @@
           <h1 class="customer-name">- Cliente - <br> {{customer.cliente}}</h1>
         </div>
       </div>
-    
-    
-      <div class="card-table">
-        <div class="content-card-table">
 
-          @for (item of listTables; track $index) {
-            @if (item.estado == 'libre') {
-              <div class="table" (click)="saveTable(item)">
-                <div class="table-content">
-                  <h2>Mesa: {{item.numero}}</h2>
-                  <div>
-                    <h3>Tipo: {{item.tipo}}</h3>
-                    <h3>Cantidad comensales: {{item.cantidadComensales}}</h3>  
-                    <h3>Estado: {{item.estado}}</h3>
+      @if (listTables.length > 0) {
+        @for (item of listTables; track $index) {
+          @if (item.estado == 'libre') {
+            <ion-card style="border: 4px double rgb(65, 151, 167); border-radius: 30px" class="tarjeta-usuario">
+              <div class="usuario-container" >
+                  <div class="usuario-detalles">
+                      <ion-card-header >
+                        <ion-card-subtitle> Mesa: {{item.numero}}</ion-card-subtitle>
+                        <ion-card-subtitle> Tipo: {{item.tipo}}</ion-card-subtitle>
+                        <ion-card-subtitle> Cantidad comensales: {{item.cantidadComensales}} </ion-card-subtitle>
+                        <ion-card-subtitle> Estado: {{item.estado}} </ion-card-subtitle>
+                        <button (click)="saveTable(item)" class="button-personalizado"> Asignar </button>
+                      </ion-card-header>
                   </div>
-                </div>
               </div>
-            }
+          </ion-card>
           }
-          @empty {
-            <div class="without-data">
-              <h2 style="font-size: 20px;">No hay mesas disponibles</h2>
-            </div>
-          }
+  
+        }   
+      }@else {
+        <h2 class="titulo-lista" style="margin-top: 17rem;">No hay mesas disponibles</h2>
+      }
 
-        </div>
-      </div>
+
+
+
+
+
+
+
+
+
     </div>
-  </ion-content>
+  </body>
 
 }
 <app-spinner [isLoading]="isLoading"></app-spinner>
