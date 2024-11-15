@@ -200,6 +200,9 @@ export class AltaClientePage implements OnInit {
                 this.fg.patchValue({
                   rol: this.fg.controls['rol'].value,
                 });
+                this.userService.setUserName(
+                  user.nombre
+                );
                 this.emptyInputs();
                 this.isLoading = false;
                 this.router.navigate(['/ingreso-local']);
