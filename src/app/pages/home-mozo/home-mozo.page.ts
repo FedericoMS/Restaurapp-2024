@@ -22,8 +22,7 @@ import { PushService } from 'src/app/services/push.service';
 export class HomeMozoPage implements OnInit {
 
   isLoading : boolean = false;
-  listaPedidos : any;
-  //userAuth: any = this.angularFireAuth.authState;
+  listaPedidos : any = [];
   push = inject(PushService);
   
 
@@ -32,12 +31,9 @@ export class HomeMozoPage implements OnInit {
     setTimeout(() => {
       this.isLoading = true;      
     }, 1800);
-    // this.userAuth = this.angularFireAuth.authState.subscribe(async (user) => {
-    //   this.userAuth = user;
-    //   console.log(user);
-    // });
     this.firestoreService.getPedidos().subscribe((pedidos: any) => {
       this.listaPedidos = pedidos;
+    //  console.log(this.listaPedidos.length)
     });
   }
 
