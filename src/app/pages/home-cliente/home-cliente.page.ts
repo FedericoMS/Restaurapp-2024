@@ -152,7 +152,7 @@ export class HomeClientePage implements OnInit {
       this.verEncuestas();
     } else if (this.pedido && this.userService.nroMesa) {
       this.util.estadoPedido();
-      this.chequeoEstadoRecibido = this.pedido.estado === 'recibido';
+      this.chequeoEstadoRecibido = true;
     }
   }
 

@@ -1,6 +1,13 @@
 <ion-header>
   <ion-toolbar class="custom-toolbar">
     <ion-title class="ion-text-center">Encuesta cliente</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon
+        class="icon"
+        name="arrow-back-circle-outline"
+        (click)="goBack()"
+      ></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -61,7 +68,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="ion-margin-bottom">
         <p>¿Qué es lo que más le gustó del restaurante?</p>
         <div class="div-cheks">
@@ -98,7 +105,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="ion-margin-bottom">
         <label for="visitFrequency"
           >¿Con qué frecuencia visita el restaurante?</label
@@ -118,7 +125,7 @@
           </option>
         </select>
       </div>
-  
+
       <div>
         <label for="comments">Comentarios adicionales</label>
         <input
@@ -129,7 +136,7 @@
           [(ngModel)]="comentario"
         />
       </div>
-  
+
       <ion-button type="submit" class="load" (click)="guardar()">
         Enviar Encuesta
       </ion-button>

@@ -30,7 +30,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       SplashScreen.hide(); // Hide the splash screen
-      this.router.navigateByUrl('splash'); // Navigate to the splash route
+      this.router.navigateByUrl('sub-menu-cliente'); // Navigate to the splash route
     });
   }
 }

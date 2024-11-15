@@ -12,12 +12,11 @@
 </ion-header>
 
 <main class="container">
-  @if(!this.util.encuesta_realizada){
   <div class="pedido" (click)="realizarEncuesta()">
     <span>REALIZAR ENCUESTA</span>
     <img src="assets/grafico.png" alt="encuesta" class="img" />
   </div>
-  } @if(mostrarCuenta){
+  @if(mostrarCuenta){
   <div class="encuesta" (click)="pedirCuenta()">
     <span>{{texto}}</span>
     <img src="assets/cuenta.png" alt="cuenta" class="img" />

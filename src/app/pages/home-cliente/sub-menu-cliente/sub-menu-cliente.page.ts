@@ -85,7 +85,7 @@ export class SubMenuClientePage implements OnInit {
         '¡Ya realizó la encuesta! No puede realizarla otra vez'
       );
     } else {
-      this.router.navigateByUrl('/encuesta-clientes', { replaceUrl: true });
+      this.router.navigateByUrl('/encuesta-clientes');
     }
   }
 
