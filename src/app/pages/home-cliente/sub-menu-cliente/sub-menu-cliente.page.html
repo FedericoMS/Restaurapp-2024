@@ -11,22 +11,24 @@
   </ion-toolbar>
 </ion-header>
 
-<main class="container">
-  <div class="pedido" (click)="realizarEncuesta()">
-    <span>REALIZAR ENCUESTA</span>
-    <img src="assets/grafico.png" alt="encuesta" class="img" />
-  </div>
-  @if(mostrarCuenta){
-  <div class="encuesta" (click)="pedirCuenta()">
-    <span>{{texto}}</span>
-    <img src="assets/cuenta.png" alt="cuenta" class="img" />
-  </div>
+<ion-content>
+  <main class="container">
+    <div class="pedido" (click)="realizarEncuesta()">
+      <span>REALIZAR ENCUESTA</span>
+      <img src="assets/grafico.png" alt="encuesta" class="img" />
+    </div>
 
-  }@else {
+    <div class="encuesta" (click)="verEstadoPedido()">
+      <span>ESTADO DEL PEDIDO</span>
+      <img src="assets/estado_pedido.png" alt="pedido" class="img" />
+    </div>
 
-  <div class="encuesta" (click)="verEstadoPedido()">
-    <span>ESTADO DEL PEDIDO</span>
-    <img src="assets/estado_pedido.png" alt="pedido" class="img" />
-  </div>
-  }
-</main>
+    @if(mostrarCuenta){
+    <div class="pedido" (click)="pedirCuenta()">
+      <span>{{texto}}</span>
+      <img src="assets/cuenta.png" alt="cuenta" class="img" />
+    </div>
+
+    }
+  </main>
+</ion-content>
