@@ -66,17 +66,20 @@
 - ✅  Funcionalidades para cocinero y bartender
 - ✅  Componente Cuenta
 - ✅  Agregado de push notifications en partes donde faltaban
+- ✅  Corrección de errores encontrados por el profesor
 
 ### Lautaro García (Nombre de las ramas: lautaro - garcia)
 - ✅  Correcciones de bugs
 - ✅  Carga de datos de 3 semanas de operaciones
 - ✅  Optimización del uso de Firebase
 - ✅  Arreglo de estilos
+- ✅  Corrección de errores encontrados por el profesor
 
 ### Federico Cardozo (Nombre de las ramas: cardozo - fede)
 - ✅  Cuenta a pagar desde cliente
 - ✅  Implementación de Push Notifications
 - ✅  Funcionalidades entre cliente - cuenta a pagar
+- ✅  Corrección de errores encontrados por el profesor
 
 
 
