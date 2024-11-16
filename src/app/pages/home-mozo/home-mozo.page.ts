@@ -110,30 +110,30 @@ export class HomeMozoPage implements OnInit {
         modOrder.estado = 'rechazado';     
         console.log(modOrder.estado);   
       this.firestoreService.updateOrderAndProducts(modOrder, 'rechazado', 'rechazado');
-        Swal.fire({
-          title: "Pedido rechazado",
-          confirmButtonText: "Continuar",
-          heightAuto: false
-        })
-      }
-    });
-  }
+      Swal.fire({
+        title: "Pedido rechazado",
+        confirmButtonText: "Continuar",
+        heightAuto: false
+      })
+    }
+  });
+}
 
-  deliverOrder(pedido : any)
-  {
-    let modOrder : any = pedido;
-    console.log(modOrder);
-    Swal.fire({
-      title: "¿Estás seguro de que quieres entregar este pedido?",
-      showCancelButton: true,
-      confirmButtonText: "Sí",
-      cancelButtonText: `Cancelar`,
-      heightAuto: false
-    }).then((result) => {
+deliverOrder(pedido : any)
+{
+  let modOrder : any = pedido;
+  console.log(modOrder);
+  Swal.fire({
+    title: "¿Estás seguro de que quieres entregar este pedido?",
+    showCancelButton: true,
+    confirmButtonText: "Sí",
+    cancelButtonText: `Cancelar`,
+    heightAuto: false
+  }).then((result) => {
       if (result.isConfirmed) {
         modOrder.estado = 'en entrega';     
         console.log(modOrder.estado);   
-        this.firestoreService.updateOrder(modOrder)
+        this.firestoreService.updateOrderAndProducts(modOrder, 'en entrega', 'en entrega');
         Swal.fire({
           title: "Pedido en entrega",
           confirmButtonText: "Continuar",
