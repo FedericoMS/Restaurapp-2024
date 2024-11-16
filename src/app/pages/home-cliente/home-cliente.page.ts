@@ -137,22 +137,14 @@ export class HomeClientePage implements OnInit {
   accionesDeEscanner() {
     if (this.userService.nroMesa && this.pedido === undefined) {
       this.router.navigateByUrl('/carta');
-    } else if (this.pedido?.estado === 'en preparación') {
-      //Ir a encuesta y estado del pedido
-      this.router.navigateByUrl('/sub-menu-cliente');
-    } else if (this.chequeoEstadoRecibido) {
+    } else if (this.pedido?.estado === 'recibido') {
       //Ir a encuesta y pedir cuenta
       this.router.navigate(['/sub-menu-cliente'], {
         queryParams: { cuenta: true },
       });
-    } else if (
-      this.pedido?.estado === 'pagado' ||
-      this.pedido?.estado === 'finalizado'
-    ) {
-      this.verEncuestas();
-    } else if (this.pedido && this.userService.nroMesa) {
-      this.util.estadoPedido();
-      this.chequeoEstadoRecibido = true;
+    } else if (this.pedido) {
+      //Ir a encuesta y estado del pedido
+      this.router.navigateByUrl('/sub-menu-cliente');
     }
   }
 
