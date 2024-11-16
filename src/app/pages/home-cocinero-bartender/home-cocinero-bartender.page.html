@@ -56,10 +56,10 @@
     </div>
   </div>
 
-  <div *ngIf="!this.tieneProductosEnPreparacion() && this.userRol == 'bartender'">
+  <div *ngIf="!this.bartenderTieneProductosEnPreparacion() && this.userRol == 'bartender'">
     <h2 class="titulo-lista" style="margin-top: 17rem;">No hay bebidas para preparar</h2>
   </div>
-  <div *ngIf="!this.tieneProductosEnPreparacion() && this.userRol == 'cocinero'">
+  <div *ngIf="!this.cocineroTieneProductosEnPreparacion() && this.userRol == 'cocinero'">
     <h2 class="titulo-lista" style="margin-top: 17rem;">No hay comidas para preparar</h2>
   </div>
 

@@ -79,9 +79,20 @@ export class HomeCocineroBartenderPage implements OnInit {
       .filter(pedido => pedido !== null); // Filtra los pedidos que no tienen productos relevantes para el usuario
   }
 
-  tieneProductosEnPreparacion(): boolean {
+ /* tieneProductosEnPreparacion(): boolean {
     return this.listaPedidos && this.listaPedidos.some((pedido: any) =>
       pedido.listaProductos && pedido.listaProductos.some((producto: any) => producto.estado === 'en preparación')
+    );
+  }*/
+
+  cocineroTieneProductosEnPreparacion(): boolean {
+    return this.listaPedidos && this.listaPedidos.some((pedido: any) =>
+      pedido.listaProductos && pedido.listaProductos.some((producto: any) => producto.estado === 'en preparación' && producto.tipo != 'bebida')
+    );
+  }
+  bartenderTieneProductosEnPreparacion(): boolean {
+    return this.listaPedidos && this.listaPedidos.some((pedido: any) =>
+      pedido.listaProductos && pedido.listaProductos.some((producto: any) => producto.estado === 'en preparación' && producto.tipo == 'bebida')
     );
   }
 
