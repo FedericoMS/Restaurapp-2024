@@ -133,7 +133,7 @@
 # Capturas de los componentes de la aplicación
 
 ## Splash Screen e inicio de sesión
-Se ingresa a la app y se muestra el Splash Screen y sigue hasta el inicio de sesión.
+Se ingresa a la app, se muestra el Splash Screen y sigue hasta el inicio de sesión.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fsplash.jpg?alt=media&token=ad5cec9e-a619-48be-a093-6d3aa5600cca" alt="Splash Screen%">
 
@@ -187,6 +187,10 @@ El cliente tiene la posibilidad de acceder en cualquier momento a encuestas y co
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%203.jpg?alt=media&token=c59c48ab-ceb1-4cc8-8760-e63f599a056d" alt="gráfico 3">  
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fgrafico%204.jpg?alt=media&token=f819a51e-1eed-4fd9-9f3d-af36ea3d5457" alt="gráfico 4">  
+</p>
+
+<p align="center">
+ <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fcomentarios.jpg?alt=media&token=42657693-43c7-42bb-b713-1f35c63d693b" alt="comentarios">   
 </p>
 
 ## Carta
