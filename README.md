@@ -194,7 +194,7 @@ El cliente tiene la posibilidad de acceder en cualquier momento a encuestas y co
 </p>
 
 ## Carta
-La carta que se le presenta al cliente a la hora de hacer el pedido. La misma posee 3 fotos por producto.
+La carta que se le presenta al cliente a la hora de hacer el pedido. La misma posee tres fotos por producto.
 <p align="center">
  <img width="350" src="https://firebasestorage.googleapis.com/v0/b/pps-sp-2024.appspot.com/o/Screenshots%2Fcarta.jpg?alt=media&token=150f76dc-aca2-400a-8a17-385bae3684cf" alt="carta">  
 </p>
